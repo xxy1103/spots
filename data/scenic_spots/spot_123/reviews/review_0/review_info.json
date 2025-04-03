@@ -1,0 +1,17 @@
+{
+    "id": 0,
+    "name": "乂昭",
+    "user_id": "user_987",
+    "content": "天心阁位于长沙市内，是历史建筑景区，除核心区域外，外部景点可以免费参观。登上天心阁后可以俯视街道，建筑内还有相关历史沿革的科普介绍，供游人参观。目前还有夜游服务，可以看到美丽夜景，适合游客前往",
+    "time": "2024-12-13",
+    "score": 4.0,
+    "score_count": 6,
+    "visited_time": 320,
+    "img_list": [
+        "images/0_0.jpg",
+        "images/0_1.jpg",
+        "images/0_2.jpg",
+        "images/0_3.jpg",
+        "images/0_4.jpg"
+    ]
+}

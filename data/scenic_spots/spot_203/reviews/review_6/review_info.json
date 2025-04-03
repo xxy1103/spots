@@ -1,0 +1,17 @@
+{
+    "id": 6,
+    "name": "东湖",
+    "user_id": "user_2023",
+    "content": "湘江美不胜收，下次希望继续游玩",
+    "time": "2024-11-30",
+    "score": 2.5,
+    "score_count": 8,
+    "visited_time": 147,
+    "img_list": [
+        "images/6_0.jpg",
+        "images/6_1.jpg",
+        "images/6_2.jpg",
+        "images/6_3.jpg",
+        "images/6_4.jpg"
+    ]
+}

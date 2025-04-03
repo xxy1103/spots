@@ -1,0 +1,21 @@
+{
+    "id": 5,
+    "name": "老鹰在飞翔",
+    "user_id": "user_1482",
+    "content": "中国科学技术馆新馆设有“科学乐园”、“华夏之光”、“探索与发现”、“科技与生活”、“挑战与未来”五大主题展厅、公共空间展示区及球幕影院、巨幕影院、动感影院、4D影院等4个特效影院，其中球幕影院兼具穹幕电影放映和天象演示两种功能。",
+    "time": "2019-06-07",
+    "score": 2.8,
+    "score_count": 6,
+    "visited_time": 755,
+    "img_list": [
+        "images/5_0.jpg",
+        "images/5_1.jpg",
+        "images/5_2.jpg",
+        "https://dimg04.c-ctrip.com/images//100115000000xuul86E11_W_640_10000.jpg?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images//100515000000xkfj278E5_W_640_10000.jpg?proc=autoorient",
+        "images/5_5.jpg",
+        "images/5_6.jpg",
+        "images/5_7.jpg",
+        "images/5_8.jpg"
+    ]
+}

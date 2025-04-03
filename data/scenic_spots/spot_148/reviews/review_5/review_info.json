@@ -1,0 +1,21 @@
+{
+    "id": 5,
+    "name": "匿名用户",
+    "user_id": "user_1486",
+    "content": "绝对推荐，游玩桂林阳朔，必须乘坐游船才能真正体验到漓江甲天下的美丽风景。我们乘坐四星邮轮，从竹江码头上船到阳朔，全程共计60多公里，4.5小时，经过20多个主要景点。十一期间，天气非常好，随手一拍就是风景画。服务人员太度非常好，船上有导游一路讲解到位；船上提供免费自助餐。全部经过桂林阳朔的主要美景，可以说只要你乘坐游船基本把阳朔的美景游览完了。",
+    "time": "2024-10-18",
+    "score": 1.5,
+    "score_count": 7,
+    "visited_time": 722,
+    "img_list": [
+        "images/5_0.jpg",
+        "https://dimg04.c-ctrip.com/images/0EQ0n12000g6w0kjmF58A_W_640_10000.jpg?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images/0EQ1z12000g6wl4ms68C4_W_640_10000.jpg?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images/0EQ3r12000g6ws1dh36B0_W_640_10000.jpg?proc=autoorient",
+        "images/5_4.jpg",
+        "images/5_5.jpg",
+        "images/5_6.jpg",
+        "images/5_7.jpg",
+        "images/5_8.jpg"
+    ]
+}

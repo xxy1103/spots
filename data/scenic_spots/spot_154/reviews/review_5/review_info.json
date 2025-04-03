@@ -1,0 +1,15 @@
+{
+    "id": 5,
+    "name": "Sukarno",
+    "user_id": "user_1547",
+    "content": "建于1913年的菽庄花园本是名绅林尔嘉的私人别墅，园子很气派，有山有水，里面还有个钢琴博物馆，曲径通幽，而且日落时分的夕阳也非常好看，建议去鼓浪屿的游客别也错过这道风景。",
+    "time": "2025-01-28",
+    "score": 3.4,
+    "score_count": 4,
+    "visited_time": 544,
+    "img_list": [
+        "images/5_0.jpg",
+        "images/5_1.jpg",
+        "images/5_2.jpg"
+    ]
+}

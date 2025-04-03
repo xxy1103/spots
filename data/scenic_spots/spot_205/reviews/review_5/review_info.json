@@ -1,0 +1,15 @@
+{
+    "id": 5,
+    "name": "lili_zhamgg",
+    "user_id": "user_1891",
+    "content": "【景色】海上不错\n【趣味】挺好好玩\n【性价比】不错\n带老人坐船游览",
+    "time": "2024-12-22",
+    "score": 4.0,
+    "score_count": 9,
+    "visited_time": 30,
+    "img_list": [
+        "images/5_0.jpg",
+        "images/5_1.jpg",
+        "images/5_2.jpg"
+    ]
+}

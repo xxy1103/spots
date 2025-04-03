@@ -1,0 +1,21 @@
+{
+    "id": 2,
+    "name": "爱看电影的嬛嬛",
+    "user_id": "user_1719",
+    "content": "西岛太好玩了，这次是中午才到，晚上8点走。才玩半天，不过瘾！下次要来玩一整天，或者住一晚。在牛王岭山顶看底下惊涛骇浪，惊叹大自然的鬼斧神工。海滨浴场的沙子细腻，海水清澈，是美丽的果冻海。骑着电动车逛渔村，就像真正的岛民一样肆意。还有很多小店，可以挑挑小礼物。有海上书房可以看看书。还有美食街，寻找岛上的特色美食。",
+    "time": "2025-02-16",
+    "score": 4.5,
+    "score_count": 5,
+    "visited_time": 710,
+    "img_list": [
+        "https://dimg04.c-ctrip.com/images/1mh6z12000ik6gxzy1B36_W_640_10000.jpg?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images/1mh5l12000ik64779A6CB_W_640_10000.jpg?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images/1mh1l12000ik6bw9o1002_W_640_10000.jpg?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images/1mh6e12000ik64971D7BB_W_640_10000.jpg?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images/1mh1912000ik6knfeF33F_W_640_10000.jpg?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images/1mh6812000ik5xk2886DC_W_640_10000.jpg?proc=autoorient",
+        "images/2_6.jpg",
+        "images/2_7.jpg",
+        "images/2_8.jpg"
+    ]
+}

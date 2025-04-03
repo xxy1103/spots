@@ -1,0 +1,18 @@
+{
+    "id": 2,
+    "name": "M45****434",
+    "user_id": "user_998",
+    "content": "印象西湖的表演将传统舞蹈与现代音乐完美融合，展现了中华民族深厚的文化底蕴和艺术创造力。演员们的精湛技艺和激情四溢的表现，让人陶醉其中。",
+    "time": "2024-11-18",
+    "score": 2.8,
+    "score_count": 4,
+    "visited_time": 999,
+    "img_list": [
+        "images/2_0.jpg",
+        "images/2_1.jpg",
+        "images/2_2.jpg",
+        "images/2_3.jpg",
+        "images/2_4.jpg",
+        "images/2_5.jpg"
+    ]
+}

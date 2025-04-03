@@ -1,0 +1,17 @@
+{
+    "id": 1,
+    "name": "吃榆",
+    "user_id": "user_1849",
+    "content": "集美学村是集美各类学校及各种文化机构的总称，它由著名爱国华侨领袖陈嘉庚先生创办。它即是钟灵敏秀之地，又是凝聚众美的风光景区，其建筑融中西风格于一炉。",
+    "time": "2024-11-05",
+    "score": 1.7,
+    "score_count": 5,
+    "visited_time": 717,
+    "img_list": [
+        "images/1_0.jpg",
+        "images/1_1.jpg",
+        "images/1_2.jpg",
+        "images/1_3.jpg",
+        "images/1_4.jpg"
+    ]
+}

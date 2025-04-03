@@ -1,0 +1,27 @@
+{
+    "id": 1,
+    "name": "老谭爱旅行",
+    "user_id": "user_1955",
+    "content": "泰山治嘴硬，华山治命硬，不坐索道，感觉良好。景色不错，鹞子翻身和长空栈道非常值得去体验。\n一定要从玉泉院徒步上山（北上西下），体验自古华山一条道的千尺幢、百尺峡、老君犁沟、苍龙岭（只有北上能走，单行）",
+    "time": "2024-11-08",
+    "score": 1.1,
+    "score_count": 10,
+    "visited_time": 48,
+    "img_list": [
+        "images/1_0.jpg",
+        "images/1_1.jpg",
+        "images/1_2.jpg",
+        "images/1_3.jpg",
+        "images/1_4.jpg",
+        "images/1_5.jpg",
+        "images/1_6.jpg",
+        "images/1_7.jpg",
+        "images/1_8.jpg",
+        "images/1_9.jpg",
+        "images/1_10.jpg",
+        "images/1_11.jpg",
+        "images/1_12.jpg",
+        "images/1_13.jpg",
+        "images/1_14.jpg"
+    ]
+}

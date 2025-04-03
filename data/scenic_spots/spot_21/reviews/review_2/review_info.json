@@ -1,0 +1,27 @@
+{
+    "id": 2,
+    "name": "快乐的小飞哥啊",
+    "user_id": "user_83",
+    "content": "北京故宫博物院，是明清两代的皇家宫殿，旧称紫禁城。故宫于明永乐四年（1406年）开始建设，到永乐十八年（1420年）建成，成为明清两朝二十四位皇帝的皇宫。故宫建成已有六百多年的历史。民国十四年（1925年）故宫博物院正式挂牌子成立，迄今已有百年。北京故宫是世界现存规模最大、保存最完整的木制结构古建筑群。1987年故宫被列为世界文化遗产。",
+    "time": "2025-02-18",
+    "score": 4.1,
+    "score_count": 8,
+    "visited_time": 863,
+    "img_list": [
+        "images/2_0.jpg",
+        "images/2_1.jpg",
+        "images/2_2.jpg",
+        "images/2_3.jpg",
+        "images/2_4.jpg",
+        "images/2_5.jpg",
+        "images/2_6.jpg",
+        "images/2_7.jpg",
+        "images/2_8.jpg",
+        "images/2_9.jpg",
+        "images/2_10.jpg",
+        "images/2_11.jpg",
+        "images/2_12.jpg",
+        "images/2_13.jpg",
+        "images/2_14.jpg"
+    ]
+}

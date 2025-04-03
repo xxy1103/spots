@@ -1,0 +1,17 @@
+{
+    "id": 4,
+    "name": "铭记时光",
+    "user_id": "user_1251",
+    "content": "暑假高考完之后和朋友一起前往成都 很喜欢成都的烟火气 所以来到了宽窄巷子 非常热闹 分为宽巷子和窄巷子 途中还有一些茶馆 可以进去喝茶看戏 总体来说 我认为很不错 值得前往的一个景点",
+    "time": "2025-01-06",
+    "score": 1.8,
+    "score_count": 10,
+    "visited_time": 528,
+    "img_list": [
+        "https://dimg04.c-ctrip.com/images/1mh3n12000hmjclpqD731_W_640_10000.jpg?proc=autoorient",
+        "images/4_1.jpg",
+        "images/4_2.jpg",
+        "images/4_3.jpg",
+        "https://dimg04.c-ctrip.com/images/1mh1w12000hmjl12f2F34_W_640_10000.jpg?proc=autoorient"
+    ]
+}

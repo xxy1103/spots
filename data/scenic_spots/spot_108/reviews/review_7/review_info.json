@@ -1,0 +1,24 @@
+{
+    "id": 7,
+    "name": "周游列国",
+    "user_id": "user_1229",
+    "content": "独秀峰和靖江王府是一个景点，靖江王是明朝开国皇帝朱元璋封给他哥哥的孙子的。靖江王府由当时的风水大师刘伯瘟设计，四周有江水围绕，前面有象山作为屏风，后面以独秀峰作为靠山，独秀峰后还有一个月牙形池塘。好的风水保佑了靖江王，使靖江王传世比明朝还长。",
+    "time": "2019-03-12",
+    "score": 4.8,
+    "score_count": 4,
+    "visited_time": 530,
+    "img_list": [
+        "images/7_0.jpg",
+        "images/7_1.jpg",
+        "images/7_2.jpg",
+        "images/7_3.jpg",
+        "images/7_4.jpg",
+        "images/7_5.jpg",
+        "images/7_6.jpg",
+        "images/7_7.jpg",
+        "images/7_8.jpg",
+        "images/7_9.jpg",
+        "images/7_10.jpg",
+        "images/7_11.jpg"
+    ]
+}

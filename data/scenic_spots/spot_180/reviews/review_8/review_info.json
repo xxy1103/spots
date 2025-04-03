@@ -1,0 +1,27 @@
+{
+    "id": 8,
+    "name": "lisa",
+    "user_id": "user_1790",
+    "content": "【景色】真的很美，一望无际草原风光。\n【趣味】玩乐项目挺多的，套票优惠。\n【性价比】性价比还可以，就是项目排队等候的时间比较久，其他的都挺好的。",
+    "time": "2020-06-26",
+    "score": 1.7,
+    "score_count": 8,
+    "visited_time": 832,
+    "img_list": [
+        "images/8_0.jpg",
+        "images/8_1.jpg",
+        "images/8_2.jpg",
+        "images/8_3.jpg",
+        "images/8_4.jpg",
+        "images/8_5.jpg",
+        "images/8_6.jpg",
+        "images/8_7.jpg",
+        "images/8_8.jpg",
+        "images/8_9.jpg",
+        "images/8_10.jpg",
+        "images/8_11.jpg",
+        "images/8_12.jpg",
+        "images/8_13.jpg",
+        "images/8_14.jpg"
+    ]
+}

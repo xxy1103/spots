@@ -1,0 +1,16 @@
+{
+    "id": 3,
+    "name": "中旅之星",
+    "user_id": "user_1202",
+    "content": "千岛湖全景值得一看，不过性价比很差，为了多赚游客电梯钱，景区把人行步道拆了，走路只能走3公里盘山公路，上行电梯30元，下山大巴10元，门票50元，觉感被抢劫。",
+    "time": "2023-07-21",
+    "score": 2.2,
+    "score_count": 5,
+    "visited_time": 156,
+    "img_list": [
+        "images/3_0.jpg",
+        "images/3_1.jpg",
+        "images/3_2.jpg",
+        "images/3_3.jpg"
+    ]
+}

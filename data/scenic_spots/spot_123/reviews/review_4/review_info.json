@@ -1,0 +1,22 @@
+{
+    "id": 4,
+    "name": "山水凡人",
+    "user_id": "user_1235",
+    "content": "天心阁具有重要的历史文化价值，也是来长沙旅游的外地游客必打卡的景区，虽然核心景区要买门票，但我觉得值得。",
+    "time": "2025-01-15",
+    "score": 4.1,
+    "score_count": 7,
+    "visited_time": 252,
+    "img_list": [
+        "images/4_0.jpg",
+        "images/4_1.jpg",
+        "images/4_2.jpg",
+        "images/4_3.jpg",
+        "images/4_4.jpg",
+        "https://dimg04.c-ctrip.com/images/1mh2112000ht5ie1iA116_W_640_10000.jpg?proc=autoorient",
+        "images/4_6.jpg",
+        "images/4_7.jpg",
+        "images/4_8.jpg",
+        "https://dimg04.c-ctrip.com/images/1mh0712000ht64xcmAAB9_W_640_10000.jpg?proc=autoorient"
+    ]
+}

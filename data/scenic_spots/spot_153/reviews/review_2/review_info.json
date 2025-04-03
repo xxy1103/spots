@@ -1,0 +1,18 @@
+{
+    "id": 2,
+    "name": "山茶叶蛋糕",
+    "user_id": "user_1492",
+    "content": "南山寺是海南三亚南山文化旅游景区的一部分，也是重要的景点，南山文化旅游景区主要景点：一是海上观音，二是南山寺，三是金玉观音，四是南山不老松。",
+    "time": "2019-06-05",
+    "score": 2.7,
+    "score_count": 10,
+    "visited_time": 119,
+    "img_list": [
+        "images/2_0.jpg",
+        "images/2_1.jpg",
+        "images/2_2.jpg",
+        "https://dimg04.c-ctrip.com/images/100914000000w8tvoCAEF_W_640_10000.jpg?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images/100215000000xl3deD359_W_640_10000.jpg?proc=autoorient",
+        "images/2_5.jpg"
+    ]
+}

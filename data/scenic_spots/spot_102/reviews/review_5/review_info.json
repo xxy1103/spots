@@ -1,0 +1,21 @@
+{
+    "id": 5,
+    "name": "老头Online",
+    "user_id": "user_1028",
+    "content": "和每个城市的步行街差不多 没有什么特点 游客聚集地 一些历史建筑比较有年代感 步行街比较长 逛一圈一小时左右 时间紧不用特地去。",
+    "time": "2024-07-26",
+    "score": 1.1,
+    "score_count": 9,
+    "visited_time": 378,
+    "img_list": [
+        "images/5_0.jpg",
+        "images/5_1.jpg",
+        "images/5_2.jpg",
+        "images/5_3.jpg",
+        "images/5_4.jpg",
+        "images/5_5.jpg",
+        "images/5_6.jpg",
+        "images/5_7.jpg",
+        "images/5_8.jpg"
+    ]
+}

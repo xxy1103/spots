@@ -1,0 +1,20 @@
+{
+    "id": 4,
+    "name": "仙仙爱游玩",
+    "user_id": "user_2139",
+    "content": "风景多美只有去了才知道，三峡江岸风景独好，只有李白知道",
+    "time": "2024-11-24",
+    "score": 1.3,
+    "score_count": 6,
+    "visited_time": 814,
+    "img_list": [
+        "images/4_0.jpg",
+        "images/4_1.jpg",
+        "images/4_2.jpg",
+        "images/4_3.jpg",
+        "images/4_4.jpg",
+        "images/4_5.jpg",
+        "images/4_6.jpg",
+        "images/4_7.jpg"
+    ]
+}

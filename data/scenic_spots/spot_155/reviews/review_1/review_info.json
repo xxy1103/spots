@@ -1,0 +1,18 @@
+{
+    "id": 1,
+    "name": "吃冰淇淋的兔纸",
+    "user_id": "user_1415",
+    "content": "谢子龙影像艺术馆位于美丽的长沙湘江畔，湘府大桥西。美术馆占地10亩。建筑建筑独特新颖。形成一道美丽的风景线。值得我们去打卡留念。",
+    "time": "2025-02-21",
+    "score": 1.6,
+    "score_count": 5,
+    "visited_time": 480,
+    "img_list": [
+        "images/1_0.jpg",
+        "images/1_1.jpg",
+        "images/1_2.jpg",
+        "images/1_3.jpg",
+        "images/1_4.jpg",
+        "https://dimg04.c-ctrip.com/images/1mh2l12000inghd9eA0B0_W_640_10000.jpg?proc=autoorient"
+    ]
+}

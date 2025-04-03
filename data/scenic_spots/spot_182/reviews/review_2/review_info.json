@@ -1,0 +1,17 @@
+{
+    "id": 2,
+    "name": "钱小湾",
+    "user_id": "user_1706",
+    "content": "上海城隍庙，繁华市井中的文化瑰宝。庙宇古色古香，香火旺盛，彰显民间信仰之力。周边老街巷弄，小吃琳琅满目，如生煎、糯米糕等，令人垂涎。商铺林立，特色手工艺品应有尽有，购物乐趣无穷。这里不仅是游客必游之地，更是上海市民生活的一部分。城隍庙，集历史、文化、美食、购物于一体，是体验上海风情的绝佳去处。",
+    "time": "2025-02-19",
+    "score": 2.0,
+    "score_count": 5,
+    "visited_time": 349,
+    "img_list": [
+        "images/2_0.jpg",
+        "https://dimg04.c-ctrip.com/images/1mh3212000im7m2cp7DAA_W_640_10000.png?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images/1mh1c12000im7rt3s730E_W_640_10000.png?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images/1mh2p12000im7ucsq2CC7_W_640_10000.png?proc=autoorient",
+        "https://dimg04.c-ctrip.com/images/1mh6x12000im740lx56C0_W_640_10000.png?proc=autoorient"
+    ]
+}

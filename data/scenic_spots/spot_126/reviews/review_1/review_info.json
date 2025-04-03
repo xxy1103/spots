@@ -1,0 +1,26 @@
+{
+    "id": 1,
+    "name": "小妍旅游博主",
+    "user_id": "user_1108",
+    "content": "1⃣三亚蜈支洲岛以其美丽的海岛风光、丰富的海洋生态资源和多样的娱乐项目，成为了三亚旅游的必去之地。无论是寻求冒险还是享受宁静，蜈支洲岛都能满足你的需求。\n2⃣绝美的自然风光：蜈支洲岛被誉为“中国的马尔代夫”，拥有清澈见底的海水和细腻的沙滩，四周环绕着丰富的热带植被，形成了一个天然的度假天堂。",
+    "time": "2024-12-25",
+    "score": 3.2,
+    "score_count": 9,
+    "visited_time": 413,
+    "img_list": [
+        "images/1_0.jpg",
+        "images/1_1.jpg",
+        "images/1_2.jpg",
+        "images/1_3.jpg",
+        "images/1_4.jpg",
+        "images/1_5.jpg",
+        "images/1_6.jpg",
+        "images/1_7.jpg",
+        "images/1_8.jpg",
+        "images/1_9.jpg",
+        "images/1_10.jpg",
+        "images/1_11.jpg",
+        "images/1_12.jpg",
+        "images/1_13.jpg"
+    ]
+}

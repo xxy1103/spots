@@ -1,0 +1,21 @@
+{
+    "id": 1,
+    "name": "一杯清茶看春秋！",
+    "user_id": "user_1951",
+    "content": "免费的5A级景区，趁着天晴，环湖行是比较好的徒步。今天是新年以来寒冷的一天，但冬日下还是比较舒畅。\n在金鸡湖东面徒步3KM，在彩虹桥上看金鸡湖美景。",
+    "time": "2025-01-09",
+    "score": 4.0,
+    "score_count": 7,
+    "visited_time": 750,
+    "img_list": [
+        "images/1_0.jpg",
+        "images/1_1.jpg",
+        "images/1_2.jpg",
+        "images/1_3.jpg",
+        "images/1_4.jpg",
+        "images/1_5.jpg",
+        "images/1_6.jpg",
+        "images/1_7.jpg",
+        "images/1_8.jpg"
+    ]
+}

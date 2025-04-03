@@ -1,0 +1,27 @@
+{
+    "id": 1,
+    "name": "嘟嘟嘟的世界",
+    "user_id": "user_1900",
+    "content": "鸟巢，可以花上1-2小时在里面慢慢看看博物馆里陈列的北京奥运会和北京冬奥会的赛前和赛时物品，了解申办的全过程，重温当年的盛况；还可以互动自制冠军照片，挑挑手办和纪念品；累了在休息区喝喝咖啡歇歇脚。",
+    "time": "2025-01-12",
+    "score": 3.8,
+    "score_count": 8,
+    "visited_time": 61,
+    "img_list": [
+        "images/1_0.jpg",
+        "images/1_1.jpg",
+        "images/1_2.jpg",
+        "images/1_3.jpg",
+        "images/1_4.jpg",
+        "images/1_5.jpg",
+        "images/1_6.jpg",
+        "images/1_7.jpg",
+        "images/1_8.jpg",
+        "images/1_9.jpg",
+        "images/1_10.jpg",
+        "images/1_11.jpg",
+        "images/1_12.jpg",
+        "images/1_13.jpg",
+        "images/1_14.jpg"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": 6,
+    "name": "黄海大智若愚",
+    "user_id": "user_1141",
+    "content": "听钟桥位于苏州枫桥景区内。一座全木结构的廊桥，上面是江南民俗建筑三间轩屋，和桥面组成了苏州传统的廊桥，它横卧于运河水湾，视野开阔，是观赏枫桥、铁铃关的最佳处。",
+    "time": "2022-08-26",
+    "score": 4.1,
+    "score_count": 5,
+    "visited_time": 180,
+    "img_list": [
+        "images/6_0.jpg",
+        "images/6_1.jpg",
+        "images/6_2.jpg",
+        "images/6_3.jpg",
+        "images/6_4.jpg"
+    ]
+}
