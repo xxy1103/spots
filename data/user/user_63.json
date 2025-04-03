@@ -1,0 +1,12 @@
+{
+    "name": "小歪Sharon",
+    "id": 63,
+    "password": 123456,
+    "likes_type": "历史建筑",
+    "reviews": [
+        [
+            3,
+            3
+        ]
+    ]
+}

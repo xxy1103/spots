@@ -1,0 +1,12 @@
+{
+    "name": "GIGI菜",
+    "id": 547,
+    "password": 123456,
+    "likes_type": "展馆展览",
+    "reviews": [
+        [
+            23,
+            9
+        ]
+    ]
+}
