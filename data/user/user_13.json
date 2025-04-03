@@ -1,0 +1,12 @@
+{
+    "name": "cj陈",
+    "id": 13,
+    "password": 123456,
+    "likes_type": "展馆展览",
+    "reviews": [
+        [
+            11,
+            0
+        ]
+    ]
+}

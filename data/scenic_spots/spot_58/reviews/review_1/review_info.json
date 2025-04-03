@@ -1,0 +1,20 @@
+{
+    "id": 1,
+    "name": "稳稳当当的小伙",
+    "user_id": "user_445",
+    "content": "第一次去四川博物院，一共有3层，里边的文物有很多值得观看，特别是特别火的三星堆，可以多停留一会观赏一下帅气的三星堆。逛完三星堆也可以去博物馆看看其他的文物，也是非常值得推荐的，期待以后会有更多的文物在四川博物院展览",
+    "time": "2024-12-31",
+    "score": 1.6,
+    "score_count": 10,
+    "visited_time": 135,
+    "img_list": [
+        "images/1_0.jpg",
+        "images/1_1.jpg",
+        "images/1_2.jpg",
+        "images/1_3.jpg",
+        "images/1_4.jpg",
+        "images/1_5.jpg",
+        "images/1_6.jpg",
+        "images/1_7.jpg"
+    ]
+}

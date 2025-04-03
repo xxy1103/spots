@@ -1,0 +1,20 @@
+{
+    "id": 8,
+    "name": "朱丽叶的旅行",
+    "user_id": "user_887",
+    "content": "西安秦岭野生动物园离西安市大概二十多公里，开车公交都可以去。最轻松游玩的办法就是先坐小火车进入公园，游玩一圈后，再坐园内的旅游大巴进入猛兽区游玩一圈。",
+    "time": "2020-05-09",
+    "score": 3.9,
+    "score_count": 8,
+    "visited_time": 278,
+    "img_list": [
+        "images/8_0.jpg",
+        "images/8_1.jpg",
+        "images/8_2.jpg",
+        "images/8_3.jpg",
+        "images/8_4.jpg",
+        "images/8_5.jpg",
+        "images/8_6.jpg",
+        "images/8_7.jpg"
+    ]
+}

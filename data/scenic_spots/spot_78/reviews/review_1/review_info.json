@@ -1,0 +1,20 @@
+{
+    "id": 1,
+    "name": "M13****373",
+    "user_id": "user_572",
+    "content": "寒山寺，一个有着悠久历史和独特文化的佛教圣地，是许多游客前来苏州必游的地方。在这里，你可以感受到深沉的佛教文化和历史，以及优美的自然风光。",
+    "time": "2024-10-04",
+    "score": 1.8,
+    "score_count": 5,
+    "visited_time": 540,
+    "img_list": [
+        "images/1_0.jpg",
+        "images/1_1.jpg",
+        "images/1_2.jpg",
+        "images/1_3.jpg",
+        "images/1_4.jpg",
+        "images/1_5.jpg",
+        "images/1_6.jpg",
+        "images/1_7.jpg"
+    ]
+}

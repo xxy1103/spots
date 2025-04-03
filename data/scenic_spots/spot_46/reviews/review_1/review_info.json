@@ -1,0 +1,19 @@
+{
+    "id": 1,
+    "name": "RobinLIN",
+    "user_id": "user_378",
+    "content": "厦门植物园以其丰富的热带亚热带植物，在一片茂密的绿色植被和不太陡峭的山坡展示出婀娜多姿的南方雨林的风情。山上点缀着典型的形状各异的厦门海滨亚热带花岗岩，景观极为错落有致，各种展出的植物可圈可点。可观赏的各类植物花卉极为繁多。",
+    "time": "2025-01-26",
+    "score": 3.1,
+    "score_count": 10,
+    "visited_time": 153,
+    "img_list": [
+        "images/1_0.jpg",
+        "images/1_1.jpg",
+        "images/1_2.jpg",
+        "images/1_3.jpg",
+        "images/1_4.jpg",
+        "images/1_5.jpg",
+        "images/1_6.jpg"
+    ]
+}

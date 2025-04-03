@@ -1,0 +1,27 @@
+{
+    "id": 3,
+    "name": "谭天扫雪",
+    "user_id": "user_152",
+    "content": "杭州西湖挺大的，走一圈要一天时间，当然，不想徒步的，可以选择交通工具，公交车，观光车，共享单车，电动车，还可以坐船。环绕西湖的有众多公园景点，我是徒步加公交游览的，从断桥残雪开始，徒步白堤，平湖秋月，省博物馆，孤山，楼外楼，武松墓，岳王庙，曲院风荷，苏提，花港观鱼，太子港，然后坐公交车到雷峰塔，净慈寺，再步行到柳浪闻莺公园，傍晚时到学士公园看日落。",
+    "time": "2024-08-05",
+    "score": 3.8,
+    "score_count": 9,
+    "visited_time": 617,
+    "img_list": [
+        "images/3_0.jpg",
+        "images/3_1.jpg",
+        "images/3_2.jpg",
+        "images/3_3.jpg",
+        "images/3_4.jpg",
+        "images/3_5.jpg",
+        "images/3_6.jpg",
+        "images/3_7.jpg",
+        "images/3_8.jpg",
+        "images/3_9.jpg",
+        "images/3_10.jpg",
+        "images/3_11.jpg",
+        "images/3_12.jpg",
+        "images/3_13.jpg",
+        "images/3_14.jpg"
+    ]
+}

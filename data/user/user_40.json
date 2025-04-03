@@ -1,0 +1,12 @@
+{
+    "name": "走南闯北的away",
+    "id": 40,
+    "password": 123456,
+    "likes_type": "夜游观景",
+    "reviews": [
+        [
+            6,
+            1
+        ]
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "name": "五一广场",
+    "id": 52,
+    "score": "4.5",
+    "type": "地标观景",
+    "reviews": 10,
+    "url": "https://you.ctrip.com/sight/changsha148/126934701.html?scene=online",
+    "img": "https://dimg04.c-ctrip.com/images/0100l12000hszz90fBEA6_C_220_140.jpg?proc=autoorient",
+    "info": [
+        {
+            "地址": "湖南省长沙市芙蓉区黄兴中路88号"
+        },
+        {
+            "开放时间": "全年全天开放"
+        }
+    ],
+    "introduce": {
+        "介绍": "五一广场位于长沙市芙蓉区，交通便利，高楼林立，商铺众多，集旅游、度假、休闲、生活等多功能于一体。",
+        "开放时间": "全年 全天开放，具体营业状态以当天开放情况为准。"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "id": 2,
+    "name": "Marlon_Mario",
+    "user_id": "user_114",
+    "content": "趵突泉，济南的三大名胜，七十二名泉之首，是来济南旅行必到的景点之一。尽管公园整体面积不大，但小而精致，且四时之景各有不同。春日赏花，夏日戏水，秋季有菊展，冬季有花灯。园内不仅有自然景观，还有名人和历史，李清照纪念堂，五三惨案纪念园，在赏景的同时，还能了解济南的历史。",
+    "time": "2024-11-20",
+    "score": 4.8,
+    "score_count": 7,
+    "visited_time": 14,
+    "img_list": [
+        "images/2_0.jpg",
+        "images/2_1.jpg",
+        "images/2_2.jpg",
+        "images/2_3.jpg",
+        "images/2_4.jpg",
+        "images/2_5.jpg"
+    ]
+}

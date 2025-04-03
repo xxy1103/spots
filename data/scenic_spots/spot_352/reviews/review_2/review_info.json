@@ -1,0 +1,17 @@
+{
+    "id": 2,
+    "name": "平凡的无知者",
+    "user_id": "user_3458",
+    "content": "其他的不说，皮影戏还是挺值得的，虽然故事比较简单。但起码它有而且只有15元。对比之下这景点不比西安那些土坑坑之类的网红坑人景点好多了？",
+    "time": "2024-07-09",
+    "score": 3.8,
+    "score_count": 6,
+    "visited_time": 216,
+    "img_list": [
+        "images/2_0.jpg",
+        "images/2_1.jpg",
+        "images/2_2.jpg",
+        "images/2_3.jpg",
+        "images/2_4.jpg"
+    ]
+}

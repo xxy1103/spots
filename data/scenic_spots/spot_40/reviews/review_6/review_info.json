@@ -1,0 +1,19 @@
+{
+    "id": 6,
+    "name": "张鹏Patrick",
+    "user_id": "user_467",
+    "content": "独秀峰是桂林市区的最高点。位于靖王府内，著名的“桂林山水甲天下”石刻就是在独秀峰下，登上独秀峰顶，有一览众山小的感觉，可以俯瞰桂林城区全貌。",
+    "time": "2021-03-31",
+    "score": 3.9,
+    "score_count": 5,
+    "visited_time": 209,
+    "img_list": [
+        "images/6_0.jpg",
+        "images/6_1.jpg",
+        "images/6_2.jpg",
+        "images/6_3.jpg",
+        "images/6_4.jpg",
+        "images/6_5.jpg",
+        "images/6_6.jpg"
+    ]
+}

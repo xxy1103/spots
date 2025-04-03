@@ -1,0 +1,17 @@
+{
+    "id": 4,
+    "name": "轻快的行走脚步",
+    "user_id": "user_321",
+    "content": "这是个丹霞地貌景观，名气不大！从兰州驱车前往天斧沙宫景区！开单子这里，印入眼帘的是黄色风沙下的丹霞地貌，各种各样造型的巨石！",
+    "time": "2020-03-09",
+    "score": 1.1,
+    "score_count": 6,
+    "visited_time": 836,
+    "img_list": [
+        "images/4_0.jpg",
+        "images/4_1.jpg",
+        "images/4_2.jpg",
+        "images/4_3.jpg",
+        "images/4_4.jpg"
+    ]
+}

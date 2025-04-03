@@ -1,0 +1,18 @@
+{
+    "id": 2,
+    "name": "魔女锦鲤",
+    "user_id": "user_474",
+    "content": "来敦煌，一定要来敦煌美术馆看看，这里面有很多历史的名画，历史的知识丰富多彩，记录了敦煌石窟，敦煌 的历史，丝绸之路的古代文物，精美的木版画，绢画，麻布画，剪纸、木雕、纺织品等等的多种历史作品。在这里都可以一一欣赏到。",
+    "time": "2020-02-28",
+    "score": 4.4,
+    "score_count": 10,
+    "visited_time": 945,
+    "img_list": [
+        "images/2_0.jpg",
+        "images/2_1.jpg",
+        "images/2_2.jpg",
+        "images/2_3.jpg",
+        "images/2_4.jpg",
+        "images/2_5.jpg"
+    ]
+}

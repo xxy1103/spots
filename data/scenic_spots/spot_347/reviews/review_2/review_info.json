@@ -1,0 +1,16 @@
+{
+    "id": 2,
+    "name": "黛米有米",
+    "user_id": "user_3373",
+    "content": "苏州的千年水乡古镇，小桥流水人家，富有江南诗意。退思园，世界文化遗产，必参观。明清街逛逛，观老建筑，品当地小吃，坐坐手摇小船，慢生活，开心。",
+    "time": "2025-01-30",
+    "score": 1.0,
+    "score_count": 5,
+    "visited_time": 298,
+    "img_list": [
+        "images/2_0.jpg",
+        "images/2_1.jpg",
+        "images/2_2.jpg",
+        "images/2_3.jpg"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "name": "zdl_cd",
+    "id": 41,
+    "password": 123456,
+    "likes_type": "萌萌动物",
+    "reviews": [
+        [
+            16,
+            1
+        ]
+    ]
+}
