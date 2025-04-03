@@ -1,0 +1,20 @@
+{
+    "id": 7,
+    "name": "轻松旅途",
+    "user_id": "user_2532",
+    "content": "乘轮船在江上航行。风儿轻轻吹着，船儿缓缓航行。\n江上其它船只游曳，远处高楼林立。古朴中带着现代气息。\n雄伟的武汉长江大桥横跨两岸，火车呜着汽笛，轰隆隆飞驰而过。\n华灯初上，在远处灯光的交织下又是一翻美景...",
+    "time": "2018-06-13",
+    "score": 4.4,
+    "score_count": 4,
+    "visited_time": 859,
+    "img_list": [
+        "images/7_0.jpg",
+        "images/7_1.jpg",
+        "images/7_2.jpg",
+        "images/7_3.jpg",
+        "images/7_4.jpg",
+        "images/7_5.jpg",
+        "images/7_6.jpg",
+        "images/7_7.jpg"
+    ]
+}

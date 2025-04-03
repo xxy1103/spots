@@ -1,0 +1,18 @@
+{
+    "id": 8,
+    "name": "小丫丫",
+    "user_id": "user_3250",
+    "content": "张园是末代皇帝溥仪住过的宅子。张园的旁边就是静园，两个景点可以一起参观！溥仪在天津就住过这两处地方！所以推荐一起参观一下！可以了解很多溥仪的生平是。",
+    "time": "2021-11-18",
+    "score": 3.5,
+    "score_count": 9,
+    "visited_time": 735,
+    "img_list": [
+        "images/8_0.jpg",
+        "images/8_1.jpg",
+        "images/8_2.jpg",
+        "images/8_3.jpg",
+        "images/8_4.jpg",
+        "images/8_5.jpg"
+    ]
+}

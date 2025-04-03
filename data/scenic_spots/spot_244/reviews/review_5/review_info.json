@@ -1,0 +1,23 @@
+{
+    "id": 5,
+    "name": "听足音",
+    "user_id": "user_2298",
+    "content": "古德寺位于武汉三镇中工商业最发达的汉口。慕名而来，一进门就眼前一亮，几幢西式建筑，华丽典雅，初看根本看不出这是一座佛教寺庙。然而，菩萨的衣饰风格显然是敦煌莫高窟壁画上的印度风格，建筑也有点像泰国寺庙风格，所以，这是一座真真切切的佛教寺庙。庙里有很多信佛的义工，为寺庙做些售卖门票、香烛的活儿，不紧不慢，望之令人倍觉安恬。",
+    "time": "2022-03-26",
+    "score": 5.0,
+    "score_count": 4,
+    "visited_time": 544,
+    "img_list": [
+        "images/5_0.jpg",
+        "images/5_1.jpg",
+        "images/5_2.jpg",
+        "https://dimg04.c-ctrip.com/images/01058120009dudljo16BA_W_640_10000.jpg?proc=autoorient",
+        "images/5_4.jpg",
+        "images/5_5.jpg",
+        "images/5_6.jpg",
+        "images/5_7.jpg",
+        "images/5_8.jpg",
+        "images/5_9.jpg",
+        "images/5_10.jpg"
+    ]
+}

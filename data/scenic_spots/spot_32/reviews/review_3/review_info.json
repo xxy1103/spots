@@ -1,0 +1,20 @@
+{
+    "id": 3,
+    "name": "静静",
+    "user_id": "user_153",
+    "content": "天生三桥是重庆最推荐的景点，喀斯特地貌非常壮观，这完全大自然的鬼斧神工，整个游览过程2个多小时，不走回头路，每段路都有不一样的感受，尤其是天气好的时候，阳光倾泻而下，简直太美了，顺着岩石缝渗下来的水流，各种岩石形状给了大家无尽的想象力，不虚此行！",
+    "time": "2024-10-27",
+    "score": 1.7,
+    "score_count": 6,
+    "visited_time": 372,
+    "img_list": [
+        "images/3_0.jpg",
+        "images/3_1.jpg",
+        "images/3_2.jpg",
+        "images/3_3.jpg",
+        "images/3_4.jpg",
+        "images/3_5.jpg",
+        "images/3_6.jpg",
+        "images/3_7.jpg"
+    ]
+}

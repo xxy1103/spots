@@ -1,0 +1,25 @@
+{
+    "id": 1,
+    "name": "虎公公",
+    "user_id": "user_2909",
+    "content": "国家一级博物馆，非常值得参观。馆内面积较大，地下一层，地上4层可以参观；浙江通史展ABC3个展厅，文物超多；临展厅经常有惊喜；数字展厅画面唯美；文创产品精巧别致，令人爱不释手。\n交通便利，地铁6号线枫桦西路出站，步行十分钟之内可达。",
+    "time": "2024-11-04",
+    "score": 2.4,
+    "score_count": 7,
+    "visited_time": 703,
+    "img_list": [
+        "images/1_0.jpg",
+        "images/1_1.jpg",
+        "images/1_2.jpg",
+        "images/1_3.jpg",
+        "images/1_4.jpg",
+        "images/1_5.jpg",
+        "images/1_6.jpg",
+        "images/1_7.jpg",
+        "images/1_8.jpg",
+        "images/1_9.jpg",
+        "images/1_10.jpg",
+        "images/1_11.jpg",
+        "images/1_12.jpg"
+    ]
+}

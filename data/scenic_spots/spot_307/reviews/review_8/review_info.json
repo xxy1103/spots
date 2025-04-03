@@ -1,0 +1,16 @@
+{
+    "id": 8,
+    "name": "快乐好人",
+    "user_id": "user_3206",
+    "content": "难得的清静佛教名山，景色优美，空气清新，秦岭山脉一览无余，各休憩平台设置恰到好处，登山步道规整安全，值得一去，非常推荐！推荐先坐交通车，再步行登山。",
+    "time": "2024-08-14",
+    "score": 4.0,
+    "score_count": 6,
+    "visited_time": 460,
+    "img_list": [
+        "images/8_0.jpg",
+        "images/8_1.jpg",
+        "images/8_2.jpg",
+        "images/8_3.jpg"
+    ]
+}

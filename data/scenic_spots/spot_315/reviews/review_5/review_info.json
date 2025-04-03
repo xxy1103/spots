@@ -1,0 +1,20 @@
+{
+    "id": 5,
+    "name": "你好，我的朋友",
+    "user_id": "user_3098",
+    "content": "该游乐园位于平塘大王山附近，与湘江欢乐雪域和水寨寨相邻。这里不仅设施齐全，还提供了丰富的娱乐和观赏项目。虽然园内的食物价格略高于外面，但仍在可接受范围内。此外，还有精彩的花车巡游和海豹表演，非常适合与朋友或带孩子一同前来游玩。",
+    "time": "2025-01-27",
+    "score": 2.4,
+    "score_count": 4,
+    "visited_time": 933,
+    "img_list": [
+        "images/5_0.jpg",
+        "images/5_1.jpg",
+        "images/5_2.jpg",
+        "images/5_3.jpg",
+        "images/5_4.jpg",
+        "images/5_5.jpg",
+        "images/5_6.jpg",
+        "images/5_7.jpg"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": 7,
+    "name": "听足音",
+    "user_id": "user_2983",
+    "content": "迪士尼小镇，是上海迪士尼度假区中迪士尼乐园中的一个小镇，从经典的迪士尼动画片中走到现实中来，欧美风格建筑，童话般漂亮，位于进口处不远，可散步购物，常常能遇见心仪的动画明星，幸运的你赶快请求和明星合影吧，一般都能如愿以偿哦！",
+    "time": "2022-08-01",
+    "score": 3.4,
+    "score_count": 4,
+    "visited_time": 78,
+    "img_list": [
+        "images/7_0.jpg",
+        "https://dimg04.c-ctrip.com/images/0100p120009qqgmy17B85_W_640_10000.jpg?proc=autoorient",
+        "images/7_2.jpg",
+        "https://dimg04.c-ctrip.com/images/0104c120009qqef9v0A1A_W_640_10000.jpg?proc=autoorient",
+        "images/7_4.jpg"
+    ]
+}

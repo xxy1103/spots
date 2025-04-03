@@ -1,0 +1,22 @@
+{
+    "id": 6,
+    "name": "卡洛Carlo",
+    "user_id": "user_3254",
+    "content": "桂林山水甲天下，桂林地下的银子岩溶洞也可称为世界上首屈一指的溶洞奇观。看过银子岩之后，再看别的知名溶洞，总有一种曾经沧海难为水的感觉。",
+    "time": "2020-04-24",
+    "score": 1.3,
+    "score_count": 4,
+    "visited_time": 518,
+    "img_list": [
+        "images/6_0.jpg",
+        "images/6_1.jpg",
+        "images/6_2.jpg",
+        "images/6_3.jpg",
+        "images/6_4.jpg",
+        "images/6_5.jpg",
+        "images/6_6.jpg",
+        "images/6_7.jpg",
+        "images/6_8.jpg",
+        "images/6_9.jpg"
+    ]
+}

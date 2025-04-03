@@ -1,0 +1,22 @@
+{
+    "id": 1,
+    "name": "山水凡人",
+    "user_id": "user_2485",
+    "content": "黄兴广场位于黄兴路步行街，这里是长沙市一个重要的商业区，这里店铺林立，这里的小吃更是味美价廉，来长沙必去黄兴广场，这里不管是节假日还是平常日，都是人山人海。",
+    "time": "2025-01-15",
+    "score": 2.9,
+    "score_count": 7,
+    "visited_time": 478,
+    "img_list": [
+        "images/1_0.jpg",
+        "images/1_1.jpg",
+        "images/1_2.jpg",
+        "images/1_3.jpg",
+        "images/1_4.jpg",
+        "images/1_5.jpg",
+        "images/1_6.jpg",
+        "images/1_7.jpg",
+        "images/1_8.jpg",
+        "images/1_9.jpg"
+    ]
+}

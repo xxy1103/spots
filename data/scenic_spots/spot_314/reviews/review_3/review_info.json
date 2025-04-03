@@ -1,0 +1,27 @@
+{
+    "id": 3,
+    "name": "在路上-奔跑",
+    "user_id": "user_2941",
+    "content": "大雄宝殿是南普陀寺的主要建筑，庄严肃穆，是游客和信众必访；\n万寿塔是南普陀寺的重要文物古迹，具有较高的历史和文化价；\n荷花池环境优美，适合拍照和休闲，是游客放松的好去处。",
+    "time": "2025-02-06",
+    "score": 1.5,
+    "score_count": 5,
+    "visited_time": 907,
+    "img_list": [
+        "images/3_0.jpg",
+        "images/3_1.jpg",
+        "images/3_2.jpg",
+        "images/3_3.jpg",
+        "images/3_4.jpg",
+        "images/3_5.jpg",
+        "images/3_6.jpg",
+        "images/3_7.jpg",
+        "images/3_8.jpg",
+        "images/3_9.jpg",
+        "images/3_10.jpg",
+        "images/3_11.jpg",
+        "images/3_12.jpg",
+        "https://dimg04.c-ctrip.com/images/1mh1612000ic5ptodF99B_W_640_10000.jpg?proc=autoorient",
+        "images/3_14.jpg"
+    ]
+}

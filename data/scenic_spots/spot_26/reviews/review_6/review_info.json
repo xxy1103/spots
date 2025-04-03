@@ -1,0 +1,20 @@
+{
+    "id": 6,
+    "name": "蓝色源泉",
+    "user_id": "user_204",
+    "content": "2024年刚开业，舞马丹霞演出是顶级水准，靠近悬崖的民宿是顶级视野，中途的餐厅一般。",
+    "time": "2025-02-22",
+    "score": 4.5,
+    "score_count": 9,
+    "visited_time": 942,
+    "img_list": [
+        "images/6_0.jpg",
+        "images/6_1.jpg",
+        "images/6_2.jpg",
+        "images/6_3.jpg",
+        "images/6_4.jpg",
+        "images/6_5.jpg",
+        "images/6_6.jpg",
+        "images/6_7.jpg"
+    ]
+}

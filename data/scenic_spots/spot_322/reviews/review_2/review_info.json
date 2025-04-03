@@ -1,0 +1,21 @@
+{
+    "id": 2,
+    "name": "yeliq1",
+    "user_id": "user_3179",
+    "content": "一般省会城市都没有自己的博物馆，都是直接用省博物院来替代，长沙是一个有个性的城市，不但有省院，依然有属于自己的长沙博物馆。而且这个长沙博物馆绝不是滥竽充数的，是真的精心布局，长沙博物馆的打光在国内博物馆里是超前的，就是清晰但不反光，不炫目，而且可以有效屏蔽背景里的杂物。",
+    "time": "2019-12-01",
+    "score": 3.1,
+    "score_count": 5,
+    "visited_time": 466,
+    "img_list": [
+        "images/2_0.jpg",
+        "images/2_1.jpg",
+        "images/2_2.jpg",
+        "images/2_3.jpg",
+        "images/2_4.jpg",
+        "images/2_5.jpg",
+        "images/2_6.jpg",
+        "images/2_7.jpg",
+        "images/2_8.jpg"
+    ]
+}
