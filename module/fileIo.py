@@ -69,6 +69,16 @@ class userIo:
         log.writeLog(f"删除用户：{userId}")
         
 
+def getAllSpotTypes():
+    """
+    获取所有景点类型的json文件
+    :return: 所有景点类型的json信息列表
+    """
+    spotTypesPath = os.path.join(dataPath, r"config/spot_types.json")
+    with open(spotTypesPath, "r", encoding="utf-8") as f:
+        spotTypes = json.load(f)
+    return spotTypes
+
 class spotIo:
     def __init__(self):
         self.spotsPath = os.path.join(dataPath,r"scenic_spots/spots.json")
@@ -90,26 +100,30 @@ class spotIo:
         if spotId > self.counts:
             return None
         return self.spots[spotId-1]
-    def updateScore(self,spotId:int,score:float)->bool:
+    def addScore(self,spotId:int,score:float)->float:
         """
         更新景点的评分
         """
         try:
             spot = self.getSpot(spotId)
-            spot["score"] = score
-            return True
+            sumScore = float(spot["score"])*spot["score_count"]
+            sumScore += score
+            spot["score_count"]+=1
+            spot["score"] = sumScore / spot["score_count"]
+
+            return spot["score"]
         except:
-            return False
-    def spotVisited(self,spotId:int)->bool:
+            return -1.0
+    def spotVisited(self,spotId:int)->int:
         """
         当已经景区被访问了，跟新被访问次数
         """
         try:
             spot = self.getSpot(spotId)
             spot["visited_time"]+=1
-            return True
+            return spot["visited_time"]
         except:
-            return False
+            return -1
     def spotReviewsAdd(self,spotId:int)->bool:
         """
         当景区日记增加，加一
@@ -130,6 +144,7 @@ class spotIo:
         }
         with open(self.spotsPath, "w", encoding="utf-8") as f:
             json.dump(spotsData, f, ensure_ascii=False, indent=4)
+
 
         
 
