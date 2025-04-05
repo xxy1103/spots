@@ -54,3 +54,17 @@ class SpotSort:
         writeLog(f"更新景点{spotId}的访问次数为{newVisitedTime}")
         return newVisitedTime
 
+if __name__ == "__main__":
+    spoyio = spotIo() 
+    SportSort = SpotSort(spotsio=spoyio, spotType=getAllSpotTypes())
+    SportSort.classify()
+    res = SportSort.getTopKForEachType(10)
+    save_data = {}
+    for type_name in res:
+        save_data[type_name] = {
+            "ids": res[type_name]["ids"],  # 使用:而不是=
+            "top_10": res[type_name]["top_10"]  # 使用:而不是=
+        }
+    with open("index/global/type_index.json", "w", encoding="utf-8") as f:
+        json.dump(save_data, f, ensure_ascii=False, indent=4)
+
