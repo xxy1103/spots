@@ -1,0 +1,2259 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39078289410914,
+          39.91745666873053
+        ]
+      },
+      "properties": {
+        "name": "故宫博物院",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39091875483673,
+          39.91311864125007
+        ]
+      },
+      "properties": {
+        "name": "金水桥",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39121373887909,
+          39.90677038608279
+        ]
+      },
+      "properties": {
+        "name": "外金水桥",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38900552113711,
+          39.91674999423025
+        ]
+      },
+      "properties": {
+        "name": "冰角咖啡店",
+        "type": "bubble_tea"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38904842785928,
+          39.91629757028951
+        ]
+      },
+      "properties": {
+        "name": "冰窖",
+        "type": "shop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.3934570938911,
+          39.917142092728646
+        ]
+      },
+      "properties": {
+        "name": "珍宝馆售票处",
+        "type": "info_center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39283494707414,
+          39.91850482253152
+        ]
+      },
+      "properties": {
+        "name": "钟表馆",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39000846675022,
+          39.91782483189164
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间1",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39039283957891,
+          39.919730433944665
+        ]
+      },
+      "properties": {
+        "name": "故宫礼品店",
+        "type": "shop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39083978449256,
+          39.91972906285985
+        ]
+      },
+      "properties": {
+        "name": "故宫饮品点",
+        "type": "bubble_tea"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38959548954918,
+          39.91999639124481
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间2",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39140142678492,
+          39.92018343671349
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间3",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39467341246694,
+          39.919003027804195
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间4",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39273009594444,
+          39.91491478653527
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间5",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39338799912706,
+          39.913937246852804
+        ]
+      },
+      "properties": {
+        "name": "本仁殿",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39087776403858,
+          39.91399050438795
+        ]
+      },
+      "properties": {
+        "name": "太和门",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38891478149857,
+          39.91260300542829
+        ]
+      },
+      "properties": {
+        "name": "盛世咖啡店",
+        "type": "bubble_tea"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38945397383233,
+          39.917176860575516
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间6",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39205161852284,
+          39.91723444123101
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间7",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39054630692235,
+          39.920938694823036
+        ]
+      },
+      "properties": {
+        "name": "神武门",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39351759776098,
+          39.92081257244388
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间8",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39502464970687,
+          39.91682165331767
+        ]
+      },
+      "properties": {
+        "name": "停车场1",
+        "type": "parking"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39429165976041,
+          39.91518743089805
+        ]
+      },
+      "properties": {
+        "name": "停车场2",
+        "type": "parking"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38699036597777,
+          39.915177833671294
+        ]
+      },
+      "properties": {
+        "name": "停车场3",
+        "type": "parking"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38812944433619,
+          39.92072644395325
+        ]
+      },
+      "properties": {
+        "name": "停车场4",
+        "type": "parking"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38384931607062,
+          39.9212039659218
+        ]
+      },
+      "properties": {
+        "name": "停车场5",
+        "type": "parking"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.3869709162343,
+          39.92303703549268
+        ]
+      },
+      "properties": {
+        "name": "大高玄殿",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39047317775997,
+          39.92355247378706
+        ]
+      },
+      "properties": {
+        "name": "万春亭",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39142248898831,
+          39.92335507240965
+        ]
+      },
+      "properties": {
+        "name": "观妙亭",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39223771670986,
+          39.923289271824004
+        ]
+      },
+      "properties": {
+        "name": "周赏亭",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38954531989272,
+          39.92332628466123
+        ]
+      },
+      "properties": {
+        "name": "辑芳亭",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38875154553232,
+          39.92313299517976
+        ]
+      },
+      "properties": {
+        "name": "富览亭",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38903759023775,
+          39.925329060572786
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间8",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39226632108216,
+          39.926209111952225
+        ]
+      },
+      "properties": {
+        "name": "停车场6",
+        "type": "parking"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38301874397226,
+          39.92443649367658
+        ]
+      },
+      "properties": {
+        "name": "白塔",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37902077353053,
+          39.922092396455746
+        ]
+      },
+      "properties": {
+        "name": "中国国家图书馆古书籍馆",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39803433493215,
+          39.9190257652213
+        ]
+      },
+      "properties": {
+        "name": "首都医科大学妇产医院",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.398463402154,
+          39.92125075098004
+        ]
+      },
+      "properties": {
+        "name": "北京医院第二住院部",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39979708588368,
+          39.92149065570214
+        ]
+      },
+      "properties": {
+        "name": "北京银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39727095261503,
+          39.92287523281165
+        ]
+      },
+      "properties": {
+        "name": "罗森",
+        "type": "shop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39633236806723,
+          39.9222501203143
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间9",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38614452883343,
+          39.926580938792796
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间10",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37972460987179,
+          39.929315591093314
+        ]
+      },
+      "properties": {
+        "name": "禅福寺",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37861439843525,
+          39.92871521067912
+        ]
+      },
+      "properties": {
+        "name": "小西天",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38134076296498,
+          39.93049577559941
+        ]
+      },
+      "properties": {
+        "name": "九龙壁",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37424531522831,
+          39.9301278103504
+        ]
+      },
+      "properties": {
+        "name": "北京大学第一医院",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37225114633837,
+          39.927008651500834
+        ]
+      },
+      "properties": {
+        "name": "北京大学第一医院第二住院部",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36894990855227,
+          39.930003068493214
+        ]
+      },
+      "properties": {
+        "name": "场桥医院",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37203277193001,
+          39.924082772291975
+        ]
+      },
+      "properties": {
+        "name": "天主教教堂",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37365534564277,
+          39.92283853494132
+        ]
+      },
+      "properties": {
+        "name": "速八酒店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36792645003658,
+          39.92148160915483
+        ]
+      },
+      "properties": {
+        "name": "速8酒店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36765291968267,
+          39.92126363850884
+        ]
+      },
+      "properties": {
+        "name": "主题酒店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36925119508403,
+          39.922826431566804
+        ]
+      },
+      "properties": {
+        "name": "汉庭酒店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37188995849841,
+          39.92142403207049
+        ]
+      },
+      "properties": {
+        "name": "1901咖啡",
+        "type": "bubble_tea"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37540116856978,
+          39.9167527436792
+        ]
+      },
+      "properties": {
+        "name": "中国邮政储蓄银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36668121437529,
+          39.90957310383781
+        ]
+      },
+      "properties": {
+        "name": "西单大悦城",
+        "type": "shop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36866922594568,
+          39.909108292319
+        ]
+      },
+      "properties": {
+        "name": "北京是蒙藏学校旧址",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36976240523835,
+          39.90894831996077
+        ]
+      },
+      "properties": {
+        "name": "西单明珠商场",
+        "type": "shop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36919701881929,
+          39.907965031098094
+        ]
+      },
+      "properties": {
+        "name": "汉光百货",
+        "type": "shop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37082747426228,
+          39.90661306110762
+        ]
+      },
+      "properties": {
+        "name": "北京图书大厦",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36902896727248,
+          39.90494705712877
+        ]
+      },
+      "properties": {
+        "name": "首都时代影城",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36857102731688,
+          39.9022599006759
+        ]
+      },
+      "properties": {
+        "name": "兴业银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.3686300240599,
+          39.90174978740049
+        ]
+      },
+      "properties": {
+        "name": "中国工商银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37045378715943,
+          39.90096358916425
+        ]
+      },
+      "properties": {
+        "name": "北京市第二医院",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36921628648986,
+          39.89951137427476
+        ]
+      },
+      "properties": {
+        "name": "宫武门天主教教堂",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37548960801615,
+          39.899378976743755
+        ]
+      },
+      "properties": {
+        "name": "北京急救中心",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37820703386365,
+          39.89913899456814
+        ]
+      },
+      "properties": {
+        "name": "和平门菜市场",
+        "type": "shop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38713942758785,
+          39.903520068681445
+        ]
+      },
+      "properties": {
+        "name": "人民大会堂",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39542042562424,
+          39.903657192903765
+        ]
+      },
+      "properties": {
+        "name": "国家博物馆",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39142652511913,
+          39.90316080269087
+        ]
+      },
+      "properties": {
+        "name": "人们英雄纪念碑",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39154862743659,
+          39.9010663092704
+        ]
+      },
+      "properties": {
+        "name": "毛主席纪念堂",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39523351810992,
+          39.900831717539106
+        ]
+      },
+      "properties": {
+        "name": "北京天东安宾馆",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39857845509677,
+          39.9006246516558
+        ]
+      },
+      "properties": {
+        "name": "北京警察博物馆",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40279761622071,
+          39.90054648739324
+        ]
+      },
+      "properties": {
+        "name": "首都宾馆",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.41094417992034,
+          39.90126858712158
+        ]
+      },
+      "properties": {
+        "name": "首都医科大学医院",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40879884381111,
+          39.90237109298384
+        ]
+      },
+      "properties": {
+        "name": "北京医院",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.41095848259752,
+          39.90347632342485
+        ]
+      },
+      "properties": {
+        "name": "东单公园",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40842269501623,
+          39.90844863234474
+        ]
+      },
+      "properties": {
+        "name": "北京东方大酒店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40635224951912,
+          39.90886824025001
+        ]
+      },
+      "properties": {
+        "name": "王府井书店",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40575155540853,
+          39.90747378188369
+        ]
+      },
+      "properties": {
+        "name": "中国银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40455016718734,
+          39.90728456115718
+        ]
+      },
+      "properties": {
+        "name": "招商银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40097818240179,
+          39.90848706360894
+        ]
+      },
+      "properties": {
+        "name": "北京天安酒店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39996344427473,
+          39.908633998749025
+        ]
+      },
+      "properties": {
+        "name": "北京香江酒店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40482884251999,
+          39.92561857287992
+        ]
+      },
+      "properties": {
+        "name": "社区医院",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40713993520903,
+          39.92485162311329
+        ]
+      },
+      "properties": {
+        "name": "龙族宾馆",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40270624047415,
+          39.92385366250122
+        ]
+      },
+      "properties": {
+        "name": "中国美术馆",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40404349954574,
+          39.922085262276816
+        ]
+      },
+      "properties": {
+        "name": "北京嘉德艺术中心",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40529852116964,
+          39.922085262276816
+        ]
+      },
+      "properties": {
+        "name": "华侨大厦",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.41205096755556,
+          39.92252942281282
+        ]
+      },
+      "properties": {
+        "name": "兴业银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40933175403708,
+          39.924281361275206
+        ]
+      },
+      "properties": {
+        "name": "东宫影剧院",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.41097626211777,
+          39.92737672321609
+        ]
+      },
+      "properties": {
+        "name": "北京当代医院",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.41409415114212,
+          39.92995782416484
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间11",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.41316817944477,
+          39.93145051398488
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间12",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.4087237583567,
+          39.932934968232786
+        ]
+      },
+      "properties": {
+        "name": "清军陆军和海军部旧址",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.4101555701699,
+          39.9335490166301
+        ]
+      },
+      "properties": {
+        "name": "中国社会科学院",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40314747210394,
+          39.933455814243
+        ]
+      },
+      "properties": {
+        "name": "东城区第一妇幼保健院",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39982220113458,
+          39.93354901808687
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间13",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39958401015018,
+          39.93416032109134
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间14",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39066752721182,
+          39.933494192518395
+        ]
+      },
+      "properties": {
+        "name": "北海医院",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38479288161449,
+          39.93247168597558
+        ]
+      },
+      "properties": {
+        "name": "停车场7",
+        "type": "parking"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38225016503979,
+          39.93264424644702
+        ]
+      },
+      "properties": {
+        "name": "蜜雪冰城",
+        "type": "bubble_tea"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37781289463564,
+          39.93194123759911
+        ]
+      },
+      "properties": {
+        "name": "超市便利店",
+        "type": "shop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37114417290596,
+          39.93163763634192
+        ]
+      },
+      "properties": {
+        "name": "北京银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36600543366455,
+          39.92924438891754
+        ]
+      },
+      "properties": {
+        "name": "公共卫生间15",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36666333668352,
+          39.927595384530754
+        ]
+      },
+      "properties": {
+        "name": "百姓生活超市",
+        "type": "shop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.3704413072961,
+          39.91900370800309
+        ]
+      },
+      "properties": {
+        "name": "理发店1",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37307663730508,
+          39.91596658634323
+        ]
+      },
+      "properties": {
+        "name": "理发店2",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.3690217278852,
+          39.910946703636085
+        ]
+      },
+      "properties": {
+        "name": "同仁堂",
+        "type": "medical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.3664562632363,
+          39.911260683193504
+        ]
+      },
+      "properties": {
+        "name": "Coco",
+        "type": "bubble_tea"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36607904158257,
+          39.90995539602289
+        ]
+      },
+      "properties": {
+        "name": "辛巴克",
+        "type": "bubble_tea"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36661864320443,
+          39.906842634922626
+        ]
+      },
+      "properties": {
+        "name": "中国银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.3664613189929,
+          39.904988780333
+        ]
+      },
+      "properties": {
+        "name": "中国名声银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38522069067123,
+          39.907933747808535
+        ]
+      },
+      "properties": {
+        "name": "停车场8",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39513455120434,
+          39.908092891875924
+        ]
+      },
+      "properties": {
+        "name": "停车场9",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40430228772941,
+          39.907639039673924
+        ]
+      },
+      "properties": {
+        "name": "北京饭店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40104137684334,
+          39.90756499702178
+        ]
+      },
+      "properties": {
+        "name": "北京贵宾楼",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40298111802392,
+          39.90845076144656
+        ]
+      },
+      "properties": {
+        "name": "北京万豪公寓",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.4032877161636,
+          39.90363934526603
+        ]
+      },
+      "properties": {
+        "name": "什么理发店",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40827315671032,
+          39.90521275559021
+        ]
+      },
+      "properties": {
+        "name": "北邮理发店",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38269744438534,
+          39.89743715332241
+        ]
+      },
+      "properties": {
+        "name": "小学门口理发店",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37985759148827,
+          39.902906114233595
+        ]
+      },
+      "properties": {
+        "name": "中学生也要理发",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37352417596692,
+          39.90280544258821
+        ]
+      },
+      "properties": {
+        "name": "三十一中理发店",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40198356119416,
+          39.913666468985184
+        ]
+      },
+      "properties": {
+        "name": "中国工商银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40462947594716,
+          39.913484120660826
+        ]
+      },
+      "properties": {
+        "name": "北京外文书店",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40513798158689,
+          39.91449732076668
+        ]
+      },
+      "properties": {
+        "name": "商场里的公共卫生间",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40620171063195,
+          39.91725576185029
+        ]
+      },
+      "properties": {
+        "name": "兴业银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40745673225585,
+          39.91598075068532
+        ]
+      },
+      "properties": {
+        "name": "桔子酒店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40512904257733,
+          39.916618259235
+        ]
+      },
+      "properties": {
+        "name": "名创优品",
+        "type": "shop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.401565996965,
+          39.91542686738811
+        ]
+      },
+      "properties": {
+        "name": "路边的洗手间",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39849366411613,
+          39.917470147927986
+        ]
+      },
+      "properties": {
+        "name": "四合院酒店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39862367543515,
+          39.9243587825913
+        ]
+      },
+      "properties": {
+        "name": "求是杂志社",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39518041097983,
+          39.92424226246959
+        ]
+      },
+      "properties": {
+        "name": "远景主题酒店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39578468075972,
+          39.926453370979395
+        ]
+      },
+      "properties": {
+        "name": "名宿",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39358392324941,
+          39.92849032414251
+        ]
+      },
+      "properties": {
+        "name": "巷子里的公共卫生间",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39253092055756,
+          39.92794887880653
+        ]
+      },
+      "properties": {
+        "name": "City walls游客中心",
+        "type": "info_center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39062210533292,
+          39.92202445906833
+        ]
+      },
+      "properties": {
+        "name": "景山公园售票处",
+        "type": "info_center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39105117255475,
+          39.92229589109041
+        ]
+      },
+      "properties": {
+        "name": "公园里的洗手间",
+        "type": "toilet"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39504760513337,
+          39.905467992684706
+        ]
+      },
+      "properties": {
+        "name": "国博检票口",
+        "type": "info_center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39118242414014,
+          39.907837390887686
+        ]
+      },
+      "properties": {
+        "name": "登天安门楼检票口",
+        "type": "info_center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39045300986298,
+          39.908684759754365
+        ]
+      },
+      "properties": {
+        "name": "行李存放点",
+        "type": "info_center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39093928582952,
+          39.912460771505565
+        ]
+      },
+      "properties": {
+        "name": "故宫博物院售票处",
+        "type": "info_center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38339373731621,
+          39.92149851578659
+        ]
+      },
+      "properties": {
+        "name": "北海公园售票处",
+        "type": "info_center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37966085248614,
+          39.90631842819829
+        ]
+      },
+      "properties": {
+        "name": "南海公园售票处",
+        "type": "info_center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39680069769291,
+          39.93188150622557
+        ]
+      },
+      "properties": {
+        "name": "南锣鼓巷",
+        "type": "scenic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39597116794889,
+          39.93237848079015
+        ]
+      },
+      "properties": {
+        "name": "度假酒店",
+        "type": "hotel"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40849635417553,
+          39.93033341934487
+        ]
+      },
+      "properties": {
+        "name": "不知名停车处",
+        "type": "parking"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40602063354963,
+          39.927871588298615
+        ]
+      },
+      "properties": {
+        "name": "胡同里的理发店",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.39732129497192,
+          39.92999622454624
+        ]
+      },
+      "properties": {
+        "name": "为什么要理发店",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.38890442673981,
+          39.92827184759308
+        ]
+      },
+      "properties": {
+        "name": "小学生理发店",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.41096205643868,
+          39.91994752187908
+        ]
+      },
+      "properties": {
+        "name": "随便凑的理发店",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.40259751686898,
+          39.91944469053929
+        ]
+      },
+      "properties": {
+        "name": "个人书店",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37716623362859,
+          39.9236086017337
+        ]
+      },
+      "properties": {
+        "name": "文京俱乐部",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37299497688021,
+          39.929553581197766
+        ]
+      },
+      "properties": {
+        "name": "北京四中图书馆",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36782360709492,
+          39.91595333087149
+        ]
+      },
+      "properties": {
+        "name": "中国建设银行",
+        "type": "bank"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.36672948567919,
+          39.91786995234726
+        ]
+      },
+      "properties": {
+        "name": "北平图书馆旧址",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37510344849855,
+          39.9191367027642
+        ]
+      },
+      "properties": {
+        "name": "光明社区图书馆",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37905086693955,
+          39.91861848951677
+        ]
+      },
+      "properties": {
+        "name": "随便停车场",
+        "type": "parking"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37551204429134,
+          39.911970574784284
+        ]
+      },
+      "properties": {
+        "name": "力学图书馆",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37567294449956,
+          39.91025945457761
+        ]
+      },
+      "properties": {
+        "name": "力学理发店",
+        "type": "barbershop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37389946686748,
+          39.90642573178459
+        ]
+      },
+      "properties": {
+        "name": "北京电报大楼",
+        "type": "library"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.37689578673648,
+          39.904292136284944
+        ]
+      },
+      "properties": {
+        "name": "北京新华街",
+        "type": "library"
+      }
+    }
+  ]
+}
