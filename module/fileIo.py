@@ -6,7 +6,7 @@ import printLog as log
 
 dataPath = r"data/"
 
-class userIo:
+class UserIo:
     def __init__(self):
         self.usersPath = os.path.join(dataPath,r"users/users.json")
         with open(self.usersPath,"r",encoding="utf-8") as f:
@@ -27,7 +27,7 @@ class userIo:
         :return: 用户的json信息
         """
         
-        if userId >= self.counts:
+        if userId > self.counts:
             return None
         user = self.users[userId-1]
         return user
@@ -79,7 +79,7 @@ def getAllSpotTypes():
         spotTypes = json.load(f)
     return spotTypes
 
-class spotIo:
+class SpotIo:
     def __init__(self):
         self.spotsPath = os.path.join(dataPath,r"scenic_spots/spots.json")
         with open(self.spotsPath,"r",encoding="utf-8") as f:
