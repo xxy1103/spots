@@ -3,6 +3,7 @@ from module.fileIo import spotIo, getAllSpotTypes
 from module.data_structure.set import IntSet
 from module.data_structure.indexHeap import TopKHeap
 from module.printLog import writeLog
+from module.data_structure.quicksort import quicksort
 import json
 
 
@@ -104,27 +105,54 @@ class Spot:
     
     def getTopKByType(self, spotType, k=10):
         """
-        获取特定类型景点的前K个评分最高的景点
+        获取特定类型景点的前K个评分最高的景点, 或当k=-1时获取所有排序后的景点
         
         :param spotType: 景点类型
-        :param k: 需要获取的景点数量，默认为10
-        :return: 指定类型的前K个景点ID列表，如果类型不存在则返回空列表
+        :param k: 需要获取的景点数量，默认为10。如果k=-1，则返回该类型所有排序后的景点。
+        :return: 指定类型的前K个景点列表，或所有排序后的景点列表，如果类型不存在则返回空列表
         """
         if spotType not in self.spotTypeDict:
             writeLog(f"找不到类型为 '{spotType}' 的景点")
             return []
-        
-        # 如果top_10列表为空，则重新获取
-        if not self.spotTypeDict[spotType]["top_10"]:
-            self.spotTypeDict[spotType]["top_10"] = self.spotTypeDict[spotType]["heap"].getTopK(k)
+
+        # 当 k = -1 时，获取该类型所有景点并排序
+        if k == -1:
+            ids = self.spotTypeDict[spotType].get("ids", [])
+            # 获取所有景点的详细信息
+            spots_of_type = [self.getSpot(spot_id) for spot_id in ids]
+            # 过滤掉可能存在的None值
+            spots_of_type = [spot for spot in spots_of_type if spot] 
             
-        # 如果需要的k与已有的不同，则重新获取
-        elif len(self.spotTypeDict[spotType]["top_10"]) != k:
-            self.spotTypeDict[spotType]["top_10"] = self.spotTypeDict[spotType]["heap"].getTopK(k)
+            # 按评分（降序）和访问次数（降序）排序
+            # 使用 .get() 提供默认值以增加健壮性
+            sorted_spots = sorted(
+                spots_of_type, 
+                key=lambda spot: (float(spot.get('score', 0.0)), int(spot.get('visited_time', 0))), 
+                reverse=True # 降序排序
+            )
+            writeLog(f"获取 '{spotType}' 类型的所有景点并排序完成")
+            return sorted_spots
+
+        # --- 处理 k > 0 的现有逻辑 ---
+        # 确保 "top_10" 键存在，如果不存在则初始化为空列表
+        if "top_10" not in self.spotTypeDict[spotType]:
+            self.spotTypeDict[spotType]["top_10"] = []
+            
+        # 如果缓存的 top_10 列表为空，或者请求的 k 与缓存的大小不同
+        if not self.spotTypeDict[spotType]["top_10"] or len(self.spotTypeDict[spotType]["top_10"]) != k:
+            # 确保 "heap" 键存在并且是一个 TopKHeap 实例
+            heap_instance = self.spotTypeDict[spotType].get("heap")
+            if heap_instance and isinstance(heap_instance, TopKHeap):
+                 # 从堆中获取 Top K 结果并更新缓存
+                 self.spotTypeDict[spotType]["top_10"] = heap_instance.getTopK(k)
+            else:
+                 # 如果堆不存在或类型不正确，记录错误并清空缓存
+                 writeLog(f"错误：类型 '{spotType}' 的堆未正确初始化。")
+                 self.spotTypeDict[spotType]["top_10"] = []
             
         writeLog(f"获取 '{spotType}' 类型的前{k}个景点完成")
+        # 返回缓存的 Top K 列表
         return self.spotTypeDict[spotType]["top_10"]
-
     
     def addScore(self, spotId, score):
         """
@@ -162,6 +190,70 @@ class Spot:
             json.dump(save_data, f, ensure_ascii=False, indent=4)
         writeLog(f"景点分类索引已保存至{filepath}")
 
+    def _merge_sort(self, spots_list):
+        """
+        归并排序辅助函数
+        按评分（降序）和访问次数（降序）排序
+        """
+        if len(spots_list) <= 1:
+            return spots_list
+
+        mid = len(spots_list) // 2
+        left_half = self._merge_sort(spots_list[:mid])
+        right_half = self._merge_sort(spots_list[mid:])
+
+        return self._merge(left_half, right_half)
+
+    def _merge(self, left, right):
+        """
+        合并两个已排序列表的辅助函数
+        """
+        merged = []
+        left_index, right_index = 0, 0
+
+        while left_index < len(left) and right_index < len(right):
+            # 比较评分，评分高的在前
+            if left[left_index]['score'] > right[right_index]['score']:
+                merged.append(left[left_index])
+                left_index += 1
+            elif left[left_index]['score'] < right[right_index]['score']:
+                merged.append(right[right_index])
+                right_index += 1
+            else:
+                # 评分相同，比较访问次数，访问次数多的在前
+                if left[left_index]['visited_time'] >= right[right_index]['visited_time']:
+                    merged.append(left[left_index])
+                    left_index += 1
+                else:
+                    merged.append(right[right_index])
+                    right_index += 1
+        
+        # 添加剩余元素
+        merged.extend(left[left_index:])
+        merged.extend(right[right_index:])
+        return merged
+
+    def getAllSpotsSorted(self):
+        """
+        获取所有景点，并按评分和访问次数进行归并排序（降序）
+        :return: 排序后的景点列表
+        """
+        # 对 self.spots 的副本进行排序，以避免修改原始列表
+        spots_to_sort = list(self.spots) 
+        sorted_spots = self._merge_sort(spots_to_sort)
+        writeLog("获取所有景点并完成排序")
+        return sorted_spots
+    def getSortedByVisitedTime(self):
+        """
+        获取所有景点，并按访问次数进行归并排序（降序）
+        :return: 排序后的景点列表
+        """
+        # 对 self.spots 的副本进行排序，以避免修改原始列表
+        spots_to_sort = list(self.spots) 
+        sorted_spots = quicksort(spots_to_sort)
+        writeLog("获取所有景点并完成排序")
+        return sorted_spots
+
 
 spotManager = Spot()
 
@@ -177,3 +269,10 @@ if __name__ == "__main__":
     # 获取"历史古迹"类型的前5个评分最高的景点
     b = historical_spots = spot.getTopKByType("历史古迹", 5)
     print(b)
+
+    # 获取所有景点并排序
+    all_sorted = spot.getAllSpotsSorted()
+    print("\nAll spots sorted by score and visited time:")
+    # 打印前几个看看效果
+    for s in all_sorted[:5]: 
+        print(f"ID: {s['id']}, Name: {s['name']}, Score: {s['score']}, Visited: {s['visited_time']}")
