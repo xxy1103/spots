@@ -1,8 +1,8 @@
-from data_structure.hashtable import HashTable 
-from fileIo import SpotIo, getAllSpotTypes
-from data_structure.set import IntSet
-from data_structure.indexHeap import TopKHeap
-from printLog import writeLog
+from module.data_structure.hashtable import HashTable 
+from module.fileIo import spotIo, getAllSpotTypes
+from module.data_structure.set import IntSet
+from module.data_structure.indexHeap import TopKHeap
+from module.printLog import writeLog
 import json
 
 
@@ -10,7 +10,7 @@ class Spot:
     """
     Spot类用于表示景点系统，包含景点查询、分类、排序等功能
     """
-    def __init__(self, spotIo):
+    def __init__(self):
         self.spotIo = spotIo
         self.spots = spotIo.getAllSpots()
         self.counts = spotIo.counts
@@ -162,9 +162,11 @@ class Spot:
             json.dump(save_data, f, ensure_ascii=False, indent=4)
         writeLog(f"景点分类索引已保存至{filepath}")
 
+
+spotManager = Spot()
+
 if __name__ == "__main__":
-    spotIo = SpotIo()
-    spot = Spot(spotIo=spotIo)
+    spot = Spot()
     # 获取每个类型前10个景点并保存索引
     t = spot.getTopKForEachType(10)
     print(t)

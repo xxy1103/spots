@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推荐景点</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 20px; }
+        .header span { font-weight: bold; }
+        .header button { padding: 5px 10px; cursor: pointer; }
+        .spots-list { list-style: none; padding: 0; }
+        .spots-list li { border: 1px solid #eee; padding: 10px; margin-bottom: 10px; border-radius: 4px; }
+        .spots-list h3 { margin: 0 0 5px 0; }
+        .spots-list p { margin: 0; font-size: 0.9em; color: #555; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <span>欢迎, <span id="username">访客</span>!</span>
+    <button id="logout-button">登出</button>
+</div>
+
+<h2>为您推荐的景点</h2>
+<ul id="spots-list" class="spots-list">
+    <!-- 推荐景点将在这里动态加载 -->
+    <li>加载中...</li>
+</ul>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const usernameSpan = document.getElementById('username');
+        const spotsList = document.getElementById('spots-list');
+        const logoutButton = document.getElementById('logout-button');
+
+        // 1. 检查会话并获取用户信息
+        fetch('/api/check-session')
+            .then(response => {
+                if (!response.ok) {
+                    // 如果未授权 (401) 或其他错误，重定向到登录页
+                    if (response.status === 401) {
+                        window.location.href = '/login'; // 跳转到登录页面的路由
+                    } else {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return null; // 防止进一步处理
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.success) {
+                    usernameSpan.textContent = data.user.username || '用户';
+                    // 用户信息获取成功后，获取推荐景点
+                    fetchRecommendedSpots();
+                } else if (data) {
+                     // 即使成功响应，也可能业务逻辑失败
+                     console.error('会话检查失败:', data.message);
+                     window.location.href = '/login';
+                }
+                // 如果 response.ok 为 false 且非 401，则不会执行到这里
+            })
+            .catch(error => {
+                console.error('检查会话时出错:', error);
+                usernameSpan.textContent = '错误';
+                spotsList.innerHTML = '<li>无法加载用户信息，请尝试重新登录。</li>';
+                // 可选：也在此处重定向到登录页
+                // window.location.href = '/login';
+            });
+
+        // 2. 获取推荐景点函数
+        function fetchRecommendedSpots() {
+            fetch('/api/recommended-spots') // 请求新的推荐 API
+                .then(response => {
+                    if (!response.ok) {
+                         // 如果未授权，也重定向
+                        if (response.status === 401) {
+                            window.location.href = '/login';
+                        }
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    spotsList.innerHTML = ''; // 清空加载提示
+                    if (data.success && data.spots && data.spots.length > 0) {
+                        data.spots.forEach(spot => {
+                            const li = document.createElement('li');
+                            const name = spot.name || '未知景点';
+                            const description = spot.description || '暂无描述';
+                            li.innerHTML = `<h3>${name}</h3><p>${description}</p>`;
+                            spotsList.appendChild(li);
+                        });
+                    } else if (data.success) {
+                        spotsList.innerHTML = '<li>暂无推荐景点。</li>';
+                    } else {
+                        spotsList.innerHTML = `<li>加载推荐景点失败: ${data.message || '未知错误'}</li>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('获取推荐景点时出错:', error);
+                    spotsList.innerHTML = '<li>加载推荐景点时出错，请稍后重试。</li>';
+                });
+        }
+
+        // 3. 处理登出
+        logoutButton.addEventListener('click', () => {
+            fetch('/api/logout', { method: 'POST' }) // 最好使用 POST 请求登出
+                .then(response => {
+                    // 不论成功与否，都尝试重定向到登录页
+                    window.location.href = '/login'; // 假设登出 API 会处理重定向，或者前端强制跳转
+                })
+                .catch(error => {
+                    console.error('登出时出错:', error);
+                    // 即使出错，也尝试跳转
+                    window.location.href = '/login';
+                });
+        });
+    });
+</script>
+
+</body>
+</html>

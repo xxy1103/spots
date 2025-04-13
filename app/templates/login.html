@@ -130,7 +130,7 @@
             if (data && data.success === true) {
                 // 后端确认会话有效，直接跳转到地图页面
                 console.log('检测到有效会话，用户:', data.user.username, '正在跳转...');
-                window.location.href = '/map';
+                window.location.href = '/spots'; // 跳转标记
             }
             // 如果 data 为 null 或 data.success 不为 true，则不执行任何操作，停留在登录页
         })
@@ -165,7 +165,7 @@
         .then(data => {
             if (data.success === true) {
                 // 登录成功，重定向到地图页面
-                window.location.href = '/map';
+                window.location.href = '/spots'; // 跳转标记
             } else {
                 // 登录失败，显示错误信息
                 alert('登录失败：' + (data.message || '用户名或密码错误'));

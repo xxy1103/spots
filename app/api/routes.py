@@ -1,13 +1,13 @@
 from flask import render_template, request, redirect, url_for, jsonify, make_response, session
 from . import api
-from module.user_class import User
-from module.fileIo import UserIo
+from module.user_class import userManager as user_manager
 import json
 import secrets
+from flask import g
 
 # 创建User实例
-userIo = UserIo()
-user_manager = User(userIo=userIo)
+
+
 
 @api.route('/login', methods=['POST'])
 def login():
@@ -84,7 +84,7 @@ def login_required(f):
 
 # filepath: d:\windows\desktop\数据结构课设\个性化旅游系统\app\api\routes.py
 # ... (import statements and existing code) ...
-from flask import g # 确保导入 g
+ # 确保导入 g
 
 # ... (existing routes like /login, login_required, /user-profile, /logout) ...
 
@@ -118,15 +118,20 @@ def logout():
     if session_token and session_token in session:
         session.pop(session_token, None)
     
-    # 创建响应
-    response = make_response(redirect(url_for('login.login_page')))
+    # --- 修改这里 ---
+    # 创建 JSON 响应
+    response = make_response(jsonify({
+        'success': True,
+        'message': '已成功登出'
+    }))
     
-    # 删除cookie
-    response.delete_cookie('user_session')
+    # 删除cookie (确保路径和域匹配设置时的值，如果设置过的话)
+    # 如果设置cookie时未指定path/domain，则默认 '/' 和当前域，通常无需指定
+    response.delete_cookie('user_session', path='/') # 显式指定 path='/' 通常更安全
     
     return response
 
-# ... (imports and other routes) ...
+
 
 @api.route('/register', methods=['POST'])
 def register():
@@ -159,3 +164,16 @@ def register():
             'message': '注册失败，用户名可能已存在' # 更具体的错误信息可能来自 addUser 方法
         }), 409 # 409 Conflict 更适合表示资源已存在
 
+# @api.route('/recommended-spots', methods=['GET'])
+# @login_required  # 确保用户已登录
+# def recommended_spots():
+#     """
+#     获取推荐的旅游景点。
+#     这里可以根据用户的兴趣标签来返回不同的推荐列表。
+#     """
+#     # 假设用户的兴趣标签存储在 session 中
+#     user = g.user
+#     user_id = user['user_id']
+#     if user_id:
+#         # 从 user_manager 获取推荐的景点
+        

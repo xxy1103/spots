@@ -186,6 +186,7 @@ def __testSpotIo(spotIo):
     spotIo.saveSpots()
 
 
-    
+userIo = UserIo()
+spotIo = SpotIo()
 
     

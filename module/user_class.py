@@ -1,5 +1,6 @@
 from module.data_structure.btree import BTree
-from module.fileIo import UserIo
+from module.fileIo import userIo
+from module.Spot_class import Spot
 import module.printLog as log
 import base64
 import hashlib
@@ -72,7 +73,7 @@ class PasswordManager:
 
 
 class User:
-    def __init__(self,userIo):
+    def __init__(self):
         self.userIo = userIo
         self.users = userIo.getAlluser()
         self.userCount = userIo.getCount()
@@ -146,6 +147,14 @@ class User:
         log.writeLog(f"删除用户{user['name']}成功")
         return True   
 
+    def getRecommendSpots(self, userId, topK=10):
+        """
+        获取用户推荐的景点
+        """
+
+
+
+userManager = User()
 
 
 
