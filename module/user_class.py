@@ -1,6 +1,6 @@
-from data_structure.btree import BTree
-from fileIo import UserIo
-import printLog as log
+from module.data_structure.btree import BTree
+from module.fileIo import UserIo
+import module.printLog as log
 import base64
 import hashlib
 import os
@@ -81,18 +81,35 @@ class User:
             self.btree.insert({"id":user["id"], "name":user["name"]})
         log.writeLog("用户数据加载完成")
 
-    def addUser(self, user):
-        if self.btree.search(user["name"]) is not None:
-            log.writeLog(f"用户{user['name']}已存在")
+    def addUser(self, username, password, liketype):
+        # --- 修改这里：使用传入的 username 进行搜索 ---
+        existing_user_node = self.btree.search(username) 
+        if existing_user_node is not None:
+            # --- 修改这里：日志记录也使用 username ---
+            log.writeLog(f"用户 {username} 已存在") 
             return False
         
+        # 现在可以安全地创建新的 user 字典
+        user = {
+            "name": username,
+            "id": None, # id 应该由 userIo.addUser 分配
+            "password": password, # 密码将在下面哈希
+            "likes_type": liketype,
+            "reviews": []
+        }
         # 对密码进行哈希处理
         user["password"] = hashPassword(user["password"])
         
-        self.userIo.addUser(user)
-        self.btree.insert({"id":user["id"], "name":user["name"]})
-        log.writeLog(f"添加用户{user['name']}成功")
-        return True
+        # 调用 userIo 添加用户，这应该会设置 user['id']
+        new_user_id = self.userIo.addUser(user) 
+        if new_user_id is None: # 假设 addUser 失败返回 None
+             log.writeLog(f"通过 userIo 添加用户 {username} 失败")
+             return False
+
+        # 使用返回的 ID 更新 B 树
+        self.btree.insert({"id": new_user_id, "name": username}) 
+        log.writeLog(f"添加用户 {username} (ID: {new_user_id}) 成功")
+        return True # 返回 True 表示成功
     
     def searchUser(self, name):
         user = self.btree.search(name)

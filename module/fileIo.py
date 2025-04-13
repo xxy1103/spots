@@ -2,7 +2,7 @@
 
 import os
 import json
-import printLog as log
+import module.printLog as log
 
 dataPath = r"data/"
 
@@ -46,6 +46,7 @@ class UserIo:
         self.counts += 1
         self.__saveUsers()
         log.writeLog(f"添加用户：{user['name']}到文件")
+        return user["id"]
     def __saveUsers(self):
         """
         保存用户信息到文件`

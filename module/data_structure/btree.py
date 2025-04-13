@@ -1,7 +1,7 @@
 import os
 import json
 import pickle
-import printLog as log
+import module.printLog as log
 
 class BTreeNode:
     def __init__(self, leaf=True, t=3):
