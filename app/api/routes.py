@@ -164,16 +164,47 @@ def register():
             'message': '注册失败，用户名可能已存在' # 更具体的错误信息可能来自 addUser 方法
         }), 409 # 409 Conflict 更适合表示资源已存在
 
-# @api.route('/recommended-spots', methods=['GET'])
-# @login_required  # 确保用户已登录
-# def recommended_spots():
-#     """
-#     获取推荐的旅游景点。
-#     这里可以根据用户的兴趣标签来返回不同的推荐列表。
-#     """
-#     # 假设用户的兴趣标签存储在 session 中
-#     user = g.user
-#     user_id = user['user_id']
-#     if user_id:
-#         # 从 user_manager 获取推荐的景点
+# ...existing code...
+@api.route('/recommended-spots', methods=['GET'])
+@login_required  # 确保用户已登录
+def recommended_spots():
+    """
+    获取推荐的旅游景点。
+    这里可以根据用户的兴趣标签来返回不同的推荐列表。
+    """
+    user = g.user
+    user_id = user['user_id']
+    
+    # 1. 获取原始推荐景点数据
+    # 假设 getRecommendSpots 返回一个列表，其中每个元素是包含景点信息的字典或对象
+    raw_recommended_spots = user_manager.getRecommendSpots(user_id) 
+    
+    # 2. 处理数据，只选择需要的字段 (例如 'name' 和 'description')
+    filtered_spots = []
+    if raw_recommended_spots: # 确保列表不为空
+        for spot in raw_recommended_spots:
+            # 假设 spot 是一个字典，如果它是对象，则使用 spot.name, spot.description
+            filtered_spot = {
+                'name': spot.get('name'),  # 假设原始数据是字典
+                'id': spot.get('id'),  # 假设原始数据是字典
+                'score': spot.get('score'),  # 假设原始数据是字典
+                'type': spot.get('type'),  # 假设原始数据是字典
+                'visited_time': spot.get('visited_time'),  # 假设原始数据是字典
+                'img': spot.get('img'),  # 假设原始数据是字典
+                # 添加其他你需要的字段
+                
+            }
+            filtered_spots.append(filtered_spot)
+
+    # 3. 返回处理后的数据
+    # 遵循前端期望的格式 {'success': True, 'spots': [...]}
+    return jsonify({
+        'success': True, 
+        'spots': filtered_spots
+    })
+# ...existing code...
+
+
+
+    
         

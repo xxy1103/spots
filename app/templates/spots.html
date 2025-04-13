@@ -86,9 +86,23 @@
                     if (data.success && data.spots && data.spots.length > 0) {
                         data.spots.forEach(spot => {
                             const li = document.createElement('li');
+                            // 安全地获取每个字段，提供默认值
+                            const id = spot.id || '未知ID';
                             const name = spot.name || '未知景点';
-                            const description = spot.description || '暂无描述';
-                            li.innerHTML = `<h3>${name}</h3><p>${description}</p>`;
+                            const score = spot.score !== undefined ? spot.score : 'N/A'; // 评分可能是 0
+                            const type = spot.type || '未知类型';
+                            const visitedTime = spot.visited_time || '未知'; // 假设 visited_time 是一个字符串描述，如 "约2小时"
+                            const imgUrl = spot.img || ''; // 图片 URL，如果没有则为空
+
+                            // 构建列表项的 HTML 内容
+                            li.innerHTML = `
+                                ${imgUrl ? `<img src="${imgUrl}" alt="${name}" style="max-width: 100px; max-height: 80px; float: left; margin-right: 10px;">` : ''}
+                                <h3>${name} (ID: ${id})</h3>
+                                <p>评分: ${score}</p>
+                                <p>类型: ${type}</p>
+                                <p>被浏览次数: ${visitedTime}</p>
+                                <div style="clear: both;"></div> <!-- 清除浮动 -->
+                            `;
                             spotsList.appendChild(li);
                         });
                     } else if (data.success) {

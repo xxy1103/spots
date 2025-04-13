@@ -1,6 +1,7 @@
 from module.data_structure.btree import BTree
 from module.fileIo import userIo
-from module.Spot_class import Spot
+from module.Spot_class import spotManager
+from module.data_structure.merge import merge_sort
 import module.printLog as log
 import base64
 import hashlib
@@ -151,7 +152,55 @@ class User:
         """
         获取用户推荐的景点
         """
+        user = self.userIo.getUser(userId)
+        if user is None:
+            log.writeLog(f"用户{userId}不存在")
+            return None
+        
+        # 获取用户的兴趣标签
+        user_likes = user["likes_type"]
+        
+        # --- 获取用户喜欢类型的所有景点 ---
+        preferred_spots = []
+        if not user_likes: # 如果用户没有喜欢的类型，可以返回全局热门或空列表
+            log.writeLog(f"用户{userId}没有设置喜欢的景点类型")
+            # 方案1：返回全局热门 (需要 spotManager 支持)
+            return spotManager.getAllSpotsSorted()[:topK] 
+            # 方案2：返回空列表
+            # return []
 
+        for spot_type in user_likes:
+            # 使用 k=-1 获取该类型所有排序后的景点
+            spots_of_type = spotManager.getTopKByType(spot_type, k=-1) 
+            if spots_of_type: # 确保列表非空
+                preferred_spots.extend(spots_of_type)
+        
+        if not preferred_spots:
+             log.writeLog(f"未能根据用户{userId}的喜好找到任何景点")
+             return []
+
+        # --- 使用归并排序对收集到的景点进行总排序 ---
+        # 注意：getTopKByType(k=-1) 已经返回排序好的列表，
+        # 但这里我们需要对 *所有* 喜欢类型的景点进行 *合并排序*
+        # 如果 getTopKByType(k=-1) 返回的是未排序列表，则必须排序
+        # 即使返回的是已排序列表，合并后也需要重新排序以获得总排名
+        
+        # 移除可能的重复景点（如果一个景点属于多个用户喜欢的类型）
+        # 使用字典去重，保留ID唯一的景点
+        unique_spots_dict = {spot['id']: spot for spot in preferred_spots}
+        unique_preferred_spots = list(unique_spots_dict.values())
+
+        # 对去重后的列表进行归并排序
+        sorted_recommended_spots = merge_sort(unique_preferred_spots)
+        
+        log.writeLog(f"为用户{userId}生成推荐景点列表，共{len(sorted_recommended_spots)}个，返回前{topK}个")
+        
+        # 返回排序后的前 topK 个景点
+        return sorted_recommended_spots[:topK]
+
+        
+        
+        
 
 
 userManager = User()

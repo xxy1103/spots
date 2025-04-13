@@ -4,6 +4,7 @@ from module.data_structure.set import IntSet
 from module.data_structure.indexHeap import TopKHeap
 from module.printLog import writeLog
 from module.data_structure.quicksort import quicksort
+from module.data_structure.merge import merge_sort
 import json
 
 
@@ -33,7 +34,8 @@ class Spot:
             }
         
         # 对景点进行分类
-        self.classify()
+        self._classify()
+        writeLog("景点分类完成")
     
     def getSpot(self, spotId):
         """
@@ -75,7 +77,7 @@ class Spot:
             print(f"No spots found for the given keys: {keys}")
         return result
     
-    def classify(self):
+    def _classify(self):
         """
         对景点按类型进行分类
         """
@@ -92,16 +94,16 @@ class Spot:
             # 添加到对应类型的堆中
             self.spotTypeDict[spotType]["heap"].insert(spot["id"], spot["score"], spot["visited_time"])
         writeLog("景点分类完成")
-        
-    def getTopKForEachType(self, k=10):
-        """
-        为每个景点类型获取前K个评分最高的景点ID
-        """
-        for spotType in self.spotTypeDict:
-            topK = self.spotTypeDict[spotType]["heap"].getTopK(k)
-            self.spotTypeDict[spotType]["top_10"] = topK
-        writeLog("获取每个类型的前K个景点完成")
-        return self.spotTypeDict
+    #    感觉没什么用，所以注释掉了
+    # def getTopKForEachType(self, k=10):
+    #     """
+    #     为每个景点类型获取前K个评分最高的景点ID
+    #     """
+    #     for spotType in self.spotTypeDict:
+    #         topK = self.spotTypeDict[spotType]["heap"].getTopK(k)
+    #         self.spotTypeDict[spotType]["top_10"] = topK
+    #     writeLog("获取每个类型的前K个景点完成")
+    #     return self.spotTypeDict
     
     def getTopKByType(self, spotType, k=10):
         """
@@ -190,49 +192,6 @@ class Spot:
             json.dump(save_data, f, ensure_ascii=False, indent=4)
         writeLog(f"景点分类索引已保存至{filepath}")
 
-    def _merge_sort(self, spots_list):
-        """
-        归并排序辅助函数
-        按评分（降序）和访问次数（降序）排序
-        """
-        if len(spots_list) <= 1:
-            return spots_list
-
-        mid = len(spots_list) // 2
-        left_half = self._merge_sort(spots_list[:mid])
-        right_half = self._merge_sort(spots_list[mid:])
-
-        return self._merge(left_half, right_half)
-
-    def _merge(self, left, right):
-        """
-        合并两个已排序列表的辅助函数
-        """
-        merged = []
-        left_index, right_index = 0, 0
-
-        while left_index < len(left) and right_index < len(right):
-            # 比较评分，评分高的在前
-            if left[left_index]['score'] > right[right_index]['score']:
-                merged.append(left[left_index])
-                left_index += 1
-            elif left[left_index]['score'] < right[right_index]['score']:
-                merged.append(right[right_index])
-                right_index += 1
-            else:
-                # 评分相同，比较访问次数，访问次数多的在前
-                if left[left_index]['visited_time'] >= right[right_index]['visited_time']:
-                    merged.append(left[left_index])
-                    left_index += 1
-                else:
-                    merged.append(right[right_index])
-                    right_index += 1
-        
-        # 添加剩余元素
-        merged.extend(left[left_index:])
-        merged.extend(right[right_index:])
-        return merged
-
     def getAllSpotsSorted(self):
         """
         获取所有景点，并按评分和访问次数进行归并排序（降序）
@@ -240,10 +199,12 @@ class Spot:
         """
         # 对 self.spots 的副本进行排序，以避免修改原始列表
         spots_to_sort = list(self.spots) 
-        sorted_spots = self._merge_sort(spots_to_sort)
+        # --- Use the imported merge_sort function ---
+        sorted_spots = merge_sort(spots_to_sort) 
         writeLog("获取所有景点并完成排序")
         return sorted_spots
-    def getSortedByVisitedTime(self):
+
+    def getAllSortedByVisitedTime(self):
         """
         获取所有景点，并按访问次数进行归并排序（降序）
         :return: 排序后的景点列表
