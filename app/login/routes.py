@@ -13,5 +13,3 @@ def registerView():
     """显示注册页面"""
     return render_template('register.html')
 
-
-

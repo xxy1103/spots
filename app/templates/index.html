@@ -7,8 +7,10 @@
     <style>
         body { font-family: sans-serif; margin: 20px; }
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 20px; }
-        .header span { font-weight: bold; }
-        .header button { padding: 5px 10px; cursor: pointer; }
+        .header span { font-weight: bold; margin-right: auto; /* 让欢迎信息靠左 */}
+        .header .actions { display: flex; gap: 10px; /* 给按钮之间添加间距 */ }
+        .header button, .header a.button { padding: 5px 10px; cursor: pointer; text-decoration: none; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 3px; color: #333; }
+        .header a.button:hover { background-color: #e0e0e0; }
         .spots-list { list-style: none; padding: 0; }
         .spots-list li { border: 1px solid #eee; padding: 10px; margin-bottom: 10px; border-radius: 4px; }
         .spots-list h3 { margin: 0 0 5px 0; }
@@ -17,10 +19,13 @@
 </head>
 <body>
 
-<div class="header">
-    <span>欢迎, <span id="username">访客</span>!</span>
-    <button id="logout-button">登出</button>
-</div>
+    <div class="header">
+        <span>欢迎, <span id="username">访客</span>!</span>
+        <div class="actions">
+            <a href="/spots/search" class="button">搜索景点</a> <!-- 添加搜索按钮 -->
+            <button id="logout-button">登出</button>
+        </div>
+    </div>
 
 <h2>为您推荐的景点</h2>
 <ul id="spots-list" class="spots-list">
