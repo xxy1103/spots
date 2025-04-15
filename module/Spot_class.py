@@ -1,6 +1,6 @@
 from module.data_structure.hashtable import HashTable 
 from module.fileIo import spotIo, getAllSpotTypes
-from module.data_structure.set import IntSet
+from module.data_structure.set import ItemSet
 from module.data_structure.indexHeap import TopKHeap
 from module.printLog import writeLog
 from module.data_structure.quicksort import quicksort
@@ -47,35 +47,50 @@ class Spot:
     
     def getSpotByName(self, keys:str)->list:
         """
-        查找包含指定字符串中每个字符的所有对象ID列表
-        :param keys: 要查找的字符串
-        :return: 包含该字符串所有字符的对象ID列表的交集
+        查找名称包含指定字符串中每个字符的所有景点对象列表
+        :param keys: 要查找的字符串 (例如 "故宫")
+        :return: 包含名称中所有字符的景点对象列表 (字典)
         """
-        # 如果关键词为空，返回空列表
+        # 如果关键词为空，直接返回空列表
         if not keys:
             return []
-        
-        # 确保关键词非空后获取第一个字符的ID列表
-        if len(keys) == 0:
+
+        # 获取第一个字符匹配的景点
+        first_char_spots = self.hashTable.search(keys[0])
+        if not first_char_spots:
+            # 如果第一个字符就没有匹配项，则不可能有交集
+            # print(f"No spots found containing the character: {keys[0]}") # 可以取消注释以进行调试
             return []
-        first_ids = self.hashTable.search(keys[0])
-        result_ids = IntSet(first_ids)
-        
-        # 遍历关键词中的每个字符
+
+        # 使用第一个字符的结果初始化结果集合
+        result_set = ItemSet(first_char_spots)
+
+        # 遍历关键词中的剩余字符
         for char in keys[1:]:
-            # 获取包含当前字符的所有ID
-            ids = IntSet(self.hashTable.search(char))
-            
-            # 取交集
-            result_ids = result_ids.intersection(ids)
-            if result_ids.is_empty():
-                break
-        
-        # 将结果转换为列表并返回
-        result = result_ids.get_all_elements()
-        if not result:
-            print(f"No spots found for the given keys: {keys}")
-        return result
+            # 获取包含当前字符的所有景点
+            current_char_spots = self.hashTable.search(char)
+            if not current_char_spots:
+                # 如果任何一个后续字符没有匹配项，则交集为空
+                # print(f"No spots found containing the character: {char}") # 可以取消注释以进行调试
+                return []
+
+            # 创建当前字符的景点集合
+            current_set = ItemSet(current_char_spots)
+
+            # 计算与当前结果集的交集
+            result_set = result_set.intersection(current_set)
+
+            # 如果交集为空，提前结束
+            if result_set.is_empty():
+                # print(f"No spots found containing all characters from: {keys}") # 可以取消注释以进行调试
+                return []
+
+        # 将最终集合中的元素转换为列表并返回
+        result_list = result_set.get_all_elements()
+        # if not result_list: # 再次检查，虽然理论上不会到这里如果上面判断了 is_empty
+        #      print(f"No spots found containing all characters from: {keys}") # 可以取消注释以进行调试
+
+        return result_list
     
     def _classify(self):
         """
@@ -117,42 +132,35 @@ class Spot:
             writeLog(f"找不到类型为 '{spotType}' 的景点")
             return []
 
+        # --- 统一使用堆实例 ---
+        heap_instance = self.spotTypeDict[spotType].get("heap")
+        if not heap_instance or not isinstance(heap_instance, TopKHeap):
+            writeLog(f"错误：类型 '{spotType}' 的堆未正确初始化。")
+            # 如果堆不存在或类型不正确，清空缓存并返回空列表
+            self.spotTypeDict[spotType]["top_10"] = [] 
+            return []
+
         # 当 k = -1 时，获取该类型所有景点并排序
         if k == -1:
-            ids = self.spotTypeDict[spotType].get("ids", [])
-            # 获取所有景点的详细信息
-            spots_of_type = [self.getSpot(spot_id) for spot_id in ids]
-            # 过滤掉可能存在的None值
-            spots_of_type = [spot for spot in spots_of_type if spot] 
-            
-            # 按评分（降序）和访问次数（降序）排序
-            # 使用 .get() 提供默认值以增加健壮性
-            sorted_spots = sorted(
-                spots_of_type, 
-                key=lambda spot: (float(spot.get('score', 0.0)), int(spot.get('visited_time', 0))), 
-                reverse=True # 降序排序
-            )
-            writeLog(f"获取 '{spotType}' 类型的所有景点并排序完成")
-            return sorted_spots
+            # 从堆中获取所有元素（传入堆的大小作为k）
+            all_sorted_spots = heap_instance.getTopK(heap_instance.size())
+            writeLog(f"使用堆获取 '{spotType}' 类型的所有景点并排序完成")
+            return all_sorted_spots
 
-        # --- 处理 k > 0 的现有逻辑 ---
+        # --- 处理 k > 0 的现有逻辑 (使用缓存) ---
         # 确保 "top_10" 键存在，如果不存在则初始化为空列表
         if "top_10" not in self.spotTypeDict[spotType]:
             self.spotTypeDict[spotType]["top_10"] = []
             
         # 如果缓存的 top_10 列表为空，或者请求的 k 与缓存的大小不同
-        if not self.spotTypeDict[spotType]["top_10"] or len(self.spotTypeDict[spotType]["top_10"]) != k:
-            # 确保 "heap" 键存在并且是一个 TopKHeap 实例
-            heap_instance = self.spotTypeDict[spotType].get("heap")
-            if heap_instance and isinstance(heap_instance, TopKHeap):
-                 # 从堆中获取 Top K 结果并更新缓存
-                 self.spotTypeDict[spotType]["top_10"] = heap_instance.getTopK(k)
-            else:
-                 # 如果堆不存在或类型不正确，记录错误并清空缓存
-                 writeLog(f"错误：类型 '{spotType}' 的堆未正确初始化。")
-                 self.spotTypeDict[spotType]["top_10"] = []
+        cached_top_k = self.spotTypeDict[spotType]["top_10"]
+        if not cached_top_k or len(cached_top_k) != k:
+             # 从堆中获取 Top K 结果并更新缓存
+             self.spotTypeDict[spotType]["top_10"] = heap_instance.getTopK(k)
+             writeLog(f"从堆获取并缓存 '{spotType}' 类型的前{k}个景点")
+        else:
+             writeLog(f"从缓存获取 '{spotType}' 类型的前{k}个景点")
             
-        writeLog(f"获取 '{spotType}' 类型的前{k}个景点完成")
         # 返回缓存的 Top K 列表
         return self.spotTypeDict[spotType]["top_10"]
     
@@ -211,7 +219,7 @@ class Spot:
         """
         # 对 self.spots 的副本进行排序，以避免修改原始列表
         spots_to_sort = list(self.spots) 
-        sorted_spots = quicksort(spots_to_sort)
+        sorted_spots = quicksort(spots_to_sort, sort_key="visited_time")
         writeLog("获取所有景点并完成排序")
         return sorted_spots
 
