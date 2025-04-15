@@ -54,6 +54,50 @@ def login():
             'success': False,
             'message': '用户名或密码错误'
         }), 401  # 返回401未授权状态码
+
+@api.route('/guest-login', methods=['POST'])
+def guest_login():
+    # 生成随机游客用户名
+    guest_username = f"guest_{secrets.token_hex(8)}"
+    
+    # 调用user_class.py中的createGuestUser方法创建游客账号
+    guest_info = user_manager.createGuestUser(guest_username)
+    
+    if guest_info:
+        # 生成会话令牌
+        session_token = secrets.token_hex(16)
+        
+        # 创建响应对象
+        response = make_response(jsonify({
+            'success': True,
+            'message': '游客登录成功',
+            'user': {
+                'username': guest_username
+            }
+        }))
+        
+        # 设置安全的Cookie，过期时间为1小时
+        response.set_cookie(
+            'user_session', 
+            session_token, 
+            max_age=3600,  # 1小时
+            httponly=True,
+            samesite='Lax'
+        )
+        
+        # 在服务器端会话中存储游客信息
+        session[session_token] = {
+            'user_id': guest_info['id'],
+            'username': guest_username,
+            'is_guest': True
+        }
+        
+        return response
+    else:
+        return jsonify({
+            'success': False,
+            'message': '游客登录失败'
+        }), 400
     
 
 

@@ -66,6 +66,20 @@
         .btn-login:hover {
             background-color: #2980b9;
         }
+        .btn-guest {
+            width: 100%;
+            padding: 12px;
+            background-color: #2ecc71;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-guest:hover {
+            background-color: #27ae60;
+        }
         .login-footer {
             text-align: center;
             margin-top: 20px;
@@ -97,6 +111,9 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn-login">登录</button>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn-guest" id="guestLogin">游客登录</button>
             </div>
         </form>
         <div class="login-footer">
@@ -174,6 +191,28 @@
         .catch(error => {
             console.error('登录错误:', error);
             alert('登录过程中发生错误，请稍后再试');
+        });
+    });
+    
+    document.getElementById('guestLogin').addEventListener('click', function() {
+        fetch('/api/guest-login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success === true) {
+                window.location.href = '/spots';
+            } else {
+                alert('游客登录失败：' + (data.message || '无法创建游客账号'));
+            }
+        })
+        .catch(error => {
+            console.error('游客登录错误:', error);
+            alert('游客登录过程中发生错误，请稍后再试');
         });
     });
     </script>
