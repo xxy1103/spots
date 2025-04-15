@@ -264,28 +264,54 @@ def search_spots():
     if keyword:
         # 用快排算法对景点进行排序
         spots = spot_manager.getSpotByName(keyword)
-
-        pass
-    if spot_type:
+        if spot_type:
+            # 过滤出符合类型的景点
+            spots = [spot for spot in spots if spot['type'] == spot_type]
+            # 按照热度进行快排
+        
+        if sort_by == 'default':
+            spots = quicksort(spots)
+        elif sort_by == 'popularity_desc':
+            spots = quicksort(spots,sort_key="visited_time")
+        
+    elif spot_type:
         # 直接使用Spot类的方法获取
         if sort_by == 'default':
-            spots = spot_manager.getSpotByType(spot_type,k=-1) # 获取所有景点
+            spots = spot_manager.getTopKByType(spot_type,k=-1) # 获取所有景点
             
         elif sort_by == 'popularity_desc':
-            spots = spot_manager.getSpotByType(spot_type,k=-1)
+            spots = spot_manager.getTopKByType(spot_type,k=-1)
             # 按照热度进行快排
             spots = quicksort(spots,sort_key="visited_time")    #按照浏览次数排序
         
 
-    if sort_by == 'default':
+    elif sort_by == 'default':
         # 直接用Spot类的方法获取
         spots = spot_manager.getAllSpotsSorted() # 获取所有景点
         pass
     elif sort_by == 'popularity_desc':
         # 直接用Spot类的方法获取
         spots = spot_manager.getAllSortedByVisitedTime() # 获取所有景点
-        
-
-
+    
+    filtered_spots = []
+    if spots:
+        for spot in spots:
+            spot_info = spot_manager.getSpot(spot['id'])
+            filtered_spot = {
+                'name': spot_info.get('name'),  # 假设原始数据是字典
+                'id': spot_info.get('id'),  # 假设原始数据是字典
+                'score': spot_info.get('score'),  # 假设原始数据是字典
+                'type': spot_info.get('type'),  # 假设原始数据是字典
+                'visited_time': spot_info.get('visited_time'),  # 假设原始数据是字典
+                'img': spot_info.get('img'),  # 假设原始数据是字典
+                # 添加其他你需要的字段
+                
+            }
+            filtered_spots.append(filtered_spot)
+    
+    return jsonify({
+        'success': True, 
+        'spots': filtered_spots
+    })
     
         

@@ -31,7 +31,7 @@ class HashTable:
         name = item["name"]
         
         # 创建只包含 id 和 name 的新字典
-        filtered_item = {"id": obj_id, "name": name}
+        filtered_item = {"id": obj_id, "name": name,"score": item.get("score", 0), "visited_time": item.get("visited_time", 0),"type": item.get("type", "")}
 
         # 存储过滤后的对象，方便通过id查找
         self.objects_by_id[obj_id] = filtered_item
