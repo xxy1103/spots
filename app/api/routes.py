@@ -1,6 +1,8 @@
 from flask import render_template, request, redirect, url_for, jsonify, make_response, session
 from . import api
 from module.user_class import userManager as user_manager
+from module.Spot_class import spotManager as spot_manager
+from module.Spot_class import merge_sort, quicksort
 import json
 import secrets
 from flask import g
@@ -202,8 +204,42 @@ def recommended_spots():
         'success': True, 
         'spots': filtered_spots
     })
-# ...existing code...
 
+
+
+@api.route('/search-spots', methods=['GET'])
+@login_required  # 确保用户已登录
+def search_spots():
+    """
+    根据用户输入的关键词搜索景点。
+    """
+    keyword = request.args.get('keyword')
+    spot_type = request.args.get('type')
+    sort_by = request.args.get('sort_by', default='default') # 可以设置默认值
+    if keyword:
+        # 用快排算法对景点进行排序
+        spots = spot_manager.getSpotByName(keyword)
+
+        pass
+    if spot_type:
+        # 直接使用Spot类的方法获取
+        if sort_by == 'default':
+            spots = spot_manager.getSpotByType(spot_type,k=-1) # 获取所有景点
+            
+        elif sort_by == 'popularity_desc':
+            spots = spot_manager.getSpotByType(spot_type,k=-1)
+            # 按照热度进行快排
+            spots = quicksort(spots,sort_key="visited_time")    #按照浏览次数排序
+        
+
+    if sort_by == 'default':
+        # 直接用Spot类的方法获取
+        spots = spot_manager.getAllSpotsSorted() # 获取所有景点
+        pass
+    elif sort_by == 'popularity_desc':
+        # 直接用Spot类的方法获取
+        spots = spot_manager.getAllSortedByVisitedTime() # 获取所有景点
+        
 
 
     
