@@ -224,19 +224,20 @@ def recommended_spots():
     # 1. 获取原始推荐景点数据
     # 假设 getRecommendSpots 返回一个列表，其中每个元素是包含景点信息的字典或对象
     raw_recommended_spots = user_manager.getRecommendSpots(user_id) 
-    
+
     # 2. 处理数据，只选择需要的字段 (例如 'name' 和 'description')
     filtered_spots = []
     if raw_recommended_spots: # 确保列表不为空
         for spot in raw_recommended_spots:
             # 假设 spot 是一个字典，如果它是对象，则使用 spot.name, spot.description
+            spot_info = spot_manager.getSpot(spot['id'])  
             filtered_spot = {
-                'name': spot.get('name'),  # 假设原始数据是字典
-                'id': spot.get('id'),  # 假设原始数据是字典
-                'score': spot.get('score'),  # 假设原始数据是字典
-                'type': spot.get('type'),  # 假设原始数据是字典
-                'visited_time': spot.get('visited_time'),  # 假设原始数据是字典
-                'img': spot.get('img'),  # 假设原始数据是字典
+                'name': spot_info.get('name'),  # 假设原始数据是字典
+                'id': spot_info.get('id'),  # 假设原始数据是字典
+                'score': spot_info.get('score'),  # 假设原始数据是字典
+                'type': spot_info.get('type'),  # 假设原始数据是字典
+                'visited_time': spot_info.get('visited_time'),  # 假设原始数据是字典
+                'img': spot_info.get('img'),  # 假设原始数据是字典
                 # 添加其他你需要的字段
                 
             }
