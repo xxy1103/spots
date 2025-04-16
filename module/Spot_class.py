@@ -222,7 +222,13 @@ class Spot:
         sorted_spots = quicksort(spots_to_sort, sort_key="visited_time")
         writeLog("获取所有景点并完成排序")
         return sorted_spots
-
+    
+    def saveSpots(self):
+        """
+        保存景点信息到文件
+        """
+        self.spotIo.saveSpots()
+        writeLog("景点信息已保存")
 
 spotManager = Spot()
 

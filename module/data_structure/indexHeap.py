@@ -77,7 +77,7 @@ class TopKHeap:
             return False
             
         index = self.index_map[item_id]
-        self.heap[index]["visited_time"] += increment
+        self.heap[index]["visited_time"] = increment
         
         # 访问次数增加，可能需要上浮
         self._siftUp(index)
