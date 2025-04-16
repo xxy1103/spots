@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>景点详情 - {{ spot.name }}</title> <!-- 使用 spot 字典中的 name 字段 -->
+</head>
+<body>
+    <h1>{{ spot.name }}</h1> <!-- 这里可以展示的信息查看data/scenic_spots/spos.json的内容 -->
+    <p>ID: {{ spot.id }}</p>   
+    <p>类型: {{ spot.type }}</p> 
+    <p>评分: {{ spot.score }}</p> 
+    <p>介绍: {{ spot.introduce.介绍 }}</p> 
+    <p>简介: {{ spot.info }}</p> 
+    <p>浏览次数: {{ spot.visited_time }}</p> 
+    <!-- 显示其他景点信息 -->
+    {% if spot.img %}
+        <img src="{{ spot.img }}" alt="{{ spot.name }}"> <!-- 显示景点图片 -->
+    {% endif %}
+</body>
+</html>

@@ -150,14 +150,15 @@
                 li.innerHTML = `
                     ${imgHtml}
                     <div class="spot-info">
-                        <h3>${name}</h3>
+                        <h3><a href="/spots/spot_info/${spot.id}">${name}</a></h3> <!-- 修改这里，将名字变为链接 -->
                         <p>评分: <span class="score">${score}</span></p>
                         <p>热度: ${popularity}</p>
                         <p>类型: <span class="type">${type}</span></p>
-                        ${spot.id ? `<p style="font-size: 0.8em; color: #999;">ID: ${spot.id}</p>` : ''}
+                        ${spot.id ? `<p style="font-size: 0.8em; color: #999;">ID: ${spot.id}</p>` : ''} <!-- ID 可以保留或移除 -->
                     </div>
                 `;
                 spotsList.appendChild(li);
+
             });
         }
 
