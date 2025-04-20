@@ -1,0 +1,227 @@
+{
+    "counts": 10,
+    "reviews": [
+        {
+            "id": 0,
+            "name": "张毓轩",
+            "user_id": "user_2250",
+            "content": "西安碑林博物馆，书法爱好者的天堂！每一块碑石都是历史的见证，字迹遒劲有力，让人叹为观止。\n\n从汉代隶书到唐代楷书，从名家碑刻到普通墓志，这里收藏了历代碑石精品，让人大开眼界。讲解员的解说生动有趣，让人在欣赏碑石的同时，也能了解到背后的历史故事和文化内涵。",
+            "time": "2024-11-07",
+            "score": 1.2,
+            "score_count": 7,
+            "visited_time": 443,
+            "img_list": [
+                "images/0_0.jpg",
+                "images/0_1.jpg",
+                "images/0_2.jpg",
+                "images/0_3.jpg",
+                "images/0_4.jpg",
+                "images/0_5.jpg",
+                "images/0_6.jpg"
+            ]
+        },
+        {
+            "id": 1,
+            "name": "可爱宝贝苗苗的爸爸",
+            "user_id": "user_2269",
+            "content": "西安碑林，这座承载着千年文化的宝库，令人叹为观止。走进碑林，仿佛穿越了时空，每一块石碑都诉说着历史的厚重与辉煌。从篆书到隶书，从楷书到行草，书法艺术的演变在这里得到了完美的呈现。那些刻在石碑上的文字，不仅是古人的智慧结晶，更是中华文明的瑰宝。\n\n碑林中的《开成石经》尤其令人震撼，它不仅是古代儒家经典的集大成者，更是古代工匠精湛技艺的见证。每一笔每一画，都凝聚着匠人的心血与智慧。漫步其间，仿佛能听到历史的低语，感受到文化的脉动。\n\n西安碑林不仅是一座博物馆，更是一座连接古今的桥梁。它让我深刻体会到中华文化的博大精深，也让我更加珍惜和敬畏这份文化遗产。离开时，心中充满了对历史的敬仰与对未来的期许。",
+            "time": "2025-02-19",
+            "score": 2.1,
+            "score_count": 7,
+            "visited_time": 549,
+            "img_list": [
+                "images/1_0.jpg",
+                "images/1_1.jpg",
+                "images/1_2.jpg",
+                "images/1_3.jpg",
+                "images/1_4.jpg",
+                "images/1_5.jpg",
+                "images/1_6.jpg",
+                "https://dimg04.c-ctrip.com/images/1mh0q12000imh78pzF4C2_W_640_10000.jpg?proc=autoorient",
+                "images/1_8.jpg",
+                "images/1_9.jpg",
+                "images/1_10.jpg",
+                "images/1_11.jpg",
+                "images/1_12.jpg",
+                "images/1_13.jpg",
+                "images/1_14.jpg"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "云自飘零水自闲",
+            "user_id": "user_2454",
+            "content": "碑林博物馆，我非常推荐，门票不贵，内涵却丰富。馆内不仅藏有历代书法名家的碑刻作品，而且还收藏着原本挂在钟楼上的景云钟，此外还有陈列汉画像石和墓葬石雕的石刻馆，和陈列佛教造像作品的专题展馆，去了绝对不后悔。",
+            "time": "2024-10-27",
+            "score": 1.5,
+            "score_count": 5,
+            "visited_time": 429,
+            "img_list": [
+                "images/2_0.jpg",
+                "images/2_1.jpg",
+                "images/2_2.jpg",
+                "images/2_3.jpg",
+                "images/2_4.jpg"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "墨漠陌大",
+            "user_id": "user_2473",
+            "content": "西安碑林博物馆位于西安古城墙文昌门里，在孔庙的原址上设立的国家一级博物馆。最近博物馆内在维修，很多珍品文物暂时在新馆没有展出，比如昭陵六骏，李小孩石棺等，期待大夏石马，景云钟，石台孝经都值得推荐。",
+            "time": "2025-03-09",
+            "score": 1.7,
+            "score_count": 6,
+            "visited_time": 114,
+            "img_list": [
+                "images/3_0.jpg",
+                "images/3_1.jpg",
+                "images/3_2.jpg",
+                "images/3_3.jpg",
+                "images/3_4.jpg",
+                "images/3_5.jpg"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "银老先生",
+            "user_id": "user_2529",
+            "content": "西安市碑林博物馆，也是孔庙所在地，我1987年来的时候还没有整修，现在已经经过打造成为一个具有西安市历史文化的象征地。这里历史悠久，有900多年的历史了。是唐朝、北宋时期的碑石比较多。孔庙也是历史悠久。最后都在这里形成一个具有文化价值的参观游览打卡地。",
+            "time": "2025-03-16",
+            "score": 1.7,
+            "score_count": 10,
+            "visited_time": 618,
+            "img_list": [
+                "images/4_0.jpg",
+                "images/4_1.jpg",
+                "images/4_2.jpg",
+                "images/4_3.jpg",
+                "images/4_4.jpg",
+                "images/4_5.jpg",
+                "images/4_6.jpg",
+                "images/4_7.jpg",
+                "images/4_8.jpg",
+                "images/4_9.jpg",
+                "images/4_10.jpg",
+                "images/4_11.jpg"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "克里斯爱钱飞飞",
+            "user_id": "user_2586",
+            "content": "太震撼了，太拥挤了，太豪横了，太不重视唐朝以后的朝代了。\n\n震撼，这里，你可以看到颜真卿，柳公权，王羲之各大家的真迹，那些小时候临摹的字帖就在这里，密密麻麻排在一起，颜真卿的年轻和老年的不同风格左右并排，一目了然，非常清晰好认。字如其人，诚如。\n\n拥挤，如果石碑有灵魂，他们就是一车厢的大家，院士，挤在火车的三层硬卧车厢里\n\n豪横，明清，哪怕皇帝的御笔，也只能站在屋檐下",
+            "time": "2021-07-19",
+            "score": 3.1,
+            "score_count": 5,
+            "visited_time": 30,
+            "img_list": [
+                "images/5_0.jpg",
+                "images/5_1.jpg",
+                "images/5_2.jpg",
+                "images/5_3.jpg",
+                "images/5_4.jpg",
+                "images/5_5.jpg",
+                "images/5_6.jpg",
+                "images/5_7.jpg"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "古藤幽兰",
+            "user_id": "user_2690",
+            "content": "西安古城，博物馆自是不少，碑林博物馆，当属上乘。馆藏丰富，展品精致，历代碑石墓志名家碑刻石刻造像，林林总总，一路走下来，惊叹不已，震撼不已，自豪不已，惭愧不已。祖上功绩斐然，文化遗产丰厚，一代一代传承至今，却观赏者寥寥……相较于游客对陕历博的热衷与追捧，碑林博物馆，这里是素静的，游客的三三两两，犹如水中涟漪，散落在静水流深的碑林中。最深的感慨是，如果说文字是一个国家一个民族的魂灵，那么，在这里，则是集文之精书之美刻之神三绝于一体，缺一而不可，青史留名的多是前两者，多少工匠毕生的心血，才成就了中华文明五千年的历史传承。致敬所有有名无名的文化传承者。",
+            "time": "2019-04-20",
+            "score": 4.8,
+            "score_count": 10,
+            "visited_time": 318,
+            "img_list": [
+                "images/6_0.jpg",
+                "images/6_1.jpg",
+                "images/6_2.jpg",
+                "images/6_3.jpg",
+                "images/6_4.jpg",
+                "images/6_5.jpg",
+                "images/6_6.jpg",
+                "images/6_7.jpg",
+                "images/6_8.jpg",
+                "images/6_9.jpg",
+                "images/6_10.jpg",
+                "images/6_11.jpg",
+                "images/6_12.jpg",
+                "images/6_13.jpg",
+                "images/6_14.jpg"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "关裕年guanyunian",
+            "user_id": "user_2796",
+            "content": "来到西安碑林感慨万千，上一次来还是上个世纪。\n那时，每次陪外宾来西安都要来碑林看看，由于西安城墙的修复还是近几年的事情，所以到西安就是看看大雁塔和碑林，几乎是匆匆忙忙，没有过细的观看，总是充满了遗憾。",
+            "time": "2018-12-16",
+            "score": 1.1,
+            "score_count": 9,
+            "visited_time": 46,
+            "img_list": [
+                "images/7_0.jpg",
+                "images/7_1.jpg",
+                "images/7_2.jpg",
+                "images/7_3.jpg",
+                "images/7_4.jpg",
+                "images/7_5.jpg",
+                "images/7_6.jpg",
+                "images/7_7.jpg",
+                "images/7_8.jpg",
+                "images/7_9.jpg",
+                "https://dimg04.c-ctrip.com/images/100s0z000000nesfnE924_W_640_10000.jpg?proc=autoorient",
+                "images/7_11.jpg",
+                "images/7_12.jpg",
+                "images/7_13.jpg",
+                "images/7_14.jpg"
+            ]
+        },
+        {
+            "id": 8,
+            "name": "帕吉牛健子",
+            "user_id": "user_2892",
+            "content": "【景色】镇馆的都没开，号称维修，看评论至少都修了多半年了，不是很懂为何这么久，其他的也很值得看，但毕竟没有看到镇馆之宝还是挺失望的\n【趣味】就那样吧，喜欢的甘之如饴，不喜欢的十分钟就想撤了😂\n【性价比】比起其他馆还是很便宜的哈哈哈",
+            "time": "2025-02-28",
+            "score": 1.6,
+            "score_count": 4,
+            "visited_time": 602,
+            "img_list": [
+                "images/8_0.jpg",
+                "images/8_1.jpg",
+                "images/8_2.jpg",
+                "images/8_3.jpg",
+                "images/8_4.jpg",
+                "images/8_5.jpg",
+                "images/8_6.jpg",
+                "images/8_7.jpg",
+                "images/8_8.jpg"
+            ]
+        },
+        {
+            "id": 9,
+            "name": "沙漠里的赤裸裸",
+            "user_id": "user_2937",
+            "content": "之前有同学表示碑林没什么好看的，大概是不知道“昭陵六骏”的名气\n大夏石马、石台孝经、三绝碑、还有每个人从小习字都要临的柳公权《玄秘塔碑》、颜真卿《多宝塔碑》、欧阳询、怀素无数名家。不过碑都罩了玻璃保护，漫反射严重，确实看起来吃力。走到最后明清时期，工作人员在拓印，碑才暴露于空气，一股浓浓的油墨味。",
+            "time": "2019-05-02",
+            "score": 2.3,
+            "score_count": 6,
+            "visited_time": 395,
+            "img_list": [
+                "https://dimg04.c-ctrip.com/images/100k14000000vv25uE4CA_W_640_10000.jpg?proc=autoorient",
+                "images/9_1.jpg",
+                "images/9_2.jpg",
+                "images/9_3.jpg",
+                "images/9_4.jpg",
+                "images/9_5.jpg",
+                "images/9_6.jpg",
+                "images/9_7.jpg",
+                "images/9_8.jpg"
+            ]
+        }
+    ],
+    "spot_id": 245
+}

@@ -1,0 +1,225 @@
+{
+    "counts": 10,
+    "reviews": [
+        {
+            "id": 0,
+            "name": "118****200",
+            "user_id": "user_1098",
+            "content": "栖霞山观光车师傅讲，今年南京天气较往年热，这个时候枫叶才刚刚变色。待到初次霜冻后一两天，满山红叶漫山遍野，层林尽染。还有哦，早晨7点之前进山免门票哦。从市中心新街口网约车才35分钟50多元，6点出发到山下还可晨练爬山。爬山可选木栈道，也可选环山柏油路。到山顶始皇临江处大约3公里，也不会很累，还可以在红色海洋中遨游，别有一番风味。",
+            "time": "2024-11-16",
+            "score": 4.4,
+            "score_count": 6,
+            "visited_time": 731,
+            "img_list": [
+                "images/0_0.jpg",
+                "images/0_1.jpg",
+                "images/0_2.jpg",
+                "images/0_3.jpg",
+                "images/0_4.jpg",
+                "images/0_5.jpg",
+                "images/0_6.jpg",
+                "images/0_7.jpg",
+                "images/0_8.jpg",
+                "images/0_9.jpg",
+                "images/0_10.jpg",
+                "images/0_11.jpg",
+                "images/0_12.jpg",
+                "images/0_13.jpg",
+                "images/0_14.jpg"
+            ]
+        },
+        {
+            "id": 1,
+            "name": "没想到的小猪",
+            "user_id": "user_1188",
+            "content": "非常值得去的，我自己的旅游记录给你们\n 枫叶景观：栖霞山是中国四大赏枫胜地之一，每到深秋时节，漫山遍野的枫叶逐渐变红，从浅黄、金黄到深红、绛红，色彩斑斓，仿佛一幅绚丽的画卷。\n秋季氛围：秋季的栖霞山，空气清新，凉爽宜人。\n\n\n 餐饮住宿：景区周边有各种餐厅、小吃摊位和酒店、民宿，能够满足游客的餐饮和住宿需求。您可以品尝到当地的特色美食，如栖霞山素斋、鸭血粉丝汤、盐水鸭等。\n 购物娱乐：景区内有商业街和古镇，有许多小吃摊位、纪念品店和手工艺品店，可以购买当地特色的纪念品、手工艺品和小吃等。",
+            "time": "2024-10-27",
+            "score": 4.5,
+            "score_count": 5,
+            "visited_time": 611,
+            "img_list": [
+                "images/1_0.jpg",
+                "images/1_1.jpg",
+                "images/1_2.jpg",
+                "images/1_3.jpg",
+                "images/1_4.jpg"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "最美不过路上的风景",
+            "user_id": "user_1211",
+            "content": "栖霞山风景名胜区位于南京城东北，三面环山，北临长江。栖霞山是南京历史文化的重要代表和见证地，栖霞山的栖霞寺为江南佛教三论宗的发祥地。\n\n据说到过栖霞山的皇帝是众多名山中最多的。史载，秦始皇东巡时登临栖霞山，留下“始皇临江处”遗址；公元前427年，越王勾践在栖霞山构筑军事要塞；三国东吴时，孙策在龙山点将台举行誓师大会，立下东吴基业；梁武帝萧衍，梁文帝萧顺之也游历过栖霞山，并留下题匾；清康熙、乾隆皇帝南巡六次临幸栖霞山，并留诗赠匾150余首。经统计，历史上有5王14帝，250余位名人游览过栖霞。\n\n栖霞山为中国四大赏枫胜地之一，“栖霞丹枫”名列金陵新四十景。栖霞山风景名胜区是融自然山水、红叶景观、石林景观和历史人文为一体的综合性风景名胜区。",
+            "time": "2024-11-28",
+            "score": 3.4,
+            "score_count": 9,
+            "visited_time": 548,
+            "img_list": [
+                "https://dimg04.c-ctrip.com/images/1mh2v12000gwv1qem8515_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/1mh0312000gwvfy559EB7_W_640_10000.jpg?proc=autoorient",
+                "images/2_2.jpg",
+                "https://dimg04.c-ctrip.com/images/1mh2w12000gwv1xriAF63_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/1mh2312000gwulnu1A9BE_W_640_10000.jpg?proc=autoorient",
+                "images/2_5.jpg",
+                "images/2_6.jpg",
+                "images/2_7.jpg",
+                "images/2_8.jpg",
+                "images/2_9.jpg",
+                "images/2_10.jpg",
+                "images/2_11.jpg"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "大元脸葡萄",
+            "user_id": "user_1273",
+            "content": "🍁秋天到南京市栖霞山景区旅游攻略🍁\n\n\n• 🚌交通方式：\n\n• 乘坐南京地铁2号线至学则路站，转乘公交138路、326路至栖霞山站，即可到达栖霞山景区。\n\n\n• 🎫门票信息：\n\n• 栖霞山景区的门票价格为淡季20元/人，旺季40元/人，学生票半价。\n\n\n• 🌳秋季特色：\n\n• 秋天是栖霞山最美的季节，枫叶红透，层林尽染，是赏枫的绝佳时期。\n\n\n• 📸拍照打卡：\n\n• 栖霞寺、千佛岩、舍利塔等都是拍照的好地方，可以捕捉秋天的色彩。\n\n\n• 🍲周边美食：\n\n• 游览结束后，可以品尝南京的地方特色小吃，如盐水鸭、小笼包等。\n\n\n• 🏨住宿推荐：\n\n• 如果计划在南京多停留几日，可以选择市区内的酒店，方便游览其他景点。\n\n希望这份攻略能让你的栖霞山之旅更加完美！🌟🍁",
+            "time": "2024-11-25",
+            "score": 4.4,
+            "score_count": 10,
+            "visited_time": 995,
+            "img_list": [
+                "https://dimg04.c-ctrip.com/images/1mh4g12000guupuui7018_W_640_10000.png?proc=autoorient",
+                "images/3_1.jpg",
+                "images/3_2.jpg",
+                "images/3_3.jpg",
+                "images/3_4.jpg",
+                "images/3_5.jpg",
+                "images/3_6.jpg",
+                "images/3_7.jpg",
+                "https://dimg04.c-ctrip.com/images/1mh0b12000guuf4um1EDE_W_640_10000.png?proc=autoorient"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "熊熊飞行官",
+            "user_id": "user_1393",
+            "content": "一大早，朋友告诉我栖霞山🍁红了！ \r\n十一月下旬，踏入南京栖霞山，似是跌入了一幅浓墨重彩的画卷之中。 山间的枫叶像是被秋意点燃了一般，红得热烈，红得绚烂。那一片片枫叶，宛如天边落下的晚霞栖于枝头，微风拂过，沙沙作响，似在轻诉着秋的故事。沿着蜿蜒山路前行，脚下是簌簌作响的落叶，仿佛铺就了一条红色的绒毯，每一步都带着诗意。 远处的山峦也被这红色晕染，与古寺的飞檐翘角相映成趣，古朴中透着灵动的美。阳光透过树叶的缝隙洒下，斑驳光影里，枫叶更显剔透。在这里，尘世的喧嚣被抛却，满心满眼皆是这红枫带来的震撼与美好。栖霞山的秋啊，用它那满目的红，在岁月里留下了一抹醉人的色彩，让人沉醉，让人留恋，愿岁岁秋来，都能再赴这红叶之约。",
+            "time": "2024-11-23",
+            "score": 2.3,
+            "score_count": 5,
+            "visited_time": 857,
+            "img_list": [
+                "https://dimg04.c-ctrip.com/images/1mh3312000gu1kbeo0E92_W_640_10000.jpg?proc=autoorient",
+                "images/4_1.jpg",
+                "https://dimg04.c-ctrip.com/images/1mh4r12000gu1sr3n36D7_W_640_10000.jpg?proc=autoorient",
+                "images/4_3.jpg",
+                "images/4_4.jpg",
+                "https://dimg04.c-ctrip.com/images/1mh4e12000gu28vqsAD18_W_640_10000.jpg?proc=autoorient",
+                "images/4_6.jpg",
+                "images/4_7.jpg",
+                "images/4_8.jpg"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "夏吹夏夜风",
+            "user_id": "user_1421",
+            "content": "🍁南京栖霞山可以说是江浙沪整个地区秋天拍照最好的季节，枫叶的叶期短， 仅仅十几天时间就有多少人不远万里跑到这里， 只为一眼枫叶最美丽的季节。\n\n🎈妥妥的江浙沪排名第一的网红枫叶拍照圣地， 这个季节的栖霞山非常适合妹子们带着古装来拍照，拾一片枫叶放在心尖，感受秋天最美的气息。\n\n🎀栖霞山每年都会举办红枫艺术节，一般在10月开始， 届时栖霞山枫叶将进入最佳观赏期。\n\n🎉栖霞山红枫 🎫门票：红枫节期间40元， 南京市老人凭老龄证半票 学生(5人以上)凭学生证8折，1.2以下儿童免票。\n\n⌚️开放时间： 6：30-17：30 \n\n🚇交通：从南京火车站乘南上线、南栖线等前往。从市区到景区约40分钟",
+            "time": "2021-11-30",
+            "score": 2.5,
+            "score_count": 7,
+            "visited_time": 121,
+            "img_list": [
+                "images/5_0.jpg",
+                "images/5_1.jpg",
+                "images/5_2.jpg",
+                "images/5_3.jpg",
+                "images/5_4.jpg",
+                "images/5_5.jpg",
+                "https://dimg04.c-ctrip.com/images/0101x1200095eov57D124_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/0103w1200095eora7FDAE_W_640_10000.jpg?proc=autoorient",
+                "images/5_8.jpg"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "夏吹夏夜风",
+            "user_id": "user_1463",
+            "content": "栖霞山虽然没有钟山高峻，但清幽怡静，风景迷人，名胜古迹,遍布诸峰，被誉为“金陵第一名秀山”。尤其是深秋的栖霞，枫林如火，漫山红遍，宛如一幅美丽的画卷，素有“春牛首，秋栖霞”之说。\n\n栖霞山位于南京城东北22公里处的栖霞镇，有东、西、中三峰，山中多枫树、乌柏树，偶尔还夹杂着几株青翠欲滴的松柏，显得别具韵味。山上枫林、乌桕林连绵成片，“栖霞丹枫”是金陵十景之一。\n\n栖霞山上枫林连绵一片，霜降时节，满山红叶，铺天盖地，红似烈火，美不胜收，成为南京著名胜景之一。东峰的太虚亭，是栖霞山观赏红叶最佳处，游至亭中小坐片刻，倚栏观赏那满山漫坡，如霞如锦的红叶奇景，别有一番情趣。\n\n东峰的太虚亭，是栖霞山观赏红叶最佳处，游至亭中小坐片刻，倚栏观赏那满山漫坡，如霞如锦的红叶奇景，别有一番情趣。\n\n栖霞山风景区的第一景是明镜湖，它位于栖霞寺大门西面，面积约3000平方米。是清乾隆年间兴建的，湖中有湖心亭，并有九曲桥与岸相连。造型精巧，景点名“彩虹明镜”。向东有月牙池，然后就是栖霞寺大门了。",
+            "time": "2021-10-25",
+            "score": 3.8,
+            "score_count": 6,
+            "visited_time": 731,
+            "img_list": [
+                "images/6_0.jpg",
+                "images/6_1.jpg",
+                "images/6_2.jpg",
+                "images/6_3.jpg",
+                "images/6_4.jpg",
+                "https://dimg04.c-ctrip.com/images/0100x12000931loybF726_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/0107412000931nn4d92B2_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/0105r12000931p1mf7DFC_W_640_10000.jpg?proc=autoorient",
+                "images/6_8.jpg",
+                "images/6_9.jpg",
+                "images/6_10.jpg",
+                "images/6_11.jpg",
+                "https://dimg04.c-ctrip.com/images/0101k12000931lzfvACDD_W_640_10000.jpg?proc=autoorient",
+                "images/6_13.jpg",
+                "images/6_14.jpg"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "陪伴成长2019",
+            "user_id": "user_1553",
+            "content": "栖霞山还是很大的，如果能免费就好了，十一去的枫叶还没红很可惜，山里蝴蝶很多，春蹦蹦，小昆虫很多，孩子还抓到了一只土灰色的螳螂。有一片有很多小红果树，虽然不能吃，不过孩子摘了一些体验了一把采摘乐趣。\n桃花涧可以踩石头过小溪，主要是爬山，中间一些小插曲也很有意思",
+            "time": "2020-10-15",
+            "score": 3.6,
+            "score_count": 7,
+            "visited_time": 692,
+            "img_list": [
+                "images/7_0.jpg",
+                "images/7_1.jpg",
+                "https://dimg04.c-ctrip.com/images/010731200086qap0hE8BB_W_640_10000.jpg?proc=autoorient",
+                "images/7_3.jpg",
+                "images/7_4.jpg",
+                "https://dimg04.c-ctrip.com/images/010191200086q9op0EE6B_W_640_10000.jpg?proc=autoorient",
+                "images/7_6.jpg",
+                "https://dimg04.c-ctrip.com/images/0103c1200086qa1luAE7F_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/010171200086q9pvfBD47_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/0106l1200086q9u7a57FA_W_640_10000.jpg?proc=autoorient"
+            ]
+        },
+        {
+            "id": 8,
+            "name": "刻骨明鑫",
+            "user_id": "user_1609",
+            "content": "栖霞山景区面积很大，需要差不多半天的时间游玩，这里有众多的人文古迹，有着“一座栖霞山，半部金陵史”的美誉。山顶可以俯瞰长江，秋天山上可以看枫叶。工作日的下午三点左右去的，景区里没什么人，可以安静的欣赏美景，享受“久在樊笼里，复得返自然”的乐趣。",
+            "time": "2020-09-07",
+            "score": 4.7,
+            "score_count": 10,
+            "visited_time": 944,
+            "img_list": [
+                "https://dimg04.c-ctrip.com/images/0104h12000833akne8D8A_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/0100112000833al0w210C_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/0104h12000833aomuC971_W_640_10000.jpg?proc=autoorient",
+                "images/8_3.jpg",
+                "https://dimg04.c-ctrip.com/images/0100112000833cwux530C_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/0101t1200083394dz73E9_W_640_10000.jpg?proc=autoorient"
+            ]
+        },
+        {
+            "id": 9,
+            "name": "fcy911",
+            "user_id": "user_1630",
+            "content": "近两天，南京来了场秋雨，天气也凉了些，秋意渐深了，我想忆起了栖霞山的红叶，有一年我们也正是雨中赏叶的。南京素有“春牛首，秋栖霞”之说，这里有“金陵第一明秀山” 、中国四大赏枫胜地之一、佛学“三论宗”祖庭、佛教“四大丛林”之一，此山上的历史古迹遗址80多处，有不少还是全国文物保护。“隋塔、唐碑、千佛岩”名扬天下，其中乾隆六下江南，五次驻跸栖霞山。\n 而栖霞红叶每年都吸引了无数游客前往。\n 栖霞山地处南京东北，小时候我们甚至还曾火车前往过，现在交通便利了，除了在火车站可以坐南栖线，在仙林现在也有公地交前往。\n 那天在雨中逛过栖霞寺、千佛岩之后，觉着雨不甚大，于是决定沿路上山，前往枫岭，沿途不时能欣赏许多红叶，在深秋季节，很是赏心悦目。在耗费了些体力后方能抵达枫岭，不常登山的游客此时已微喘了，但扑面而来的绚丽令人不禁陶醉，再登高处，也正是因雨，游客较少，看漫山红透、层林尽染，心旷神怡，有些微雨，也算别有趣了。\n 自认此地赏枫海内第一，佳于北京香山、苏州天平山、长沙岳麓山。",
+            "time": "2019-09-10",
+            "score": 4.9,
+            "score_count": 6,
+            "visited_time": 990,
+            "img_list": [
+                "https://dimg04.c-ctrip.com/images/10060z000000mm5fbC9B1_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/100l0z000000mpdx7870C_W_640_10000.jpg?proc=autoorient",
+                "images/9_2.jpg",
+                "images/9_3.jpg",
+                "https://dimg04.c-ctrip.com/images/10091800000140gw25545_W_640_10000.jpg?proc=autoorient",
+                "images/9_5.jpg",
+                "images/9_6.jpg",
+                "https://dimg04.c-ctrip.com/images/100l11000000re2imCA72_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/100e11000000red66D817_W_640_10000.jpg?proc=autoorient"
+            ]
+        }
+    ],
+    "spot_id": 134
+}

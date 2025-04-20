@@ -1,0 +1,164 @@
+{
+    "counts": 10,
+    "reviews": [
+        {
+            "id": 0,
+            "name": "M18****501",
+            "user_id": "user_410",
+            "content": "敦煌石窟、壁画很不错！很值得细细回味观看，了解佛教文化内涵。",
+            "time": "2024-06-09",
+            "score": 4.3,
+            "score_count": 9,
+            "visited_time": 561,
+            "img_list": [
+                "images/0_0.jpg",
+                "images/0_1.jpg",
+                "images/0_2.jpg",
+                "images/0_3.jpg",
+                "images/0_4.jpg",
+                "images/0_5.jpg",
+                "images/0_6.jpg",
+                "images/0_7.jpg",
+                "images/0_8.jpg"
+            ]
+        },
+        {
+            "id": 1,
+            "name": "ariel423",
+            "user_id": "user_464",
+            "content": "来兰州玩，没有时间去敦煌的话可以来这个艺术馆看看，展示了很多敦煌壁画，还有壁画的制作工艺。值得一看。",
+            "time": "2024-12-10",
+            "score": 1.2,
+            "score_count": 8,
+            "visited_time": 324,
+            "img_list": [
+                "images/1_0.jpg",
+                "images/1_1.jpg"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "魔女锦鲤",
+            "user_id": "user_474",
+            "content": "来敦煌，一定要来敦煌美术馆看看，这里面有很多历史的名画，历史的知识丰富多彩，记录了敦煌石窟，敦煌 的历史，丝绸之路的古代文物，精美的木版画，绢画，麻布画，剪纸、木雕、纺织品等等的多种历史作品。在这里都可以一一欣赏到。",
+            "time": "2020-02-28",
+            "score": 4.4,
+            "score_count": 10,
+            "visited_time": 945,
+            "img_list": [
+                "images/2_0.jpg",
+                "images/2_1.jpg",
+                "images/2_2.jpg",
+                "images/2_3.jpg",
+                "images/2_4.jpg",
+                "images/2_5.jpg"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "爱睡觉的猪01",
+            "user_id": "user_512",
+            "content": "美术馆可以说是整个东方地区最值得去逛的建筑啊，它这里面从16五六年开始已经400多年的东西都能够在这看得到相关的一些文化壁纸，包括我们的像九色鹿能够知道的一些耳熟能详的故事，都能够看到一些真正的图，非常的漂亮。",
+            "time": "2020-01-18",
+            "score": 4.4,
+            "score_count": 9,
+            "visited_time": 526,
+            "img_list": [
+                "images/3_0.jpg",
+                "images/3_1.jpg",
+                "images/3_2.jpg"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "爱睡觉的猪01",
+            "user_id": "user_525",
+            "content": "敦煌的美术馆也是非常不错的地方，在这儿能看到各式各样很珍奇的敦煌壁画改制的一些油画，还有一些珍贵的照片，确实真的是打开眼界。",
+            "time": "2020-06-02",
+            "score": 2.0,
+            "score_count": 8,
+            "visited_time": 470,
+            "img_list": [
+                "images/4_0.jpg",
+                "images/4_1.jpg",
+                "images/4_2.jpg"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "爱睡觉的猪01",
+            "user_id": "user_548",
+            "content": "敦煌美术馆还是属于非常不错的地方，在这边逛一逛起码，了解一下敦煌的文化，嗯，特别是敦煌壁画它的由来历史过程，以及为什么要画这些东西才知道是个大家族，重新佛教带来的结果还真的是挺好。",
+            "time": "2020-12-30",
+            "score": 2.7,
+            "score_count": 4,
+            "visited_time": 694,
+            "img_list": [
+                "images/5_0.jpg",
+                "images/5_1.jpg",
+                "images/5_2.jpg"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "爱睡觉的猪01",
+            "user_id": "user_564",
+            "content": "敦华的美术馆这边来逛一逛啊，还真的是挺好的，嗯，有各式各样的啊，叫做壁画的仿真投影，嗯，还有对这个壁画的投影效果，那就觉得看上去嗯觉得这些东西啊做的还是很棒的。",
+            "time": "2020-09-01",
+            "score": 4.1,
+            "score_count": 4,
+            "visited_time": 562,
+            "img_list": [
+                "images/6_0.jpg",
+                "images/6_1.jpg",
+                "images/6_2.jpg"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "爱睡觉的猪01",
+            "user_id": "user_577",
+            "content": "他那个艺术馆吧，进去溜达溜达也还可以，嗯，有非常多的复原作品非常适合，就是带着孩子一起进去，长长知识长长见识。还是非常的不错。",
+            "time": "2019-11-25",
+            "score": 4.7,
+            "score_count": 4,
+            "visited_time": 774,
+            "img_list": [
+                "images/7_0.jpg",
+                "images/7_1.jpg",
+                "images/7_2.jpg"
+            ]
+        },
+        {
+            "id": 8,
+            "name": "爱睡觉的猪01",
+            "user_id": "user_594",
+            "content": "敦煌美术馆绝对是个好地方啊，景色非常的棒啊，同学非常的全面，各方各样的东西还是挺好的啊，看上去就觉着，嗯，真的是中国古代艺术的结晶吧，非常好。",
+            "time": "2020-04-07",
+            "score": 1.4,
+            "score_count": 8,
+            "visited_time": 192,
+            "img_list": [
+                "images/8_0.jpg",
+                "images/8_1.jpg",
+                "images/8_2.jpg"
+            ]
+        },
+        {
+            "id": 9,
+            "name": "爱睡觉的猪01",
+            "user_id": "user_605",
+            "content": "东方的美术馆整体来说还是非常不错的啊，里面有整个它的绿化的一些讲解历史。速度啊，这样的一些耳熟能详的一些故事啊，真的非常的感人。",
+            "time": "2020-01-30",
+            "score": 3.3,
+            "score_count": 10,
+            "visited_time": 49,
+            "img_list": [
+                "images/9_0.jpg",
+                "images/9_1.jpg",
+                "images/9_2.jpg"
+            ]
+        }
+    ],
+    "spot_id": 54
+}

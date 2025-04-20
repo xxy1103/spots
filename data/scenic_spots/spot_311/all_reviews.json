@@ -1,0 +1,160 @@
+{
+    "counts": 10,
+    "reviews": [
+        {
+            "id": 0,
+            "name": "明慈",
+            "user_id": "user_2860",
+            "content": "Time is over for this wheel.  Due to bad maintenance and bad cleaning skills of the staff,  the wheel is in poor condition. The wheel is a good idea. Next to the Stadion. But very often visibility in Changsha is cloudy.... The view is limited. I liked it..... But I cannot recommend it anymore",
+            "time": "2019-08-09",
+            "score": 4.3,
+            "score_count": 10,
+            "visited_time": 636,
+            "img_list": [
+                "images/0_0.jpg",
+                "images/0_1.jpg",
+                "images/0_2.jpg"
+            ]
+        },
+        {
+            "id": 1,
+            "name": "山在穷游",
+            "user_id": "user_2863",
+            "content": "长沙摩天轮 来到长沙必须看的夜景 位于和龙体育场旁边 白天他和全国的摩天轮没有什么的区别 但是到了夜晚 他真的就是最美的自己了 五彩斑斓 各种变换 坐在广场上看 美得不要不要的",
+            "time": "2018-05-26",
+            "score": 4.4,
+            "score_count": 4,
+            "visited_time": 93,
+            "img_list": [
+                "images/1_0.jpg",
+                "images/1_1.jpg",
+                "images/1_2.jpg",
+                "images/1_3.jpg",
+                "images/1_4.jpg"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "筱风姿",
+            "user_id": "user_2913",
+            "content": "长沙必玩榜|夜色中的长沙摩天轮\n\n这是浪漫的摩天轮\n他建在一个大楼的屋顶上嘛？\n这个地方倒是非常的别致啊\n第一次看到这样特别的摩天轮，不是很大，但是市区高处都能看到他的身影\n\n据说曾经是亚洲最大的摩天轮\n\n也不知是何时？大概是建成之初吧\n等暮色降临之际\n登上这摩天轮，欣赏长沙市区夜景\n俯瞰长沙全景，带你登上至高点，停留那几秒\n一切都很美好~\n\n\n\n基本上都是来这里欣赏夜景的，不知道在最高点是否\n能看到更多的星辰大海，毕竟是更靠近天空的地方\n\n•坐标：长沙市天心区芙蓉中路二段170号\n•交通：地铁1号线侯家塘站3号口步行700米/或者公交车站“小林子冲站”\n•门票：￥70.00\n•开放时间：18:30-22:00/9:30-22:00(周末)\n•推荐游览时间：30分钟左右",
+            "time": "2019-11-19",
+            "score": 2.2,
+            "score_count": 10,
+            "visited_time": 135,
+            "img_list": [
+                "images/2_0.jpg",
+                "images/2_1.jpg",
+                "images/2_2.jpg",
+                "images/2_3.jpg",
+                "images/2_4.jpg",
+                "images/2_5.jpg",
+                "images/2_6.jpg",
+                "images/2_7.jpg",
+                "images/2_8.jpg",
+                "images/2_9.jpg",
+                "images/2_10.jpg"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "_WeCh****146095",
+            "user_id": "user_2952",
+            "content": "长沙摩天轮最称奇之处在于它立在巨型屋顶上。据介绍，将摩天轮建在屋顶不仅在国内，就是在世界上也是独一无二的。我国的上海、香港、哈尔滨和英国的伦敦都建有世界著名的摩天轮，但都是建在地面上的。位于长沙新世纪体育文化中心城市东广场，号称世界第二高、亚洲第一高，该摩天轮直径为99米，轮顶距离屋面104米，最高处离楼下地面120米，共计安装吊篮60个，可同时容纳360人，摩天轮运转一圈约需20分钟，可观赏整个长沙市的风景。",
+            "time": "2022-09-29",
+            "score": 2.9,
+            "score_count": 8,
+            "visited_time": 441,
+            "img_list": [
+                "images/3_0.jpg",
+                "images/3_1.jpg",
+                "images/3_2.jpg"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "M31****4603",
+            "user_id": "user_2954",
+            "content": "星城之眼摩天轮高大壮观。\n \n在上面能俯瞰长沙的美景。\n \n夜晚更是浪漫，灯光璀璨。\n \n总的来说，是个不错的观景之地。",
+            "time": "2024-12-18",
+            "score": 2.5,
+            "score_count": 8,
+            "visited_time": 171,
+            "img_list": []
+        },
+        {
+            "id": 5,
+            "name": "_WeCh****621273",
+            "user_id": "user_2955",
+            "content": "那天下午诶，整个城市都有一种朦胧感，我很喜欢！可以看到长沙最繁华的夜景！总体感觉很棒！遗憾的是：当时跟喜欢的人一起去的，我们也在顶端接了吻。但还是分开啦～互相祝福彼此吧 ",
+            "time": "2021-07-11",
+            "score": 4.3,
+            "score_count": 6,
+            "visited_time": 746,
+            "img_list": [
+                "https://dimg04.c-ctrip.com/images/03059120008spfhnx2DC1_W_640_10000.jpg?proc=autoorient"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "gz当地向导伊妹儿",
+            "user_id": "user_2957",
+            "content": "长沙摩天轮景色美，大气上档次，趣味性强，感觉非常不错，抬头仰望，感慨万分，趣味性强，有想去尝试的感觉，挑战自己，但还是没有克服不了内心的恐惧。",
+            "time": "2020-12-17",
+            "score": 3.3,
+            "score_count": 7,
+            "visited_time": 974,
+            "img_list": [
+                "https://dimg04.c-ctrip.com/images/0103s120008bxn0fb26EF_W_640_10000.jpg?proc=autoorient",
+                "images/6_1.jpg",
+                "images/6_2.jpg",
+                "images/6_3.jpg"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "M30****1308",
+            "user_id": "user_2967",
+            "content": "在一个周日的白天带孩子来体验一下，白天人不多，检票口刷二维码检票非常方便。转一圈全程用时十八分钟，能清晰的看到长沙城景，特别是旁边的贺龙体育场。虽然天气不好，但是带孩子体验一下还是不错，孩子很喜欢。下次，一定要在晚上华灯初上的时候再来体验一下吧！",
+            "time": "2025-02-26",
+            "score": 1.4,
+            "score_count": 9,
+            "visited_time": 405,
+            "img_list": [
+                "images/7_0.jpg",
+                "images/7_1.jpg",
+                "images/7_2.jpg",
+                "images/7_3.jpg",
+                "images/7_4.jpg",
+                "images/7_5.jpg"
+            ]
+        },
+        {
+            "id": 8,
+            "name": "珍珠🧜‍♀️",
+            "user_id": "user_2981",
+            "content": "今天天气好，蓝天白云的。在体育馆广场可以直接拍到整个摩天轮。晚上灯光亮起氛围感好，而且在高空可以欣赏到湘江的夜景，也能看到橘子洲头的夜色。长沙城市的夜景也能尽收眼底。\n\n周五开放时间：18:30-22:30 【22:00停止入\n场\n周六、周日开放时间：9:30-22:30 22:00停止入场】\n现场买票价格：70元\n这里购票价格：66元",
+            "time": "2022-10-21",
+            "score": 1.9,
+            "score_count": 6,
+            "visited_time": 981,
+            "img_list": [
+                "images/8_0.jpg",
+                "images/8_1.jpg",
+                "images/8_2.jpg"
+            ]
+        },
+        {
+            "id": 9,
+            "name": "当地向导张家界星感觉自由行",
+            "user_id": "user_2989",
+            "content": "长沙摩天轮最称奇之处在于它立在巨型屋顶上。据介绍，将摩天轮建在屋顶不仅在国内，就是在世界上也是独一无二的。我国的上海、香港、哈尔滨和英国的伦敦都建有世界著名的摩天轮，但都是建在地面上的。 位于长沙新世纪体育文化中心城市东广场，是亚洲大型摩天轮之一。该摩天轮最高处离楼下地面120米，可同时容纳360人，摩天轮运转一圈约需20分钟，可观赏整个长沙市的风景。",
+            "time": "2016-05-31",
+            "score": 1.9,
+            "score_count": 9,
+            "visited_time": 891,
+            "img_list": []
+        }
+    ],
+    "spot_id": 311
+}

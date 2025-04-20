@@ -1,0 +1,188 @@
+{
+    "counts": 10,
+    "reviews": [
+        {
+            "id": 0,
+            "name": "小风",
+            "user_id": "user_1902",
+            "content": "去的时候下雨，一开始感觉自己运气不好，后来发觉自己的感觉不对。雨中的江面雾气朦胧，大桥，房屋等建筑隐隐约约，如梦如幻，仿若仙境，太美了。建议各位游客选雨天出行。",
+            "time": "2024-06-22",
+            "score": 3.6,
+            "score_count": 6,
+            "visited_time": 504,
+            "img_list": [
+                "images/0_0.jpg",
+                "images/0_1.jpg",
+                "images/0_2.jpg",
+                "images/0_3.jpg",
+                "images/0_4.jpg",
+                "images/0_5.jpg"
+            ]
+        },
+        {
+            "id": 1,
+            "name": "闲云在旅途",
+            "user_id": "user_1930",
+            "content": "彭水县城出发的乌江画廊自由行：早上九点出发，打车(50元~80元)约半小时到达乌江画廊码头，游客中心购票，山东籍半价往返110元，10：00多可登船，10：30开船，一路乌江美景尽收眼底，品尝美食，小酌一番，好不惬意。约2小时后到达龚滩古镇，山东籍凭身份证免古镇门票，可以逛逛古镇，吃点东西，有好多小景点分解收费，这里的住宿基本是民宿，条件一般，除非很想体验住一晚上，否则可乘坐下午16：00船返航，地点在来时下船地方。返回后可联系车辆来接(大约80元);车辆难联系时，可自行走到马路边，等待去往县城的公共汽车，有空座时招手即停，返回县城客运站(不是城北汽车站)。\n注：乌江画廊也可选择单程，有龚滩古镇到彭水的公共汽车。",
+            "time": "2019-08-06",
+            "score": 1.3,
+            "score_count": 9,
+            "visited_time": 717,
+            "img_list": [
+                "images/1_0.jpg",
+                "images/1_1.jpg",
+                "images/1_2.jpg",
+                "images/1_3.jpg",
+                "images/1_4.jpg",
+                "images/1_5.jpg",
+                "images/1_6.jpg",
+                "images/1_7.jpg"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "黄海大智若愚",
+            "user_id": "user_1977",
+            "content": "乌江发源于贵州省威甯县，自沿河进入酉阳万木、龚滩，至涪陵汇入长江，全长1070公里，乌江酉阳段约60公里，是千里乌江最精华的地段，山似斧劈、水如碧玉、虬枝盘旋、水鸟嬉翔。",
+            "time": "2021-12-19",
+            "score": 2.5,
+            "score_count": 5,
+            "visited_time": 247,
+            "img_list": [
+                "images/2_0.jpg",
+                "images/2_1.jpg",
+                "images/2_2.jpg",
+                "images/2_3.jpg",
+                "images/2_4.jpg"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "M45****1393",
+            "user_id": "user_2021",
+            "content": "乌江画廊感觉和巫山县的小三峡差不多，不同的是乌江画廊江面较宽，视野开阔，小三峡江面窄一些。如果没有来过的可以过来体验一下！",
+            "time": "2024-10-17",
+            "score": 1.6,
+            "score_count": 5,
+            "visited_time": 76,
+            "img_list": [
+                "images/3_0.jpg",
+                "images/3_1.jpg",
+                "images/3_2.jpg",
+                "images/3_3.jpg",
+                "images/3_4.jpg"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "愉行人",
+            "user_id": "user_2047",
+            "content": "去渝东南自驾游，第一个自然景观游览首选乌江画廊。我们买的万足至龚滩单行票，从彭水万足乌江画廊码头上船，船行2小时右到龚滩古镇，乌江画廊名符其实，景色美不胜收。买票前一定要注意买哪条线路和发船班次。这里没有代驾服务，我们的车只能由一位同行的朋友放弃乘船同行，让他将车开到龚滩古镇后再汇合。当然可以选择购往返票，但就比较耗时了。还有另一个游览选择就是买万足-鹿角-万足的票，线路不一样，时间也要短些，但游完后可以回到万足码头，继续自驾前行。",
+            "time": "2021-05-15",
+            "score": 1.4,
+            "score_count": 7,
+            "visited_time": 37,
+            "img_list": [
+                "images/4_0.jpg",
+                "images/4_1.jpg",
+                "images/4_2.jpg",
+                "images/4_3.jpg",
+                "images/4_4.jpg",
+                "images/4_5.jpg"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "就是不高兴16",
+            "user_id": "user_2073",
+            "content": "去年去的重庆，其中一站就是这个乌江画廊游船了，整个船程约2个小时，从彭水到龚滩古镇，沿途风景一览无余的漂亮，不夸张的说国内船游玩了也不少，论景色和舒适度这个绝对可以排前三，另外船上有卖当地的炸虾和炸鱼那个很好吃哦",
+            "time": "2021-02-15",
+            "score": 2.0,
+            "score_count": 5,
+            "visited_time": 609,
+            "img_list": [
+                "images/5_0.jpg",
+                "images/5_1.jpg",
+                "images/5_2.jpg",
+                "images/5_3.jpg",
+                "images/5_4.jpg",
+                "images/5_5.jpg",
+                "images/5_6.jpg",
+                "images/5_7.jpg",
+                "images/5_8.jpg",
+                "images/5_9.jpg",
+                "images/5_10.jpg",
+                "images/5_11.jpg",
+                "images/5_12.jpg",
+                "images/5_13.jpg"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "小小导游爱旅游",
+            "user_id": "user_2157",
+            "content": "乌江画廊是彭水最具代表性的旅游景点之一，这里拥有独特的峡谷风光和丰富的生态资源，被誉为中国西南地区最美的峡谷风光带。乘坐游船，可以欣赏到壮美的峡谷景色，感受大自然的鬼斧神工。",
+            "time": "2024-11-03",
+            "score": 2.2,
+            "score_count": 7,
+            "visited_time": 818,
+            "img_list": [
+                "images/6_0.jpg",
+                "images/6_1.jpg",
+                "images/6_2.jpg"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "铁甲小宝爱旅游",
+            "user_id": "user_2167",
+            "content": "乌江画廊真是美如画卷！门票100元，游览其中，仿佛置身于一幅流动的山水画中。山势险峻，水波粼粼，古镇古朴，民俗丰富。乘坐游船，品味地道美食，感受大自然的鬼斧神工，真是不虚此行！",
+            "time": "2024-11-03",
+            "score": 1.2,
+            "score_count": 9,
+            "visited_time": 196,
+            "img_list": [
+                "images/7_0.jpg",
+                "images/7_1.jpg",
+                "images/7_2.jpg"
+            ]
+        },
+        {
+            "id": 8,
+            "name": "m51****4227",
+            "user_id": "user_2183",
+            "content": "乌江画廊是坐船，去码头可以打车去，但是坐船回来的话就不是很方便了，码头比较偏叫车绝对不方便，景色非常好，一定要升舱去看景色，非常漂亮",
+            "time": "2024-10-18",
+            "score": 2.1,
+            "score_count": 5,
+            "visited_time": 150,
+            "img_list": [
+                "images/8_0.jpg",
+                "images/8_1.jpg",
+                "images/8_2.jpg"
+            ]
+        },
+        {
+            "id": 9,
+            "name": "钟鸣a",
+            "user_id": "user_2196",
+            "content": "重庆彭水乌江画廊风光太美了!一江碧水缓缓流淌，两岸松竹滴翠，间或绝壁险滩，真不愧是“千里乌江百里画廊”。前年时候乘船在江中游了一次，这一回是乘车在岸上游的。为方便游客，乌江画廊沿岸景色绝美处都设有观景台，既安全又能以最佳角度观赏风景，值得称赞!",
+            "time": "2021-02-21",
+            "score": 2.2,
+            "score_count": 8,
+            "visited_time": 510,
+            "img_list": [
+                "images/9_0.jpg",
+                "images/9_1.jpg",
+                "images/9_2.jpg",
+                "images/9_3.jpg",
+                "images/9_4.jpg",
+                "images/9_5.jpg",
+                "images/9_6.jpg",
+                "images/9_7.jpg",
+                "images/9_8.jpg"
+            ]
+        }
+    ],
+    "spot_id": 218
+}

@@ -1,0 +1,190 @@
+{
+    "counts": 10,
+    "reviews": [
+        {
+            "id": 0,
+            "name": "mattydh5",
+            "user_id": "user_29",
+            "content": "来到兰州一定要去水墨丹霞，去看五颜六色的群山。真的太震撼了。来到兰州一定要去水墨丹霞，去看五颜六色的群山。真的太震撼了。来到兰州一定要去水墨丹霞，去看五颜六色的群山。真的太震撼了。",
+            "time": "2025-02-07",
+            "score": 4.5,
+            "score_count": 8,
+            "visited_time": 786,
+            "img_list": [
+                "images/0_0.jpg",
+                "images/0_1.jpg",
+                "images/0_2.jpg",
+                "images/0_3.jpg",
+                "images/0_4.jpg"
+            ]
+        },
+        {
+            "id": 1,
+            "name": "浪漫瞬间FBXHZ",
+            "user_id": "user_47",
+            "content": "水墨丹霞景观秀丽迷人，丹霞地貌以其独特地质构造，展现出一幅幅如诗如画的自然画卷。山体纹理清晰可见，仿佛是岁月的刻痕，记录着这片土地的沧桑与变迁。",
+            "time": "2024-12-27",
+            "score": 3.7,
+            "score_count": 4,
+            "visited_time": 482,
+            "img_list": [
+                "images/1_0.jpg",
+                "images/1_1.jpg",
+                "images/1_2.jpg",
+                "images/1_3.jpg",
+                "images/1_4.jpg"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "M18****501",
+            "user_id": "user_66",
+            "content": "景区面积很大约400平方公里，一期规划的景区面积是25平方公里，亿万年风雨，历尽沧桑，留下丹青……！感受自然的奇妙和壮阔，珍惜生命的生生不息。",
+            "time": "2024-06-11",
+            "score": 3.6,
+            "score_count": 8,
+            "visited_time": 17,
+            "img_list": [
+                "images/2_0.jpg",
+                "images/2_1.jpg",
+                "images/2_2.jpg",
+                "images/2_3.jpg",
+                "images/2_4.jpg",
+                "images/2_5.jpg"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "荆楚潇湘",
+            "user_id": "user_94",
+            "content": "兰州周边到处是丹霞，水墨丹霞收80块的门票着实不便宜，推荐大家去免费的苦水丹霞或者水居丹霞。离兰州都不远，自驾很方便！",
+            "time": "2025-02-04",
+            "score": 3.7,
+            "score_count": 8,
+            "visited_time": 987,
+            "img_list": [
+                "images/3_0.jpg",
+                "images/3_1.jpg",
+                "images/3_2.jpg",
+                "images/3_3.jpg",
+                "images/3_4.jpg",
+                "images/3_5.jpg"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "奇峰云海",
+            "user_id": "user_123",
+            "content": "离兰州市区有十几公里，不通公共交通，如果不是自驾的话需要打车过去，打车回去，景区门口有很多出租车，到景区的路修的还可以，没有烂路和盘山路。门票是80元，景区车票是往返20元，目前门票是半价，所以总共加起来是60元，老人免门票，不免车票。景区进去先乘大巴车，再转乘电瓶车，出来的时候相反，大巴车下车的地方有骆驼马和羊驼，可以骑马骑骆驼拍照。拍完照乘景区有蓬电瓶车上山，总共有6-7点景点，每个景点之间都有电瓶车接驳，20元包括了景区内所有的车票，我们去的那天刮沙尘暴了，第一个景点景色不太好，后面的景点越来越美，前面的景点都是远观，后面的可以沿着栈道走到山跟前，七彩丹霞很震撼，虽然去年国庆节我去过甘肃贵德七彩从峰景区了。原计划1个小时转遍这个景区，没想到最终玩了4个多小时，后面的行程也跟着改变了。\n旅友们千万不要去了第一个景点觉得没意思不好看就走了哦，那样你会错过后面好看的景点。如果是晴天的话，在太阳的照耀下，景色比阴天或者多云天美。",
+            "time": "2023-08-23",
+            "score": 1.1,
+            "score_count": 6,
+            "visited_time": 683,
+            "img_list": [
+                "images/4_0.jpg",
+                "images/4_1.jpg",
+                "images/4_2.jpg",
+                "images/4_3.jpg",
+                "images/4_4.jpg",
+                "images/4_5.jpg",
+                "images/4_6.jpg",
+                "images/4_7.jpg"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "xinni0817",
+            "user_id": "user_155",
+            "content": "人少景美，价格合理，离兰州还挺近，整个半日游轻轻松松，必须五星好评！",
+            "time": "2024-07-29",
+            "score": 2.9,
+            "score_count": 8,
+            "visited_time": 72,
+            "img_list": [
+                "images/5_0.jpg",
+                "images/5_1.jpg",
+                "images/5_2.jpg",
+                "images/5_3.jpg",
+                "images/5_4.jpg",
+                "images/5_5.jpg",
+                "images/5_6.jpg",
+                "images/5_7.jpg",
+                "images/5_8.jpg"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "蓝色源泉",
+            "user_id": "user_204",
+            "content": "2024年刚开业，舞马丹霞演出是顶级水准，靠近悬崖的民宿是顶级视野，中途的餐厅一般。",
+            "time": "2025-02-22",
+            "score": 4.5,
+            "score_count": 9,
+            "visited_time": 942,
+            "img_list": [
+                "images/6_0.jpg",
+                "images/6_1.jpg",
+                "images/6_2.jpg",
+                "images/6_3.jpg",
+                "images/6_4.jpg",
+                "images/6_5.jpg",
+                "images/6_6.jpg",
+                "images/6_7.jpg"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "生长在海边的果果",
+            "user_id": "user_240",
+            "content": "携程买的直通车＋景区门票＋观光车，共94元。无导游，司机上门接送，到景区自由活动。早9点多到景区，12点半集合返程，6个景点都看到了，时间充裕，能座观光车的路线均选择乘观光车，无观光车路段选择步行，没有花钱座38元代步车。最值得看的一段观光车路线是九色丹青再往里乘车，可近距离欣赏丹霞地貌，好多人不知道。司机介绍再往里是爬山路线，我们整车人选择观光车开到终点不下车直接返程。整个景区可欣赏性很高，门票价合理，观光车便宜，人少景美值得一去。",
+            "time": "2024-06-03",
+            "score": 2.8,
+            "score_count": 8,
+            "visited_time": 725,
+            "img_list": [
+                "images/7_0.jpg",
+                "images/7_1.jpg",
+                "images/7_2.jpg",
+                "images/7_3.jpg",
+                "images/7_4.jpg",
+                "images/7_5.jpg",
+                "images/7_6.jpg",
+                "images/7_7.jpg"
+            ]
+        },
+        {
+            "id": 8,
+            "name": "总爱自己折腾",
+            "user_id": "user_265",
+            "content": "还未正式开放，免门票，只收景区内的电瓶车票。管理不错，只开放了一小部分，景色真心不错。面积大，站在高点很震撼，离兰州不到一个小时的车程。另建议景区内就不要种树了，即便活了，成本也太高，还破坏原有地貌和景色。",
+            "time": "2021-06-28",
+            "score": 1.4,
+            "score_count": 8,
+            "visited_time": 186,
+            "img_list": [
+                "images/8_0.jpg",
+                "images/8_1.jpg",
+                "images/8_2.jpg",
+                "images/8_3.jpg"
+            ]
+        },
+        {
+            "id": 9,
+            "name": "Peter-Fun",
+            "user_id": "user_279",
+            "content": "看惯了江南水乡的青砖黑瓦、小桥流水的风景，再来欣赏西北的西北异域风情，还是蛮震撼的。",
+            "time": "2024-11-13",
+            "score": 3.7,
+            "score_count": 8,
+            "visited_time": 949,
+            "img_list": [
+                "images/9_0.jpg",
+                "images/9_1.jpg",
+                "images/9_2.jpg",
+                "images/9_3.jpg",
+                "images/9_4.jpg"
+            ]
+        }
+    ],
+    "spot_id": 26
+}

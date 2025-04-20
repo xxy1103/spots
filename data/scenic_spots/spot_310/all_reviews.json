@@ -1,0 +1,209 @@
+{
+    "counts": 10,
+    "reviews": [
+        {
+            "id": 0,
+            "name": "濼邑閒雲",
+            "user_id": "user_2853",
+            "content": "山东省美术馆位于济南经十路东段，西侧紧邻山东省博物馆，凭身份证就可以参观，油画、国画、版画、雕塑、书法篆刻、民间艺术，各类美术作品一应俱全。该馆是独具特色、设施先进、品位高雅、功能完善的现代化美术馆。文艺青年必到之处。",
+            "time": "2020-07-23",
+            "score": 5.0,
+            "score_count": 8,
+            "visited_time": 468,
+            "img_list": [
+                "images/0_0.jpg",
+                "images/0_1.jpg",
+                "images/0_2.jpg",
+                "images/0_3.jpg",
+                "images/0_4.jpg",
+                "images/0_5.jpg",
+                "images/0_6.jpg",
+                "images/0_7.jpg",
+                "images/0_8.jpg",
+                "images/0_9.jpg",
+                "images/0_10.jpg",
+                "images/0_11.jpg",
+                "https://dimg04.c-ctrip.com/images/010531200061bs3rgF84F_W_640_10000.jpg?proc=autoorient",
+                "images/0_13.jpg",
+                "images/0_14.jpg"
+            ]
+        },
+        {
+            "id": 1,
+            "name": "爪子凉透了",
+            "user_id": "user_2940",
+            "content": "整体感觉不错，相对于青年展，先出的东西很丰富",
+            "time": "2025-01-02",
+            "score": 2.2,
+            "score_count": 5,
+            "visited_time": 860,
+            "img_list": [
+                "images/1_0.jpg",
+                "images/1_1.jpg",
+                "images/1_2.jpg",
+                "images/1_3.jpg",
+                "images/1_4.jpg",
+                "images/1_5.jpg"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "含情脉脉不得语",
+            "user_id": "user_2945",
+            "content": "和动力艺术展持续到2021年3月28日，作为视觉大餐，绝对不虚此行。\n游览建议：\n关注公众号提前预约，提前对推送展品进行学习，更好的便于参观。\n展品较多，在走廊、拐角也有展出，一定看好每层布局参观，不要漏下。\n有互动展品需排队，尽量提前参观，带好口罩。",
+            "time": "2021-03-15",
+            "score": 1.8,
+            "score_count": 5,
+            "visited_time": 896,
+            "img_list": [
+                "images/2_0.jpg",
+                "images/2_1.jpg",
+                "https://dimg04.c-ctrip.com/images/0104i120008hdq43zEEA7_W_640_10000.jpg?proc=autoorient",
+                "images/2_3.jpg",
+                "images/2_4.jpg",
+                "images/2_5.jpg"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "知行合一背包客",
+            "user_id": "user_3046",
+            "content": "老实说，一开始并没有打算去美术馆。但是因为就在博物馆旁边，索性从万象城吃个饭就去了。最近是什么双年特展，就我这个艺术细胞稀缺的人而言还是很有收获的😂\n其实好多东西是看不懂的，但是有一些能看懂的，还是有那种会心的感觉。艺术是需要用心灵去感悟的。当然了，也是非常适合拍照打卡滴，好多小哥哥小姐姐都在凹造型，确实很nice",
+            "time": "2021-03-14",
+            "score": 2.0,
+            "score_count": 7,
+            "visited_time": 498,
+            "img_list": [
+                "images/3_0.jpg",
+                "images/3_1.jpg",
+                "images/3_2.jpg",
+                "images/3_3.jpg",
+                "images/3_4.jpg",
+                "images/3_5.jpg"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "老二连",
+            "user_id": "user_3063",
+            "content": "山东省美术馆始建于1977年，是非营利性的艺术博物馆，老馆址位于济南青年东路，位于济南经十路东段的新馆是山东省承办第十届中国艺术节的重要场馆之一，山东省美术馆新馆将为\"全国优秀美术作品展\"、\"山东省重大历史题材美术创作工程作品展\"等提供一流的展示平台。山东省美术馆新馆是我国在建规模最大的现代美术馆，该馆定位为独具特色、设施先进、品位高雅、功能完善的现代化美术馆。\n建馆以来，通过征集、收购和接受捐赠等形式，收藏近、现代各类美术作品500余件， 民间艺术作品2000余件;举办展览约800余个，接待观众约300余万人次。\n山东省美术馆拥有一支实力较强的创作队伍，肩负着创作、研究和社会服务等任务。具不完全统计，他们的美术作品在全国美展和美国家级美展中入选280余件，获奖60余项;入选国外美展260余件，获奖20余项;他们的作品被国内外艺术机构收藏200件;美术作品被国家和省领导人作为重要礼品赠送外国友人50余件;为首都人民大会堂、中南海、天安门城楼、钓鱼台国宾馆、中国驻外使馆、首都机场和我省的许多重要场所设计、创作、绘制了大型壁画、浮雕和巨幅书画作品上百幅。",
+            "time": "2019-01-29",
+            "score": 3.8,
+            "score_count": 10,
+            "visited_time": 787,
+            "img_list": [
+                "images/4_0.jpg",
+                "images/4_1.jpg",
+                "images/4_2.jpg",
+                "images/4_3.jpg",
+                "images/4_4.jpg",
+                "images/4_5.jpg",
+                "images/4_6.jpg",
+                "images/4_7.jpg",
+                "images/4_8.jpg"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "呵呵而后",
+            "user_id": "user_3100",
+            "content": "2013年10月12日正式对外开放。新馆位于济南市区主干道经十路东段（经十路11777号），占地31.05亩，建筑总面积52000平方米，共分5层。设有展厅12个，分布在建筑的1至4层，总面积19700平方米，实际可用展线1763米。新馆建筑主体是以正方体为代表的“城”和以正方体变体为代表的“山”的巧妙融合,建筑顶层的天窗设计象征着“泉”，将“泉城”济南的特色融入其中。",
+            "time": "2018-06-11",
+            "score": 2.7,
+            "score_count": 7,
+            "visited_time": 677,
+            "img_list": [
+                "images/5_0.jpg",
+                "images/5_1.jpg",
+                "images/5_2.jpg",
+                "images/5_3.jpg",
+                "images/5_4.jpg"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "含情脉脉不得语",
+            "user_id": "user_3108",
+            "content": "终于去了心心念的双年展，观看之后，感觉棒棒的，不虚此行。\n尽量避开周六周日下午去，光进门就得20分钟，为了保证观看效果，一定提前预约，早去留出参观时间。\n展览分三层，三层展厅最多，所以一定要摆布好时间，扫码讲解都非常简短，有些许遗憾，每件作品的感觉全凭个人感受。",
+            "time": "2023-03-08",
+            "score": 3.0,
+            "score_count": 8,
+            "visited_time": 383,
+            "img_list": [
+                "images/6_0.jpg",
+                "images/6_1.jpg",
+                "images/6_2.jpg",
+                "images/6_3.jpg",
+                "images/6_4.jpg",
+                "images/6_5.jpg",
+                "images/6_6.jpg",
+                "images/6_7.jpg",
+                "images/6_8.jpg"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "Even",
+            "user_id": "user_3154",
+            "content": "美术馆的空间非常大，非常符合艺术品的陈列，油画，摄影，水彩，素描等等各种风格的画作，即使不懂艺术的人也可以慢慢欣赏。馆内还有一个模拟塔顶摄影的点，人们在地面上，但可以通过镜面效果而拍摄在屋檐上的效果，就是排队的人很多。",
+            "time": "2022-05-01",
+            "score": 1.5,
+            "score_count": 6,
+            "visited_time": 305,
+            "img_list": [
+                "images/7_0.jpg",
+                "images/7_1.jpg",
+                "images/7_2.jpg",
+                "images/7_3.jpg",
+                "images/7_4.jpg",
+                "images/7_5.jpg",
+                "images/7_6.jpg",
+                "images/7_7.jpg",
+                "images/7_8.jpg",
+                "images/7_9.jpg",
+                "images/7_10.jpg",
+                "images/7_11.jpg",
+                "images/7_12.jpg",
+                "images/7_13.jpg"
+            ]
+        },
+        {
+            "id": 8,
+            "name": "M34****7326",
+            "user_id": "user_3200",
+            "content": "山东美术馆面积很大，内部有教室，可以上绘画课使用，去了正好有非洲雕刻艺术精品展，有一些雕刻作品不错，二楼是学生作品的展览，可惜没有一些美术精品展示，好作品太少",
+            "time": "2019-08-28",
+            "score": 4.8,
+            "score_count": 6,
+            "visited_time": 288,
+            "img_list": [
+                "images/8_0.jpg",
+                "images/8_1.jpg",
+                "images/8_2.jpg",
+                "images/8_3.jpg",
+                "images/8_4.jpg",
+                "images/8_5.jpg"
+            ]
+        },
+        {
+            "id": 9,
+            "name": "205****682",
+            "user_id": "user_3217",
+            "content": "就在山东博物馆旁边，步行可至，里面挺大的，大部分都是临时展览，绘画，雕塑等等，免费的，有空的人可以来悠闲的附庸风雅一下。",
+            "time": "2019-01-22",
+            "score": 2.7,
+            "score_count": 6,
+            "visited_time": 220,
+            "img_list": [
+                "images/9_0.jpg",
+                "images/9_1.jpg",
+                "images/9_2.jpg",
+                "images/9_3.jpg",
+                "images/9_4.jpg",
+                "images/9_5.jpg",
+                "images/9_6.jpg"
+            ]
+        }
+    ],
+    "spot_id": 310
+}

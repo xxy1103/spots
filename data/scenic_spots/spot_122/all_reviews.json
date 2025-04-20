@@ -1,0 +1,201 @@
+{
+    "counts": 10,
+    "reviews": [
+        {
+            "id": 0,
+            "name": "M45****1132",
+            "user_id": "user_986",
+            "content": "实际看下来，感觉舞台效果非常好，场景看起来也是气势恢弘，月亮升起星星闪起的时候，安史之乱战火纷飞的时候，都是让人哇的一下惊叹，作为歌舞剧来说应该还不错了，基本都是跳舞，转场有点解说，但我失望的点也在这里，我以为会很有故事性，千古情是从头到尾能沉浸在故事里，而且通过演员的表演，我能看的很清晰剧情是什么，并为之感动落泪；而长恨歌主要就是歌舞，明明对这段历史和故事都很熟悉了，但是看着冗长的舞蹈还会有点懵有点无聊，加上这俩人的爱情也不知道哪里算感人，小林都睡着了一段，我也有一段时间感觉不太想看下去，还好不久后又有一些光效的刺激～所以总体来说我是失望的，就是美是很美的，演员是很好的，总体也很不错，就是和我自己的期望值比是没达到，仅仅是个人观点，不具有代表性～",
+            "time": "2024-12-06",
+            "score": 4.0,
+            "score_count": 5,
+            "visited_time": 226,
+            "img_list": [
+                "images/0_0.jpg",
+                "images/0_1.jpg",
+                "images/0_2.jpg",
+                "images/0_3.jpg"
+            ]
+        },
+        {
+            "id": 1,
+            "name": "小狮子啦啦啦啦啦啦",
+            "user_id": "user_1002",
+            "content": "买长恨歌，上携程!看夕阳!美很……\n\n携程真的很不错，花着同样的价格不仅可以享受提前入场服务，还可以看着◎骊山的夕阳，体验骊山晚照的浪漫氛围。\n关中八景，骊山晚照…还是要来华清宫",
+            "time": "2024-05-15",
+            "score": 2.0,
+            "score_count": 9,
+            "visited_time": 938,
+            "img_list": [
+                "images/1_0.jpg",
+                "images/1_1.jpg",
+                "images/1_2.jpg",
+                "images/1_3.jpg",
+                "images/1_4.jpg",
+                "images/1_5.jpg"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "M49****6299",
+            "user_id": "user_1020",
+            "content": "一曲长恨歌，不过是赶了一场繁华，只是低回慢转都诉着告别，曲终人要散，时间最具有腐蚀力，洗尽了铅华，那夺目的荣耀最终都会成为过眼云烟，留不住的风景。\n         夜幕降临，华灯初上，那《长恨歌》的演出场地灯光缓缓亮起，那一刻，真的是震撼极了。犹如群星璀璨，瞬间将观众带入了一个如梦如幻的世界，让人感叹人生真美好。今夜，我们一同领略这部千古绝唱的魅力，感受它所带来的无尽感动与震撼。\n        这次《长恨歌》的演出之夜，我们仿佛经历了一场穿越时空的旅行。我们被那种深沉的情感所打动也被那种美好的画面所震撼。让我们共同期待下一次这样的文化盛宴再次到来让我们再次感受那种灯火辉煌、星光璀璨、人间至美的美好瞬间！",
+            "time": "2025-02-28",
+            "score": 1.1,
+            "score_count": 9,
+            "visited_time": 841,
+            "img_list": [
+                "images/2_0.jpg",
+                "images/2_1.jpg",
+                "images/2_2.jpg",
+                "images/2_3.jpg",
+                "images/2_4.jpg",
+                "images/2_5.jpg",
+                "images/2_6.jpg",
+                "images/2_7.jpg",
+                "images/2_8.jpg",
+                "images/2_9.jpg",
+                "images/2_10.jpg",
+                "images/2_11.jpg"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "可爱宝贝苗苗的爸爸",
+            "user_id": "user_1065",
+            "content": "《长恨歌》的演出如同一幅流动的史诗画卷，将唐玄宗与杨贵妃的爱情悲剧娓娓道来。舞台设计恢弘大气，灯光与音效的巧妙结合，营造出盛世繁华与乱世悲凉的强烈对比。演员们的表演细腻动人，尤其是杨贵妃的舞姿，轻盈曼妙，仿佛穿越千年，重现了那段缠绵悱恻的爱情故事。整场演出不仅展现了历史的厚重感，更通过艺术的手法，让人感受到爱情与权力的交织、命运的无常。观后令人久久沉浸其中，感叹盛世繁华终成过眼云烟，唯有长恨绵绵，流传千古。",
+            "time": "2025-02-17",
+            "score": 4.4,
+            "score_count": 9,
+            "visited_time": 704,
+            "img_list": [
+                "images/3_0.jpg",
+                "images/3_1.jpg",
+                "images/3_2.jpg",
+                "images/3_3.jpg",
+                "images/3_4.jpg",
+                "images/3_5.jpg",
+                "images/3_6.jpg",
+                "images/3_7.jpg",
+                "images/3_8.jpg",
+                "images/3_9.jpg",
+                "images/3_10.jpg",
+                "images/3_11.jpg",
+                "images/3_12.jpg",
+                "images/3_13.jpg",
+                "images/3_14.jpg"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "小姐姐带你去旅行",
+            "user_id": "user_1129",
+            "content": "怀着满满的期待去看长恨歌演出，结果被深深震撼。绚丽的舞台效果、精湛的表演，仿佛把人带入了那个凄美动人的故事中。^^来源：个人真实体验^^心中涌起无尽的感动。\n \n总结：长恨歌演出震撼唯美，情感真挚，是一场不容错过的视听盛宴。",
+            "time": "2024-12-16",
+            "score": 4.6,
+            "score_count": 4,
+            "visited_time": 386,
+            "img_list": [
+                "images/4_0.jpg",
+                "images/4_1.jpg",
+                "images/4_2.jpg",
+                "images/4_3.jpg",
+                "images/4_4.jpg"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "乌利哇啦",
+            "user_id": "user_1182",
+            "content": "长恨歌vip休息室这个套餐真的很不错，花着同样的价格不仅可以享受提前入场服务，还可以看着骊山的夕阳，体验骊山晚照的浪漫氛围。\n甜品和小吃也好吃，味道很惊艳，会推荐来西安的朋友体验一下",
+            "time": "2024-05-15",
+            "score": 4.5,
+            "score_count": 7,
+            "visited_time": 833,
+            "img_list": [
+                "images/5_0.jpg",
+                "images/5_1.jpg",
+                "images/5_2.jpg",
+                "images/5_3.jpg",
+                "images/5_4.jpg",
+                "images/5_5.jpg"
+            ]
+        },
+        {
+            "id": 6,
+            "name": ".屋檐下听雨.",
+            "user_id": "user_1204",
+            "content": "舞台设计精致，布景恢弘，灯光与音乐的配合堪称一绝，营造出梦幻般的氛围，让人沉浸其中。\n\n总的来说，值得一看‌。虽然票价略高，但演出精彩纷呈，视觉效果震撼，现场秩序井然，演员敬业，整体体验非常不错‌‌！",
+            "time": "2025-02-24",
+            "score": 1.5,
+            "score_count": 8,
+            "visited_time": 983,
+            "img_list": [
+                "images/6_0.jpg",
+                "images/6_1.jpg",
+                "images/6_2.jpg",
+                "images/6_3.jpg"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "热糖炒栗子🌰",
+            "user_id": "user_1250",
+            "content": "这次长恨歌vip休息室的体验感拉满了，在携程买了长恨歌的票后，就可以在工作人员的带领下提前入场进入VIP休息室，休息室的环境特别好，可以看见关中八景之一的骊山晚照，非常适合打卡拍照",
+            "time": "2024-05-15",
+            "score": 2.0,
+            "score_count": 6,
+            "visited_time": 864,
+            "img_list": [
+                "https://dimg04.c-ctrip.com/images/1mh2i12000e0ewo1s7406_W_640_10000.jpg?proc=autoorient",
+                "images/7_1.jpg",
+                "images/7_2.jpg",
+                "images/7_3.jpg"
+            ]
+        },
+        {
+            "id": 8,
+            "name": "伊來",
+            "user_id": "user_1337",
+            "content": "中国最震撼的身临其境实景演出，没有之一！\n\n长恨歌讲述的是杨玉环与李隆基缠绵悱恻的爱情故事，两人郎才女貌琴瑟和谐，在这华清宫过着神仙般的日子，后因太过放任藩镇军阀，以至于发生事变，杨贵妃最终香消玉损，一代佳话以悲剧收场，可悲可叹啊…\n\n推荐理由：\n1.场景。全剧规模之宏大，国内所有实景演出无出其右者。背靠骊山语罢清宵半，在当年杨玉环真实生活的地方演绎她的故事，实在难得。\n2.舞美。全剧动用了六名舞者出演杨玉环，每个场景所表达的情绪不同，舞态各异，各自精彩，将每段情节的人物和故事表现得淋漓尽致。\n3.特效。四大当中，特效不算最好，特点是演员众多--老谋子的特点嘛，就擅长驾驭大场面。\n\n交通：\n市区有直通旅行专线，跟团游也不错，可以一路听导游讲解。\n\ntips：\n务必购买中央的位置，座间距太窄，前后排坡度不明显，如果坐在了后面，只能看后脑勺了。",
+            "time": "2020-07-14",
+            "score": 4.5,
+            "score_count": 9,
+            "visited_time": 164,
+            "img_list": [
+                "https://dimg04.c-ctrip.com/images/0101l120004ydzg8d8EAD_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/01003120004ydzmiv2360_W_640_10000.jpg?proc=autoorient",
+                "images/8_2.jpg",
+                "https://dimg04.c-ctrip.com/images/0106v120004ydzzs9F495_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/01004120004ye04po90E4_W_640_10000.jpg?proc=autoorient",
+                "images/8_5.jpg",
+                "https://dimg04.c-ctrip.com/images/0106z120004ye0op2DD39_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/01006120004ye0qil8A91_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/0101u120004ye0x8e8CEF_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/01073120004ye0zs1B640_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/0100e120004ye19ys5452_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/01021120004ye1ku77339_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/0100a120004ye1rk09123_W_640_10000.jpg?proc=autoorient",
+                "images/8_13.jpg",
+                "images/8_14.jpg"
+            ]
+        },
+        {
+            "id": 9,
+            "name": "于何",
+            "user_id": "user_1410",
+            "content": "强推长恨歌的VIP休息室，休息室内环境特别美，夜晚吹着骊山上的风，小砌一壶茶，实在是美呆了。在携程买演出票就可以享受到这个服务了，值得体验。",
+            "time": "2024-05-15",
+            "score": 2.8,
+            "score_count": 8,
+            "visited_time": 437,
+            "img_list": [
+                "images/9_0.jpg",
+                "images/9_1.jpg",
+                "images/9_2.jpg",
+                "images/9_3.jpg"
+            ]
+        }
+    ],
+    "spot_id": 122
+}

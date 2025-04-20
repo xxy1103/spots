@@ -1,0 +1,213 @@
+{
+    "counts": 10,
+    "reviews": [
+        {
+            "id": 0,
+            "name": "涟峥",
+            "user_id": "user_1103",
+            "content": "👍什刹海地区自元代以来就是京城的繁华地带，曾是漕运的终点，商业和文化活动非常活跃。\n\n🌈什刹海是位于中国北京市西城区的一个著名历史文化景区，由前海、后海和西海（又称积水潭）三个相连的湖泊组成。什刹海地区历史悠久，文化底蕴深厚，是北京城内保存最完整的传统风貌区之一。",
+            "time": "2025-03-02",
+            "score": 1.5,
+            "score_count": 9,
+            "visited_time": 69,
+            "img_list": [
+                "images/0_0.jpg",
+                "images/0_1.jpg",
+                "images/0_2.jpg",
+                "images/0_3.jpg",
+                "images/0_4.jpg",
+                "images/0_5.jpg"
+            ]
+        },
+        {
+            "id": 1,
+            "name": "关裕年guanyunian",
+            "user_id": "user_1114",
+            "content": "什刹海是北京城里最贴近人的生活的湖泊，不像公园你要买票进入，这个湖泊就在家门口，古往今来，北京的志士名人大多数人都喜欢这里 宋庆龄郭沫若梅兰芳都是居住在这里，如今这里还有火神庙等，这里夏天可以划船，冬天滑冰，总之这里就是北京的一个著名景点。\n在什刹海也可以看到城市中心的中国尊，远处的景山公园北海公园，还有南锣鼓巷，外地游客光顾这里的最多。",
+            "time": "2025-01-09",
+            "score": 1.1,
+            "score_count": 5,
+            "visited_time": 959,
+            "img_list": [
+                "images/1_0.jpg",
+                "images/1_1.jpg",
+                "images/1_2.jpg",
+                "images/1_3.jpg",
+                "images/1_4.jpg",
+                "images/1_5.jpg",
+                "images/1_6.jpg",
+                "images/1_7.jpg",
+                "images/1_8.jpg",
+                "images/1_9.jpg",
+                "images/1_10.jpg",
+                "images/1_11.jpg",
+                "images/1_12.jpg",
+                "images/1_13.jpg",
+                "images/1_14.jpg"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "我心永飞扬",
+            "user_id": "user_1161",
+            "content": "非常值得去，前海、后海连成一片，周围全是仿古建筑和老北京胡同，乘坐人力三轮车游老北京胡同不但可以节省体力还减免了请导游费用，实在是太划算了。另外海边上尽是一些名人故居和古四合院，是探寻历史古迹和老北京人文文化的不二之选。水面夏天是游泳爱好者的天堂，冬天是滑冰爱好者的游乐场；海边白天是美食的广场，晚上则是酒吧烧烤的天地。周边还有钟鼓搂、火神庙、南锣鼓巷等景点都值得一游。",
+            "time": "2024-10-18",
+            "score": 4.9,
+            "score_count": 10,
+            "visited_time": 894,
+            "img_list": [
+                "images/2_0.jpg",
+                "images/2_1.jpg",
+                "images/2_2.jpg",
+                "images/2_3.jpg",
+                "images/2_4.jpg",
+                "images/2_5.jpg",
+                "images/2_6.jpg",
+                "images/2_7.jpg",
+                "images/2_8.jpg",
+                "images/2_9.jpg",
+                "images/2_10.jpg",
+                "images/2_11.jpg"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "熊熊飞行官",
+            "user_id": "user_1223",
+            "content": "北京秋天，一定要来什刹海看一场浪漫日落🌅 \r\n|秋天一定要来北京看看老舍先生笔下天堂的模样你方能体会什么叫做北平之秋才是人间理想什刹海的日落🌅看一万次都不够一个月三刷什刹海，三次都追到了浪漫的日落📷蕞佳拍摄机位：银锭桥上📷其他拍摄机位：银锭桥侧面、糖房咖啡三层露台🕐拍摄时间：日落时分18:10-30，建议六点前到达📝拍照设备：🍎14pro🚇地铁：8号线A2口出（到什刹海右转往糖房咖啡☕️方向走就看到了）",
+            "time": "2024-12-05",
+            "score": 4.4,
+            "score_count": 8,
+            "visited_time": 272,
+            "img_list": [
+                "images/3_0.jpg",
+                "images/3_1.jpg",
+                "images/3_2.jpg",
+                "https://dimg04.c-ctrip.com/images/1mh2712000h23prpy6C98_W_640_10000.jpg?proc=autoorient",
+                "images/3_4.jpg",
+                "images/3_5.jpg",
+                "images/3_6.jpg",
+                "images/3_7.jpg"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "我禁欲了",
+            "user_id": "user_1238",
+            "content": "先在鼓楼姚记炒肝吃的早点，然后穿过200米的烟袋斜街再往南就到银锭桥了。\n银锭桥西边是后海，东边是前海，后海适合晚上来看夜景，这次逛逛前海。上午人不算多，下午旅游团一来那就人流不息了。😂",
+            "time": "2024-10-02",
+            "score": 4.4,
+            "score_count": 9,
+            "visited_time": 398,
+            "img_list": [
+                "images/4_0.jpg",
+                "images/4_1.jpg",
+                "images/4_2.jpg",
+                "images/4_3.jpg",
+                "images/4_4.jpg",
+                "images/4_5.jpg",
+                "images/4_6.jpg",
+                "images/4_7.jpg"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "行万里路不如读万卷书",
+            "user_id": "user_1333",
+            "content": "什刹海位于北京中轴线内，它的南边是景山公园，北边是鼓楼，钟楼。清代时期这里是著名的市场，商业发达。每年什刹海荷花盛开的时候都会有大批游人前来观赏，这里是北京著名的三大酒吧一条街之一，另外两条是三里屯和锣鼓巷。什刹海周边有许多名人的故居，它是国家4A级景区，吸引了大批游客前来游览。",
+            "time": "2025-03-05",
+            "score": 1.7,
+            "score_count": 9,
+            "visited_time": 926,
+            "img_list": [
+                "images/5_0.jpg",
+                "https://dimg04.c-ctrip.com/images/1mh6s12000iw2i8a11109_W_640_10000.jpg?proc=autoorient",
+                "images/5_2.jpg",
+                "images/5_3.jpg",
+                "https://dimg04.c-ctrip.com/images/1mh3t12000iw20y1sF594_W_640_10000.jpg?proc=autoorient"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "熊熊飞行官",
+            "user_id": "user_1346",
+            "content": "什刹海也太美了！每次去都有惊喜！📸||每次去什刹海总要拍几张，总会发现什刹海不同的美好！\n第一次在这个视角拍什刹海！什刹海的魅力具象化了！\n📍北平花园—平台\n\t\n📌俯瞰什刹海才能感受到什刹海的独特\n📘去什刹海如何玩！\n必去的两个天台\n✅糖咖啡天台，俯瞰烟袋斜街\n✅北平花园——天台\n✅鼓楼观景台\n什刹海可以选择上午去，人更少，更好出片！",
+            "time": "2025-02-25",
+            "score": 4.2,
+            "score_count": 5,
+            "visited_time": 346,
+            "img_list": [
+                "https://dimg04.c-ctrip.com/images/1mh4h12000iqfhzuh2CB2_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/1mh3l12000iqg6vjqCFCD_W_640_10000.jpg?proc=autoorient",
+                "images/6_2.jpg",
+                "https://dimg04.c-ctrip.com/images/1mh2312000iqg04ujC741_W_640_10000.jpg?proc=autoorient",
+                "images/6_4.jpg"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "七游记",
+            "user_id": "user_1357",
+            "content": "🌅北京什刹海游玩全攻略|||门票：免费入场，全天开放🌞建议游玩时间：半天至一天，傍晚则可欣赏绝美落日🌅地铁：乘坐8号线至什刹海站A1口出站🚇自驾：不建议，周边易堵车，停车不便🚗🚫游玩路线🏃‍♂️地铁口出 → 鼓楼🏯 → 钟楼⏰ → 铃铛胡同🏘️ → 烟袋斜街🚶‍♂️ → 后海🌊 → 糖房咖啡☕ → 北海北地铁站🚇拍照打卡点📷糖房咖啡：网红观景平台，视野开阔，拍照效果绝佳📸后海：划船赏日落，浪漫至极🌅🛶鼓楼大街：鼓楼前留影，复古氛围拉满📸🏯落日拍摄位置👀金锭桥、银锭桥：因人流量大，桥上不再允许停留，建议寻找周边安全观赏点🌅👀7️⃣ 周边景点🏞️北海公园：皇家园林，风景如画🏞️钟鼓楼：古韵悠长，历史见证🏯⏰南锣鼓巷：胡同文化，热闹非凡🏘️恭王府：清代王府，富丽堂皇🏰北锣鼓巷、鸦儿胡同：老北京风情，静谧悠长🚶‍♀️宋庆龄故居：名人旧居，文化底蕴深厚🏠烟袋斜街：特色胡同，小吃丰富🍢什刹海，一个集自然风光、历史文化与现代生活于一体的地方。无论是漫步胡同，还是泛舟湖上，亦或是静赏落日，都能让你感受到这座城市的独特魅力。希望这份攻略能为你的北京之行增添一份美好回忆。💖",
+            "time": "2024-12-25",
+            "score": 1.4,
+            "score_count": 8,
+            "visited_time": 136,
+            "img_list": [
+                "images/7_0.jpg",
+                "images/7_1.jpg",
+                "images/7_2.jpg",
+                "https://dimg04.c-ctrip.com/images/1mh6q12000hesbbh1E4FB_W_640_10000.jpg?proc=autoorient"
+            ]
+        },
+        {
+            "id": 8,
+            "name": "不可触碰撞的鱼",
+            "user_id": "user_1362",
+            "content": "什刹海，是北京市历史文化旅游风景区、北京市历史文化保护区。位于市中心城区西城区，毗邻北京城中轴线。水域面积33.6万平方米，与中南海水域一脉相连，是北京内城一处具有开阔水面的开放型景区，也是北京城内面积最大、风貌保存最完整的一片历史街区，在北京城规划建设史上占有独特的地位。什刹海景区范围大体是东起地安门外大街北侧；南自地安门西大街向西至龙头井向西北接柳荫街、羊房胡同、新街口东街到新街口北大街，西自新街口北大街向北到新街口豁口；北自新街口豁口向东到德胜门，由德胜门沿鼓楼西大街到钟、鼓楼。清代起就成为游乐消夏之所，为燕京胜景之一。什刹海景区的不少古建筑在北京城市建设发展史上及政治文化史上占有重要地位，主要代表有恭王府及花园、宋庆龄故居及醇王府、郭沫若纪念馆、钟鼓楼、德胜门箭楼、广化寺、汇通祠、会贤堂。什刹海包括前海、后海和西海（又称积水潭）三个水域及临近地区，与“前三海”相呼应，俗称“后三海”。其中前海是我最熟悉，也是给了我人生深刻记忆的地方。我第一次在游泳池游泳是在什刹海游泳池，第一次学会在水中漂浮也是在什刹海游泳池（前海西侧是什刹海体校，哪里原来有一座游泳池，70年代拆除了）。前海西侧，夏天是游泳场，冬天是滑冰场，我第一次滑冰在什刹海冰场，滑冰摔的第一个跟头也是在什刹海冰场。电影《阳光灿烂的日子》描写了那时年轻人的生活，也有不少我们当时生活的影子，什刹海给了我至今难以忘怀的美好记忆。",
+            "time": "2022-08-19",
+            "score": 2.5,
+            "score_count": 8,
+            "visited_time": 977,
+            "img_list": [
+                "images/8_0.jpg",
+                "https://dimg04.c-ctrip.com/images/0106d120009upt4ew75D6_W_640_10000.jpg?proc=autoorient",
+                "images/8_2.jpg",
+                "images/8_3.jpg",
+                "images/8_4.jpg",
+                "images/8_5.jpg",
+                "images/8_6.jpg",
+                "images/8_7.jpg",
+                "images/8_8.jpg"
+            ]
+        },
+        {
+            "id": 9,
+            "name": "关裕年guanyunian",
+            "user_id": "user_1377",
+            "content": "在北京什刹海，有很多著名景观，其中庙宇两个，码头一个，湖泊一大片，餐馆若干个，总之这里是一个北京以外的游客喜欢的地方。\n\n那么为什么有银锭桥这么一说呢？\n\n银锭桥位于西城区什刹海的前海和后海之间的水道上。为南北向的单孔石拱桥，因形似银锭故称银锭桥。是什刹海的风景之一，燕京小八景之一。过去站在银锭桥上可遥望西山，故景名为“银锭观山”。",
+            "time": "2018-12-22",
+            "score": 2.2,
+            "score_count": 9,
+            "visited_time": 145,
+            "img_list": [
+                "images/9_0.jpg",
+                "images/9_1.jpg",
+                "https://dimg04.c-ctrip.com/images/100q0z000000nihb6A143_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/100h0z000000nirhq1F3D_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/100a0z000000niigx476E_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/100r0z000000nfm3j5590_W_640_10000.jpg?proc=autoorient",
+                "https://dimg04.c-ctrip.com/images/100i0z000000ng0dzB1B4_W_640_10000.jpg?proc=autoorient",
+                "images/9_7.jpg",
+                "https://dimg04.c-ctrip.com/images/100s0z000000no2inCBD9_W_640_10000.jpg?proc=autoorient",
+                "images/9_9.jpg",
+                "images/9_10.jpg",
+                "images/9_11.jpg",
+                "images/9_12.jpg",
+                "https://dimg04.c-ctrip.com/images/100d0z000000nfpmfB8BB_W_640_10000.jpg?proc=autoorient",
+                "images/9_14.jpg"
+            ]
+        }
+    ],
+    "spot_id": 137
+}

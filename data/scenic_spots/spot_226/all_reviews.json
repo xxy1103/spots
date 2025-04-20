@@ -1,0 +1,17 @@
+{
+    "counts": 1,
+    "reviews": [
+        {
+            "id": 0,
+            "name": "杂多要离",
+            "user_id": "user_2061",
+            "content": "希望希望二开能抢到票！！！！！",
+            "time": "2025-03-15",
+            "score": 4.3,
+            "score_count": 4,
+            "visited_time": 536,
+            "img_list": []
+        }
+    ],
+    "spot_id": 226
+}
