@@ -44,10 +44,9 @@ class UserIo:
         user["id"] = self.counts + 1
         self.users.append(user)
         self.counts += 1
-        self.__saveUsers()
         log.writeLog(f"添加用户：{user['name']}到文件")
         return user["id"]
-    def __saveUsers(self):
+    def saveUsers(self):
         """
         保存用户信息到文件`
         """
@@ -66,7 +65,6 @@ class UserIo:
             return False
         del self.users[userId-1]
         self.counts -= 1
-        self.__saveUsers()
         log.writeLog(f"删除用户：{userId}")
         
 
@@ -101,15 +99,16 @@ class SpotIo:
         if spotId > self.counts:
             return None
         return self.spots[spotId-1]
-    def addScore(self,spotId:int,score:float)->float:
+    def updateScore(self,spotId:int,newScore:float,oldScore:float = 0)->float:
         """
         更新景点的评分
         """
         try:
             spot = self.getSpot(spotId)
             sumScore = float(spot["score"])*spot["score_count"]
-            sumScore += score
-            spot["score_count"]+=1
+            sumScore += newScore - oldScore
+            if oldScore != 0:
+                spot["score_count"]+=1
             spot["score"] = sumScore / spot["score_count"]
 
             return spot["score"]

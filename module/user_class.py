@@ -197,6 +197,38 @@ class User:
         
         # 返回排序后的前 topK 个景点
         return sorted_recommended_spots[:topK]
+    
+    def markingSpot(self, userId, spotId, newScore):
+        """
+        用户对景点进行评分
+        """
+        user = self.userIo.getUser(userId)
+        if user is None:
+            log.writeLog(f"用户{userId}不存在")
+            return False
+        
+        # 获取景点信息
+        spot = spotManager.getSpot(spotId)
+        if spot is None:
+            log.writeLog(f"景点{spotId}不存在")
+            return False
+        
+        # 检查用户是否已经评分
+        for item in user["spot_marking"]:
+            if item["spot_id"] == spotId:
+                oldScore = item["score"]
+                spotManager.updateScore(spotId, newScore, oldScore)
+                item["score"] = newScore
+                log.writeLog(f"用户{userId}更新景点{spotId}评分为{newScore}")
+                return True
+        
+        spotManager.updateScore(spotId, newScore)
+        user["spot_marking"].append({"spot_id": spotId, "score": newScore})
+        return True
+        
+        
+
+
 
         
         

@@ -164,11 +164,11 @@ class Spot:
         # 返回缓存的 Top K 列表
         return self.spotTypeDict[spotType]["top_10"]
     
-    def addScore(self, spotId, score):
+    def updateScore(self, spotId:int, newScore:float, oldScore:float = 0)->float:
         """
         为指定景点添加评分
         """
-        newScore = self.spotIo.addScore(spotId, score)
+        newScore = self.spotIo.updateScore(spotId, newScore, oldScore)
         type = self.spotIo.getSpot(spotId)["type"]
         # 更新对应类型的堆
         self.spotTypeDict[type]["heap"].updateScore(spotId, newScore)
