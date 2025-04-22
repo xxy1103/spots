@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for, jsonify, make_res
 from . import api
 from module.user_class import userManager as user_manager
 from module.Spot_class import spotManager as spot_manager
-from module.Spot_class import merge_sort, quicksort
+from module.data_structure.quicksort import quicksort
 import json
 import secrets
 from flask import g
