@@ -200,17 +200,27 @@ class Spot:
             json.dump(save_data, f, ensure_ascii=False, indent=4)
         writeLog(f"景点分类索引已保存至{filepath}")
 
+# ...existing code...
+
     def getAllSpotsSorted(self):
         """
-        获取所有景点，并按评分和访问次数进行归并排序（降序）
+        获取所有景点，并按评分和访问次数进行归并排序（降序）。
+        通过迭代所有类型，获取每个类型的排序列表，然后逐步归并。
         :return: 排序后的景点列表
         """
-        # 对 self.spots 的副本进行排序，以避免修改原始列表
-        spots_to_sort = list(self.spots) 
-        # --- Use the imported merge_sort function ---
-        sorted_spots = merge_sort(spots_to_sort) 
-        writeLog("获取所有景点并完成排序")
-        return sorted_spots
+        total_sorted_list = []
+        # 遍历所有景点类型
+        for spot_type in self.spotTypeDict.keys():
+            # 获取该类型下所有已排序的景点 (k=-1)
+            spots_of_type = self.getTopKByType(spot_type, k=-1)
+            if spots_of_type: # 确保列表非空
+                # 将当前类型的有序列表与总列表进行归并排序
+                total_sorted_list = merge_sort(total_sorted_list, spots_of_type)
+        
+        writeLog("通过逐类型归并获取所有景点并完成排序")
+        return total_sorted_list
+
+# ...existing code...
 
     def getAllSortedByVisitedTime(self):
         """

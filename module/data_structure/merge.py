@@ -1,8 +1,13 @@
 # --- 归并排序辅助函数 ---
-def merge(left, right):
+def merge_sort(left, right):
     """
-    合并两个已排序列表的辅助函数
+    合并两个已排序列表的函数
     按评分（降序）和访问次数（降序）排序
+    参数:
+        left (list): 第一个已排序的列表
+        right (list): 第二个已排序的列表
+    返回:
+        list: 合并并排序后的列表
     """
     merged = []
     left_index, right_index = 0, 0
@@ -33,17 +38,3 @@ def merge(left, right):
     merged.extend(left[left_index:])
     merged.extend(right[right_index:])
     return merged
-
-def merge_sort(spots_list):
-    """
-    归并排序主函数
-    按评分（降序）和访问次数（降序）排序
-    """
-    if len(spots_list) <= 1:
-        return spots_list
-
-    mid = len(spots_list) // 2
-    left_half = merge_sort(spots_list[:mid])
-    right_half = merge_sort(spots_list[mid:])
-
-    return merge(left_half, right_half)
