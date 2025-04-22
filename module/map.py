@@ -1,6 +1,6 @@
-from data_structure.dijkstra import DijkstraRouter
-from data_structure.POiSearch import POISearch
-from data_structure.quicksort import quicksort
+from module.data_structure.dijkstra import DijkstraRouter
+from module.data_structure.POiSearch import POISearch
+from module.data_structure.quicksort import quicksort
 
 
 
@@ -18,7 +18,7 @@ class Map:
         total_distance, path = self.router.plan_route(coordinates)
         return total_distance, path
     
-    def get_POI(self, query, location, radius=500, page_num=0, page_size=20, output="json"):
+    def get_POI_reversal(self, query, location, radius=500, page_num=0, page_size=20, output="json"):
         """
         获取周边POI点
         :param query: 搜索关键词
@@ -34,16 +34,16 @@ class Map:
             pois = self.poi_search.get_poi_details(result, location)
             if pois:
                 pois = quicksort(pois)
-            #将pois 反转
-            pois = pois[::-1]
             return pois
         return None
     
 
+map = Map()
+
 
 if __name__ == "__main__":
     map_instance = Map()
-    pois = map_instance.get_POI("餐厅", "39.915,116.404",2000)
+    pois = map_instance.get_POI_reversal("餐厅", "39.915,116.404",2000)
     if pois:
         for poi in pois:
             print(f"名称: {poi['name']}, 地址: {poi['address']}, 距离: {poi['score']}米")

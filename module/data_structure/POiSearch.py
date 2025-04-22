@@ -112,6 +112,7 @@ class POISearch:
                 
                 poi_info = {
                     "name": poi.get("name", ""),
+                    "type": poi.get("name", ""),
                     "address": poi.get("address", ""),
                     "province": poi.get("province", ""),
                     "city": poi.get("city", ""),
@@ -130,7 +131,7 @@ if __name__ == "__main__":
     poi_search = POISearch()
     # 搜索北京天安门附近2公里内的银行
     location = "39.915,116.404"  # 定义位置坐标
-    result = poi_search.search("餐厅", location, 500)
+    result = poi_search.search("景点", location, 500)
     
     if result.get("status") == 0:
         print(f"总共找到 {result.get('total')} 个结果")
