@@ -29,9 +29,9 @@ class Map:
         :param output: 返回格式
         :return: POI搜索结果
         """
-        result = self.poi_search.search(query, location, radius, page_num, page_size, output)
+        result,type = self.poi_search.search(query, location, radius, page_num, page_size, output)
         if result.get("status") == 0:
-            pois = self.poi_search.get_poi_details(result, location)
+            pois = self.poi_search.get_poi_details(result, location,type)
             if pois:
                 pois = quicksort(pois)
             return pois

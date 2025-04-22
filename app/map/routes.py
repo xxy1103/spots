@@ -19,8 +19,27 @@ def mapView(spot_id):
         # 处理景点不存在的情况，例如返回404页面或重定向
         return "Spot not found", 404
 
+    location = spot.get("location") # 使用 .get() 更安全，因为如果键 "location" 不存在，它不会抛出 KeyError，并且可以指定默认值
+    #获取经纬度从"纬度,经度"格式转换为列表
+    if location:
+        try:
+            # 使用列表推导式和 strip() 来去除空白字符
+            parts = [part.strip() for part in location.split(",")]
+            if len(parts) == 2:
+                lat = float(parts[0])
+                lng = float(parts[1])
+            else:
+                # 处理分割后部分数量不为2的情况
+                raise ValueError("Location string does not contain exactly one comma.")
+        except ValueError:
+            # 处理位置格式错误的情况，例如返回400错误
+            # 可以考虑记录下无效的 location 值以供调试
+            # import logging
+            # logging.error(f"Invalid location format encountered: {location}")
+            return "Invalid location format", 400
+
     # 将 spot_id 传递给模板
-    return render_template('map.html', spot_id=spot_id)
+    return render_template('map.html', spot_id=spot_id, lat=lat, lng=lng)
 
 
 @map.route('/<int:spot_id>/api/scenicSpots') # 确保 spot_id 是整数

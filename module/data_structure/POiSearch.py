@@ -52,14 +52,14 @@ class POISearch:
         try:
             response = requests.get(url=self.host + self.uri, params=params)
             if response.status_code == 200:
-                return response.json()
+                return response.json(),query
             else:
                 return {"status": response.status_code, "message": "请求失败"}
         except Exception as e:
             return {"status": -1, "message": f"发生异常: {str(e)}"}
     
     
-    def get_poi_details(self, result, location=None):
+    def get_poi_details(self, result, location=None, type=None):
         """
         从搜索结果中提取POI详情
         
@@ -112,7 +112,7 @@ class POISearch:
                 
                 poi_info = {
                     "name": poi.get("name", ""),
-                    "type": poi.get("name", ""),
+                    "type": type,
                     "address": poi.get("address", ""),
                     "province": poi.get("province", ""),
                     "city": poi.get("city", ""),

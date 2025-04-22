@@ -163,7 +163,7 @@
             zoomControl: true, // 显示缩放控件
             // maxBounds: bounds, // 可选：限制地图边界
             // maxBoundsViscosity: 1.0
-        }).setView([39.914692, 116.390477], 13); // 默认视图和缩放级别
+        }).setView([{{lat}}, {{lng}}], 13); // 默认视图和缩放级别
 
         // 添加OSM瓦片图层
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
