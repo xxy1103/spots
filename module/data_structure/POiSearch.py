@@ -3,6 +3,10 @@ import requests
 import json
 from dotenv import load_dotenv
 load_dotenv() # 加载 .env 文件中的环境变量
+try:
+    from module.data_structure.coordTransform_utils import gcj02_to_wgs84, wgs84_to_gcj02
+except:
+    from coordTransform_utils import gcj02_to_wgs84, wgs84_to_gcj02
 
 
 import os
@@ -40,6 +44,12 @@ class POISearch:
         返回:
             查询结果字典
         """
+
+        lat, lng = map(float,location.split(","))
+        result  = wgs84_to_gcj02(lng, lat)  # 将WGS84坐标转换为GCJ02坐标
+        
+        location = f"{result[1]},{result[0]}"  # 转换后的坐标格式为"纬度,经度"
+
         params = {
             "query": query,
             "location": location,
@@ -88,7 +98,10 @@ class POISearch:
             except (ValueError, AttributeError):
                 # 如果解析失败，保持ref_lat和ref_lng为None
                 pass
-        
+        ref_result = wgs84_to_gcj02(ref_lng, ref_lat)  # 将WGS84坐标转换为GCJ02坐标
+        ref_lat = ref_result[1]  # 纬度
+        ref_lng = ref_result[0]  # 经度
+
         if result.get("status") == 0 and "results" in result:
             pois = []
             for poi in result["results"]:
@@ -113,6 +126,10 @@ class POISearch:
                     distance_km = c * r
                     distance = round(distance_km * 1000) # 转换为米并四舍五入
                 
+                poi_result = gcj02_to_wgs84(poi_lng, poi_lat)  # 将GCJ02坐标转换为WGS84坐标
+                poi_location["lat"] = poi_result[1]  # 纬度
+                poi_location["lng"] = poi_result[0]  # 经度
+
                 poi_info = {
                     "name": poi.get("name", ""),
                     "type": type,
