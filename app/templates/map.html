@@ -133,8 +133,13 @@
                         <label>终点：</label>
                         <input type="text" placeholder="选择终点">
                     </div>
-                    <button type="button" style="margin-top: 10px;">规划路线</button>
+                    <button type="button" style="margin-top: 10px;" onclick="planRoute()">规划路线</button>
                 </form>
+                <hr> <!-- Optional separator -->
+                <h4>已选地点：</h4>
+                <div id="selected-route-points">
+                    <p>尚未选择任何地点。请点击地图标记上的“添加到路线”按钮。</p>
+                </div>
             </div>
 
             <!-- <div id="favorites" class="tab-content">
@@ -176,6 +181,8 @@
         let scenicSpotLayer = L.layerGroup().addTo(map);
         // 存储当前显示的 POI 数据
         let currentPois = [];
+        let routePoints = []; // 存储路线规划的点 {name, lat, lng}
+        let routeListContainer; // 在 DOMContentLoaded 后获取
 
         // 地图大小改变时更新地图
         window.addEventListener('resize', function() {
@@ -189,6 +196,8 @@
             const poiListUl = document.getElementById('poi-ul');
             const detailsContent = document.getElementById('details-content');
             const spotDetailsDiv = document.getElementById('spot-details'); // 获取景点详情区域
+            routeListContainer = document.getElementById('selected-route-points'); // 获取路线点列表容器
+            updateRouteListDisplay(); // 初始化显示
 
             tabButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -199,6 +208,114 @@
                     document.getElementById(tabId).classList.add('active');
                 });
             });
+
+            // --- 函数：将点添加到路线列表 ---
+            function addPointToRoute(point) {
+                // 检查是否已存在（基于坐标）
+                const exists = routePoints.some(p => p.lat === point.lat && p.lng === point.lng);
+                if (!exists) {
+                    routePoints.push(point);
+                    updateRouteListDisplay();
+                    alert(`"${point.name}" 已添加到路线规划列表！`);
+                } else {
+                    alert(`"${point.name}" 已在列表中。`);
+                }
+            }
+
+            // --- 函数：从路线列表中移除点 ---
+            function removePointFromRoute(index) {
+                if (index >= 0 && index < routePoints.length) {
+                    const removed = routePoints.splice(index, 1);
+                    console.log("Removed point:", removed[0]);
+                    updateRouteListDisplay();
+                }
+            }
+
+            // --- 函数：更新路线规划标签页中的列表显示 ---
+            function updateRouteListDisplay() {
+                if (!routeListContainer) return; // 确保容器存在
+
+                routeListContainer.innerHTML = ''; // 清空
+
+                if (routePoints.length === 0) {
+                    routeListContainer.innerHTML = '<p>尚未选择任何地点。请点击地图标记上的“添加到路线”按钮。</p>';
+                    return;
+                }
+
+                const ol = document.createElement('ol');
+                routePoints.forEach((point, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = `${point.name}`; // (${point.lat.toFixed(4)}, ${point.lng.toFixed(4)})`; // 可选显示坐标
+
+                    // 添加移除按钮
+                    const removeBtn = document.createElement('button');
+                    removeBtn.textContent = '移除';
+                    removeBtn.style.marginLeft = '10px';
+                    removeBtn.style.cursor = 'pointer';
+                    // 使用闭包或 data-* 属性传递索引
+                    removeBtn.onclick = function() { removePointFromRoute(index); };
+
+                    li.appendChild(removeBtn);
+                    ol.appendChild(li);
+                });
+                routeListContainer.appendChild(ol);
+
+                // 更新起点/终点输入框（可选）
+                updateRouteFormInputs();
+            }
+
+            // --- 函数：更新路线规划表单的起点和终点（可选）---
+            function updateRouteFormInputs() {
+                const startInput = document.querySelector('#route form input[placeholder="选择起点"]');
+                const endInput = document.querySelector('#route form input[placeholder="选择终点"]');
+
+                if (startInput) {
+                    startInput.value = routePoints.length > 0 ? routePoints[0].name : '';
+                }
+                if (endInput) {
+                    endInput.value = routePoints.length > 1 ? routePoints[routePoints.length - 1].name : '';
+                }
+            }
+
+            // --- 监听 Popup 打开事件，为内部按钮绑定事件 ---
+            map.on('popupopen', function(e) {
+                const popupNode = e.popup.getElement();
+                const addButton = popupNode.querySelector('.add-to-route-btn');
+                if (addButton) {
+                    // 确保只绑定一次监听器，或先移除旧的
+                    const newButton = addButton.cloneNode(true); // 克隆以移除旧监听器
+                    addButton.parentNode.replaceChild(newButton, addButton);
+
+                    newButton.addEventListener('click', () => {
+                        const name = newButton.dataset.name;
+                        const lat = parseFloat(newButton.dataset.lat);
+                        const lng = parseFloat(newButton.dataset.lng);
+
+                        if (name && !isNaN(lat) && !isNaN(lng)) {
+                            addPointToRoute({ name, lat, lng });
+                            // e.popup._close(); // 可选：添加后关闭弹窗
+                        } else {
+                            console.error("无法从按钮获取地点数据:", newButton.dataset);
+                        }
+                    });
+                }
+            });
+
+            // --- 占位符：实际的路线规划函数 ---
+            window.planRoute = function() { // 将函数挂载到 window 使其可在 onclick 中调用
+                if (routePoints.length < 2) {
+                    alert("请至少选择两个地点（起点和终点）来规划路线。");
+                    return;
+                }
+                // 在这里添加调用路线规划API和在地图上绘制路线的逻辑
+                console.log("准备规划路线，选择的点:", routePoints);
+                alert("路线规划功能待实现。已选点信息已打印到控制台。");
+                // 示例：获取起点和终点坐标
+                // const startPoint = routePoints[0];
+                // const endPoint = routePoints[routePoints.length - 1];
+                // const waypoints = routePoints.slice(1, -1); // 中间点
+                // 调用后端API或前端路由库...
+            }
 
             // --- 获取并显示初始景点 ---
             const spotId = {{ spot_id | tojson }}; // 从 Flask 获取 spot_id
@@ -230,13 +347,16 @@
                                                 iconAnchor: [12, 41],
                                                 popupAnchor: [1, -34],
                                                 shadowSize: [41, 41],
-                                                // 设置图标颜色（通过 filter 或使用自定义图标）
-                                                // 例如使用 CSS filter (效果可能不理想)
-                                                // iconUrl: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="marker"><path fill="%23007bff" stroke="%23ccc" stroke-width="1" d="M16 0c-5.523 0-10 4.477-10 10 0 10 10 22 10 22s10-12 10-22c0-5.523-4.477-10-10-10z"/></svg>'
                                             })
                                         })
                                         .addTo(scenicSpotLayer) // 添加到景点图层
-                                        .bindPopup(`<b>${spot.name}</b><br>${spot.address || '无地址信息'}`);
+
+                                        const popupContent = `
+                                            <b>${spot.name}</b><br>
+                                            ${spot.address || '无地址信息'}<br>
+                                            <button class="add-to-route-btn" data-name="${spot.name}" data-lat="${lat}" data-lng="${lng}" style="margin-top: 5px;">添加到路线</button>
+                                        `;
+                                        marker.bindPopup(popupContent);
 
                                         // 存储景点信息到标记对象，方便后续使用
                                         marker.spotData = spot;
@@ -343,7 +463,14 @@
                                         })
                                     })
                                     .addTo(poiLayer) // 添加到 POI 图层
-                                    .bindPopup(`<b>${poi.name || '未知名称'}</b><br>类型: ${poi.type || '未知'}<br>地址: ${poi.address || '无'}`);
+
+                                    const popupContent = `
+                                        <b>${poi.name || '未知名称'}</b><br>
+                                        类型: ${poi.type || '未知'}<br>
+                                        地址: ${poi.address || '无'}<br>
+                                        <button class="add-to-route-btn" data-name="${poi.name || '未知名称'}" data-lat="${lat}" data-lng="${lng}" style="margin-top: 5px;">添加到路线</button>
+                                    `;
+                                    poiMarker.bindPopup(popupContent);
 
                                     // 点击 POI 标记时更新底部详细信息
                                     poiMarker.on('click', function() {
