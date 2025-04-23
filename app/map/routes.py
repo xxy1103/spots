@@ -39,7 +39,7 @@ def mapView(spot_id):
             return "Invalid location format", 400
 
     # 将 spot_id 传递给模板
-    return render_template('map.html', spot_id=spot_id, lat=lat, lng=lng)
+    return render_template('map.html', spot_id=spot_id, lat=lat, lng=lng, spot=spot)
 
 
 @map.route('/<int:spot_id>/api/scenicSpots') # 确保 spot_id 是整数
