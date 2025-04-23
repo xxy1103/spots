@@ -16,6 +16,7 @@ class Map:
         :return: 路线总距离和路径节点
         """
         total_distance, path = self.router.plan_route(coordinates)
+        path = self.router.get_route_coordinates(path)
         return total_distance, path
     
     def get_POI_reversal(self, query, location, radius=500, page_num=0, page_size=20, output="json"):

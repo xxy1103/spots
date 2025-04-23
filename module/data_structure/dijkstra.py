@@ -252,7 +252,7 @@ class DijkstraRouter:
                 lng = node.get('x', node.get('lon'))
                 
                 if lat is not None and lng is not None:
-                    route_coords.append((lat, lng))
+                    route_coords.append([lat, lng])
             except:
                 pass  # 忽略错误节点
         

@@ -86,9 +86,55 @@ def getPoi(location):
 
 
 
+@map.route('/api/navigation', methods=['POST'])
+def navigation():
+    """获取导航数据"""
+    data = request.get_json()
+    # 校验输入数据
+    if not data or 'points' not in data: # 前端发送的是 'points'
+        return jsonify({"success": False, "message": "无效的输入数据"}), 400
+
+    coordinates = data['points'] # 获取坐标点列表
+    # 校验坐标点格式
+    if not isinstance(coordinates, list) or len(coordinates) < 2:
+        return jsonify({"success": False, "message": "无效的坐标点数据，至少需要两个点"}), 400
+    
+    # 进一步校验每个坐标点的格式（例如，确保它们是包含 lat 和 lng 的字典）
+    valid_coordinates = []
+    for point in coordinates:
+        if isinstance(point, dict) and 'lat' in point and 'lng' in point:
+             # 修改这里：将坐标点转换为元组 (lat, lng)
+             valid_coordinates.append((point['lat'], point['lng'])) 
+        else:
+             return jsonify({"success": False, "message": "坐标点格式错误，应为 {lat: number, lng: number}"}), 400
 
 
+    try:
+        # 调用地图模块的规划路线方法
+        # 注意：假设 map_module.plan_route 返回 (总距离, 路径点列表, 预计时间)
+        # 如果只返回距离和路径，需要相应调整
+        # result = map_module.plan_route(valid_coordinates) 
+        
+        # 假设 map_module.plan_route 返回 (total_distance, path_points)
+        print(f"传递给 plan_route 的坐标: {valid_coordinates}") # 调试输出，确认格式为 [(lat, lng), ...]
+        total_distance, path_points = map_module.plan_route(valid_coordinates) 
+        # 检查规划结果 - 确保 path_points 是一个非空列表或元组
+        # 使用 'not path_points' 来检查 None 或空列表/元组 []/()
+        if total_distance is None or not path_points: 
+             raise ValueError("地图模块未能成功规划路线或返回空路径") 
+
+        # 假设没有返回预计时间，duration 设为 None 或不包含在响应中
+        duration = None # 如果 map_module.plan_route 返回时间，则替换这里
 
 
+        return jsonify({
+            "success": True,
+            "route": path_points, # 确保返回给前端的是 [[lat1, lng1], ...]
+            "distance": total_distance, # 总距离（米）
+            "duration": duration # 预计时间（秒），如果可用
+        })
 
-
+    except Exception as e:
+        # 处理地图模块可能抛出的异常或其他错误
+        print(f"路线规划出错: {e}") # 记录错误日志
+        return jsonify({"success": False, "message": f"路线规划失败: {e}"}), 500

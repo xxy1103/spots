@@ -183,6 +183,7 @@
         let currentPois = [];
         let routePoints = []; // 存储路线规划的点 {name, lat, lng}
         let routeListContainer; // 在 DOMContentLoaded 后获取
+        let currentRouteLayer = null; // <--- 添加这一行：声明并初始化路线图层变量
 
         // 地图大小改变时更新地图
         window.addEventListener('resize', function() {
@@ -301,20 +302,82 @@
                 }
             });
 
-            // --- 占位符：实际的路线规划函数 ---
+            
             window.planRoute = function() { // 将函数挂载到 window 使其可在 onclick 中调用
                 if (routePoints.length < 2) {
                     alert("请至少选择两个地点（起点和终点）来规划路线。");
                     return;
                 }
-                // 在这里添加调用路线规划API和在地图上绘制路线的逻辑
-                console.log("准备规划路线，选择的点:", routePoints);
-                alert("路线规划功能待实现。已选点信息已打印到控制台。");
-                // 示例：获取起点和终点坐标
-                // const startPoint = routePoints[0];
-                // const endPoint = routePoints[routePoints.length - 1];
-                // const waypoints = routePoints.slice(1, -1); // 中间点
-                // 调用后端API或前端路由库...
+
+                // 提取坐标点列表
+                const coordinates = routePoints.map(point => ({ lat: point.lat, lng: point.lng }));
+
+                console.log("准备规划路线，发送坐标:", coordinates);
+                // 显示加载提示或禁用按钮
+                const planButton = document.querySelector('#route button[onclick="planRoute()"]');
+                if (planButton) planButton.disabled = true;
+                detailsContent.innerHTML = '正在规划路线...'; // 更新底部信息
+
+                // 发送 POST 请求到后端
+                fetch('/map/api/navigation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json' // 明确希望接收JSON
+                    },
+                    body: JSON.stringify({ points: coordinates }) // 发送坐标点数组
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        // 如果响应状态不是 2xx，尝试解析错误信息
+                        return response.json().then(errData => {
+                            throw new Error(errData.message || `HTTP error! status: ${response.status}`);
+                        }).catch(() => {
+                            // 如果无法解析 JSON 错误信息，抛出通用错误
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success && data.route && data.route.length > 0) {
+                        console.log("收到路线数据:", data);
+
+                        // 清除旧路线 (现在 currentRouteLayer 已定义)
+                        if (currentRouteLayer) {
+                            map.removeLayer(currentRouteLayer);
+                        }
+
+                        // 绘制新路线 (现在 currentRouteLayer 已定义)
+                        currentRouteLayer = L.polyline(data.route, { color: 'red', weight: 5 }).addTo(map);
+
+                        // 缩放地图以适应路线
+                        map.fitBounds(currentRouteLayer.getBounds(), { padding: [50, 50] });
+
+                        // 更新底部信息显示结果
+                        let detailsHtml = `路线规划成功！`;
+                        if (data.distance) {
+                            detailsHtml += ` 总距离: ${(data.distance / 1000).toFixed(2)} 公里。`;
+                        }
+                        if (data.duration) {
+                            detailsHtml += ` 预计时间: ${Math.round(data.duration / 60)} 分钟。`;
+                        }
+                        detailsContent.innerHTML = detailsHtml;
+
+                    } else {
+                        // 后端返回 success: false 或数据格式不正确
+                        throw new Error(data.message || '无法规划路线或返回数据无效');
+                    }
+                })
+                .catch(error => {
+                    console.error('路线规划失败:', error);
+                    alert('路线规划失败: ' + error.message);
+                    detailsContent.innerHTML = `路线规划失败: ${error.message}`;
+                })
+                .finally(() => {
+                    // 无论成功或失败，都重新启用按钮
+                    if (planButton) planButton.disabled = false;
+                });
             }
 
             // --- 获取并显示初始景点 ---
