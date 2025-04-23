@@ -35,6 +35,7 @@ class POISearch:
             page_num: 页码，默认为0
             page_size: 每页返回的POI数量，默认为20
             output: 返回格式，默认为json
+            coord_type: 坐标类型，1表示wgs84ll
             
         返回:
             查询结果字典
@@ -46,7 +47,9 @@ class POISearch:
             "page_num": page_num,
             "page_size": page_size,
             "output": output,
-            "ak": self.ak
+            "ak": self.ak,
+            "coord_type": 2,  # 百度地图坐标类型，1表示wgs84ll，2表示gcj02ll
+            "ret_coordtype": "gcj02ll"  # 返回坐标类型
         }
         
         try:
@@ -131,7 +134,7 @@ if __name__ == "__main__":
     poi_search = POISearch()
     # 搜索北京天安门附近2公里内的银行
     location = "39.915,116.404"  # 定义位置坐标
-    result = poi_search.search("景点", location, 500)
+    result,qurry = poi_search.search("景点", location, 500)
     
     if result.get("status") == 0:
         print(f"总共找到 {result.get('total')} 个结果")
