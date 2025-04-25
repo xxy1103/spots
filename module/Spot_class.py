@@ -1,5 +1,5 @@
 from module.data_structure.hashtable import HashTable 
-from module.fileIo import spotIo, getAllSpotTypes
+from module.fileIo import spotIo, configIo
 from module.data_structure.set import ItemSet
 from module.data_structure.indexHeap import TopKHeap
 from module.printLog import writeLog
@@ -24,7 +24,7 @@ class Spot:
             self.hashTable.insert(spot)
         
         # 初始化景点分类字典
-        spotTypes = getAllSpotTypes()
+        spotTypes = configIo.getAllSpotTypes()
         self.spotTypeDict = {}
         for i in range(len(spotTypes)):
             self.spotTypeDict[spotTypes[i]] = {

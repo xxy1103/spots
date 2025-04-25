@@ -66,17 +66,27 @@ class UserIo:
         del self.users[userId-1]
         self.counts -= 1
         log.writeLog(f"删除用户：{userId}")
-        
 
-def getAllSpotTypes():
-    """
-    获取所有景点类型的json文件
-    :return: 所有景点类型的json信息列表
-    """
-    spotTypesPath = os.path.join(dataPath, r"config/spot_types.json")
-    with open(spotTypesPath, "r", encoding="utf-8") as f:
-        spotTypes = json.load(f)
-    return spotTypes
+class ConfigIo:
+    def __init__(self):
+        self.configPath = os.path.join(dataPath, r"config/config.json")
+        
+    def getAllSpotTypes(self):
+        """
+        获取所有景点类型的json文件
+        :return: 所有景点类型的json信息列表
+        """
+        with open(self.configPath, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data["spot_types"]
+    def getAllPoiTypes(self):
+        """
+        获取所有兴趣点类型的json文件
+        :return: 所有兴趣点类型的json信息列表
+        """
+        with open(self.configPath, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data["POI_types"]
 
 class SpotIo:
     def __init__(self):
@@ -146,6 +156,8 @@ class SpotIo:
             json.dump(spotsData, f, ensure_ascii=False, indent=4)
 
 
+
+
         
 
 def __testUserIo():
@@ -187,5 +199,6 @@ def __testSpotIo(spotIo):
 
 userIo = UserIo()
 spotIo = SpotIo()
+configIo = ConfigIo()
 
     
