@@ -2,11 +2,12 @@ from flask import render_template, request, redirect, url_for,g,jsonify
 from . import map #导入蓝图
 from app.api.routes import login_required # 导入登录验证装饰器
 from module.Spot_class import spotManager
+from module.fileIo import configIo
 from module.map import map as map_module # 导入地图模块, 重命名避免与蓝图冲突
 from module.data_structure.merge import merge_sort
 
 
-POI_types = ["餐厅","超市","酒店","加油站","停车场","医院","银行","奶茶店","图书馆","厕所"] # 预定义的POI类型列表
+
 
 
 @map.route('/<int:spot_id>') # 确保 spot_id 是整数
@@ -68,6 +69,7 @@ def scenicSpots(spot_id):
 def getPoi(location):
     """获取兴趣点数据，合并所有类型并排序"""
     all_pois = []
+    POI_types = configIo.getAllPoiTypes() # 获取所有兴趣点类型
     for poi_type in POI_types:
         # 调用 map_module.get_POI 获取数据
         # 假设直接返回 POI 列表，例如: [{'name': '...', 'distance': ...}, ...]
