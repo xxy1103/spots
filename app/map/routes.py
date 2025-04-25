@@ -86,6 +86,13 @@ def getPoi(location):
     all_pois = all_pois[::-1]
     return jsonify(all_pois)
 
+@map.route('/api/poi/<location>/<keyword>')
+def getPoiByKeyword(location, keyword):
+    poi_list = map_module.get_POI_reversal(keyword, location, 500)
+
+    # 检查返回数据是否为列表
+    return jsonify(poi_list[::-1])
+
 
 
 @map.route('/api/navigation', methods=['POST'])
