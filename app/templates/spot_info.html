@@ -15,5 +15,11 @@
     {% if spot.img %}
         <img src="{{ spot.img }}" alt="{{ spot.name }}"> <!-- 显示景点图片 -->
     {% endif %}
+
+    <br><br> <!-- 添加一些间距 -->
+    <a href="/map/{{ spot.id }}">
+        <button>查看地图位置</button>
+    </a>
+
 </body>
 </html>
