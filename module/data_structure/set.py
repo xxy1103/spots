@@ -1,229 +1,120 @@
-class ItemSet:
+class MySet:
     """
-    一个简单的对象集合类，基于对象的 'id' 存储和操作，实现基本的集合操作。
-    对象格式为: {"id": ..., "name": ...}
+    一个简单的自定义集合类，使用字典实现。
     """
-    def __init__(self, items=None):
+    def __init__(self, iterable=None):
         """
-        初始化集合
-        :param items: 可选的初始对象列表，每个对象应为 {"id": ..., "name": ...} 格式
+        初始化集合。可以从一个可迭代对象初始化。
+        :param iterable: 可选的可迭代对象，用于初始化集合元素。
         """
-        # 使用字典以id为键存储对象，提高查找效率
-        self._items_by_id = {}
-        if items:
-            for item in items:
+        self._elements = {}  # 使用字典存储元素，键是元素，值可以是任意非None值（例如True）
+        if iterable:
+            for item in iterable:
                 self.add(item)
 
-    def add(self, item: dict):
+    def add(self, item):
         """
-        添加对象到集合
-        :param item: 要添加的对象，格式为 {"id": ..., "name": ...}
-        :return: None
-        :raises TypeError: 如果对象格式不正确
-        :raises ValueError: 如果对象缺少 'id' 或 'name' 键
+        向集合中添加一个元素。
+        :param item: 要添加的元素。
         """
-        if not isinstance(item, dict):
-            raise TypeError("集合只能包含字典格式的对象")
-        if "id" not in item or "name" not in item:
-            raise ValueError("对象必须包含 'id' 和 'name' 键")
+        self._elements[item] = True
 
-        item_id = item["id"]
-        if item_id not in self._items_by_id:
-            self._items_by_id[item_id] = item
+    def contains(self, item):
+        """
+        检查元素是否存在于集合中。
+        :param item: 要检查的元素。
+        :return: 如果元素存在则返回 True，否则返回 False。
+        """
+        return item in self._elements
 
-    def remove(self, item_id):
+    def remove(self, item):
         """
-        根据对象id从集合中删除对象
-        :param item_id: 要删除的对象的id
-        :return: None
-        :raises KeyError: 如果具有该id的对象不在集合中
+        从集合中移除一个元素。如果元素不存在，则引发 KeyError。
+        :param item: 要移除的元素。
         """
-        if item_id in self._items_by_id:
-            del self._items_by_id[item_id]
+        if item in self._elements:
+            del self._elements[item]
         else:
-            raise KeyError(f"ID为 {item_id} 的对象不在集合中")
+            raise KeyError(f"Element {item} not found in the set")
 
-    def discard(self, item_id):
+    def intersection_update(self, other_set):
         """
-        根据对象id从集合中删除对象，如果对象不存在则不进行操作
-        :param item_id: 要删除的对象的id
-        :return: None
+        原地修改集合，仅保留同时存在于当前集合和另一个集合中的元素。
+        :param other_set: 另一个 CustomSet 实例。
         """
-        if item_id in self._items_by_id:
-            del self._items_by_id[item_id]
+        if not isinstance(other_set, MySet):
+            raise TypeError("Can only perform intersection with another CustomSet")
 
-    def contains(self, item_id):
-        """
-        检查具有指定id的对象是否在集合中
-        :param item_id: 要检查的对象的id
-        :return: 布尔值
-        """
-        return item_id in self._items_by_id
+        # 需要移除的元素列表
+        items_to_remove = []
+        for item in self._elements:
+            if not other_set.contains(item):
+                items_to_remove.append(item)
 
-    def union(self, other_set):
-        """
-        返回两个集合的并集
-        :param other_set: 另一个 ItemSet 实例
-        :return: 新的 ItemSet 集合
-        :raises TypeError: 如果 other_set 不是 ItemSet 类型
-        """
-        if not isinstance(other_set, ItemSet):
-            raise TypeError("操作对象必须是 ItemSet 类型")
-        
-        result = ItemSet(self.get_all_elements()) # 从当前集合开始
-        for item_id, item in other_set._items_by_id.items():
-            result.add(item) # add 方法会自动处理重复（基于id）
-        return result
+        # 执行移除
+        for item in items_to_remove:
+            self.remove(item)
 
-    def intersection(self, other_set):
+    def __len__(self):
         """
-        返回两个集合的交集
-        :param other_set: 另一个 ItemSet 实例
-        :return: 新的 ItemSet 集合
-        :raises TypeError: 如果 other_set 不是 ItemSet 类型
+        返回集合中元素的数量。
         """
-        if not isinstance(other_set, ItemSet):
-            raise TypeError("操作对象必须是 ItemSet 类型")
-
-        result = ItemSet()
-        # 遍历较小的集合以提高效率
-        if self.size() < other_set.size():
-            smaller_set = self
-            larger_set = other_set
-        else:
-            smaller_set = other_set
-            larger_set = self
-
-        for item_id, item in smaller_set._items_by_id.items():
-            if larger_set.contains(item_id):
-                result.add(item)
-        return result
-
-    def difference(self, other_set):
-        """
-        返回两个集合的差集（self - other_set）
-        :param other_set: 另一个 ItemSet 实例
-        :return: 新的 ItemSet 集合
-        :raises TypeError: 如果 other_set 不是 ItemSet 类型
-        """
-        if not isinstance(other_set, ItemSet):
-            raise TypeError("操作对象必须是 ItemSet 类型")
-
-        result = ItemSet()
-        for item_id, item in self._items_by_id.items():
-            if not other_set.contains(item_id):
-                result.add(item)
-        return result
-
-    def clear(self):
-        """
-        清空集合
-        :return: None
-        """
-        self._items_by_id = {}
-
-    def size(self):
-        """
-        返回集合中对象的数量
-        :return: 整数
-        """
-        return len(self._items_by_id)
+        return len(self._elements)
 
     def is_empty(self):
         """
-        检查集合是否为空
-        :return: 布尔值
+        检查集合是否为空。
         """
-        return len(self._items_by_id) == 0
+        return len(self._elements) == 0
 
-    def get_all_elements(self) -> list[dict]:
+    def __iter__(self):
         """
-        返回集合中所有对象的列表副本
-        :return: 对象列表
+        返回集合元素的迭代器。
         """
-        return list(self._items_by_id.values())
-
-    def get_all_ids(self) -> list:
-        """
-        返回集合中所有对象 ID 的列表副本
-        :return: ID 列表
-        """
-        return list(self._items_by_id.keys())
+        return iter(self._elements.keys())
 
     def __str__(self):
         """
-        返回集合的字符串表示
-        :return: 字符串
+        返回集合的字符串表示形式。
         """
-        # 为了简洁，可以只显示id，或者显示完整的对象字符串
-        # return "{" + ", ".join(str(id) for id in self._items_by_id.keys()) + "}"
-        return "{" + ", ".join(str(item) for item in self._items_by_id.values()) + "}"
+        items = ', '.join(map(str, self._elements.keys()))
+        return f"CustomSet({{{items}}})"
 
     def __repr__(self):
         """
-        返回集合的字符串表示
-        :return: 字符串
+        返回集合的官方字符串表示形式。
         """
-        # 使用更明确的表示法
-        items_repr = ", ".join(repr(item) for item in self._items_by_id.values())
-        return f"ItemSet([{items_repr}])"
+        return self.__str__()
 
-# --- 示例用法 ---
-if __name__ == "__main__":
-    set1 = ItemSet([
-        {"id": 1, "name": "故宫"},
-        {"id": 2, "name": "天安门"}
-    ])
-    set2 = ItemSet([
-        {"id": 2, "name": "天安门广场"}, # ID 相同，name 不同，会被视为同一个元素
-        {"id": 3, "name": "颐和园"}
-    ])
+# 示例用法
+if __name__ == '__main__':
+    set1 = MySet([1, 2, 3, 4])
+    set2 = MySet([3, 4, 5, 6])
 
     print(f"Set 1: {set1}")
     print(f"Set 2: {set2}")
+    print(f"Length of Set 1: {len(set1)}")
+    print(f"Does Set 1 contain 3? {set1.contains(3)}")
+    print(f"Does Set 1 contain 5? {set1.contains(5)}")
 
-    # 添加
-    set1.add({"id": 4, "name": "长城"})
-    print(f"Set 1 after add: {set1}")
+    set1.add(5)
+    print(f"Set 1 after adding 5: {set1}")
+
     try:
-        set1.add({"id": 1, "name": "紫禁城"}) # 添加已存在的 ID，不会改变集合
-    except ValueError as e:
-        print(e)
-    print(f"Set 1 after adding existing ID: {set1}")
-
-    # 包含
-    print(f"Set 1 contains ID 2: {set1.contains(2)}")
-    print(f"Set 1 contains ID 5: {set1.contains(5)}")
-
-    # 删除
-    set1.remove(4)
-    print(f"Set 1 after remove ID 4: {set1}")
-    set1.discard(5) # 删除不存在的 ID，无事发生
-    print(f"Set 1 after discard ID 5: {set1}")
-    try:
-        set1.remove(10) # 删除不存在的 ID，会报错
+        set1.remove(2)
+        print(f"Set 1 after removing 2: {set1}")
+        set1.remove(10) # 这会引发 KeyError
     except KeyError as e:
         print(e)
 
-    # 集合操作
-    union_set = set1.union(set2)
-    print(f"Union: {union_set}")
-    print(f"Union size: {union_set.size()}")
+    set1 = MySet([1, 2, 3, 4]) # 重置 set1
+    set1.intersection_update(set2)
+    print(f"Set 1 after intersection update with Set 2: {set1}")
 
-    intersection_set = set1.intersection(set2)
-    print(f"Intersection: {intersection_set}")
+    print("Iterating through the updated Set 1:")
+    for element in set1:
+        print(element)
 
-    difference_set = set1.difference(set2)
-    print(f"Difference (Set1 - Set2): {difference_set}")
-
-    difference_set2 = set2.difference(set1)
-    print(f"Difference (Set2 - Set1): {difference_set2}")
-
-    # 获取元素
-    print(f"All elements in Set 1: {set1.get_all_elements()}")
-    print(f"All IDs in Set 1: {set1.get_all_ids()}")
-
-    # 清空
-    set1.clear()
-    print(f"Set 1 after clear: {set1}")
-    print(f"Set 1 is empty: {set1.is_empty()}")
+    print(f"Is Set 1 empty? {set1.is_empty()}")
+    empty_set = MySet()
+    print(f"Is empty_set empty? {empty_set.is_empty()}")

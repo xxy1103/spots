@@ -1,10 +1,9 @@
 import os
-import heapq
-from typing import List, Tuple, Dict, Any, Optional
-import math
-
+from module.data_structure.heap import MinHeap
+from typing import List, Tuple, Any
 import osmnx as ox
-import networkx as nx
+# 导入自定义 Set 类
+from module.data_structure.set import MySet
 
 
 class DijkstraRouter:
@@ -44,41 +43,45 @@ class DijkstraRouter:
     def dijkstra(self, start_node: Any, end_node: Any) -> Tuple[float, List[Any]]:
         """
         使用Dijkstra算法计算从起点到终点的最短路径
-        
+
         Args:
             start_node: 起点节点ID
             end_node: 终点节点ID
-            
+
         Returns:
             Tuple[float, List[Any]]: 总距离和路径节点列表
         """
         # 检查节点是否存在于图中
         if start_node not in self.graph or end_node not in self.graph:
             return float('inf'), []
-        
+
         # 初始化距离字典和前驱节点字典
         distances = {node: float('inf') for node in self.graph.nodes}
         distances[start_node] = 0
         predecessors = {node: None for node in self.graph.nodes}
-        
+
         # 使用优先队列实现Dijkstra算法
-        priority_queue = [(0, start_node)]
-        visited = set()
-        
-        while priority_queue:
-            current_distance, current_node = heapq.heappop(priority_queue)
-            
+        priority_queue = MinHeap() # Initialize custom MinHeap
+        priority_queue.push((0, start_node)) # Push the starting node
+        # 使用 MySet 替代内置 set
+        visited = MySet()
+
+        # while priority_queue: # Old loop condition
+        while not priority_queue.is_empty(): # Use is_empty() for loop condition
+            # current_distance, current_node = heapq.heappop(priority_queue) # Old pop
+            current_distance, current_node = priority_queue.pop() # Use MinHeap pop
+
             # 如果已经找到目标节点的最短路径，退出循环
             if current_node == end_node:
                 break
-            
-            # 如果已经访问过该节点，跳过
-            if current_node in visited:
+
+            # 如果已经访问过该节点，跳过 (使用 contains 方法)
+            if visited.contains(current_node):
                 continue
-            
-            # 标记为已访问
+
+            # 标记为已访问 (使用 add 方法)
             visited.add(current_node)
-            
+
             # 检查所有邻居节点
             for neighbor in self.graph.neighbors(current_node):
                 # 获取边的权重（距离）
@@ -99,20 +102,21 @@ class DijkstraRouter:
                 except (AttributeError, KeyError):
                     # 如果没有length属性，使用默认值1.0
                     weight = 1.0
-                
+
                 # 计算到邻居的新距离
                 distance = current_distance + weight
-                
+
                 # 如果找到更短的路径，更新距离和前驱节点
                 if distance < distances[neighbor]:
                     distances[neighbor] = distance
                     predecessors[neighbor] = current_node
-                    heapq.heappush(priority_queue, (distance, neighbor))
-        
+                    # heapq.heappush(priority_queue, (distance, neighbor)) # Old push
+                    priority_queue.push((distance, neighbor)) # Use MinHeap push
+
         # 如果没有找到路径
         if distances[end_node] == float('inf'):
             return float('inf'), []
-        
+
         # 构建路径
         path = []
         current = end_node
@@ -120,7 +124,7 @@ class DijkstraRouter:
             path.append(current)
             current = predecessors[current]
         path.reverse()
-        
+
         return distances[end_node], path
     
     def get_nearest_node(self, lat: float, lng: float) -> Any:
@@ -349,7 +353,6 @@ if __name__ == "__main__":
     # 示例坐标 (纬度, 经度)
     coordinates = [
         (39.92094, 116.36924),  # 北京某地点1
-        (39.91198, 116.40554),  # 北京某地点2
         (39.93428, 116.38447),  # 北京某地点3
     ]
     

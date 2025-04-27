@@ -1,10 +1,11 @@
-from module.data_structure.hashtable import HashTable 
+from module.data_structure.hashtable import HashTable
 from module.fileIo import spotIo, configIo
-from module.data_structure.set import ItemSet
 from module.data_structure.indexHeap import TopKHeap
 from module.printLog import writeLog
 from module.data_structure.quicksort import quicksort
 from module.data_structure.merge import merge_sort
+# 导入自定义 Set 类
+from module.data_structure.set import MySet
 import json
 
 
@@ -59,11 +60,10 @@ class Spot:
         first_char_spots = self.hashTable.search(keys[0])
         if not first_char_spots:
             # 如果第一个字符就没有匹配项，则不可能有交集
-            # print(f"No spots found containing the character: {keys[0]}") # 可以取消注释以进行调试
             return []
 
-        # 使用第一个字符的结果初始化结果集合
-        result_set = ItemSet(first_char_spots)
+        # 使用第一个字符的结果初始化结果 ID 集合 (使用 MySet)
+        result_ids = MySet(spot['id'] for spot in first_char_spots)
 
         # 遍历关键词中的剩余字符
         for char in keys[1:]:
@@ -71,27 +71,25 @@ class Spot:
             current_char_spots = self.hashTable.search(char)
             if not current_char_spots:
                 # 如果任何一个后续字符没有匹配项，则交集为空
-                # print(f"No spots found containing the character: {char}") # 可以取消注释以进行调试
                 return []
 
-            # 创建当前字符的景点集合
-            current_set = ItemSet(current_char_spots)
+            # 创建当前字符的景点 ID 集合 (使用 MySet)
+            current_ids = MySet(spot['id'] for spot in current_char_spots)
 
-            # 计算与当前结果集的交集
-            result_set = result_set.intersection(current_set)
+            # 计算与当前结果集的交集 (使用 MySet 的 intersection_update)
+            result_ids.intersection_update(current_ids)
 
-            # 如果交集为空，提前结束
-            if result_set.is_empty():
-                # print(f"No spots found containing all characters from: {keys}") # 可以取消注释以进行调试
+            # 如果交集为空，提前结束 (使用 is_empty 方法)
+            if result_ids.is_empty():
                 return []
 
-        # 将最终集合中的元素转换为列表并返回
-        result_list = result_set.get_all_elements()
-        # if not result_list: # 再次检查，虽然理论上不会到这里如果上面判断了 is_empty
-        #      print(f"No spots found containing all characters from: {keys}") # 可以取消注释以进行调试
+        # 根据最终的 ID 集合获取景点对象列表
+        # 使用 self.spots 列表直接访问，假设 ID 是从 1 开始且连续的
+        # 迭代 MySet
+        result_list = [self.spots[spot_id - 1] for spot_id in result_ids if 1 <= spot_id <= self.counts]
 
         return result_list
-    
+
     def _classify(self):
         """
         对景点按类型进行分类
@@ -200,8 +198,6 @@ class Spot:
             json.dump(save_data, f, ensure_ascii=False, indent=4)
         writeLog(f"景点分类索引已保存至{filepath}")
 
-# ...existing code...
-
     def getAllSpotsSorted(self):
         """
         获取所有景点，并按评分和访问次数进行归并排序（降序）。
@@ -219,8 +215,6 @@ class Spot:
         
         writeLog("通过逐类型归并获取所有景点并完成排序")
         return total_sorted_list
-
-# ...existing code...
 
     def getAllSortedByVisitedTime(self):
         """
