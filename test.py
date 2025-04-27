@@ -28,7 +28,8 @@ if __name__ == "__main__":
 
 
     spots = spot.getSpotByName("天津")
-    print("\nSpots with '天' in their name:")
-    print(spots)
+    print("\nSpots with '天津' in their name:")
+    for s in spots: 
+        print(f" Name: {s['name']}")
 
     

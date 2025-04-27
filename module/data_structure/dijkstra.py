@@ -1,9 +1,10 @@
 import os
 from module.data_structure.heap import MinHeap
+from module.data_structure.set import MySet
 from typing import List, Tuple, Any
 import osmnx as ox
 # 导入自定义 Set 类
-from module.data_structure.set import MySet
+
 
 
 class DijkstraRouter:
