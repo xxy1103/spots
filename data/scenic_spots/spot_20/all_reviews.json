@@ -4,182 +4,182 @@
         {
             "id": 0,
             "name": "M32****1636",
-            "user_id": "user_16",
+            "user_id": 16,
             "content": "趁有时间约上好友相约铜官窑古镇，一进去就被这气势恢宏的建筑震撼到了.非常适合拍照打卡，出片美美的，飞行影院体验感绝绝子，晚上的打铁花烟花水秀真的好美，还有好多的演出，博物馆，一家老小都有适合的项目，值得推荐",
             "time": "2024-06-10",
             "score": 5.0,
             "score_count": 5,
             "visited_time": 790,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg",
-                "images/0_4.jpg",
-                "images/0_5.jpg",
-                "images/0_6.jpg",
-                "images/0_7.jpg",
-                "images/0_8.jpg",
-                "images/0_9.jpg",
-                "images/0_10.jpg",
-                "images/0_11.jpg",
-                "images/0_12.jpg"
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_3.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_4.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_5.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_6.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_7.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_8.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_9.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_10.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_11.jpg",
+                "data/scenic_spots/spot_20/reviews/review_0/images/0_12.jpg"
             ]
         },
         {
             "id": 1,
             "name": "M25****7734",
-            "user_id": "user_64",
+            "user_id": 64,
             "content": "景区周末活动很多，表演也很不错，黑石号，魔法釉，童梦王国等等项目很适合小朋友们玩，湖边小亭子和沿湖花街绿地也很适合他们撒欢，整体下来有松有紧，不为了排队看节目也焦虑，完全可以慢节奏享受，这才是旅游的乐趣，放松的真理",
             "time": "2024-12-07",
             "score": 3.8,
             "score_count": 7,
             "visited_time": 582,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg"
+                "data/scenic_spots/spot_20/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_20/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_20/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_20/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_20/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_20/reviews/review_1/images/1_5.jpg"
             ]
         },
         {
             "id": 2,
             "name": "M86****5385",
-            "user_id": "user_85",
+            "user_id": 85,
             "content": "今天去了铜官窑国风乐园，真的太棒了！整个园区的设计非常用心，古建筑和园林景色相得益彰。表演节目丰富多彩，尤其是花鼓戏和杂技，让人拍手叫绝。手工艺体验区也很有趣，尝试了陶艺制作，感觉非常新奇。小吃街的食物种类繁多，味道都很正宗。强烈推荐大家来体验一下！",
             "time": "2024-12-07",
             "score": 2.4,
             "score_count": 6,
             "visited_time": 144,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg",
-                "images/2_4.jpg",
-                "images/2_5.jpg",
-                "images/2_6.jpg",
-                "images/2_7.jpg",
-                "images/2_8.jpg"
+                "data/scenic_spots/spot_20/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_20/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_20/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_20/reviews/review_2/images/2_3.jpg",
+                "data/scenic_spots/spot_20/reviews/review_2/images/2_4.jpg",
+                "data/scenic_spots/spot_20/reviews/review_2/images/2_5.jpg",
+                "data/scenic_spots/spot_20/reviews/review_2/images/2_6.jpg",
+                "data/scenic_spots/spot_20/reviews/review_2/images/2_7.jpg",
+                "data/scenic_spots/spot_20/reviews/review_2/images/2_8.jpg"
             ]
         },
         {
             "id": 3,
             "name": "白云白云飞飞",
-            "user_id": "user_135",
+            "user_id": 135,
             "content": "因为自己很喜欢木雕和古建筑，国风乐园里面的老家具博物馆就很对我的胃口，木料大部分是清晚期的，虽然木料不是很名贵，但手工雕刻的技艺也很不错，拔步床，雀替，镂空、描金、缠枝都体现了不一样的民俗文化，古建筑的斗拱、藻井很有艺术价值，真的可以细细品味，慢慢研究，走进生活，欣赏文化，在文化中升华",
             "time": "2024-12-07",
             "score": 4.8,
             "score_count": 7,
             "visited_time": 28,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg",
-                "images/3_3.jpg",
-                "images/3_4.jpg",
-                "images/3_5.jpg"
+                "data/scenic_spots/spot_20/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_20/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_20/reviews/review_3/images/3_2.jpg",
+                "data/scenic_spots/spot_20/reviews/review_3/images/3_3.jpg",
+                "data/scenic_spots/spot_20/reviews/review_3/images/3_4.jpg",
+                "data/scenic_spots/spot_20/reviews/review_3/images/3_5.jpg"
             ]
         },
         {
             "id": 4,
             "name": "梧峥天",
-            "user_id": "user_162",
+            "user_id": 162,
             "content": "🎇长沙铜官窑游玩攻略🎇\n✨铜官窑是个不错的游玩地，下面我的游玩攻略分享给你们！ 🏮行前准备🏮 提前订好门票，查看天气，准备舒适的鞋子，方便游玩行走。 🚗交通指南🚗 自驾：景区停车位充足；建议停车定位：冰淇熊奶茶铜官窑店；上一层楼就是游客中心闸口 公共交通：有免费的巴士到金盆丘地铁站接驳。 🎫入园时间🎫 9:00-21:00，园区挺大的，建议在上午就入园，这样能有更多的时间游玩。 🏛必游景点🏛 长沙窑博物馆：深入了解铜官窑的历史和陶瓷文化。 黑石号特技秀：精彩刺激的表演，不容错过。 5D 影院：带来身临其境的奇妙体验。 花火铜官：打铁花、火壶、烟花、水秀 非常精彩，不过注意表演时间工作日和周末有变化19:30/20:00 我的路线推荐：游客服务中心入园—罗汉松广场（表演10:00）—舜子街（巡游11:00）—君生戏楼（杂技柔术11:30佤寨风情12:00）—花鼓戏楼（13:00）—午餐—黑石远渡（14:30）—风雨桥长廊处观看（水上巡游15:00）—长沙窑博物馆（5个）—长风镖局（16:30）—听雨轩戏楼（古彩戏法17:00）—舜子街（巡游17:30）—5D影院（18:00）—石渚塔亮灯（18:15）—晚餐—罗汉松广场（表演19:00）—打铁花/火壶/烟花/水秀（19:30/20:00）—回家 🌆表演安排🌆 提前了解并规划好各个表演的时间，确保能看到自己想看的节目。 🎠游乐项目🎠 飞行影院：感受飞翔的刺激与美景。 机器人博物馆：充满科技感，适合亲子游玩。 🍱美食推荐🍱 铜官豆腐：鲜嫩可口，豆香四溢。 糖油粑粑：香甜软糯，一口满足。 💡注意事项💡 注意防晒和保暖，根据天气情况做好相应准备。 快来铜官窑开启一场难忘的欢乐之旅吧！",
             "time": "2024-12-01",
             "score": 1.2,
             "score_count": 7,
             "visited_time": 236,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg",
-                "images/4_4.jpg"
+                "data/scenic_spots/spot_20/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_20/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_20/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_20/reviews/review_4/images/4_3.jpg",
+                "data/scenic_spots/spot_20/reviews/review_4/images/4_4.jpg"
             ]
         },
         {
             "id": 5,
             "name": "小叮当妈妈爱旅游！",
-            "user_id": "user_186",
+            "user_id": 186,
             "content": "对不起，是我来迟了❗\n一个被严重低估的国风乐园！ 真的是太好玩太好拍啦，一天根本逛不够呀！ ✅超多仿古建筑，虽然是仿的但都好逼真，那做旧的门头、精美的雕花、那自带复古神秘气息的藤蔓，仿佛穿越到了古代 ✅融入了杂技元素的实景演出《黑石远渡》，场面非常震撼精彩 ✅里面的多个博物馆，内容丰富让我家孩子看得津津有味收获很多 ✅裸眼可看的5D电影🎬《魔法釉传奇》，老少咸宜体验感也很不错。",
             "time": "2024-12-01",
             "score": 2.5,
             "score_count": 6,
             "visited_time": 135,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg",
-                "images/5_3.jpg",
-                "images/5_4.jpg",
-                "images/5_5.jpg"
+                "data/scenic_spots/spot_20/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_20/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_20/reviews/review_5/images/5_2.jpg",
+                "data/scenic_spots/spot_20/reviews/review_5/images/5_3.jpg",
+                "data/scenic_spots/spot_20/reviews/review_5/images/5_4.jpg",
+                "data/scenic_spots/spot_20/reviews/review_5/images/5_5.jpg"
             ]
         },
         {
             "id": 6,
             "name": "M22****7050",
-            "user_id": "user_222",
+            "user_id": 222,
             "content": "铜官窑国风乐园真是一个让人流连忘返的地方！一走进园区，就被那古色古香的建筑和精心布置的园林所吸引。每个角落都充满了浓厚的历史文化气息，仿佛穿越回了古代。特别是那些身着古装的服务人员，不仅热情友好，还为游客提供了很多有趣的互动体验。夜晚的灯光秀和烟花表演更是美轮美奂，让人目不暇接。整个园区干净整洁，设施齐全，非常适合家庭出游，强烈推荐！",
             "time": "2024-12-07",
             "score": 3.5,
             "score_count": 10,
             "visited_time": 543,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg"
+                "data/scenic_spots/spot_20/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_20/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_20/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_20/reviews/review_6/images/6_3.jpg"
             ]
         },
         {
             "id": 7,
             "name": "M47****0638",
-            "user_id": "user_241",
+            "user_id": 241,
             "content": "\"铜官窑国风乐园的焰火表演，以其独特的文化韵味，展现了传统与现代的完美融合，让人对中华传统文化有了全新的认识。\n焰火的每一次升空与绽放，都像是在诉说着古老传说，将历史长河中的辉煌瞬间凝固在夜空，令人感慨万千。\n作为游客，我被这场焰火表演深深打动，它不仅是一场视觉上的狂欢，更是一次心灵上的震撼，是对传统文化的一次深情礼赞。\"",
             "time": "2024-08-31",
             "score": 2.5,
             "score_count": 6,
             "visited_time": 805,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg",
-                "images/7_3.jpg"
+                "data/scenic_spots/spot_20/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_20/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_20/reviews/review_7/images/7_2.jpg",
+                "data/scenic_spots/spot_20/reviews/review_7/images/7_3.jpg"
             ]
         },
         {
             "id": 8,
             "name": "M52****1013",
-            "user_id": "user_271",
+            "user_id": 271,
             "content": "铜官窑国风乐园是一个充满传统文化氛围的游玩胜地，让人仿佛穿越时空，不仅有传统的手工艺展示，还有精彩的非遗表演，让人在游玩的同时，也能感受到中华文化的博大精深。推荐烟花、无梦到铜官演出和打铁花，场面极为壮观，对传统文化感兴趣的可以在这里找到极大的乐趣，建议穿着舒适的鞋子，因为乐园面积较大，步行较多，还有很多节目没有看到，下次再来[胜利]",
             "time": "2025-02-18",
             "score": 4.5,
             "score_count": 8,
             "visited_time": 628,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg"
+                "data/scenic_spots/spot_20/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_20/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_20/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_20/reviews/review_8/images/8_3.jpg"
             ]
         },
         {
             "id": 9,
             "name": "M35****314",
-            "user_id": "user_315",
+            "user_id": 315,
             "content": "我要是国家级旅游的度假区这边呢，嗯是唐风的建筑，然后晚上这边还有打铁花有烟花，还有包括这边的黑石号的演绎，感觉挺好看的，今天和家人一起来进行游玩。观看了非常好看的表演。觉得这个是一个必打卡地吧，感觉还可以，晚上的时候我这边还想去看一下烟花和打铁花。",
             "time": "2024-12-14",
             "score": 4.0,
             "score_count": 4,
             "visited_time": 454,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg"
+                "data/scenic_spots/spot_20/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_20/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_20/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_20/reviews/review_9/images/9_3.jpg"
             ]
         }
     ],

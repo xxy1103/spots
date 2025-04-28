@@ -4,47 +4,47 @@
         {
             "id": 0,
             "name": "风起鹰鲨",
-            "user_id": "user_2884",
+            "user_id": 2884,
             "content": "在洪崖洞上船到弹子石，价格美丽，非常亲民，可以领略黄崖洞，来福士，嘉陵江大桥，朝天门码头，从嘉陵江驶入长江，非常有感觉，到弹子石可以上岸逛逛，坐地铁回去，有不同的感觉。建议带孩子乘坐。",
             "time": "2025-03-05",
             "score": 3.9,
             "score_count": 7,
             "visited_time": 702,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg",
-                "images/0_4.jpg",
-                "images/0_5.jpg",
-                "images/0_6.jpg",
-                "images/0_7.jpg"
+                "data/scenic_spots/spot_313/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_313/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_313/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_313/reviews/review_0/images/0_3.jpg",
+                "data/scenic_spots/spot_313/reviews/review_0/images/0_4.jpg",
+                "data/scenic_spots/spot_313/reviews/review_0/images/0_5.jpg",
+                "data/scenic_spots/spot_313/reviews/review_0/images/0_6.jpg",
+                "data/scenic_spots/spot_313/reviews/review_0/images/0_7.jpg"
             ]
         },
         {
             "id": 1,
             "name": "_M13****8816",
-            "user_id": "user_2899",
+            "user_id": 2899,
             "content": "坐的18点洪崖洞到弹子石的末班船，人不多船上座位很多。可提前关注公众号在线买票避免遇到李鬼(景区附近有很多兜售船票的小贩和摊位），坐船坐升降电梯到洪崖洞B1层出来车库走到登船入口出示电子票二维码和身份证。",
             "time": "2023-11-06",
             "score": 3.5,
             "score_count": 10,
             "visited_time": 365,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg",
-                "images/1_6.jpg",
-                "images/1_7.jpg"
+                "data/scenic_spots/spot_313/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_313/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_313/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_313/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_313/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_313/reviews/review_1/images/1_5.jpg",
+                "data/scenic_spots/spot_313/reviews/review_1/images/1_6.jpg",
+                "data/scenic_spots/spot_313/reviews/review_1/images/1_7.jpg"
             ]
         },
         {
             "id": 2,
             "name": "M85****8245",
-            "user_id": "user_2930",
+            "user_id": 2930,
             "content": "座位选择：轮船分为两层，一层有木质板凳座椅和空调，观看视野一般；二层甲板视野开阔，设有少量座椅和小卖部，是拍照的好去处。\n拍照打卡：可以在一楼厕所旁、长凳处、玻璃门处以及二楼甲板处、船头处等位置拍照。",
             "time": "2025-02-09",
             "score": 3.5,
@@ -55,7 +55,7 @@
         {
             "id": 3,
             "name": "天涯虽远有我家",
-            "user_id": "user_2931",
+            "user_id": 2931,
             "content": "相较于两江游，两江小渡性价比更高。其特点一是体验重庆市民传统的出行方式，二是能游览到两江四岸的沿途风景。\n缺点就是不开行夜渡，不能欣赏夜景。",
             "time": "2024-11-12",
             "score": 2.0,
@@ -66,7 +66,7 @@
         {
             "id": 4,
             "name": "天使的小猴子",
-            "user_id": "user_2932",
+            "user_id": 2932,
             "content": "体验感非常好，沿途的能观赏两江四岸的独特风景，如果有缘还能在嘉陵江看见游泳🏊‍♀️健儿高台跳水表演的精彩画面。",
             "time": "2025-03-01",
             "score": 4.1,
@@ -77,7 +77,7 @@
         {
             "id": 5,
             "name": "旅行生活体验",
-            "user_id": "user_2933",
+            "user_id": 2933,
             "content": "两江小渡很有特色，可以乘坐小船游览嘉陵江和长江。沿途能欣赏到两岸的城市风光，感受江水的流动，是一种别样的体验。",
             "time": "2024-11-25",
             "score": 3.6,
@@ -88,61 +88,61 @@
         {
             "id": 6,
             "name": "心静如水、",
-            "user_id": "user_2934",
+            "user_id": 2934,
             "content": "游完磁器口古镇，发现可以坐渡轮回洪崖洞，马上网上订票、打车到码头，未班船的最后一分钟赶到码头，码头和船上的工作人员都耐心地等我们上船后才起航。回洪崖洞的路上在甲板上欣赏嘉陵江两岸的风景，真是意外的收获。",
             "time": "2024-05-06",
             "score": 4.9,
             "score_count": 10,
             "visited_time": 351,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg",
-                "images/6_5.jpg",
-                "images/6_6.jpg",
-                "images/6_7.jpg",
-                "images/6_8.jpg"
+                "data/scenic_spots/spot_313/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_313/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_313/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_313/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_313/reviews/review_6/images/6_4.jpg",
+                "data/scenic_spots/spot_313/reviews/review_6/images/6_5.jpg",
+                "data/scenic_spots/spot_313/reviews/review_6/images/6_6.jpg",
+                "data/scenic_spots/spot_313/reviews/review_6/images/6_7.jpg",
+                "data/scenic_spots/spot_313/reviews/review_6/images/6_8.jpg"
             ]
         },
         {
             "id": 7,
             "name": "唔知咩都唔知",
-            "user_id": "user_2984",
+            "user_id": 2984,
             "content": "网上可以提前买票，很方便还有优惠。码头有点小隐蔽，开得不算太快，可以看看两江的风景，性价比很高的选择。可以选择室外吹吹江风看风景，也可以坐在室内脆空调欣赏的风景，都是不错的选择。朝天门可以下船，然后去来福士吃个饭。不过下来又是很多楼梯等着我们爬😭😭😭",
             "time": "2022-07-02",
             "score": 1.7,
             "score_count": 10,
             "visited_time": 750,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg"
+                "data/scenic_spots/spot_313/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_313/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_313/reviews/review_7/images/7_2.jpg"
             ]
         },
         {
             "id": 8,
             "name": "有态度的拍拍",
-            "user_id": "user_3035",
+            "user_id": 3035,
             "content": "乘坐一叶扁舟，穿梭在两江之间，感受那份悠然自得与宁静致远。微风拂面，带来丝丝凉意，仿佛能洗净心灵的尘埃，让你忘却都市的烦恼与压力。两岸风光，美不胜收。高楼大厦与古朴民居交相辉映，现代文明与历史文化在这里碰撞出独特的火花。",
             "time": "2024-10-23",
             "score": 3.4,
             "score_count": 6,
             "visited_time": 344,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg",
-                "images/8_4.jpg",
-                "images/8_5.jpg"
+                "data/scenic_spots/spot_313/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_313/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_313/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_313/reviews/review_8/images/8_3.jpg",
+                "data/scenic_spots/spot_313/reviews/review_8/images/8_4.jpg",
+                "data/scenic_spots/spot_313/reviews/review_8/images/8_5.jpg"
             ]
         },
         {
             "id": 9,
             "name": "潇洒小姐",
-            "user_id": "user_3085",
+            "user_id": 3085,
             "content": "两江小渡恢复以后又可以体验重庆传统渡江交通，票价每人10元，目前调整到洪崖洞码头上船，行程10分钟左右。提前在网上购票非常方便，到了码头不用着急排队，上船后都能找到非常好的角度。由于航班经常调整，实时班次可以在重庆交运两江游公众号上查询。",
             "time": "2023-05-02",
             "score": 2.0,

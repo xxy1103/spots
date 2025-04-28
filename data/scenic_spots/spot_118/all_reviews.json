@@ -4,176 +4,176 @@
         {
             "id": 0,
             "name": "M45****837",
-            "user_id": "user_953",
+            "user_id": 953,
             "content": "晚上吃完饭，散步至日月双塔，景区内游人如织。免费开放欢迎各方游客。桂林市区管理有序，城市建设及市容市貌不错。山水秀丽，处处是风景，推荐来桂林！",
             "time": "2024-08-19",
             "score": 4.4,
             "score_count": 8,
             "visited_time": 856,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg",
-                "images/0_4.jpg"
+                "data/scenic_spots/spot_118/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_118/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_118/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_118/reviews/review_0/images/0_3.jpg",
+                "data/scenic_spots/spot_118/reviews/review_0/images/0_4.jpg"
             ]
         },
         {
             "id": 1,
             "name": "倩ang🍓🍉🍑🍒",
-            "user_id": "user_975",
+            "user_id": 975,
             "content": "来桂林，一定不能错过日月双塔！这组塔坐落于美丽的杉湖之上，日塔为铜塔，浑身金黄，阳光下熠熠生辉，好似从神话中走来；月塔为琉璃塔，周身通透，月色下散发着神秘的幽光，如梦似幻。\n \n双塔通过水下通道相连，沿通道穿梭，仿若开启奇幻之旅。登上塔顶，凭栏远眺，桂林城的湖光山色尽收眼底，远处山峦起伏，近处碧波荡漾。无论是白天欣赏日塔的金碧辉煌，还是夜晚观赏月塔与灯光交相辉映的璀璨夜景，日月双塔都以独特风姿，展现着桂林独有的浪漫与魅力，成为不容错过的打卡胜地。",
             "time": "2025-03-18",
             "score": 2.8,
             "score_count": 5,
             "visited_time": 538,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg"
+                "data/scenic_spots/spot_118/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_118/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_118/reviews/review_1/images/1_2.jpg"
             ]
         },
         {
             "id": 2,
             "name": "M23****7215",
-            "user_id": "user_996",
+            "user_id": 996,
             "content": "围着日月塔转了一圈。拍摄的不同角度的塔。这塔呀还是得晚上来。也没有必要登上去，因为它最大的亮点就是它的颜色，白天塔没有开灯都是一样的了。最棒的是正阳步行街，和它是连接的。景色很集中。象山也不远，可以下午游玩象山，晚饭后游玩双塔。",
             "time": "2024-08-09",
             "score": 4.1,
             "score_count": 10,
             "visited_time": 351,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg"
+                "data/scenic_spots/spot_118/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_118/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_118/reviews/review_2/images/2_2.jpg"
             ]
         },
         {
             "id": 3,
             "name": "fan****zzg",
-            "user_id": "user_1014",
+            "user_id": 1014,
             "content": "桂林山水甲天下，确实名不虚传。整个城市就是一副画卷。日月双塔也是其中的一大美景，其他地方的塔一般都是一座，但这里有两座塔，晚上灯光亮起来的话，正式交相辉映，非常漂亮。",
             "time": "2020-09-27",
             "score": 3.8,
             "score_count": 8,
             "visited_time": 670,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg",
-                "images/3_3.jpg"
+                "data/scenic_spots/spot_118/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_118/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_118/reviews/review_3/images/3_2.jpg",
+                "data/scenic_spots/spot_118/reviews/review_3/images/3_3.jpg"
             ]
         },
         {
             "id": 4,
             "name": "Angelina 沁",
-            "user_id": "user_1035",
+            "user_id": 1035,
             "content": "来桂林就是住在附近，过来很方便。本来买了门票但要等 30 分钟才能兑换，晚上不想等，无意中发现这公园外围的步道其实能看到很好的角度，可以拍到双塔亮灯美景。",
             "time": "2024-11-09",
             "score": 2.5,
             "score_count": 10,
             "visited_time": 153,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg"
+                "data/scenic_spots/spot_118/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_118/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_118/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_118/reviews/review_4/images/4_3.jpg"
             ]
         },
         {
             "id": 5,
             "name": "Gulupu",
-            "user_id": "user_1061",
+            "user_id": 1061,
             "content": "看了攻略，就拍照不要花钱。晚上还是好看的。",
             "time": "2024-08-03",
             "score": 3.4,
             "score_count": 6,
             "visited_time": 480,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg",
-                "images/5_3.jpg",
-                "images/5_4.jpg"
+                "data/scenic_spots/spot_118/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_118/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_118/reviews/review_5/images/5_2.jpg",
+                "data/scenic_spots/spot_118/reviews/review_5/images/5_3.jpg",
+                "data/scenic_spots/spot_118/reviews/review_5/images/5_4.jpg"
             ]
         },
         {
             "id": 6,
             "name": "M87****7587",
-            "user_id": "user_1086",
+            "user_id": 1086,
             "content": "桂林日月塔真是太漂亮了\n日月塔又称金塔银塔、情侣塔，日塔别名叫金塔，月塔别名叫银塔，所以也有金银塔之称。日月双塔坐落在桂林市美丽的杉湖中，日塔为铜塔，位于湖中心，高41米，共9层，月塔为琉璃塔，高35米，共7层。两塔之间以湖底一条10米长的湖底隧道相连。\n这里的景色非常漂亮。让人流连往返",
             "time": "2025-02-11",
             "score": 1.9,
             "score_count": 10,
             "visited_time": 782,
             "img_list": [
-                "images/6_0.jpg"
+                "data/scenic_spots/spot_118/reviews/review_6/images/6_0.jpg"
             ]
         },
         {
             "id": 7,
             "name": "郭润龙浪迹天涯",
-            "user_id": "user_1099",
+            "user_id": 1099,
             "content": "20230311晚上：\n1、“日月双塔”位于5A景区“两江四湖•象山”内。两江四湖•象山是桂林市闻名于世的地标式山水风光名胜，是来桂林必打卡的网红景点，其水系像血液般贯穿市区，城市与山水融为一体，属于开放式景区，游走于桂林街头便不知不觉徜徉在碧水翠山之间。景区分为“两江四湖”和“象鼻山”两大区块，入园均免费，前者适合夜景，后者适合白天游览。\n①地址：桂林市象山区。\n②交通：公交直达，开车很好停。\n③旺季：无。\t\n④用时：2小时。\n2、日月双塔原为木制，始建于唐天宝九年（750年），由后来东渡日本弘扬佛法和大唐文化的鉴真大和尚主持兴建，地宫发现于1999年，出土了多个佛教密宗相关文物，眼前的双塔是2001年复建的，靠近湖岸、矮胖的塔是月塔，7层，银白色灯光；靠近湖中心、高瘦的塔是日塔，9层，金黄色灯光，耗铜352吨，号称“世界第一铜塔”，是世界最高的铜制建筑物和最高的水中塔。双塔塔顶都有存放舍利子的法器，并能形成磁场吸收天地灵气。登日月双塔需要买28元门票，有免费讲解，唯一出入通道“心之小路”周围有各种佛教小物件、“十二生肖寿字碑”（十二生肖石柱）、系着红色祈福带的竹林。月塔下有“药师井”（仿制石井）、药师佛金像、“摩尼车”（自唐玄宗时期风靡长达88年的唐密法器，直到唐武宗灭佛运动后消失）、假山山洞（白开放山洞，洞内到处是水）。月塔只能徒步上塔，塔身有双塔的科普介绍，包括结构、历史、出土文物等信息，一楼是一圈仿制佛家文物。双塔的负一层是商铺，之间通过10多米长的地下通道连接。日塔有电梯，但电梯只到七层，九层供奉着地宫出土的十一面千手观音，一层有口大钟可敲三下祈福。双塔19:00亮灯，22:00关门，塔顶视野开阔，我等了2小时到日落和晚上开灯拍夜景，日塔无厕所得强憋着。",
             "time": "2023-08-22",
             "score": 2.9,
             "score_count": 6,
             "visited_time": 359,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg",
-                "images/7_3.jpg",
-                "images/7_4.jpg",
-                "images/7_5.jpg",
-                "images/7_6.jpg",
-                "images/7_7.jpg",
-                "images/7_8.jpg",
-                "images/7_9.jpg",
-                "images/7_10.jpg",
-                "images/7_11.jpg",
-                "images/7_12.jpg",
-                "images/7_13.jpg",
-                "images/7_14.jpg"
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_2.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_3.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_4.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_5.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_6.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_7.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_8.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_9.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_10.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_11.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_12.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_13.jpg",
+                "data/scenic_spots/spot_118/reviews/review_7/images/7_14.jpg"
             ]
         },
         {
             "id": 8,
             "name": "_WeCh****169427",
-            "user_id": "user_1198",
+            "user_id": 1198,
             "content": "桂林地标之一，旁边是李宗仁先生的宫邸，建议不要坐船，到塔里去看看，日月双塔分两坐塔，日塔没有电梯，可上二楼去坐坐，聊聊天，负一楼有唐代文物，也是通往月塔的通道，可以坐电梯直接上七楼，再走楼梯上八楼，九楼不要上去，如果你钱用的话也没问题。",
             "time": "2018-03-28",
             "score": 2.5,
             "score_count": 4,
             "visited_time": 407,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg",
-                "images/8_4.jpg",
-                "https://dimg04.c-ctrip.com/images/10020q000000gtxqn5AF4_W_640_10000.jpg?proc=autoorient",
-                "images/8_6.jpg"
+                "data/scenic_spots/spot_118/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_118/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_118/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_118/reviews/review_8/images/8_3.jpg",
+                "data/scenic_spots/spot_118/reviews/review_8/images/8_4.jpg",
+                "data/scenic_spots/spot_118/reviews/review_8/images/8_5.jpg",
+                "data/scenic_spots/spot_118/reviews/review_8/images/8_6.jpg"
             ]
         },
         {
             "id": 9,
             "name": "古言新语",
-            "user_id": "user_1221",
+            "user_id": 1221,
             "content": "参观桂林日月双塔书《日塔月塔永不分》日月双塔座桂林，湖底遂道心连心。日塔铜塔九层阳，月塔琉璃七层阴。日塔金碧十三丈，世界之最祈福音，月塔银辉十二丈，太极鼓声传妙韵。双塔五彩桂花香，壁画花卉瑶王印。滚滚红尘映金银，日塔月塔永不分。",
             "time": "2017-08-31",
             "score": 3.8,
             "score_count": 9,
             "visited_time": 834,
             "img_list": [
-                "images/9_0.jpg",
-                "https://dimg04.c-ctrip.com/images/100i0j000000b15wr4248_W_640_10000.jpg?proc=autoorient",
-                "https://dimg04.c-ctrip.com/images/10040j000000b0sw39F2D_W_640_10000.jpg?proc=autoorient",
-                "images/9_3.jpg",
-                "images/9_4.jpg",
-                "images/9_5.jpg",
-                "images/9_6.jpg",
-                "images/9_7.jpg"
+                "data/scenic_spots/spot_118/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_118/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_118/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_118/reviews/review_9/images/9_3.jpg",
+                "data/scenic_spots/spot_118/reviews/review_9/images/9_4.jpg",
+                "data/scenic_spots/spot_118/reviews/review_9/images/9_5.jpg",
+                "data/scenic_spots/spot_118/reviews/review_9/images/9_6.jpg",
+                "data/scenic_spots/spot_118/reviews/review_9/images/9_7.jpg"
             ]
         }
     ],

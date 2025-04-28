@@ -4,24 +4,24 @@
         {
             "id": 0,
             "name": "_WeCh****931178",
-            "user_id": "user_376",
+            "user_id": 376,
             "content": "来重庆超值得去的地方 地下二层有历史隧道原址 门口的保安很好 耐心讲解那段历史 爱国主义情怀爆棚 感谢大哥为我们守候那份记忆",
             "time": "2024-05-21",
             "score": 2.3,
             "score_count": 7,
             "visited_time": 181,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg",
-                "images/0_4.jpg"
+                "data/scenic_spots/spot_50/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_50/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_50/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_50/reviews/review_0/images/0_3.jpg",
+                "data/scenic_spots/spot_50/reviews/review_0/images/0_4.jpg"
             ]
         },
         {
             "id": 1,
             "name": "吃榆",
-            "user_id": "user_412",
+            "user_id": 412,
             "content": "日本大轰炸，给重庆人民带来了无穷的悲痛和辛酸，大隧道惨案，千古仅有，惨绝人寰。重庆解放后，有关部门对较场口大隧道进行了清理维修。1987年7月6日，为纪念“七·七”事变50周年，“日本侵略者轰炸重庆纪事碑”落成仪式在此举行，2000年9月重庆市人民政府将该处列为重庆市文物保护单位。",
             "time": "2024-12-21",
             "score": 5.0,
@@ -32,137 +32,137 @@
         {
             "id": 2,
             "name": "M51****9094",
-            "user_id": "user_415",
+            "user_id": 415,
             "content": "展馆位于八一好吃街对面，隐于闹市，跟朋友路过得意无意间看到，临时起意进入参观。由于手机没网，还是门口保安帮我预约才进入参观。展馆不大，负一层是展览，展览还是挺丰富的，看到很多当年大轰炸的图片，深知美好生活真的来之不易！负二层是整点开放，去的时候太早，还是等了将近半个小时才进入。tip:展馆里面没有厕所，如果想进入负二层参观，可以不用去太早，因为负二层是整点开放，进去前需要签一个安全承诺书，保安会给大家多次强调进入隧道的注意事项，略啰嗦。隧道出来是地铁站，可以坐1.2号线。出行还是很方便",
             "time": "2023-04-17",
             "score": 4.5,
             "score_count": 6,
             "visited_time": 630,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg",
-                "images/2_4.jpg",
-                "images/2_5.jpg"
+                "data/scenic_spots/spot_50/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_50/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_50/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_50/reviews/review_2/images/2_3.jpg",
+                "data/scenic_spots/spot_50/reviews/review_2/images/2_4.jpg",
+                "data/scenic_spots/spot_50/reviews/review_2/images/2_5.jpg"
             ]
         },
         {
             "id": 3,
             "name": "惠玩的小陆惠",
-            "user_id": "user_447",
+            "user_id": 447,
             "content": "门票：免费\n距离解放碑步行街很近，来重庆还是很值得了解下红色历史的，里面展陈空间布局不会让你错过任何一个点，各种立体和声光电结合的展示非常生动，互动性也很好👍",
             "time": "2024-02-02",
             "score": 1.3,
             "score_count": 4,
             "visited_time": 360,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg",
-                "images/3_3.jpg",
-                "images/3_4.jpg",
-                "images/3_5.jpg",
-                "images/3_6.jpg"
+                "data/scenic_spots/spot_50/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_50/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_50/reviews/review_3/images/3_2.jpg",
+                "data/scenic_spots/spot_50/reviews/review_3/images/3_3.jpg",
+                "data/scenic_spots/spot_50/reviews/review_3/images/3_4.jpg",
+                "data/scenic_spots/spot_50/reviews/review_3/images/3_5.jpg",
+                "data/scenic_spots/spot_50/reviews/review_3/images/3_6.jpg"
             ]
         },
         {
             "id": 4,
             "name": "粤剧演员朱女",
-            "user_id": "user_490",
+            "user_id": 490,
             "content": "从重庆大轰炸惨案遗址展馆出来，信步走回解放碑。看着熙熙攘攘的人群，繁华林立的高楼，好一会儿才喘过口气。有些历史永远不应该被遗忘，有些事情永远不应该被原谅。🙏🙏🙏  ​​​",
             "time": "2023-11-25",
             "score": 3.0,
             "score_count": 4,
             "visited_time": 862,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg",
-                "images/4_4.jpg",
-                "images/4_5.jpg"
+                "data/scenic_spots/spot_50/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_50/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_50/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_50/reviews/review_4/images/4_3.jpg",
+                "data/scenic_spots/spot_50/reviews/review_4/images/4_4.jpg",
+                "data/scenic_spots/spot_50/reviews/review_4/images/4_5.jpg"
             ]
         },
         {
             "id": 5,
             "name": "E14****91",
-            "user_id": "user_527",
+            "user_id": 527,
             "content": "展馆不大，展出的内容还是很丰富，在外面群雕看见有4公里，进来以后在讲解员的解说下才知道这只是其中一部分。听了讲解才知道大轰炸期间的重庆遭受了6年多的轰炸，致敬抗战英雄，缅怀逝去同胞！一定要注意负二层隧道是整点开放！！！！听完讲解刚好错过时间，大家一定要注意参观时间，错过要等1个小时😂，最后一场是5点开放，错过了就进不去了。",
             "time": "2023-04-17",
             "score": 1.2,
             "score_count": 5,
             "visited_time": 630,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg",
-                "images/5_3.jpg"
+                "data/scenic_spots/spot_50/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_50/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_50/reviews/review_5/images/5_2.jpg",
+                "data/scenic_spots/spot_50/reviews/review_5/images/5_3.jpg"
             ]
         },
         {
             "id": 6,
             "name": "匿名用户",
-            "user_id": "user_553",
+            "user_id": 553,
             "content": "就在人民解放纪念碑步行街附近\n去纪念碑的一定要去参观一下\n门口有行李寄存柜\n大的放行李箱的柜子是6元一小时\n铭记历史，振兴中华\n我之前是不知道还有重庆大隧道惨案事件及遗址的",
             "time": "2023-11-04",
             "score": 3.9,
             "score_count": 4,
             "visited_time": 542,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg",
-                "images/6_5.jpg",
-                "images/6_6.jpg",
-                "images/6_7.jpg"
+                "data/scenic_spots/spot_50/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_50/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_50/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_50/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_50/reviews/review_6/images/6_4.jpg",
+                "data/scenic_spots/spot_50/reviews/review_6/images/6_5.jpg",
+                "data/scenic_spots/spot_50/reviews/review_6/images/6_6.jpg",
+                "data/scenic_spots/spot_50/reviews/review_6/images/6_7.jpg"
             ]
         },
         {
             "id": 7,
             "name": "孤独的隐者",
-            "user_id": "user_607",
+            "user_id": 607,
             "content": "中华民族苦难史的组成部分，可以让你亲身体验一下当年日寇的疯狂和中国人民不屈不挠的反抗精神。展馆设计的符合主题色调，图文加视频加艺术展示，非常不错。孩子还在文创店盖了一个套章，店员服务态度非常好。",
             "time": "2025-01-29",
             "score": 3.5,
             "score_count": 9,
             "visited_time": 605,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg",
-                "images/7_3.jpg"
+                "data/scenic_spots/spot_50/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_50/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_50/reviews/review_7/images/7_2.jpg",
+                "data/scenic_spots/spot_50/reviews/review_7/images/7_3.jpg"
             ]
         },
         {
             "id": 8,
             "name": "M54****015",
-            "user_id": "user_623",
+            "user_id": 623,
             "content": "深受教育！第一次参观这个展馆的时候时间太匆忙了，所以今天专门和妹妹一起来仔细了解这段历史，讲解小姐姐很专业，阐述很直观清晰，对大轰炸有了历史事件和重庆这座城市都有了更深刻的了解，推荐学生参观。",
             "time": "2023-01-31",
             "score": 2.6,
             "score_count": 10,
             "visited_time": 358,
             "img_list": [
-                "images/8_0.jpg"
+                "data/scenic_spots/spot_50/reviews/review_8/images/8_0.jpg"
             ]
         },
         {
             "id": 9,
             "name": "Skims琛睿",
-            "user_id": "user_627",
+            "user_id": 627,
             "content": "山城重庆，一座承载着厚重历史与不屈精神的英雄城市。在抗日战争的烽火岁月里，重庆遭受了长达五年半的残酷大轰炸，这段历史成为中国人心中永远无法忘却的伤痛，也铸就了中华民族顽强不屈的抗战精神。",
             "time": "2025-03-05",
             "score": 4.5,
             "score_count": 8,
             "visited_time": 303,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg"
+                "data/scenic_spots/spot_50/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_50/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_50/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_50/reviews/review_9/images/9_3.jpg"
             ]
         }
     ],

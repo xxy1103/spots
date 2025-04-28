@@ -4,7 +4,7 @@
         {
             "id": 0,
             "name": "邱小仙儿~🍒",
-            "user_id": "user_763",
+            "user_id": 763,
             "content": "🌈欢迎来到邱小仙儿の玩乐分享～•͈ᴗ•͈ ♡\n.\n傍晚时分， 坐着露天巴士，吹着夏末晚风，看着夜幕降临，是再惬意不过的一件事～每到一个城市，都喜欢体验一下当地的观光巴士🚌～作为一个天津人，咱们本地的观光巴士，自然也是不能错过！\n.\n📙『游玩攻略』\n📍乘坐地点：意式风情街但丁广场\n💰购票：30元/人（小宝宝👶🏻如果抱着不占座位，不收费）；现场买票即可\n⏰时长：全程30分钟左右～\n✔️班次：平日14:00-21:00，周末&节假日11:00-21:00。19:00前要凑够8人才能发车，临近19:00以后一般开始排队，每隔15分钟左右一班车～\n🎡主要景点：天津之眼摩天轮、津湾广场、意风区、大悲院、鼓楼、金街、解放桥、世纪钟、天后宫、天津站等等……\n☀️小Tip：\n1⃣️个子高的小伙伴，要小心树枝～\n2⃣️想看海河的宝宝，记得坐在左边；想和天津之眼拍照的宝宝，记得坐在右边（天津之眼出现的那个画面，真的绝美！）～\n3⃣️尽量早去，不然排队会让你怀疑人生……\n4⃣️带好花露水～！",
             "time": "2022-08-20",
             "score": 1.9,
@@ -15,42 +15,42 @@
         {
             "id": 1,
             "name": "蒲公英97330",
-            "user_id": "user_764",
+            "user_id": 764,
             "content": "值得乘坐，排队的人很多很多，去时白天景色，回来夜景，真的太幸运了。拍了好的的美景，把天津最美景点拍个遍。一定要乘坐这个车。",
             "time": "2023-04-16",
             "score": 3.1,
             "score_count": 5,
             "visited_time": 608,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg",
-                "images/1_6.jpg"
+                "data/scenic_spots/spot_94/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_94/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_94/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_94/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_94/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_94/reviews/review_1/images/1_5.jpg",
+                "data/scenic_spots/spot_94/reviews/review_1/images/1_6.jpg"
             ]
         },
         {
             "id": 2,
             "name": "匿名用户",
-            "user_id": "user_820",
+            "user_id": 820,
             "content": "孩子特别喜欢坐公交车，特别是双层巴士，所以坐完摩天轮又去坐了观光巴士，可惜天公不作美，一路上基本都在下雨，坐在二层淋了一身湿，打着伞基本没什么作用，不过沿途风景其实挺好的，车上还有讲解，初次到天津旅游还是值得坐一坐的。",
             "time": "2023-08-05",
             "score": 3.4,
             "score_count": 5,
             "visited_time": 907,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg"
+                "data/scenic_spots/spot_94/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_94/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_94/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_94/reviews/review_2/images/2_3.jpg"
             ]
         },
         {
             "id": 3,
             "name": "M16****146",
-            "user_id": "user_847",
+            "user_id": 847,
             "content": "一趟车把很多有特色的地方转了一遍，孩子挺喜欢的。",
             "time": "2025-01-17",
             "score": 3.0,
@@ -61,102 +61,102 @@
         {
             "id": 4,
             "name": "M54****7143",
-            "user_id": "user_848",
+            "user_id": 848,
             "content": "提前买票上车在门口核销二维码，挺方便的，排队人非常多，但车也很多，大概要排半个小时，车速很快，走马观花，有讲解员会给每个景点介绍一下。建议坐后面，很多小姐姐在后排自拍。",
             "time": "2024-08-12",
             "score": 3.9,
             "score_count": 6,
             "visited_time": 372,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg"
+                "data/scenic_spots/spot_94/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_94/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_94/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_94/reviews/review_4/images/4_3.jpg"
             ]
         },
         {
             "id": 5,
             "name": "蒲公英97330",
-            "user_id": "user_863",
+            "user_id": 863,
             "content": "值得乘坐，排队的人很多很多，去时白天景色，回来夜景，真的太幸运了。拍了好的的美景，把天津最美景点拍个遍。一定要乘坐这个车。",
             "time": "2023-04-16",
             "score": 1.8,
             "score_count": 9,
             "visited_time": 215,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg",
-                "images/5_3.jpg",
-                "images/5_4.jpg"
+                "data/scenic_spots/spot_94/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_94/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_94/reviews/review_5/images/5_2.jpg",
+                "data/scenic_spots/spot_94/reviews/review_5/images/5_3.jpg",
+                "data/scenic_spots/spot_94/reviews/review_5/images/5_4.jpg"
             ]
         },
         {
             "id": 6,
             "name": "清凉绿豆汤",
-            "user_id": "user_888",
+            "user_id": 888,
             "content": "公交车每人收费50，性价比肯定不高。游客嘛，啥都想体验些，非周末排队也等了40-50分钟。海河两年的夜景还是不错的，桥梁比较特别，市内主要景点就分布在两岸。刚到的迷茫的朋友可以坐坐",
             "time": "2023-08-09",
             "score": 4.9,
             "score_count": 6,
             "visited_time": 37,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg"
+                "data/scenic_spots/spot_94/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_94/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_94/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_94/reviews/review_6/images/6_3.jpg"
             ]
         },
         {
             "id": 7,
             "name": "M41****6818",
-            "user_id": "user_918",
+            "user_id": 918,
             "content": "王导讲解详细，吸引游客的注意力与好奇心，并且能够用亲切的话语拉近自己与游客的距离，用委婉的语言向游客提出要求",
             "time": "2023-09-09",
             "score": 3.3,
             "score_count": 4,
             "visited_time": 674,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg",
-                "images/7_3.jpg",
-                "images/7_4.jpg",
-                "images/7_5.jpg",
-                "images/7_6.jpg",
-                "images/7_7.jpg",
-                "images/7_8.jpg"
+                "data/scenic_spots/spot_94/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_94/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_94/reviews/review_7/images/7_2.jpg",
+                "data/scenic_spots/spot_94/reviews/review_7/images/7_3.jpg",
+                "data/scenic_spots/spot_94/reviews/review_7/images/7_4.jpg",
+                "data/scenic_spots/spot_94/reviews/review_7/images/7_5.jpg",
+                "data/scenic_spots/spot_94/reviews/review_7/images/7_6.jpg",
+                "data/scenic_spots/spot_94/reviews/review_7/images/7_7.jpg",
+                "data/scenic_spots/spot_94/reviews/review_7/images/7_8.jpg"
             ]
         },
         {
             "id": 8,
             "name": "M41****534",
-            "user_id": "user_978",
+            "user_id": 978,
             "content": "夜晚的凉风徐徐吹来。看着天津美丽的夜景，感受城市文化的沉淀，一切都松弛下来。在孩子们的笑声中走过五大道。穿过海河，愿望天津之眼。喧闹中车水马龙，宁谧中的淌淌河流。让游客们重新得到一次心灵的洗礼。",
             "time": "2024-07-09",
             "score": 2.8,
             "score_count": 7,
             "visited_time": 694,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg"
+                "data/scenic_spots/spot_94/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_94/reviews/review_8/images/8_1.jpg"
             ]
         },
         {
             "id": 9,
             "name": "M33****1186",
-            "user_id": "user_993",
+            "user_id": 993,
             "content": "排队两小时，大家都坐上层，吹着海河旁边的晚风，欣赏津门风景，非常棒",
             "time": "2023-08-01",
             "score": 2.8,
             "score_count": 9,
             "visited_time": 966,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg",
-                "images/9_4.jpg"
+                "data/scenic_spots/spot_94/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_94/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_94/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_94/reviews/review_9/images/9_3.jpg",
+                "data/scenic_spots/spot_94/reviews/review_9/images/9_4.jpg"
             ]
         }
     ],

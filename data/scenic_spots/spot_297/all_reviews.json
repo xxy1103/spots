@@ -4,7 +4,7 @@
         {
             "id": 0,
             "name": "胡如伟",
-            "user_id": "user_2738",
+            "user_id": 2738,
             "content": "厦门海底世界是一个集生态保护、海洋知识、科教和观光于一体的大型海洋水族馆，拥有丰富的海洋生物展览和现代化的设施。\n\n景点概况\n\n厦门海底世界位于厦门鼓浪屿东岸黄家渡，占地面积17.5公顷，总建筑面积7500平方米。它于1998年1月对外开放，是由新加坡华侨与鼓浪屿政府合作兴建的，总投资1000万美元。\n\n展览与设施\n\n● 展览内容：\n    \t○ 海洋馆：展示热带、亚热带独特鱼类，包括巨鲨、巨型石斑、珊瑚礁鱼类等。\n    \t○ 企鹅淡水鱼馆：展示洪氏环企鹅及斑嘴环企鹅，以及淡水鱼类如花鳗鲡、胭脂鱼等。\n    \t○ 抹香鲸标本馆、海豚馆、海兽表演馆等：展示海洋生物的多样性和神奇之处。\n\n● 特色设施：\n    \t○ 海底隧道：长80米，宽1.5米，游客可以在电动代步道上观赏四面八方的鱼群，甚至与鲨鱼近距离接触。\n    \t○ 圆柱形鱼池：高7米，直径2.5米，展示我国南海的珊瑚礁鱼类。\n\n旅游信息\n\n● 开放时间：全年开放，建议游玩天数为2天。\n\n● 门票价格：根据不同的展览和活动有所变化。\n\n● 交通信息：位于鼓浪屿轮渡码头西侧，交通便利。",
             "time": "2025-02-14",
             "score": 1.8,
@@ -15,118 +15,118 @@
         {
             "id": 1,
             "name": "古月初夏",
-            "user_id": "user_2739",
+            "user_id": 2739,
             "content": "厦门旅游| 蓝色大海的传说，鼓浪屿海底世界\n\n厦门唯一的海底世界，这里有企鹅馆、淡水鱼馆、抹香鲸标本馆、海洋馆，其中最值得推荐的是海洋馆的【定海神针】，高达7米的圆柱形展缸，全亚洲最大的 水族柱形缸体就在鼓浪屿啦。\n\n270°全景海底隧道：在这座海底龙宫里你能看到鲨鱼、巨型石斑、浪人鲹、大海龟等齐聚一堂，当天刚好看到工作人员穿着潜水服在里头，大概是在清理海洋精灵们的粑粑←.←\n\n拍照秘诀：可以找个白天刚开馆的时候进来，几乎是包场状态，各种凹造型试角度，鱼游过来的一瞬间抓拍住。最好拍的是海底隧道和旋转天柱，海洋馆特别的深蓝色光线拍出来几乎不用怎么修，很梦幻。\n\n关于买票：117rmb\\人。可以去各大团或旅行平台上购买，会比直接在售票处购买便宜10元左右。\n\n海豹表演时间：9:30、11:00、14:30、16:00（每场10分钟）\n开馆时间：8:00~20:00\n位置：鼓浪屿龙头路2号（钢琴码头下船往右直走150m\\内厝澳码头下船往左沿岸边走1km）",
             "time": "2019-07-30",
             "score": 3.5,
             "score_count": 5,
             "visited_time": 91,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg",
-                "images/1_6.jpg",
-                "images/1_7.jpg",
-                "images/1_8.jpg",
-                "images/1_9.jpg",
-                "images/1_10.jpg",
-                "images/1_11.jpg",
-                "images/1_12.jpg"
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_5.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_6.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_7.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_8.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_9.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_10.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_11.jpg",
+                "data/scenic_spots/spot_297/reviews/review_1/images/1_12.jpg"
             ]
         },
         {
             "id": 2,
             "name": "铁甲小宝爱旅游",
-            "user_id": "user_2886",
+            "user_id": 2886,
             "content": "这里非常适合带小朋友们来玩，是海洋生物的乐园！漫步其中，仿佛置身海底，五彩斑斓的珊瑚、热带鱼环绕周围。企鹅馆内企鹅憨态可掬，海豚馆中海豚表演精彩绝伦。还有海底隧道、触摸池等互动体验，可以近距离感受海洋的魅力。",
             "time": "2024-10-27",
             "score": 1.6,
             "score_count": 5,
             "visited_time": 207,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg"
+                "data/scenic_spots/spot_297/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_297/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_297/reviews/review_2/images/2_2.jpg"
             ]
         },
         {
             "id": 3,
             "name": "与神同行abc",
-            "user_id": "user_2891",
+            "user_id": 2891,
             "content": "厦门海底世界是一座充满奇妙海洋生物的水族馆，展区丰富多样，从五光十色的热带鱼到庞大的海洋生物，都能一一看到。特别是穿过长长的海底隧道，身边是游动的鲨鱼、海龟和五彩斑斓的珊瑚礁，感觉仿佛进入了另一个水下世界，十分震撼。\n\n虽然游客较多，但整体氛围活泼且有教育意义，适合家庭游客，特别是带小朋友的游客，可以在这里学到很多关于海洋的知识。",
             "time": "2025-02-20",
             "score": 3.8,
             "score_count": 7,
             "visited_time": 419,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg"
+                "data/scenic_spots/spot_297/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_297/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_297/reviews/review_3/images/3_2.jpg"
             ]
         },
         {
             "id": 4,
             "name": "恩乐双侠",
-            "user_id": "user_2896",
+            "user_id": 2896,
             "content": "海底世界，清凉之所，带着孩子大开眼界的同时，还有海洋知识的学习，海豚海豹的表演，让小朋友们欢呼不已！吃上些当地特色美食，再来点儿小玩具，完美行程！",
             "time": "2019-05-16",
             "score": 2.1,
             "score_count": 6,
             "visited_time": 834,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg",
-                "images/4_4.jpg",
-                "images/4_5.jpg"
+                "data/scenic_spots/spot_297/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_297/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_297/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_297/reviews/review_4/images/4_3.jpg",
+                "data/scenic_spots/spot_297/reviews/review_4/images/4_4.jpg",
+                "data/scenic_spots/spot_297/reviews/review_4/images/4_5.jpg"
             ]
         },
         {
             "id": 5,
             "name": "年糕大侠",
-            "user_id": "user_2904",
+            "user_id": 2904,
             "content": "馆不是很大！门口会有很多黄牛！我记得好像是八十还是九十一张票！一米二以下的免费！有个水母屏挺不错的！游玩时间一到两个小时吧！",
             "time": "2019-07-01",
             "score": 3.7,
             "score_count": 7,
             "visited_time": 910,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg",
-                "images/5_3.jpg",
-                "images/5_4.jpg",
-                "images/5_5.jpg",
-                "images/5_6.jpg",
-                "images/5_7.jpg"
+                "data/scenic_spots/spot_297/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_297/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_297/reviews/review_5/images/5_2.jpg",
+                "data/scenic_spots/spot_297/reviews/review_5/images/5_3.jpg",
+                "data/scenic_spots/spot_297/reviews/review_5/images/5_4.jpg",
+                "data/scenic_spots/spot_297/reviews/review_5/images/5_5.jpg",
+                "data/scenic_spots/spot_297/reviews/review_5/images/5_6.jpg",
+                "data/scenic_spots/spot_297/reviews/review_5/images/5_7.jpg"
             ]
         },
         {
             "id": 6,
             "name": "雪糕",
-            "user_id": "user_2938",
+            "user_id": 2938,
             "content": "海底世界也在鼓浪屿岛上，票价90元，到岛上了可以去看看，还不错的，可以看见很多品种的海底动物。",
             "time": "2018-06-15",
             "score": 1.4,
             "score_count": 4,
             "visited_time": 917,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg",
-                "images/6_5.jpg"
+                "data/scenic_spots/spot_297/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_297/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_297/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_297/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_297/reviews/review_6/images/6_4.jpg",
+                "data/scenic_spots/spot_297/reviews/review_6/images/6_5.jpg"
             ]
         },
         {
             "id": 7,
             "name": "柿子炒鸡蛋！",
-            "user_id": "user_2946",
+            "user_id": 2946,
             "content": "这里汇聚了众多海洋生物，是海洋知识的科普乐园。主要观赏点有海底隧道，仿佛置身于深海之中，各种鱼类在身旁游弋；还有企鹅馆，憨态可掬的企鹅令人喜爱。\n \n此外，水母展示区如梦如幻，珊瑚礁鱼类五彩斑斓。在这里，人们可以近距离观察海洋生物的奇妙姿态，感受海洋世界的神秘与美丽。",
             "time": "2024-10-18",
             "score": 1.8,
@@ -137,35 +137,35 @@
         {
             "id": 8,
             "name": "M27****4609",
-            "user_id": "user_2947",
+            "user_id": 2947,
             "content": "以前来过海底世界，这次是带娃来看看。对三岁的小朋友来说，里面的鱼类已经够多了，兴奋的不得了。我抱着他转了两圈，他还没看够。唯一觉得失望的是海兽表演，就一只海狮出场，表演大概十五分钟左右，也并不精彩。",
             "time": "2018-08-02",
             "score": 2.9,
             "score_count": 6,
             "visited_time": 813,
             "img_list": [
-                "images/8_0.jpg",
-                "https://dimg04.c-ctrip.com/images/100l0v000000jiwfiF1D3_W_640_10000.jpg?proc=autoorient",
-                "images/8_2.jpg",
-                "images/8_3.jpg",
-                "images/8_4.jpg",
-                "images/8_5.jpg"
+                "data/scenic_spots/spot_297/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_297/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_297/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_297/reviews/review_8/images/8_3.jpg",
+                "data/scenic_spots/spot_297/reviews/review_8/images/8_4.jpg",
+                "data/scenic_spots/spot_297/reviews/review_8/images/8_5.jpg"
             ]
         },
         {
             "id": 9,
             "name": "_WeCh****617867",
-            "user_id": "user_3081",
+            "user_id": 3081,
             "content": "真的不值票价，充满期待去的，结果失望了，原本以为沿海，海洋馆会比较惊艳，结果去了发现除了抹香鲸惊艳一把外，真没啥突出的了。真的对不起107的票价，逛不了多久，动物表演我看的是海豹表演那场，说实在比较无聊，时间也短就结束了。",
             "time": "2019-04-13",
             "score": 4.5,
             "score_count": 5,
             "visited_time": 191,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg"
+                "data/scenic_spots/spot_297/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_297/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_297/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_297/reviews/review_9/images/9_3.jpg"
             ]
         }
     ],

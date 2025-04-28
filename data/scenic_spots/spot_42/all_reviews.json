@@ -4,59 +4,59 @@
         {
             "id": 0,
             "name": "lo****ghi",
-            "user_id": "user_275",
+            "user_id": 275,
             "content": "免费的放弃了开发的景点，停车方便，上坡远看看就好，没必要深入跑进去，进去也没啥更多可看的。夏天去注意防晒，入口处还有小店卖水卖雪糕",
             "time": "2024-07-27",
             "score": 4.7,
             "score_count": 8,
             "visited_time": 576,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg",
-                "images/0_4.jpg"
+                "data/scenic_spots/spot_42/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_42/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_42/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_42/reviews/review_0/images/0_3.jpg",
+                "data/scenic_spots/spot_42/reviews/review_0/images/0_4.jpg"
             ]
         },
         {
             "id": 1,
             "name": "谁说不好听mr",
-            "user_id": "user_289",
+            "user_id": 289,
             "content": "天斧沙宫这个景点标记在携程的位置是错误的，它并不在皋兰（不知前面哪位游客给这样错误标记，也许他并没有去过），而是在兰州安宁区仁寿山东面的龙风峡里。这里是大约二千五百万年前形成的类似于丹霞地貌般的地形，红色的砂岩上形成了各式各样的奇特景观，非常壮观，加上峡湾里遍地黄沙，感觉出自带的沧桑、荒凉、古老又神秘的景象，如果是拍电影，估计完全不需要装饰，直接霸气侧漏，非常值得一去。",
             "time": "2021-02-24",
             "score": 2.3,
             "score_count": 4,
             "visited_time": 541,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg"
+                "data/scenic_spots/spot_42/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_42/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_42/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_42/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_42/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_42/reviews/review_1/images/1_5.jpg"
             ]
         },
         {
             "id": 2,
             "name": "WECANH9218",
-            "user_id": "user_307",
+            "user_id": 307,
             "content": "一般，景区没有建成，路程太远了，景色都差不多，要是想锻炼身体可以试试。去的时候大门关着，车进不去，人可以钻进去。路程真的有点远，做好心理准备。",
             "time": "2018-05-11",
             "score": 1.2,
             "score_count": 6,
             "visited_time": 815,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg",
-                "images/2_4.jpg"
+                "data/scenic_spots/spot_42/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_42/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_42/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_42/reviews/review_2/images/2_3.jpg",
+                "data/scenic_spots/spot_42/reviews/review_2/images/2_4.jpg"
             ]
         },
         {
             "id": 3,
             "name": "习惯了Alone安静",
-            "user_id": "user_320",
+            "user_id": 320,
             "content": "开着我最喜欢的坦克300进去飙一圈，绝对的Nice，神奇的地貌各种各样的颜色美不胜收，里面还能看到很多恐龙哦🦕🦕哈哈哈，不错。",
             "time": "2024-12-15",
             "score": 2.9,
@@ -67,89 +67,89 @@
         {
             "id": 4,
             "name": "轻快的行走脚步",
-            "user_id": "user_321",
+            "user_id": 321,
             "content": "这是个丹霞地貌景观，名气不大！从兰州驱车前往天斧沙宫景区！开单子这里，印入眼帘的是黄色风沙下的丹霞地貌，各种各样造型的巨石！",
             "time": "2020-03-09",
             "score": 1.1,
             "score_count": 6,
             "visited_time": 836,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg",
-                "images/4_4.jpg"
+                "data/scenic_spots/spot_42/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_42/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_42/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_42/reviews/review_4/images/4_3.jpg",
+                "data/scenic_spots/spot_42/reviews/review_4/images/4_4.jpg"
             ]
         },
         {
             "id": 5,
             "name": "pa****e",
-            "user_id": "user_327",
+            "user_id": 327,
             "content": "天斧沙宫，绕了好几圈，问了几个人，最后才在仁寿山游客中心问到路，停车后，爬上坡，看峡谷对面的沙雕神宫，的确神奇，明明是天然景观，但又像人工雕琢的。找不到路大概也是因为还没开发好，我们还看到好多坟墓，顿觉阴森森的。",
             "time": "2022-01-10",
             "score": 3.1,
             "score_count": 4,
             "visited_time": 876,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg"
+                "data/scenic_spots/spot_42/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_42/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_42/reviews/review_5/images/5_2.jpg"
             ]
         },
         {
             "id": 6,
             "name": "M25****892",
-            "user_id": "user_335",
+            "user_id": 335,
             "content": "我的天，也不知道是不是运气差，打车过去一路颠簸崎岖，到了地方一看，是完全没有开发的荒凉景象，道路没有硬化，没有游客服务中心，没有人烟，啥都没有……匆匆扫了一眼赶紧撤了……",
             "time": "2018-06-18",
             "score": 4.4,
             "score_count": 10,
             "visited_time": 313,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg"
+                "data/scenic_spots/spot_42/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_42/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_42/reviews/review_6/images/6_2.jpg"
             ]
         },
         {
             "id": 7,
             "name": "轻快的行走脚步",
-            "user_id": "user_347",
+            "user_id": 347,
             "content": "从兰州出发不远有个天斧沙宫景区，这个地质公园好像没怎么开发，配套不太好，以丹霞地貌为主要特色！地方不大，没有张掖的丹霞地貌壮观！",
             "time": "2020-03-05",
             "score": 2.3,
             "score_count": 9,
             "visited_time": 315,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg"
+                "data/scenic_spots/spot_42/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_42/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_42/reviews/review_7/images/7_2.jpg"
             ]
         },
         {
             "id": 8,
             "name": "，。。。。@",
-            "user_id": "user_353",
+            "user_id": 353,
             "content": "天斧沙宫，丹霞地貌，应该就是一种地理环境和一方人的情怀吧",
             "time": "2021-04-18",
             "score": 2.1,
             "score_count": 7,
             "visited_time": 868,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg",
-                "images/8_4.jpg",
-                "images/8_5.jpg",
-                "images/8_6.jpg",
-                "images/8_7.jpg"
+                "data/scenic_spots/spot_42/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_42/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_42/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_42/reviews/review_8/images/8_3.jpg",
+                "data/scenic_spots/spot_42/reviews/review_8/images/8_4.jpg",
+                "data/scenic_spots/spot_42/reviews/review_8/images/8_5.jpg",
+                "data/scenic_spots/spot_42/reviews/review_8/images/8_6.jpg",
+                "data/scenic_spots/spot_42/reviews/review_8/images/8_7.jpg"
             ]
         },
         {
             "id": 9,
             "name": "hua****4483",
-            "user_id": "user_394",
+            "user_id": 394,
             "content": "天斧沙宫以前没听过，这次去兰州特意去了下，是丹霞地貌地质公园，不错的",
             "time": "2020-11-13",
             "score": 2.6,

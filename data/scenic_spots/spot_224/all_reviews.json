@@ -4,7 +4,7 @@
         {
             "id": 0,
             "name": "勤儿",
-            "user_id": "user_1985",
+            "user_id": 1985,
             "content": "黄陂木兰文化生态旅游区是木兰文化的发源地之一，这里有许多与木兰传奇相关的遗迹和文化景观，如木兰祠、木兰墓等。旅游区由木兰山、木兰天池、木兰草原、木兰云雾山四大景区组成，每个景区都有独特的自然风光和人文景观。木兰山有千年宗教名胜，木兰天池有浪漫山水，木兰草原是华中唯一的草原风情景区，木兰云雾山有万亩杜鹃和美丽的自然风光。",
             "time": "2024-11-03",
             "score": 4.7,
@@ -15,7 +15,7 @@
         {
             "id": 1,
             "name": "勤儿",
-            "user_id": "user_1986",
+            "user_id": 1986,
             "content": "黄陂木兰文化生态旅游区拥有丰富的自然景观，包括山水、森林、草原、花海等。其中，木兰山是国家地质公园，木兰天池是国家森林公园，木兰草原是华中唯一的草原风情景区，木兰云雾山则以四季花海和云雾缭绕的美景而闻名。园内有众多的旅游项目和活动，如登山、徒步、骑马、赏花、观鸟、露营、烧烤等。此外，还有一些特色的表演和活动，如木兰从军实景演出、小猪跳水表演等。",
             "time": "2024-10-31",
             "score": 4.3,
@@ -26,7 +26,7 @@
         {
             "id": 2,
             "name": "勤儿",
-            "user_id": "user_1987",
+            "user_id": 1987,
             "content": "旅游区由木兰山、木兰天池、木兰草原、木兰云雾山四大景区组成，每个景区都有独特的自然风光和人文景观。木兰山是千年宗教名山，木兰天池有浪漫山水和高峡人家，木兰草原是华中唯一的草原风情景区，木兰云雾山有万亩杜鹃和野生樱花。这里有山有水有草原，还有森林和花海，四季景色各异，春天可以赏花，夏天可以避暑，秋天可以赏叶，冬天可以玩雪。",
             "time": "2024-10-28",
             "score": 1.9,
@@ -37,7 +37,7 @@
         {
             "id": 3,
             "name": "勤儿",
-            "user_id": "user_1988",
+            "user_id": 1988,
             "content": "武汉木兰生态旅游文化区汇聚了奇山、秀水、草原、花海等多样景观，是大自然的鬼斧神工与人文历史的精彩交融之地。这里既是领略木兰文化、感受英雄情怀的精神圣地，又是畅享休闲度假、体验多彩游乐项目的绝佳旅游胜地。",
             "time": "2024-10-23",
             "score": 3.9,
@@ -48,23 +48,23 @@
         {
             "id": 4,
             "name": "smile123456lan",
-            "user_id": "user_1989",
+            "user_id": 1989,
             "content": "中秋节当天来的，本来想根据攻略到火车站乘公交过来，人实在太多，最后为了不浪费时间直接打的。景色还是很值得的，武汉当天39度的高温。在这里至少要降温三四度吧。景色非常漂亮，一大早景区人也不多，值得来一趟。",
             "time": "2019-10-12",
             "score": 2.3,
             "score_count": 7,
             "visited_time": 133,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg"
+                "data/scenic_spots/spot_224/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_224/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_224/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_224/reviews/review_4/images/4_3.jpg"
             ]
         },
         {
             "id": 5,
             "name": "酱螽",
-            "user_id": "user_2025",
+            "user_id": 2025,
             "content": "有山有水有草原，可感受到大自然的神秘与野趣，体验木兰文化的独特魅力。木兰天池山水相依，可乘船欣赏湖光山色或徒步登山；木兰草原可体验草原风情和户外活动  。",
             "time": "2025-01-03",
             "score": 1.3,
@@ -75,22 +75,22 @@
         {
             "id": 6,
             "name": "乐乐嘻嘻哈哈",
-            "user_id": "user_2026",
+            "user_id": 2026,
             "content": "武汉会不会在两年后成为国内打卡的景点之一呢？一起去看看武大的樱花，这是以前的节目，现在可能会更多一份情怀吧。其实我从网上的介绍来看，这个景点也是不错的。整个风景区分为古寨区、石景区、花苑区、山庄区四区。而且也是一个有宗教文化的地方。",
             "time": "2020-04-17",
             "score": 3.0,
             "score_count": 9,
             "visited_time": 11,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg"
+                "data/scenic_spots/spot_224/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_224/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_224/reviews/review_6/images/6_2.jpg"
             ]
         },
         {
             "id": 7,
             "name": "286****549",
-            "user_id": "user_2036",
+            "user_id": 2036,
             "content": "秋老虎来袭，武汉周边最值得一去的休闲去处———木兰草原：丰富的项目、精彩的演出（雲中战歌）、热情的篝火、绚烂的焰火、清爽的泼水节……\n友情提示：最佳入场时间16:00-22:00",
             "time": "2022-08-22",
             "score": 1.5,
@@ -101,43 +101,43 @@
         {
             "id": 8,
             "name": "宙",
-            "user_id": "user_2037",
+            "user_id": 2037,
             "content": "传说中花木兰的故乡，离武汉市区一个多小时车程。里面挺大的，有各种游乐设施，还有小火车、直升机、骑马、骑骆驼等体验。适合带娃来玩一天。",
             "time": "2025-02-06",
             "score": 5.0,
             "score_count": 10,
             "visited_time": 916,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg",
-                "images/8_4.jpg",
-                "images/8_5.jpg",
-                "images/8_6.jpg",
-                "images/8_7.jpg",
-                "images/8_8.jpg"
+                "data/scenic_spots/spot_224/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_224/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_224/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_224/reviews/review_8/images/8_3.jpg",
+                "data/scenic_spots/spot_224/reviews/review_8/images/8_4.jpg",
+                "data/scenic_spots/spot_224/reviews/review_8/images/8_5.jpg",
+                "data/scenic_spots/spot_224/reviews/review_8/images/8_6.jpg",
+                "data/scenic_spots/spot_224/reviews/review_8/images/8_7.jpg",
+                "data/scenic_spots/spot_224/reviews/review_8/images/8_8.jpg"
             ]
         },
         {
             "id": 9,
             "name": "XC_zcl",
-            "user_id": "user_2076",
+            "user_id": 2076,
             "content": "四个景区各有特色，我仅去了天池和草原，先说天池，虽然当天天气不好，在下雨，但不影响游玩观景，一趟徒步上下，还是感觉到累。再说草原，很适合带小朋友过来玩。景色不错，",
             "time": "2021-06-21",
             "score": 1.2,
             "score_count": 4,
             "visited_time": 797,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg",
-                "images/9_4.jpg",
-                "images/9_5.jpg",
-                "images/9_6.jpg",
-                "images/9_7.jpg",
-                "images/9_8.jpg"
+                "data/scenic_spots/spot_224/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_224/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_224/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_224/reviews/review_9/images/9_3.jpg",
+                "data/scenic_spots/spot_224/reviews/review_9/images/9_4.jpg",
+                "data/scenic_spots/spot_224/reviews/review_9/images/9_5.jpg",
+                "data/scenic_spots/spot_224/reviews/review_9/images/9_6.jpg",
+                "data/scenic_spots/spot_224/reviews/review_9/images/9_7.jpg",
+                "data/scenic_spots/spot_224/reviews/review_9/images/9_8.jpg"
             ]
         }
     ],

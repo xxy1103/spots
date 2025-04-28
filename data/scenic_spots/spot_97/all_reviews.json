@@ -4,62 +4,62 @@
         {
             "id": 0,
             "name": "LHCY",
-            "user_id": "user_796",
+            "user_id": 796,
             "content": "兰州西部恐龙水乐园位于兰州新区，毗邻兰州中川机场，地理位置优越，交通便利，是深受兰州市民喜爱的水上游乐项目。水乐园分为室内和室外两个游乐区，室内有专供小童游玩的浅水区，水温室温都比较舒适，室外区有一大片人造沙滩，水也很清澈，就是阳光太晒，玩的朋友做好防晒。乐园配套冲洗设施也不错，食品稍贵。进入乐园是不许带食品和水的，需要提醒去的朋友，不过可以寄存。",
             "time": "2020-08-18",
             "score": 4.3,
             "score_count": 9,
             "visited_time": 685,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg",
-                "images/0_4.jpg",
-                "images/0_5.jpg",
-                "images/0_6.jpg",
-                "images/0_7.jpg",
-                "images/0_8.jpg",
-                "images/0_9.jpg",
-                "images/0_10.jpg",
-                "images/0_11.jpg",
-                "images/0_12.jpg"
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_3.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_4.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_5.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_6.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_7.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_8.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_9.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_10.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_11.jpg",
+                "data/scenic_spots/spot_97/reviews/review_0/images/0_12.jpg"
             ]
         },
         {
             "id": 1,
             "name": "M46****9021",
-            "user_id": "user_870",
+            "user_id": 870,
             "content": "环境不错，值得关顾去了三次了，玩的非常愉快",
             "time": "2021-07-22",
             "score": 2.2,
             "score_count": 5,
             "visited_time": 552,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg"
+                "data/scenic_spots/spot_97/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_97/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_97/reviews/review_1/images/1_2.jpg"
             ]
         },
         {
             "id": 2,
             "name": "临江仙一仙",
-            "user_id": "user_880",
+            "user_id": 880,
             "content": "兰州这个文化的荒漠，有这样的游乐项目实属难能可贵。兰州人民且玩儿且珍惜吧。",
             "time": "2023-05-05",
             "score": 4.8,
             "score_count": 8,
             "visited_time": 757,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg"
+                "data/scenic_spots/spot_97/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_97/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_97/reviews/review_2/images/2_2.jpg"
             ]
         },
         {
             "id": 3,
             "name": "M22****7257",
-            "user_id": "user_890",
+            "user_id": 890,
             "content": "去年去过，8月下旬已经有些冷了，室外项目玩起来有点冷，要去趁早趁热啊",
             "time": "2021-07-29",
             "score": 1.7,
@@ -70,7 +70,7 @@
         {
             "id": 4,
             "name": "临江仙一仙",
-            "user_id": "user_891",
+            "user_id": 891,
             "content": "甘肃南德的游乐园。但是对体重的要求太多。小朋友有很多的项目都玩不了。非常遗憾。冬天也不开门。只有夏天几个月的时间。不太明白这几个月怎么能够盈利",
             "time": "2023-02-10",
             "score": 1.1,
@@ -81,7 +81,7 @@
         {
             "id": 5,
             "name": "か 小白",
-            "user_id": "user_892",
+            "user_id": 892,
             "content": "夏天去水是凉的，建议身体不太好的朋友注意保暖",
             "time": "2021-09-09",
             "score": 2.3,
@@ -92,7 +92,7 @@
         {
             "id": 6,
             "name": "胖小冉",
-            "user_id": "user_893",
+            "user_id": 893,
             "content": "值得一去。",
             "time": "2023-02-09",
             "score": 1.9,
@@ -103,7 +103,7 @@
         {
             "id": 7,
             "name": "风城散人",
-            "user_id": "user_894",
+            "user_id": 894,
             "content": "孩子很喜欢",
             "time": "2021-08-04",
             "score": 1.6,
@@ -114,7 +114,7 @@
         {
             "id": 8,
             "name": "か 小白",
-            "user_id": "user_895",
+            "user_id": 895,
             "content": "去的那天突然大风，结果就玩的不是太好，水也太凉了",
             "time": "2021-09-09",
             "score": 3.0,
@@ -125,14 +125,14 @@
         {
             "id": 9,
             "name": "M24****915",
-            "user_id": "user_896",
+            "user_id": 896,
             "content": "第二次来，体验依然差。更衣区和存衣柜不在一起，很麻烦。很多滑道不开，理由是工作人员太少，那为什么不少收钱。",
             "time": "2021-08-06",
             "score": 2.8,
             "score_count": 5,
             "visited_time": 962,
             "img_list": [
-                "images/9_0.jpg"
+                "data/scenic_spots/spot_97/reviews/review_9/images/9_0.jpg"
             ]
         }
     ],

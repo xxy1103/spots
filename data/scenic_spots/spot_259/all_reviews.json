@@ -4,178 +4,178 @@
         {
             "id": 0,
             "name": "135****3716",
-            "user_id": "user_2348",
+            "user_id": 2348,
             "content": "从搜索就感到是一个专业的服务团队。前期咨询沟通也非常给力，有问必答。海钓过程中钓竿经常容易卡在岩石里，船长马上就来耐心的解决问题。一个地方没鱼了船长马上寻找下一个好的钓点。非常好的服务，值得满星好评。",
             "time": "2024-11-20",
             "score": 1.5,
             "score_count": 10,
             "visited_time": 300,
             "img_list": [
-                "images/0_0.jpg"
+                "data/scenic_spots/spot_259/reviews/review_0/images/0_0.jpg"
             ]
         },
         {
             "id": 1,
             "name": "203****867",
-            "user_id": "user_2351",
+            "user_id": 2351,
             "content": "单层游艇出海，船长还备了免费的晕船贴和矿泉水，还细心教大家海钓，我家二年级小朋友都钓到了一条老虎斑一条黑金刚，海上往返足足四小时，没有额外消费，很棒的海钓体验！最后钓到的鱼船长都叫带走，我们给放生了。",
             "time": "2023-02-11",
             "score": 5.0,
             "score_count": 10,
             "visited_time": 983,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg"
+                "data/scenic_spots/spot_259/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_259/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_259/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_259/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_259/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_259/reviews/review_1/images/1_5.jpg"
             ]
         },
         {
             "id": 2,
             "name": "_WeCh****92056",
-            "user_id": "user_2365",
+            "user_id": 2365,
             "content": "很好的一次体验，小朋友钓到鱼很开心，船长有经验知道哪里能钓到鱼，标点很熟悉。提醒需要来玩的朋友在船长那里买一片大白兔晕船药，全船人都晕船受不了了只有我们一家人坚持到了最后。",
             "time": "2023-08-08",
             "score": 2.1,
             "score_count": 4,
             "visited_time": 847,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg"
+                "data/scenic_spots/spot_259/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_259/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_259/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_259/reviews/review_2/images/2_3.jpg"
             ]
         },
         {
             "id": 3,
             "name": "小猫猫爱吃鱼",
-            "user_id": "user_2379",
+            "user_id": 2379,
             "content": "1:船很干净，专业钓鱼艇，158还有厕所，不是那种破旧小渔船，带去的地方很有鱼，工作人员很亲切，很开心！\n2:身为小白的我钓了好多，有机会要去感受深海远钓\n3:出海破浪，海钓，很好的体验，接到人员很周到，很热情，船长也很好。\n5:基本很少评价，这个海钓相当不错，推荐\n6:非常满意 小孩最开心\n7:非常负责人的海钓俱乐部，感受很好，记得提前吃晕船药\n8:玩了一下午，虽然鱼小。但是158还是值得",
             "time": "2022-02-12",
             "score": 2.1,
             "score_count": 4,
             "visited_time": 16,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg",
-                "images/3_3.jpg",
-                "images/3_4.jpg",
-                "images/3_5.jpg",
-                "images/3_6.jpg",
-                "images/3_7.jpg"
+                "data/scenic_spots/spot_259/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_259/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_259/reviews/review_3/images/3_2.jpg",
+                "data/scenic_spots/spot_259/reviews/review_3/images/3_3.jpg",
+                "data/scenic_spots/spot_259/reviews/review_3/images/3_4.jpg",
+                "data/scenic_spots/spot_259/reviews/review_3/images/3_5.jpg",
+                "data/scenic_spots/spot_259/reviews/review_3/images/3_6.jpg",
+                "data/scenic_spots/spot_259/reviews/review_3/images/3_7.jpg"
             ]
         },
         {
             "id": 4,
             "name": "M51****1481",
-            "user_id": "user_2479",
+            "user_id": 2479,
             "content": "这次就跟朋友一起约好游艇出海最大的好处就是无论天干下雨，都可以出发，完全不影响行程，这次天气不错，蓝天白云游艇很宽敞.从踏上游艇那一刻起，整个人都是处于兴奋的状态。大海与我近在咫尺，海风在耳边呼呼的吹，整个人都陶醉了，最最重要的是我们都钓到了不少鱼，收货很大。",
             "time": "2023-09-28",
             "score": 4.0,
             "score_count": 5,
             "visited_time": 91,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg",
-                "images/4_4.jpg"
+                "data/scenic_spots/spot_259/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_259/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_259/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_259/reviews/review_4/images/4_3.jpg",
+                "data/scenic_spots/spot_259/reviews/review_4/images/4_4.jpg"
             ]
         },
         {
             "id": 5,
             "name": "M30****6718",
-            "user_id": "user_2506",
+            "user_id": 2506,
             "content": "平时在上海就喜欢休闲野钓，来了三亚看到如此壮观的大海，当然也会心痒，搜了下附近的海钓俱乐部，选择了小猫，本来预约好的上午突然狂风暴雨只能改到了下午，如约到了港口，带着父母一起来体验海钓，船长告知了注意事项，船员很耐心的给我们进行海钓教学，整个过程很开心，看来要期待下次再来三亚，计划一下去远海钓大鱼了",
             "time": "2021-09-22",
             "score": 4.9,
             "score_count": 4,
             "visited_time": 713,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg",
-                "images/5_3.jpg",
-                "images/5_4.jpg",
-                "images/5_5.jpg",
-                "images/5_6.jpg",
-                "images/5_7.jpg",
-                "images/5_8.jpg"
+                "data/scenic_spots/spot_259/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_259/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_259/reviews/review_5/images/5_2.jpg",
+                "data/scenic_spots/spot_259/reviews/review_5/images/5_3.jpg",
+                "data/scenic_spots/spot_259/reviews/review_5/images/5_4.jpg",
+                "data/scenic_spots/spot_259/reviews/review_5/images/5_5.jpg",
+                "data/scenic_spots/spot_259/reviews/review_5/images/5_6.jpg",
+                "data/scenic_spots/spot_259/reviews/review_5/images/5_7.jpg",
+                "data/scenic_spots/spot_259/reviews/review_5/images/5_8.jpg"
             ]
         },
         {
             "id": 6,
             "name": "M14****644",
-            "user_id": "user_2578",
+            "user_id": 2578,
             "content": "1.29初一下午去的14：00新手场，一个船满载12人，我们船是小猫01号，船长人不错，挺热情也有经验，出海要扫码报备。三个家庭的桶都有收货，一个数量多，一个斤数大，还有一个颜色漂亮，船上有卫生间，虽然有点小，但是出海一共4个小时，有一个还是方便的，海上风大，不管岸上多么热，都应该带一件厚一点的衣服，游艇可以穿鞋，沿途风景不错，船长会教给你方法，但是感觉钓鱼都是凭运气，挺好玩的，有的人放下就咬钩，有的虾饵都泡白了，咋的都不咬。春节期间价格涨了一些，也理解，平时的性价比应该更高，还有，要注意，打车定位就输入“三亚国际游艇会3号馆”，我当天用滴滴打不到车，用百度打的，输入接待人员微信里提前告知的地址“小猫钓鱼海钓俱乐部三亚国际游艇会3号馆”，结果百度只显示前面的名称，最终定位到离3号馆还有1、2公里左右的地方，什么欣欣食杂店，没办法，我们又重新定位打车过去到游艇会3号馆，总之，这个海钓还是推荐的，没有别的推销，就是纯粹的钓鱼观光，",
             "time": "2025-01-31",
             "score": 1.6,
             "score_count": 4,
             "visited_time": 382,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg"
+                "data/scenic_spots/spot_259/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_259/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_259/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_259/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_259/reviews/review_6/images/6_4.jpg"
             ]
         },
         {
             "id": 7,
             "name": "m45****91",
-            "user_id": "user_2595",
+            "user_id": 2595,
             "content": "船长人很好，船开的就是近海，大概离岸边一百多米的位置，珊瑚礁上面，钓的都是热带小鱼，钓的不多，鱼的种类很多但是数量不太多，也许是季节不好吧，总的来说就是来感受海钓的，不是来为了进货的，只要能钓上来鱼就很开心了，价格也不是那么贵，觉得挺好的",
             "time": "2024-07-04",
             "score": 4.1,
             "score_count": 5,
             "visited_time": 70,
             "img_list": [
-                "https://dimg04.c-ctrip.com/images/0EQ6e12000eo8bfdqDA05_W_640_10000.jpg?proc=autoorient",
-                "images/7_1.jpg",
-                "images/7_2.jpg",
-                "images/7_3.jpg",
-                "https://dimg04.c-ctrip.com/images/0EQ1212000eo8ceffA424_W_640_10000.jpg?proc=autoorient",
-                "images/7_5.jpg"
+                "data/scenic_spots/spot_259/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_259/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_259/reviews/review_7/images/7_2.jpg",
+                "data/scenic_spots/spot_259/reviews/review_7/images/7_3.jpg",
+                "data/scenic_spots/spot_259/reviews/review_7/images/7_4.jpg",
+                "data/scenic_spots/spot_259/reviews/review_7/images/7_5.jpg"
             ]
         },
         {
             "id": 8,
             "name": "car****62",
-            "user_id": "user_2682",
+            "user_id": 2682,
             "content": "太喜欢海钓了，4个小时不过瘾😂\n以前去马来西亚参加过海钓，能钓到好多又大又漂亮的🐟。这次的钓点都不是特别好钓，大家钓了好久才钓上来没几条，而且鱼都比较小\n，但船长很耐心，给我们换了好几次地方，好在大家都钓到了2条以上，也算是满载而归，还是很开心的！",
             "time": "2023-08-27",
             "score": 1.5,
             "score_count": 7,
             "visited_time": 707,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg",
-                "images/8_4.jpg",
-                "images/8_5.jpg"
+                "data/scenic_spots/spot_259/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_259/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_259/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_259/reviews/review_8/images/8_3.jpg",
+                "data/scenic_spots/spot_259/reviews/review_8/images/8_4.jpg",
+                "data/scenic_spots/spot_259/reviews/review_8/images/8_5.jpg"
             ]
         },
         {
             "id": 9,
             "name": "米卡Meerca",
-            "user_id": "user_2698",
+            "user_id": 2698,
             "content": "很棒的一次体验，贼好玩。本来以为是小破船，结果是崭新漂亮的小游艇。我琢磨着小白船有没有汽车贵，结果船长说不到200万。。。好吧孤陋寡闻了。船长特别好，专业又热情。基本每个人都钓到了，我钓了4条小鱼。船长钓到了中型石斑。最后的时候下雨了，海面像缀满珠子一样，真漂亮。有免费矿泉水和晕船贴。别玩手机，少待船舱，在外面看风景就不容易晕船。我们只有全船一个人晕船的，也不严重。",
             "time": "2021-10-07",
             "score": 2.6,
             "score_count": 4,
             "visited_time": 436,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg",
-                "images/9_4.jpg",
-                "images/9_5.jpg",
-                "images/9_6.jpg"
+                "data/scenic_spots/spot_259/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_259/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_259/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_259/reviews/review_9/images/9_3.jpg",
+                "data/scenic_spots/spot_259/reviews/review_9/images/9_4.jpg",
+                "data/scenic_spots/spot_259/reviews/review_9/images/9_5.jpg",
+                "data/scenic_spots/spot_259/reviews/review_9/images/9_6.jpg"
             ]
         }
     ],

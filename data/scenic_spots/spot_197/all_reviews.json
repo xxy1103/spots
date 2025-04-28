@@ -4,141 +4,141 @@
         {
             "id": 0,
             "name": "selma1982",
-            "user_id": "user_1807",
+            "user_id": 1807,
             "content": "江南这边还只是单穿秋装，兰州已经大雪纷飞，而且这个雪很自然，雪场非常的大，玩起来很舒服。而且雪场收费也不贵，人又少。真的很适合这样的淡季过来玩",
             "time": "2019-12-13",
             "score": 2.0,
             "score_count": 4,
             "visited_time": 163,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg"
+                "data/scenic_spots/spot_197/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_197/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_197/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_197/reviews/review_0/images/0_3.jpg"
             ]
         },
         {
             "id": 1,
             "name": "_WeCh****122970",
-            "user_id": "user_1834",
+            "user_id": 1834,
             "content": "搞不懂那些个自己不会滑还嫌弃雪硬德人，我也是第一次去啊，我也摔了很两次就会了，学习能力不好别怪雪场",
             "time": "2019-10-20",
             "score": 3.8,
             "score_count": 7,
             "visited_time": 257,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg",
-                "images/1_6.jpg"
+                "data/scenic_spots/spot_197/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_197/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_197/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_197/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_197/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_197/reviews/review_1/images/1_5.jpg",
+                "data/scenic_spots/spot_197/reviews/review_1/images/1_6.jpg"
             ]
         },
         {
             "id": 2,
             "name": "m10****247",
-            "user_id": "user_1863",
+            "user_id": 1863,
             "content": "主要是滑雪去了。班车不错准时 司机张师傅热情服务好，车况好干净舒适。雪场雪具旧了，雪板不好穿，这次学会了自己调整固定器的大小。没有找到直的雪仗。遇见的教练上岗三天，大三的学生，问他他说也才开始接触滑雪，所以没有敢请他教，教练费太贵，每小时240元。雪场烧水器没有开，没有开水喝，饭不好吃，牛肉面看着就不像（忘记拍照了），不是牛肉面的汤,好像是面汤，还说没有萝卜了😅。滑雪比较开心，虽然不会滑碰见大神耐心教我，有机会再去。",
             "time": "2020-12-29",
             "score": 2.2,
             "score_count": 9,
             "visited_time": 560,
             "img_list": [
-                "images/2_0.jpg"
+                "data/scenic_spots/spot_197/reviews/review_2/images/2_0.jpg"
             ]
         },
         {
             "id": 3,
             "name": "名字还没想好呢*",
-            "user_id": "user_1878",
+            "user_id": 1878,
             "content": "滑雪爱好者自己开车来的，中午到的车位还比较多，停车场蛮大蛮好停，下午车会多一些，总体体验还不错，高级道请教练的话300每小时，教的蛮细心，上高级道需要租头盔价格忘了，总体体验蛮好结交了新朋友",
             "time": "2022-02-22",
             "score": 3.9,
             "score_count": 9,
             "visited_time": 135,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg"
+                "data/scenic_spots/spot_197/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_197/reviews/review_3/images/3_1.jpg"
             ]
         },
         {
             "id": 4,
             "name": "m10****247",
-            "user_id": "user_1885",
+            "user_id": 1885,
             "content": "今天人多，初级 中级 高级雪道全开，估计是兰州周边最便宜的了，服务还不错，饭菜一般，离兰州有点远，教练费太太太贵啦！令人望而却步！",
             "time": "2019-12-21",
             "score": 3.1,
             "score_count": 9,
             "visited_time": 495,
             "img_list": [
-                "images/4_0.jpg"
+                "data/scenic_spots/spot_197/reviews/review_4/images/4_0.jpg"
             ]
         },
         {
             "id": 5,
             "name": "五月燕子",
-            "user_id": "user_1890",
+            "user_id": 1890,
             "content": "不想去崇礼扎堆，新疆又太远，特地在网上搜了很多北方城市的雪场，最后选了来兰州滑雪。兴隆山这个滑雪场有3条魔毯道和2条坐缆车高级道，但最长的魔毯道只有220米长，最大16度的坡度，这和松花湖雪场给一日游游客用的雪道差不多，周边山体已经没雪了，今天出很大的太阳，滑起来一点都不冷。雪道不丰富，配套不齐全，和崇礼的太舞小镇那就根本不是一个级别了。",
             "time": "2023-02-05",
             "score": 4.8,
             "score_count": 6,
             "visited_time": 658,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg"
+                "data/scenic_spots/spot_197/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_197/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_197/reviews/review_5/images/5_2.jpg"
             ]
         },
         {
             "id": 6,
             "name": "金角大王的弟弟银角大王",
-            "user_id": "user_1908",
+            "user_id": 1908,
             "content": "设施、服务不断完善的兴隆山滑雪场，是冬季周末出游的绝佳选择。",
             "time": "2022-01-17",
             "score": 1.6,
             "score_count": 6,
             "visited_time": 202,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg"
+                "data/scenic_spots/spot_197/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_197/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_197/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_197/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_197/reviews/review_6/images/6_4.jpg"
             ]
         },
         {
             "id": 7,
             "name": "习惯了Alone安静",
-            "user_id": "user_1954",
+            "user_id": 1954,
             "content": "都没有人搭理你，何来服务一说，全程靠自己领悟，从进门开始应该有向导才对，帮助哪些进来就不知道要干什么的人解解惑嘛；还有领取衣服和鞋子完全不合适，这个能不能看准点，阿姨们虽忙但是服务要提升上来，不要爱搭不理的样子！除了自己玩的很开心，其他方面一般般！",
             "time": "2024-12-08",
             "score": 3.2,
             "score_count": 8,
             "visited_time": 919,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg"
+                "data/scenic_spots/spot_197/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_197/reviews/review_7/images/7_1.jpg"
             ]
         },
         {
             "id": 8,
             "name": "m10****247",
-            "user_id": "user_1968",
+            "user_id": 1968,
             "content": "第一次去滑雪感觉不错，准时出发 回来。周内人少，教练教得耐心 保护的很好，玩的很开心！不开车的话这个选择很不错，给大家推荐！",
             "time": "2019-12-20",
             "score": 3.3,
             "score_count": 5,
             "visited_time": 735,
             "img_list": [
-                "images/8_0.jpg"
+                "data/scenic_spots/spot_197/reviews/review_8/images/8_0.jpg"
             ]
         },
         {
             "id": 9,
             "name": "小武1234",
-            "user_id": "user_1973",
+            "user_id": 1973,
             "content": "优点：离兰州近，停车方便。雪道不错，设施齐备，配套的休息、超市购物、餐饮等还不错。衣服、雪具的还、取程序虽较复杂但比较有序，整个管理相对不错。\n缺点：停车场要收费10元，不爽；滑雪服很脏，比较破烂。\n总体来说，是值得体验的。",
             "time": "2019-01-22",
             "score": 2.3,

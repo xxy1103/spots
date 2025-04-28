@@ -4,23 +4,23 @@
         {
             "id": 0,
             "name": "Leesing小歆",
-            "user_id": "user_985",
+            "user_id": 985,
             "content": "今年厦门最轰动的事🔥莫过于海上世界的开业了，要说海上世界那不得不提潮汐之眼摩天轮，👏🏻已成为厦门新地标。\n-\n潮汐之眼摩天轮还未开业就吸引了大量市民的👀注意力，当然，👉🏻归功于独特的特点：\n①360°全景🎡摩天轮\n②与海潮🌊共同转动\n③62米高空☁️\n④一圈⌚时长13分钟14秒\n-\n🎡景点：潮汐之眼摩天轮\n🈺时间：周日-周四10:00-22:00\n                     周五-周六10:00-22:30\n💰人均：团购88元，原价168元\n📍地址：湖里区远航路77号海上世界购物中心4楼\n🚗自驾：海上世界停车场",
             "time": "2022-09-29",
             "score": 4.5,
             "score_count": 8,
             "visited_time": 636,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg"
+                "data/scenic_spots/spot_121/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_121/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_121/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_121/reviews/review_0/images/0_3.jpg"
             ]
         },
         {
             "id": 1,
             "name": "柿子炒鸡蛋！",
-            "user_id": "user_1010",
+            "user_id": 1010,
             "content": "矗立在海边，拥有独特的外观和绝佳的观景位置。乘坐其中，主要观赏点是可以 360 度俯瞰城市风光与海景的完美融合。白天，能欣赏到碧海蓝天和繁华的城市景象；夜晚，灯火辉煌，璀璨夺目。\n \n在缓缓上升和下降的过程中，感受着浪漫与宁静，为游客带来难忘的体验。",
             "time": "2024-10-18",
             "score": 1.8,
@@ -31,132 +31,132 @@
         {
             "id": 2,
             "name": "121****680",
-            "user_id": "user_1011",
+            "user_id": 1011,
             "content": "风景视野余地，就是价格太高阻挡了很多人，一圈下来稀稀拉拉两三个家庭！都是带孩子的，年轻的情侣没有，其实价格完全可以降个50%下来，现在的价格太贵了，特别对年轻人不友好！这也是国内很多设施的通病。合理的价格曲线对城市的宣传是很有帮助的，这种地标性的设施，也是城市宣传的窗口，搞这么贵，跟房价一样，对年轻人不友好，一个城市吸引不了年轻人，最终是什么结局？",
             "time": "2024-06-10",
             "score": 4.4,
             "score_count": 8,
             "visited_time": 198,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg",
-                "images/2_4.jpg"
+                "data/scenic_spots/spot_121/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_121/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_121/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_121/reviews/review_2/images/2_3.jpg",
+                "data/scenic_spots/spot_121/reviews/review_2/images/2_4.jpg"
             ]
         },
         {
             "id": 3,
             "name": "M48****8372",
-            "user_id": "user_1037",
+            "user_id": 1037,
             "content": "潮汐之眼·摩天轮.厦门网红新晋地标，打卡日出·日落·适合企业派对·约会·写生·摄影·求婚新圣地\n✅ 32座球形珍珠\n✅ 62米梦幻高度\n✅ 6人座奢阔尺度空间\n✅ 13分14秒诠释浪漫主义\n✅ 360℃山海全景尽收眼底",
             "time": "2022-12-12",
             "score": 1.8,
             "score_count": 5,
             "visited_time": 357,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg",
-                "images/3_3.jpg"
+                "data/scenic_spots/spot_121/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_121/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_121/reviews/review_3/images/3_2.jpg",
+                "data/scenic_spots/spot_121/reviews/review_3/images/3_3.jpg"
             ]
         },
         {
             "id": 4,
             "name": "姬霓太美babe",
-            "user_id": "user_1070",
+            "user_id": 1070,
             "content": "在海上购物中心4F检票摩天轮在5F前台接待人员服务态度不错会很耐心地讲解，摩天轮风景很美能俯看城市夜景综合来说乘坐体验不错",
             "time": "2023-01-16",
             "score": 3.0,
             "score_count": 5,
             "visited_time": 285,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg",
-                "images/4_4.jpg",
-                "images/4_5.jpg"
+                "data/scenic_spots/spot_121/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_121/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_121/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_121/reviews/review_4/images/4_3.jpg",
+                "data/scenic_spots/spot_121/reviews/review_4/images/4_4.jpg",
+                "data/scenic_spots/spot_121/reviews/review_4/images/4_5.jpg"
             ]
         },
         {
             "id": 5,
             "name": "_WeCh****351748",
-            "user_id": "user_1115",
+            "user_id": 1115,
             "content": "性价比很高，风景不错，很美，在高空观看芸芸众生，在海上飘行，心情不好的时候可以去观望观望，也许会找到不一样的心得，人生都不一样的感觉",
             "time": "2024-02-13",
             "score": 4.5,
             "score_count": 10,
             "visited_time": 823,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg",
-                "images/5_3.jpg"
+                "data/scenic_spots/spot_121/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_121/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_121/reviews/review_5/images/5_2.jpg",
+                "data/scenic_spots/spot_121/reviews/review_5/images/5_3.jpg"
             ]
         },
         {
             "id": 6,
             "name": "行者NO1",
-            "user_id": "user_1143",
+            "user_id": 1143,
             "content": "在携程买套票，玩潮汐之眼，坐厦门夜航！厦门标志性建筑潮汐之眼。这里利用了地理优势，与大海完美融合，形成了一道独特的风景线。坐在360°观景舱里，我们能够俯瞰整个海岸，感受海浪拍打在码头上，看夕阳西下落在海上。\n夜游海上。夜幕降临，这座城市变得更加迷人。我们可以乘坐游船游览厦门的两岸，欣赏夜景中的厦门双子塔。",
             "time": "2024-06-19",
             "score": 3.6,
             "score_count": 10,
             "visited_time": 204,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg"
+                "data/scenic_spots/spot_121/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_121/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_121/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_121/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_121/reviews/review_6/images/6_4.jpg"
             ]
         },
         {
             "id": 7,
             "name": "M17****993",
-            "user_id": "user_1178",
+            "user_id": 1178,
             "content": "风景不错 天气也很好 带宝宝一起玩",
             "time": "2024-10-05",
             "score": 3.3,
             "score_count": 4,
             "visited_time": 267,
             "img_list": [
-                "images/7_0.jpg"
+                "data/scenic_spots/spot_121/reviews/review_7/images/7_0.jpg"
             ]
         },
         {
             "id": 8,
             "name": "璐璐漫游记",
-            "user_id": "user_1187",
+            "user_id": 1187,
             "content": "儿童票还是挺好的，虽然优惠不多。整体上，是小朋友们喜欢的，摩天轮下来以后，有一块人工草坪，找到视角可以拍人和摩天轮全景，倒是个不错的拍照出片的地方。但整体上票价偏高。",
             "time": "2023-10-11",
             "score": 4.4,
             "score_count": 5,
             "visited_time": 220,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg",
-                "images/8_4.jpg",
-                "https://dimg04.c-ctrip.com/images/0EQ0r12000bo72di138A8_W_640_10000.jpg?proc=autoorient"
+                "data/scenic_spots/spot_121/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_121/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_121/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_121/reviews/review_8/images/8_3.jpg",
+                "data/scenic_spots/spot_121/reviews/review_8/images/8_4.jpg",
+                "data/scenic_spots/spot_121/reviews/review_8/images/8_5.jpg"
             ]
         },
         {
             "id": 9,
             "name": "幸运的小卖家",
-            "user_id": "user_1259",
+            "user_id": 1259,
             "content": "13分14秒的潮汐之眼摩天轮\n2023第一篇笔记就是逃去温暖一点的地方旅游\n天津太冷了…楼下的河水都结冰\n厦门旅行开始啦\n厦门真的好温暖 白天大太阳温度20度\n穿个卫衣就好啦\n潮汐之眼很美很美 我现在3月份去的哦，基本没什么人\n而且在上面能眺望大沧大桥\n晚上去、晚上去、好美",
             "time": "2023-03-03",
             "score": 2.7,
             "score_count": 5,
             "visited_time": 914,
             "img_list": [
-                "https://dimg04.c-ctrip.com/images/0EQ1512000aqgy7j9E9D8_W_640_10000.jpg?proc=autoorient",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg"
+                "data/scenic_spots/spot_121/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_121/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_121/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_121/reviews/review_9/images/9_3.jpg"
             ]
         }
     ],

@@ -4,91 +4,91 @@
         {
             "id": 0,
             "name": "Aima3125",
-            "user_id": "user_528",
+            "user_id": 528,
             "content": "上海磁浮列车是世界上第一条商业化运营的磁浮列车示范线，于2002年12月31日开通。上海磁浮列车运营线起于磁浮龙阳路站，止于浦东1号2号航站楼站，大致呈东西走向。上海磁浮列车示范运营线全长29千米，采用全高架敷设方式；设车站2座，其中高架站1座，地面站1座，列车采用4节或5节编组，设计最高运行速度为430千米/小时。",
             "time": "2025-02-04",
             "score": 3.2,
             "score_count": 9,
             "visited_time": 587,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg",
-                "images/0_4.jpg"
+                "data/scenic_spots/spot_76/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_76/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_76/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_76/reviews/review_0/images/0_3.jpg",
+                "data/scenic_spots/spot_76/reviews/review_0/images/0_4.jpg"
             ]
         },
         {
             "id": 1,
             "name": "空前绝后邓丽君",
-            "user_id": "user_557",
+            "user_id": 557,
             "content": "人生第一次乘坐磁浮列车，体验了一下中国速度。上海磁浮列车西起地铁二号线龙阳路站，东至浦东国际机场，线路全长30公里，单线运行时间仅为7分20秒，是世界上第一段投入商业运行的高速磁浮列车，也是目前世界上唯一一条高速磁浮商业运行线。它集高速、安全、舒适、节能与环保于一体，是当今全球最先进、最快速的陆上商用交通工具。如果说“上海中心大厦”、“上海环球金融中心”、“上海金茂大厦”、“东方明珠广播电视塔”等建筑代表了“上海的高度”，那么高速磁浮列车则代表了“新上海的速度”与“新上海的精神”。作为一个中国公民我感到骄傲和自豪，我爱我的祖国！",
             "time": "2020-05-27",
             "score": 1.2,
             "score_count": 4,
             "visited_time": 899,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg",
-                "images/1_6.jpg"
+                "data/scenic_spots/spot_76/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_76/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_76/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_76/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_76/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_76/reviews/review_1/images/1_5.jpg",
+                "data/scenic_spots/spot_76/reviews/review_1/images/1_6.jpg"
             ]
         },
         {
             "id": 2,
             "name": "Raul888",
-            "user_id": "user_609",
+            "user_id": 609,
             "content": "作为一个上海人，居然一次都没有坐过磁悬浮列车。这次出差回来到浦东机场，心血来潮去坐了一次磁悬浮。机场到达出来，沿着路牌指示走，很快就能找到站台，凭当日的登机牌可以40元买一张票，列车有点像日本的新干线，座位挺宽敞的，时速三百多公里非常平稳，很快就到龙阳路。",
             "time": "2021-04-02",
             "score": 4.1,
             "score_count": 9,
             "visited_time": 655,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg"
+                "data/scenic_spots/spot_76/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_76/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_76/reviews/review_2/images/2_2.jpg"
             ]
         },
         {
             "id": 3,
             "name": "M30****3741",
-            "user_id": "user_614",
+            "user_id": 614,
             "content": "An amazing feat of technology. Although bthe service at the stations wasn't up to standard, the expedited speed made up for the imperfections. I will continue to use the train in the future.性价比高，",
             "time": "2021-03-14",
             "score": 3.7,
             "score_count": 8,
             "visited_time": 902,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg",
-                "images/3_3.jpg"
+                "data/scenic_spots/spot_76/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_76/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_76/reviews/review_3/images/3_2.jpg",
+                "data/scenic_spots/spot_76/reviews/review_3/images/3_3.jpg"
             ]
         },
         {
             "id": 4,
             "name": "ken在路上",
-            "user_id": "user_633",
+            "user_id": 633,
             "content": "坐反了地铁方向，时间有点赶，为了不误机只能选择磁悬浮列车，只要七到八分钟就能从龙阳路地铁站到达浦东国际机场，发车间隔差不多30分钟。目前使用\"大都会Metro\"App支付没折扣，用公交卡或凭机票可以享受40优惠价，全价50元。",
             "time": "2018-03-23",
             "score": 3.9,
             "score_count": 10,
             "visited_time": 364,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg",
-                "images/4_4.jpg"
+                "data/scenic_spots/spot_76/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_76/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_76/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_76/reviews/review_4/images/4_3.jpg",
+                "data/scenic_spots/spot_76/reviews/review_4/images/4_4.jpg"
             ]
         },
         {
             "id": 5,
             "name": "M85****0509",
-            "user_id": "user_662",
+            "user_id": 662,
             "content": "悬浮车的概念最早由日本提出，并成功进行了行驶试验。世界上首辆磁悬浮汽车由日本开发研制，尺寸为长52厘米、宽23厘米、高14厘米，重4千克，在26米长的直线距离上成功进行了行驶试验，时速达25千米‌2。近年来，中国也在磁悬浮汽车领域进行了积极探索，如在江苏高宣高速公路上进行了时速200公里级的高速公路技术及磁浮汽车技术研究，实车最高速度一度接近230公里/小时，成功实现悬浮重量2.8吨、悬浮间隙35毫米的试验目标‌",
             "time": "2024-11-30",
             "score": 2.0,
@@ -99,51 +99,51 @@
         {
             "id": 6,
             "name": "fly_me_to_the_moon",
-            "user_id": "user_663",
+            "user_id": 663,
             "content": "上一次坐磁悬浮是2016年7月，和闺蜜们从大西北回来，到了浦东机场，想着从来没坐过磁悬浮，凭当日机票对折可以有。\n今天七号线龙阳路地铁站下来我又来坐磁悬浮啦！还不是为了节约时间么…\n排票的队伍超级长，其实刷交通卡就可以进，也是40元。\n安检后即可搭乘磁悬浮，8分钟抵达浦东国际机场，超方便的！",
             "time": "2019-09-27",
             "score": 3.6,
             "score_count": 4,
             "visited_time": 716,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg",
-                "images/6_5.jpg",
-                "images/6_6.jpg",
-                "images/6_7.jpg",
-                "images/6_8.jpg",
-                "images/6_9.jpg",
-                "images/6_10.jpg",
-                "images/6_11.jpg",
-                "images/6_12.jpg",
-                "images/6_13.jpg",
-                "images/6_14.jpg"
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_4.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_5.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_6.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_7.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_8.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_9.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_10.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_11.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_12.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_13.jpg",
+                "data/scenic_spots/spot_76/reviews/review_6/images/6_14.jpg"
             ]
         },
         {
             "id": 7,
             "name": "匿名用户",
-            "user_id": "user_765",
+            "user_id": 765,
             "content": "带着孩子乘坐体验，亲身感受磁悬列车运行，是生动的物理知识学习。列车总体运行平稳，速度控制在300公里每小时，从龙阳路到达浦东国际机场不到9分钟。",
             "time": "2024-02-16",
             "score": 4.5,
             "score_count": 6,
             "visited_time": 560,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg",
-                "images/7_3.jpg",
-                "images/7_4.jpg"
+                "data/scenic_spots/spot_76/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_76/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_76/reviews/review_7/images/7_2.jpg",
+                "data/scenic_spots/spot_76/reviews/review_7/images/7_3.jpg",
+                "data/scenic_spots/spot_76/reviews/review_7/images/7_4.jpg"
             ]
         },
         {
             "id": 8,
             "name": "喊你们来玩吸吸乐",
-            "user_id": "user_789",
+            "user_id": 789,
             "content": "🚀磁悬浮，飞一般的感觉！🚀\n\n🌟速度与激情，磁悬浮来啦！🌟\n💨想象一下，一辆列车在空中飞驰，没有轮子，没有轨道，只有速度与科技的完美结合。这就是磁悬浮列车，带你感受未来交通的魅力！\n\n🚀穿越城市的时空隧道，磁悬浮带你飞🚀\n🌈坐上这列未来列车，感受风的速度，看城市的繁华在窗外流转，每一站都是一次全新的旅程。\n\n😍告别拥堵，磁悬浮让时间为你静止😍\n🔥忘掉那些塞车的烦恼，磁悬浮列车让你的出行变得轻松又快捷，享受高效的通勤生活，每一刻都是美好的开始。\n\n🌌穿梭在未来的城市轨道，磁悬浮给你星际旅行的体验🌌\n🌟这不仅仅是出行，更是一次探索未来科技的冒险，磁悬浮列车，让你的每一次出行都充满期待和惊喜。\n\n🌱绿色出行，磁悬浮引领新潮流🌱\n🌿速度快，又环保，磁悬浮列车让你在享受速度的同时，也为地球贡献一份力量。快来加入磁悬浮的绿色出行行列吧！",
             "time": "2024-11-19",
             "score": 3.2,
@@ -154,18 +154,18 @@
         {
             "id": 9,
             "name": "_WeCh****992753",
-            "user_id": "user_790",
+            "user_id": 790,
             "content": "这里值得去，亮点是磁悬浮列车最高时速可达每小时300公里，八分钟可以到达上海浦东机场，我推荐大家到上海后做一下磁悬浮列车。",
             "time": "2024-07-29",
             "score": 1.1,
             "score_count": 9,
             "visited_time": 939,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg",
-                "images/9_4.jpg"
+                "data/scenic_spots/spot_76/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_76/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_76/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_76/reviews/review_9/images/9_3.jpg",
+                "data/scenic_spots/spot_76/reviews/review_9/images/9_4.jpg"
             ]
         }
     ],

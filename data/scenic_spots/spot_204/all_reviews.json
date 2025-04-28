@@ -4,179 +4,179 @@
         {
             "id": 0,
             "name": "巧子仙子",
-            "user_id": "user_1820",
+            "user_id": 1820,
             "content": "九马画山非常值得一游，桂林山水甲天下，山美水美，九马画山很壮观，很形象！九匹马在山上，奔腾向前，美不胜收！推荐大家去一游！",
             "time": "2025-02-06",
             "score": 2.2,
             "score_count": 9,
             "visited_time": 537,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg"
+                "data/scenic_spots/spot_204/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_204/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_204/reviews/review_0/images/0_2.jpg"
             ]
         },
         {
             "id": 1,
             "name": "顺时针1986",
-            "user_id": "user_1833",
+            "user_id": 1833,
             "content": "清明澄澈的漓江水边罗列着无数秀丽奇特的山，在这百来里如画的江山中又数九马画山是最奇特的了。一座峰峦重叠的大山象给什么神斧劈去了一半，再经过了打磨似的，光滑平展如同一块巨大无比的画布，就在这块高悬在青天上的大画布上面，画着一幅气势雄伟的万马奔腾图，那些马栩栩如生的样子真是鬼斧神工。\n\n九马画山在漓江东岸画山村附近，距桂林约60公里处，山高400余米，宽200米。马图呈九首，奇物在人间。山面如削，石壁上有白、黄、灰、黑等色，色彩斑斓，呈现出马的画像，名画山，马图最多可见九匹，又名九马画山。细看山壁石纹可依稀辩出群马形象。\n\n九马画山是大自然的笔墨奇观。一般坐游船或竹筏游览，船行到这里，距离阳朔县城也不远哦。我们乘坐的游船是从桂林的竹江码头到阳朔码头，船行时间大约4小时，途径杨堤、九马画山、黄布倒影等漓江沿岸的精华景点，而且游船上有讲解，到了精华景点会自动开启讲解模式。",
             "time": "2020-06-17",
             "score": 1.5,
             "score_count": 9,
             "visited_time": 247,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg"
+                "data/scenic_spots/spot_204/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_204/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_204/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_204/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_204/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_204/reviews/review_1/images/1_5.jpg"
             ]
         },
         {
             "id": 2,
             "name": "vivienvivien",
-            "user_id": "user_1866",
+            "user_id": 1866,
             "content": "九马画山是从桂林坐游船游漓江去阳朔时的一个景点，据说远看山体不同颜色加上树木的形成了九个不同型壮马的样子，主要还是要凭自己想象了。离兴坪古镇没有多远。时间充足的话可以在浅滩地方玩玩水。需要注意的是岸边的蚊子比较的多。",
             "time": "2018-04-04",
             "score": 4.0,
             "score_count": 8,
             "visited_time": 574,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg",
-                "images/2_4.jpg",
-                "images/2_5.jpg"
+                "data/scenic_spots/spot_204/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_204/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_204/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_204/reviews/review_2/images/2_3.jpg",
+                "data/scenic_spots/spot_204/reviews/review_2/images/2_4.jpg",
+                "data/scenic_spots/spot_204/reviews/review_2/images/2_5.jpg"
             ]
         },
         {
             "id": 3,
             "name": "yoyolove7788",
-            "user_id": "user_1897",
+            "user_id": 1897,
             "content": "桂林漓江九马画山，如果你静下心来，那这就是一副山水画，九马画山没有人工划的竹筏了，都是电动的，来回45分钟时间，如果人工划要两个小时了。那天去天气好，漓江的泥水没有翻上来，漓江很美九马画山很美。",
             "time": "2020-11-12",
             "score": 2.9,
             "score_count": 9,
             "visited_time": 566,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg",
-                "images/3_3.jpg",
-                "images/3_4.jpg"
+                "data/scenic_spots/spot_204/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_204/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_204/reviews/review_3/images/3_2.jpg",
+                "data/scenic_spots/spot_204/reviews/review_3/images/3_3.jpg",
+                "data/scenic_spots/spot_204/reviews/review_3/images/3_4.jpg"
             ]
         },
         {
             "id": 4,
             "name": "匿名用户",
-            "user_id": "user_1939",
+            "user_id": 1939,
             "content": "📍位置：广西桂林市，距离桂林市区56公里\n\n🌄阳朔的美，真的是无法用语言来形容的。它就像是一个藏在山水画中的世外桃源，让人心旷神怡。一踏上这片土地，就能感受到那种清新自然的气息，仿佛所有的烦恼都随风而逝。\n\n🏞️自然风光：阳朔的山水是出了名的美。你可以乘坐竹筏漂流在大自然的鬼斧神工。",
             "time": "2024-07-24",
             "score": 1.4,
             "score_count": 7,
             "visited_time": 528,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg",
-                "images/4_4.jpg"
+                "data/scenic_spots/spot_204/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_204/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_204/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_204/reviews/review_4/images/4_3.jpg",
+                "data/scenic_spots/spot_204/reviews/review_4/images/4_4.jpg"
             ]
         },
         {
             "id": 5,
             "name": "",
-            "user_id": "user_1981",
+            "user_id": 1981,
             "content": "漓江，属珠江流域西江水系，为支流桂江上游河段的通称，位于广西壮族自治区东北部。传统意义上的漓江起点为桂江源头越城岭猫儿山，现代水文定义为兴安县溶江镇灵渠口，终点为平乐三江口。漓江上游河段为大溶江，下游河段为传统名称的桂江。\n灵渠河口为桂江大溶江段和漓江段的分界点，荔浦河、恭城河口为漓江段和桂江段的分界点。漓江段全长164公里。沿江河床多为水质卵石，泥沙量小，水质清澈，两岸多为岩溶地貌。旅游资源丰富，著名的桂林山水就在漓江上。",
             "time": "2018-04-08",
             "score": 2.3,
             "score_count": 6,
             "visited_time": 583,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg"
+                "data/scenic_spots/spot_204/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_204/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_204/reviews/review_5/images/5_2.jpg"
             ]
         },
         {
             "id": 6,
             "name": "天涯乐逍遥",
-            "user_id": "user_2013",
+            "user_id": 2013,
             "content": "九马画山景区是漓江边上的旅游胜地，她临江而立，石壁如削，景致迷人。九马画山下的峡谷漂流更是天下一绝，咫尺漓江300米，独特的漂流河道设计让游客如入仙境博舟，似在画中畅游。",
             "time": "2018-03-21",
             "score": 3.7,
             "score_count": 7,
             "visited_time": 910,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg"
+                "data/scenic_spots/spot_204/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_204/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_204/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_204/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_204/reviews/review_6/images/6_4.jpg"
             ]
         },
         {
             "id": 7,
             "name": "qianjiangyue",
-            "user_id": "user_2040",
+            "user_id": 2040,
             "content": "九马画山是桂林漓江风景区主要景点之一，距离兴坪古镇5至6公里，徒步漓江，从兴坪古镇出发，步行一个多小时才走到九马画山，沿江风光秀丽，优美自然，空气清新，适合休闲旅游。",
             "time": "2021-01-01",
             "score": 4.4,
             "score_count": 4,
             "visited_time": 966,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg",
-                "images/7_3.jpg",
-                "images/7_4.jpg",
-                "images/7_5.jpg",
-                "images/7_6.jpg",
-                "images/7_7.jpg"
+                "data/scenic_spots/spot_204/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_204/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_204/reviews/review_7/images/7_2.jpg",
+                "data/scenic_spots/spot_204/reviews/review_7/images/7_3.jpg",
+                "data/scenic_spots/spot_204/reviews/review_7/images/7_4.jpg",
+                "data/scenic_spots/spot_204/reviews/review_7/images/7_5.jpg",
+                "data/scenic_spots/spot_204/reviews/review_7/images/7_6.jpg",
+                "data/scenic_spots/spot_204/reviews/review_7/images/7_7.jpg"
             ]
         },
         {
             "id": 8,
             "name": "201****891",
-            "user_id": "user_2084",
+            "user_id": 2084,
             "content": "乘船从桂林的竹江码头乘游船到阳朔。游船在漓江上行驶，中途会经过不少著名景点。九马画山就是其中比较著名的一个景点。\n山体很大，面对漓江的一面，上下山势比较陡峭，切面也比较平整，就像一扇屏风面对江水。因为山上的树木植被，山体的皲裂和褶皱，地形的高低起伏，在人们的想象中，这些因素组合就造就了不同的动物形象。据说可以在山崖上看到九匹马，想象力越好，看到的越多。不少游客乘船游的时候，会在这里数数有多少匹马。\n过了九马画山，行船不远就到了兴平镇了。",
             "time": "2021-07-12",
             "score": 2.9,
             "score_count": 9,
             "visited_time": 199,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg",
-                "images/8_4.jpg",
-                "images/8_5.jpg",
-                "images/8_6.jpg",
-                "images/8_7.jpg"
+                "data/scenic_spots/spot_204/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_204/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_204/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_204/reviews/review_8/images/8_3.jpg",
+                "data/scenic_spots/spot_204/reviews/review_8/images/8_4.jpg",
+                "data/scenic_spots/spot_204/reviews/review_8/images/8_5.jpg",
+                "data/scenic_spots/spot_204/reviews/review_8/images/8_6.jpg",
+                "data/scenic_spots/spot_204/reviews/review_8/images/8_7.jpg"
             ]
         },
         {
             "id": 9,
             "name": "酒仙老周",
-            "user_id": "user_2128",
+            "user_id": 2128,
             "content": "漓江风光在阳朔段，冬天的漓江水非常的清澈，在绿水青山就是金山银山的指导思想下，桂林的山水也愈发美丽了！在九马画山的码头上坐上电动筏子溯江而上，一江美景熟悉的好似昨日，记忆中的漓江水就应该是这样的，天若是再暖点就更好了！\n【景色】\n【趣味】\n【性价比】",
             "time": "2020-02-08",
             "score": 2.5,
             "score_count": 6,
             "visited_time": 185,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg",
-                "images/9_4.jpg",
-                "images/9_5.jpg",
-                "https://dimg04.c-ctrip.com/images/100l1d000001ebsay20F5_W_640_10000.jpg?proc=autoorient",
-                "images/9_7.jpg",
-                "images/9_8.jpg"
+                "data/scenic_spots/spot_204/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_204/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_204/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_204/reviews/review_9/images/9_3.jpg",
+                "data/scenic_spots/spot_204/reviews/review_9/images/9_4.jpg",
+                "data/scenic_spots/spot_204/reviews/review_9/images/9_5.jpg",
+                "data/scenic_spots/spot_204/reviews/review_9/images/9_6.jpg",
+                "data/scenic_spots/spot_204/reviews/review_9/images/9_7.jpg",
+                "data/scenic_spots/spot_204/reviews/review_9/images/9_8.jpg"
             ]
         }
     ],

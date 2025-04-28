@@ -4,186 +4,186 @@
         {
             "id": 0,
             "name": "鲲哥爱旅游",
-            "user_id": "user_2310",
+            "user_id": 2310,
             "content": "《印象·刘三姐》是大型桂林山水实景演出，曾开创了中国旅游实景演出的先河，也是张艺谋“印象”系列的开山鼻祖。2004年3月，《印象•刘三姐》在阳朔开始公演，至今已达6500场，接待观众近1600万人次。",
             "time": "2024-05-24",
             "score": 4.8,
             "score_count": 6,
             "visited_time": 142,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg",
-                "images/0_4.jpg",
-                "images/0_5.jpg",
-                "images/0_6.jpg",
-                "images/0_7.jpg",
-                "images/0_8.jpg",
-                "images/0_9.jpg",
-                "images/0_10.jpg",
-                "images/0_11.jpg",
-                "images/0_12.jpg",
-                "images/0_13.jpg",
-                "images/0_14.jpg"
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_3.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_4.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_5.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_6.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_7.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_8.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_9.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_10.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_11.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_12.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_13.jpg",
+                "data/scenic_spots/spot_255/reviews/review_0/images/0_14.jpg"
             ]
         },
         {
             "id": 1,
             "name": "小味爱旅行",
-            "user_id": "user_2339",
+            "user_id": 2339,
             "content": "《印象刘三姐》是一场令人叹为观止的视听盛宴，它不仅是一部演出，更是一次深入灵魂的文化体验。\n总之，《印象刘三姐》是一部值得一看再看的演出。它以其独特的艺术形式和深刻的文化内涵，成为了中国山水实景演出的典范。无论是对自然之美的展现，还是对民族文化的传承，它都做到了极致。这是一部让人心潮澎湃、难以忘怀的作品。",
             "time": "2024-12-25",
             "score": 3.4,
             "score_count": 4,
             "visited_time": 937,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg"
+                "data/scenic_spots/spot_255/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_255/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_255/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_255/reviews/review_1/images/1_3.jpg"
             ]
         },
         {
             "id": 2,
             "name": "鹿枫Jackson",
-            "user_id": "user_2346",
+            "user_id": 2346,
             "content": "时隔五年 再一次来阳朔旅行 上次来因为下大雨 没能看到《印象·刘三姐》所以这次是奔着演出来的 而且特意提前在网上买了VIP的票\n看过不少国内的山水实景演出 本以为不会有太大的感受 可是远山的灯光亮起的时候 还是非常激动的 \n来之前看了很多点评 有些人吐槽说看不懂演出 我却不这么认为 演出本身的确没有明确的故事脉络 但是却用艺术的手法展现了广西少数民族的生活 也让我感受到了大师的艺术高度 十几年前的创意到现在仍然经久不衰 这就是艺术本身的魅力 \n让我惊喜的不仅是演出 园区里的博物馆和竹笼灯都让我特别惊喜 本以为是个普通的景区配套设施 可没想到 到处都是可以打卡拍照的网红经典 发朋友圈倍儿有面子 好多朋友都以为在日本 没想到 国内的景区也能这么洋气 \n凭心而论 五星好评 真的不虚此行！",
             "time": "2019-09-20",
             "score": 1.4,
             "score_count": 10,
             "visited_time": 14,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg",
-                "images/2_4.jpg",
-                "images/2_5.jpg",
-                "images/2_6.jpg"
+                "data/scenic_spots/spot_255/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_255/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_255/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_255/reviews/review_2/images/2_3.jpg",
+                "data/scenic_spots/spot_255/reviews/review_2/images/2_4.jpg",
+                "data/scenic_spots/spot_255/reviews/review_2/images/2_5.jpg",
+                "data/scenic_spots/spot_255/reviews/review_2/images/2_6.jpg"
             ]
         },
         {
             "id": 3,
             "name": "小蜜桃爸爸爱遛娃",
-            "user_id": "user_2360",
+            "user_id": 2360,
             "content": "《印象刘三姐》是大型桂林山水实景演出，《印象刘三姐》讲述的是壮族民间传说人物刘三姐的故事，刘三姐的歌谣享誉海内外，景区位于东街田园路1号，《印象刘三姐》曾经是桂林阳朔最有名的表演，而现在更多人会选择去看《桂林千古情》。从阳朔西街打车前往大概有2公里，打车10元左右，在西街入口也有前往《印象刘三姐》的专车，5元/人。《印象刘三姐》的门票也是分等级的，分B1席和B2席，在途牛上预定，B2座位的票价是198，B1座位的票价是280，基本都是露天的座位席和舞台。演出每天有两场，第一场是晚上7点40分，第二场是晚上9点20分。表演时间约为1小时左右。\n《印象刘三姐》的总导演是张艺谋，张艺谋导演的节目，说实话我是有点看不懂，因此我觉得这个票价有点不值，整个表演，讲述的都是桂林少数民族的文化，没有什么讲解，游客很难理解。张艺谋导演的，基本都是人海战术的，表演的演员非常多，看上去很震撼，但实际内容不知道，这是《印象刘三姐》值得改善的一点。给我留下印象比较深刻的是舞台背后的群山，这是实景演出，灯光照在后面的群山所呈现出的画面是很难看到的。",
             "time": "2019-06-08",
             "score": 4.0,
             "score_count": 4,
             "visited_time": 292,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg",
-                "images/3_3.jpg",
-                "images/3_4.jpg"
+                "data/scenic_spots/spot_255/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_255/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_255/reviews/review_3/images/3_2.jpg",
+                "data/scenic_spots/spot_255/reviews/review_3/images/3_3.jpg",
+                "data/scenic_spots/spot_255/reviews/review_3/images/3_4.jpg"
             ]
         },
         {
             "id": 4,
             "name": "癞河蟆",
-            "user_id": "user_2374",
+            "user_id": 2374,
             "content": "场面宏达，演员众多，估计500.600人。而且这种所谓的演员还都是农民，白天种地打鱼，晚上来参加表演的渔民。让人不得不佩服，他们的动作整齐划一。表演内容丰富，演绎了这些少数民族的日常生活，已经把妹的经过。夜间背后的山和水成了表演的背景和场地，加上光影效果。非常的耐人寻味，本来犹豫要不要看。后来觉得不虚此行。而且基本每次座无虚席（2000多个座位）住的辅特戴斯酒店走到大门口10分钟。很方便。",
             "time": "2018-04-01",
             "score": 1.7,
             "score_count": 5,
             "visited_time": 674,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg",
-                "images/4_4.jpg",
-                "images/4_5.jpg"
+                "data/scenic_spots/spot_255/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_255/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_255/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_255/reviews/review_4/images/4_3.jpg",
+                "data/scenic_spots/spot_255/reviews/review_4/images/4_4.jpg",
+                "data/scenic_spots/spot_255/reviews/review_4/images/4_5.jpg"
             ]
         },
         {
             "id": 5,
             "name": "M89****3006",
-            "user_id": "user_2392",
+            "user_id": 2392,
             "content": "《印象·刘三姐》是桂林广维文华旅游文化产业有限公司在2004年投资打造\n的大型桂林山水实景演出，由张艺谋、王潮歌、樊跃执导\n，曾开创了中国旅游实景演出的先河，是张艺谋“印象”系列的开山鼻祖。该剧以刘三姐为引，展示广西少数民族风俗风情及漓江周边百家万象",
             "time": "2025-03-15",
             "score": 2.3,
             "score_count": 4,
             "visited_time": 945,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg"
+                "data/scenic_spots/spot_255/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_255/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_255/reviews/review_5/images/5_2.jpg"
             ]
         },
         {
             "id": 6,
             "name": "_WeCh****91565",
-            "user_id": "user_2409",
+            "user_id": 2409,
             "content": "还是很震撼的，不过觉得坐前排好一些，对山歌的时候是没有音响的后面听不了，前排右侧双号的部分最好，网评去了后悔不去更后悔，觉得还是值得一看的，不过有的演员不太敬业，毕竟好多都是普通村民，总体表现的就是原始的生活",
             "time": "2018-04-22",
             "score": 1.6,
             "score_count": 10,
             "visited_time": 411,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg",
-                "images/6_5.jpg",
-                "images/6_6.jpg"
+                "data/scenic_spots/spot_255/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_255/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_255/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_255/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_255/reviews/review_6/images/6_4.jpg",
+                "data/scenic_spots/spot_255/reviews/review_6/images/6_5.jpg",
+                "data/scenic_spots/spot_255/reviews/review_6/images/6_6.jpg"
             ]
         },
         {
             "id": 7,
             "name": "M23****0511",
-            "user_id": "user_2429",
+            "user_id": 2429,
             "content": "张艺谋、王潮歌导演真的很震撼、娃娃们的表演很认真！民族文化就是世界的！值得被看见",
             "time": "2024-12-05",
             "score": 4.5,
             "score_count": 10,
             "visited_time": 669,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg",
-                "images/7_3.jpg",
-                "images/7_4.jpg"
+                "data/scenic_spots/spot_255/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_255/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_255/reviews/review_7/images/7_2.jpg",
+                "data/scenic_spots/spot_255/reviews/review_7/images/7_3.jpg",
+                "data/scenic_spots/spot_255/reviews/review_7/images/7_4.jpg"
             ]
         },
         {
             "id": 8,
             "name": "xinx1216",
-            "user_id": "user_2439",
+            "user_id": 2439,
             "content": "景色秀丽，非非常非常好看好玩，值得一看🎉🎉🎉👏👏👏",
             "time": "2024-11-25",
             "score": 1.5,
             "score_count": 7,
             "visited_time": 935,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg",
-                "images/8_4.jpg",
-                "images/8_5.jpg",
-                "images/8_6.jpg"
+                "data/scenic_spots/spot_255/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_255/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_255/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_255/reviews/review_8/images/8_3.jpg",
+                "data/scenic_spots/spot_255/reviews/review_8/images/8_4.jpg",
+                "data/scenic_spots/spot_255/reviews/review_8/images/8_5.jpg",
+                "data/scenic_spots/spot_255/reviews/review_8/images/8_6.jpg"
             ]
         },
         {
             "id": 9,
             "name": "_WeCh****846010",
-            "user_id": "user_2455",
+            "user_id": 2455,
             "content": "听大家都说刘三姐不好看，就抱着这个态度和妈妈一起去看，没想到格外的惊喜！！！千古情我也看过，感觉真没刘三姐好看，刘三姐坐在漓江上，吹着江边和山上的风真的不热，观看大型室外的表演很震撼，再一次给印象刘三姐和老谋子赞赞赞",
             "time": "2021-07-13",
             "score": 4.0,
             "score_count": 8,
             "visited_time": 66,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg",
-                "images/9_4.jpg",
-                "images/9_5.jpg"
+                "data/scenic_spots/spot_255/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_255/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_255/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_255/reviews/review_9/images/9_3.jpg",
+                "data/scenic_spots/spot_255/reviews/review_9/images/9_4.jpg",
+                "data/scenic_spots/spot_255/reviews/review_9/images/9_5.jpg"
             ]
         }
     ],

@@ -4,7 +4,7 @@
         {
             "id": 0,
             "name": "驻村干部",
-            "user_id": "user_3104",
+            "user_id": 3104,
             "content": "交运渡轮是一方便两江对岸快捷通道的一种方式，轮渡和车渡各有不同，车渡为主，轮渡很少了。",
             "time": "2025-02-14",
             "score": 3.9,
@@ -15,56 +15,56 @@
         {
             "id": 1,
             "name": "匿名用户",
-            "user_id": "user_3105",
+            "user_id": 3105,
             "content": "票价15 当浦江浏览绝对不亏 但因为不影响其他旅游线路 所以晚上结束的早 完美错过亮灯！也正常 毕竟不是给当旅游资源用的 千万注意方向 弹子石上来确定有你要玩的坐！不然要打车回来 不是很方便！",
             "time": "2025-03-11",
             "score": 3.8,
             "score_count": 8,
             "visited_time": 305,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg",
-                "images/1_6.jpg",
-                "images/1_7.jpg"
+                "data/scenic_spots/spot_327/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_327/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_327/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_327/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_327/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_327/reviews/review_1/images/1_5.jpg",
+                "data/scenic_spots/spot_327/reviews/review_1/images/1_6.jpg",
+                "data/scenic_spots/spot_327/reviews/review_1/images/1_7.jpg"
             ]
         },
         {
             "id": 2,
             "name": "M61****242",
-            "user_id": "user_3109",
+            "user_id": 3109,
             "content": "非常值得坐的 只坐单程就可以了 可以从洪崖洞坐到磁器口或返过来坐都可以  码头下后有免费班车送到古镇 或在地铁2号口楼下有车送到码头 非常方便",
             "time": "2024-10-27",
             "score": 2.2,
             "score_count": 6,
             "visited_time": 267,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg"
+                "data/scenic_spots/spot_327/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_327/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_327/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_327/reviews/review_2/images/2_3.jpg"
             ]
         },
         {
             "id": 3,
             "name": "de****14",
-            "user_id": "user_3117",
+            "user_id": 3117,
             "content": "挺好的，又便宜，又可以上二楼吹着风看周围景色。到洪崖洞码头买15块钱的门票就可以取到弹子石老街这边，也可以30元去瓷器口，在船上拍照不错。建议大家坐坐。",
             "time": "2024-11-10",
             "score": 4.0,
             "score_count": 9,
             "visited_time": 36,
             "img_list": [
-                "images/3_0.jpg"
+                "data/scenic_spots/spot_327/reviews/review_3/images/3_0.jpg"
             ]
         },
         {
             "id": 4,
             "name": "_WeCh****92482",
-            "user_id": "user_3125",
+            "user_id": 3125,
             "content": "从洪崖洞往返磁器口，单程一小时，景色很棒，有车直接送到磁器口，绝对值回票价！！",
             "time": "2024-12-28",
             "score": 2.2,
@@ -75,25 +75,25 @@
         {
             "id": 5,
             "name": "北北爸比",
-            "user_id": "user_3126",
+            "user_id": 3126,
             "content": "在洪崖洞旁边坐船，要走到楼下，上下船同一个地方",
             "time": "2025-02-10",
             "score": 2.5,
             "score_count": 6,
             "visited_time": 301,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg",
-                "images/5_3.jpg",
-                "images/5_4.jpg",
-                "images/5_5.jpg"
+                "data/scenic_spots/spot_327/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_327/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_327/reviews/review_5/images/5_2.jpg",
+                "data/scenic_spots/spot_327/reviews/review_5/images/5_3.jpg",
+                "data/scenic_spots/spot_327/reviews/review_5/images/5_4.jpg",
+                "data/scenic_spots/spot_327/reviews/review_5/images/5_5.jpg"
             ]
         },
         {
             "id": 6,
             "name": "天使的小猴子",
-            "user_id": "user_3136",
+            "user_id": 3136,
             "content": "值得去体验一下，这是政府保留的非常亲民的一条轮渡⛴。可以一边乘坐观光照片，可以从不同的角度观光两江四岸的风景。不过不过轮渡⛴是有时间的，注意在码头询问具体时间。\n【性价比】\n【趣味】\n【景色】",
             "time": "2025-03-07",
             "score": 1.5,
@@ -104,7 +104,7 @@
         {
             "id": 7,
             "name": "开心每一天2689",
-            "user_id": "user_3137",
+            "user_id": 3137,
             "content": "非常棒的体验",
             "time": "2024-10-23",
             "score": 3.9,

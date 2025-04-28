@@ -4,164 +4,164 @@
         {
             "id": 0,
             "name": "M26****9704",
-            "user_id": "user_2815",
+            "user_id": 2815,
             "content": "上海的观光巴士🚌，比较下来还是这家人气和性价比都很高。以前二层是敞篷的，现在响应国家要求二层也封闭了，不过风景依然美丽😄\n春暖花开的季节买上一日票，跟着巴士🚌，在上海各大景点转上一圈，真是再好不过了。",
             "time": "2024-04-24",
             "score": 4.1,
             "score_count": 8,
             "visited_time": 82,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg"
+                "data/scenic_spots/spot_305/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_305/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_305/reviews/review_0/images/0_2.jpg"
             ]
         },
         {
             "id": 1,
             "name": "M49****5009",
-            "user_id": "user_2822",
+            "user_id": 2822,
             "content": "晚上出来夜游南京路，正好看到这边有观光车直接网上下单来这边坐车线路非常的nice，浦东浦西都可以到兜一圈要一个多小时坐着看看风景真的很不错，天气也十分的凉爽",
             "time": "2024-07-24",
             "score": 2.5,
             "score_count": 4,
             "visited_time": 591,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg"
+                "data/scenic_spots/spot_305/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_305/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_305/reviews/review_1/images/1_2.jpg"
             ]
         },
         {
             "id": 2,
             "name": "M43****244",
-            "user_id": "user_2856",
+            "user_id": 2856,
             "content": "江南游到上海这一站走不动了，搜到这个24小时巴士观光，试试看的心理～体验后觉得非常划算，听着讲解，看着风景，车开到外滩时，景色真的非常震撼！如果行程允许，晚上坐坐敞篷巴士，吹吹风～体验应该也会很棒～我们夜晚选择了坐观光游轮，很棒！图片都是在观光大巴二层第一排拍摄的～",
             "time": "2023-07-25",
             "score": 4.5,
             "score_count": 5,
             "visited_time": 43,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg",
-                "images/2_4.jpg",
-                "https://dimg04.c-ctrip.com/images/0EQ5g12000bqw2mlq2903_W_640_10000.jpg?proc=autoorient",
-                "images/2_6.jpg",
-                "images/2_7.jpg",
-                "images/2_8.jpg"
+                "data/scenic_spots/spot_305/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_305/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_305/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_305/reviews/review_2/images/2_3.jpg",
+                "data/scenic_spots/spot_305/reviews/review_2/images/2_4.jpg",
+                "data/scenic_spots/spot_305/reviews/review_2/images/2_5.jpg",
+                "data/scenic_spots/spot_305/reviews/review_2/images/2_6.jpg",
+                "data/scenic_spots/spot_305/reviews/review_2/images/2_7.jpg",
+                "data/scenic_spots/spot_305/reviews/review_2/images/2_8.jpg"
             ]
         },
         {
             "id": 3,
             "name": "启航yyy",
-            "user_id": "user_3000",
+            "user_id": 3000,
             "content": "我觉得这次来上海最满意的就是上海这个观光大巴，真的是特别实惠，省去很多事，因为如果这些沉淀自己打车的话会非常麻烦，也会，花费很多钱，我们买的是两日票，特别划算，还可以做黄浦江，轮渡，两天无限次乘坐，并且还发耳机，有讲解，很满意！",
             "time": "2018-12-03",
             "score": 3.7,
             "score_count": 6,
             "visited_time": 289,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg",
-                "images/3_3.jpg",
-                "images/3_4.jpg"
+                "data/scenic_spots/spot_305/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_305/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_305/reviews/review_3/images/3_2.jpg",
+                "data/scenic_spots/spot_305/reviews/review_3/images/3_3.jpg",
+                "data/scenic_spots/spot_305/reviews/review_3/images/3_4.jpg"
             ]
         },
         {
             "id": 4,
             "name": "M26****9704",
-            "user_id": "user_3003",
+            "user_id": 3003,
             "content": "这个观光巴士可以把上海大部分景点逛一遍，车票一整天有效，性价比高。双层的大巴，还有讲解。",
             "time": "2024-04-26",
             "score": 2.1,
             "score_count": 6,
             "visited_time": 428,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg"
+                "data/scenic_spots/spot_305/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_305/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_305/reviews/review_4/images/4_2.jpg"
             ]
         },
         {
             "id": 5,
             "name": "小马恒恒",
-            "user_id": "user_3015",
+            "user_id": 3015,
             "content": "坐这个游览车，除了比较费时间，其他倒还好，兜了一圈。对于游客选择乘坐，还是蛮好的，主要地点都去了。车况蛮好的，空调很冷哈哈，车也很干净，这一点很重要。坐在第二层，看得远，景观还是很不错。",
             "time": "2018-07-04",
             "score": 4.2,
             "score_count": 10,
             "visited_time": 493,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg",
-                "images/5_3.jpg"
+                "data/scenic_spots/spot_305/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_305/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_305/reviews/review_5/images/5_2.jpg",
+                "data/scenic_spots/spot_305/reviews/review_5/images/5_3.jpg"
             ]
         },
         {
             "id": 6,
             "name": "elsashen0529",
-            "user_id": "user_3025",
+            "user_id": 3025,
             "content": "在纪念建党100周年到来之际，开展“搭乘红色巴士，听移动党课”，大家怀着激动和崇敬的心情坐上红色巴士，参观了刚刚修缮好的中共一大纪念馆、中共二大会址纪念馆，通过体验式学习，共同重温红色历史、感受红色精神、传承红色基因。从一大到二大，从1921到2021，红色专车驶过的路途虽然很短，但民族复兴的漫漫长路我们已经走过了百年。党旗始终指引着我们，为建设繁荣富强的社会主义现代化国家而奋斗终身。",
             "time": "2021-06-27",
             "score": 4.4,
             "score_count": 8,
             "visited_time": 241,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg"
+                "data/scenic_spots/spot_305/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_305/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_305/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_305/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_305/reviews/review_6/images/6_4.jpg"
             ]
         },
         {
             "id": 7,
             "name": "蔚蓝爱年糕",
-            "user_id": "user_3038",
+            "user_id": 3038,
             "content": "路线规划的好，可以1、2、3、5号全乘，也可以来哪辆车乘哪辆车，随意逛逛。我们先到陆家嘴东方明珠站换票，然后上2号线，乘到上海博物馆，换1号线，因为是1号线起始站，早上的话人比较少，可以坐2层第一排，经过南京路步行街，1号线做到豫园，下来午餐游玩，结束了乘5号线到外滩，看看江景拍拍照，乘3号线逛逛结束一天的行程，3号线可以看到南浦大桥，中国馆。",
             "time": "2020-10-05",
             "score": 4.8,
             "score_count": 4,
             "visited_time": 928,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg"
+                "data/scenic_spots/spot_305/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_305/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_305/reviews/review_7/images/7_2.jpg"
             ]
         },
         {
             "id": 8,
             "name": "童小佟",
-            "user_id": "user_3080",
+            "user_id": 3080,
             "content": "【景色】可以看到沿途风光，又能快速的将上海部分标志性地点有所了解，况且十多趟线路，的确无敌！\n【趣味】我坐的是申城观光巴士，无论司机还是乘务都是非常好，态度好，解释清晰，而且还幽默！\n\n【性价比】这个看你怎么想！如果你刚到上海，好多地方还搞不清，那就坐这个，据说票有效期一个是24H，一个是48H，两者差了10块钱！但是这些线路你可以随便换乘啊！所以只要你想，你有时间，就可以把所有线路都感受一下，那么性价比很高！若是其他情况的话，那这性价比只能说很一般！！",
             "time": "2019-07-11",
             "score": 2.3,
             "score_count": 6,
             "visited_time": 985,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg"
+                "data/scenic_spots/spot_305/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_305/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_305/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_305/reviews/review_8/images/8_3.jpg"
             ]
         },
         {
             "id": 9,
             "name": "M43****846",
-            "user_id": "user_3119",
+            "user_id": 3119,
             "content": "之前在评论上看到的，原来真的，如你网上订票的，你想问那换票点在那，根本不会说，更气是巴士上工作人也不说，让你自己找。现在在这里分享下在网上订票取点在那。我订票在外滩取票的，导航会带到你取票点附近，但不是那里的。在工商银行对面，有间星巴克，再往前走一点，在门号391里面。还有上车时明明可换耳机的，有的司机就是不给，态度差！最后还是有好的司机给了。观光巴土坐1,3线差不多够了，或坐1,2线。5线不推荐！订37元日票够了。",
             "time": "2018-08-10",
             "score": 4.6,
             "score_count": 9,
             "visited_time": 22,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg"
+                "data/scenic_spots/spot_305/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_305/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_305/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_305/reviews/review_9/images/9_3.jpg"
             ]
         }
     ],

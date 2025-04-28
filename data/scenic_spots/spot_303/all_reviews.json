@@ -4,177 +4,177 @@
         {
             "id": 0,
             "name": "M50****5365",
-            "user_id": "user_2793",
+            "user_id": 2793,
             "content": "先不得不说一下这真的是我觉得最棒的一个景区了，景区里面也有很多的小吃 ，还有很多互动的外场节目，民族快闪，杂技等，特别喜欢变脸这个节目，感觉很新颖，可以在景区里面边吃边逛，也可以带小朋友一起进来游玩，特别推荐这里的虚拟空间，好玩也不会枯燥。",
             "time": "2025-01-23",
             "score": 1.2,
             "score_count": 9,
             "visited_time": 403,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg",
-                "images/0_4.jpg",
-                "images/0_5.jpg"
+                "data/scenic_spots/spot_303/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_303/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_303/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_303/reviews/review_0/images/0_3.jpg",
+                "data/scenic_spots/spot_303/reviews/review_0/images/0_4.jpg",
+                "data/scenic_spots/spot_303/reviews/review_0/images/0_5.jpg"
             ]
         },
         {
             "id": 1,
             "name": "M67****5040",
-            "user_id": "user_2802",
+            "user_id": 2802,
             "content": "来桂林必须看的桂林千古情，下了车眼前就非常震撼，给人一种在山洞里看的感觉，这个图像是刘三姐，四个面一样是为了让从每个角度都能看到，整个演出1个小时，非常的震撼，表演非常精彩，门票好像是200多，但是得分位置，位置不一样价格是不同的，看完千古情还有水上表扬。",
             "time": "2025-01-02",
             "score": 1.4,
             "score_count": 7,
             "visited_time": 183,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg"
+                "data/scenic_spots/spot_303/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_303/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_303/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_303/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_303/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_303/reviews/review_1/images/1_5.jpg"
             ]
         },
         {
             "id": 2,
             "name": "M67****5040",
-            "user_id": "user_2819",
+            "user_id": 2819,
             "content": "桂林山水甲天下，在这个人杰地灵的地方，如若想了解它的前世今生，绝不可错过桂林干古情这场大型歌舞演出。这场一生必看的演出浓缩了桂林千年的历史与民俗，将掩藏在八百里漓江山水下的八桂文化带入大家的视野，让人眼前一亮是一场视觉盛宴。",
             "time": "2024-12-30",
             "score": 4.8,
             "score_count": 5,
             "visited_time": 949,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg",
-                "images/2_4.jpg"
+                "data/scenic_spots/spot_303/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_303/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_303/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_303/reviews/review_2/images/2_3.jpg",
+                "data/scenic_spots/spot_303/reviews/review_2/images/2_4.jpg"
             ]
         },
         {
             "id": 3,
             "name": "M67****5040",
-            "user_id": "user_2829",
+            "user_id": 2829,
             "content": "“一山一幅画，一水一段情”，在千古情景区身临其境的体验一场桂林文化盛宴，一场震撼的沉浸式视觉盛宴~!这里不仅仅是一场表演，这里是一个集演出、商圈、景点于一身的综合园区。这里所展现“阳朔烟火味”异常浓烈，不愧是“一生必看的演出”。千古情是室内演出不太受天气影响，并且除了主秀演出外，里面有不少特色街区、儿童玩乐区食，很适合带小朋友游玩。阳朔古村、奇妙街、3号秘境、4号港湾互动表演、儿童戏水池、非遗文化遗产体验、民族快闪表演，各种换装民族服装、汉服等等，更显广西民族特色。真正做到老少皆宜，晴雨皆宜。\n收起へ",
             "time": "2024-08-10",
             "score": 3.9,
             "score_count": 7,
             "visited_time": 893,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg",
-                "images/3_3.jpg",
-                "images/3_4.jpg"
+                "data/scenic_spots/spot_303/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_303/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_303/reviews/review_3/images/3_2.jpg",
+                "data/scenic_spots/spot_303/reviews/review_3/images/3_3.jpg",
+                "data/scenic_spots/spot_303/reviews/review_3/images/3_4.jpg"
             ]
         },
         {
             "id": 4,
             "name": "☆久违",
-            "user_id": "user_2836",
+            "user_id": 2836,
             "content": "桂林山水甲天下，一场由宋城演艺和桂林旅股共同打造的千古情景区，来到这里能够体验到民族风情特色。无论是灯光特效还是演艺效果，都非常出色。相聚即是缘，阳朔古街的民族盛装和快闪秀，都能让游客共同参与互动。一场歌舞演出，更让大家感动惊喜。走进园区，氛围一下红火起来，虚拟空间处的长龙队伍，更是能给大家带来完美的体验感。紧张又刺激的鬼屋环境，大家纷纷赞美，来到这里，吃上一碗桂林米粉，诠释了米粉传情的故乡。许愿长廊的点滴留言，更是表明大家对美好生活的向往和对爱情完美的归宿。",
             "time": "2024-08-10",
             "score": 4.7,
             "score_count": 9,
             "visited_time": 111,
             "img_list": [
-                "images/4_0.jpg",
-                "https://dimg04.c-ctrip.com/images/1mh1912000f2ed5jyE10F_W_640_10000.jpg?proc=autoorient",
-                "images/4_2.jpg",
-                "images/4_3.jpg",
-                "images/4_4.jpg"
+                "data/scenic_spots/spot_303/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_303/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_303/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_303/reviews/review_4/images/4_3.jpg",
+                "data/scenic_spots/spot_303/reviews/review_4/images/4_4.jpg"
             ]
         },
         {
             "id": 5,
             "name": "M52****8372",
-            "user_id": "user_2861",
+            "user_id": 2861,
             "content": "桂林千古情景区真的太棒了！从精彩绝伦的演出到充满民族风情的建筑，每一处都让人陶醉。演出场面宏大，演员们的表演精湛，将桂林的历史与文化展现得淋漓尽致。景区内的美食街也让人回味无穷，特色小吃应有尽有。这里是了解桂林的绝佳之地，强烈推荐！",
             "time": "2024-08-07",
             "score": 2.6,
             "score_count": 8,
             "visited_time": 65,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg",
-                "images/5_3.jpg",
-                "images/5_4.jpg",
-                "images/5_5.jpg",
-                "https://dimg04.c-ctrip.com/images/1mh2412000f19p3enCF30_W_640_10000.jpg?proc=autoorient"
+                "data/scenic_spots/spot_303/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_303/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_303/reviews/review_5/images/5_2.jpg",
+                "data/scenic_spots/spot_303/reviews/review_5/images/5_3.jpg",
+                "data/scenic_spots/spot_303/reviews/review_5/images/5_4.jpg",
+                "data/scenic_spots/spot_303/reviews/review_5/images/5_5.jpg",
+                "data/scenic_spots/spot_303/reviews/review_5/images/5_6.jpg"
             ]
         },
         {
             "id": 6,
             "name": "M56****1397",
-            "user_id": "user_2875",
+            "user_id": 2875,
             "content": "《桂林千古情》是一场震撼人心的视听盛宴。舞台上，漓江山水的壮美、刘三姐的传奇故事被生动演绎，歌舞精彩绝伦，特效令人惊叹。它不仅展现了桂林的自然之美，更让我感受到这片土地深厚的文化底蕴，仿佛穿越千年，触摸到历史的温度，让人回味无穷。",
             "time": "2025-01-25",
             "score": 2.2,
             "score_count": 5,
             "visited_time": 359,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg"
+                "data/scenic_spots/spot_303/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_303/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_303/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_303/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_303/reviews/review_6/images/6_4.jpg"
             ]
         },
         {
             "id": 7,
             "name": "M37****8115",
-            "user_id": "user_2936",
+            "user_id": 2936,
             "content": "桂林旅游不可错过的一处景点。桂林千古情，一个给我一天还你千年的地方，能吃喝玩乐一整天，啥都有的地方，有能跟漂亮小姐姐帅气小哥哥互动的舞蹈表演，有极具历史感的火壶.打铁花非遗表演，更有贯穿历史极具感染力千古情表演更是一场震撼的表演。\n【景色】\n【景色\n【趣味】\n【性价比】",
             "time": "2025-01-25",
             "score": 2.3,
             "score_count": 4,
             "visited_time": 863,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg",
-                "images/7_3.jpg",
-                "images/7_4.jpg",
-                "images/7_5.jpg"
+                "data/scenic_spots/spot_303/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_303/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_303/reviews/review_7/images/7_2.jpg",
+                "data/scenic_spots/spot_303/reviews/review_7/images/7_3.jpg",
+                "data/scenic_spots/spot_303/reviews/review_7/images/7_4.jpg",
+                "data/scenic_spots/spot_303/reviews/review_7/images/7_5.jpg"
             ]
         },
         {
             "id": 8,
             "name": "M48****7812",
-            "user_id": "user_3019",
+            "user_id": 3019,
             "content": "放假去了桂林千古情景区，太好拍了。\n看了非遗打铁花，很是震撼！还有互动节目也精彩，表演人员特别好。\n📸建议\n✔️靖王府城门楼以仿古屋顶为背景出片效果佳\n✔️风情街和市井街有古装剧片场感\n✔️夜景灯光特别有新年氛围感，可以穿民族服装或者喜庆的年衣\n✔️小朋友可以拿鱼灯或者小灯笼道具",
             "time": "2025-01-25",
             "score": 3.6,
             "score_count": 6,
             "visited_time": 308,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg",
-                "images/8_4.jpg"
+                "data/scenic_spots/spot_303/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_303/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_303/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_303/reviews/review_8/images/8_3.jpg",
+                "data/scenic_spots/spot_303/reviews/review_8/images/8_4.jpg"
             ]
         },
         {
             "id": 9,
             "name": "M25****659",
-            "user_id": "user_3037",
+            "user_id": 3037,
             "content": "桂林千古情景区，是一场震撼心灵的穿越之旅。踏入其中，古色古香的街巷，让人仿若置身古代桂林。街头艺人的精彩杂耍，民俗集市的热闹喧嚣，处处洋溢着生活气息。夜幕降临，大型歌舞《桂林千古情》华丽上演。在声光电交织里，演绎着桂林的前世今生，让游客在短短一小时，领略这片山水的厚重文化与无尽风情 。",
             "time": "2025-01-25",
             "score": 1.2,
             "score_count": 6,
             "visited_time": 612,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg",
-                "images/9_3.jpg",
-                "images/9_4.jpg",
-                "images/9_5.jpg"
+                "data/scenic_spots/spot_303/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_303/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_303/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_303/reviews/review_9/images/9_3.jpg",
+                "data/scenic_spots/spot_303/reviews/review_9/images/9_4.jpg",
+                "data/scenic_spots/spot_303/reviews/review_9/images/9_5.jpg"
             ]
         }
     ],

@@ -4,156 +4,156 @@
         {
             "id": 0,
             "name": "M22****349",
-            "user_id": "user_2607",
+            "user_id": 2607,
             "content": "夏门鹭江夜游是值得一去的旅游项目。\n鹭江夜游是厦门市的一个知名旅游线路，拥有二十多年的历史，提供了一个独特的视角来欣赏厦门的夜景和文化。",
             "time": "2024-08-14",
             "score": 2.8,
             "score_count": 7,
             "visited_time": 596,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg"
+                "data/scenic_spots/spot_284/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_284/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_284/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_284/reviews/review_0/images/0_3.jpg"
             ]
         },
         {
             "id": 1,
             "name": "-标标-",
-            "user_id": "user_2613",
+            "user_id": 2613,
             "content": "分享一下自己的经历，各位买票一定要相信官方渠道哦！！！我在携程买了鹭江夜游的船票80元，晚上18：45从中山街打车去和平码头，乘坐的是一个胖子开的出租车。一上车胖司机就问我：买票了吗？我说：买好了。他问：买的票多少钱的？我说：80元一个人。他说：是在携程上买的？我说：对。他说：你退票吧，买这个80元的票没用的。我问为什么？他说：80的票只能在一楼，两楼三楼是上不去的，而且表演也不能看。要买136元一个人的票，才管用。我说：不会吧，我买票的时候看了介绍，一二三楼都可以坐而且有表演可以看的。他又说了一遍让我退票。我说：也没事，我去现场问一下，反正买票的时候写了可以随时退票的。然后这个胖子不说话了，过了一会儿他跟我说：你现在过去只能坐20：10的船了，现在路上堵车厉害。当时我正好手机开着百度导航，就直接说了不会吧，导航上显示道路畅通呢。然后，这个胖子说他有事拉不了我了，让我下车。我就很果断的说没问题，而且我要付钱他居然说是他的问题不收我钱。之后我就自己打车去了码头，一路顺畅根本没堵车而且顺利乘上船，还有表演看。现场买票是188元一个人，这个携程80元的票还送了一杯饮料。真的差点被忽悠了！！！",
             "time": "2020-10-30",
             "score": 3.7,
             "score_count": 9,
             "visited_time": 130,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg"
+                "data/scenic_spots/spot_284/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_284/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_284/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_284/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_284/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_284/reviews/review_1/images/1_5.jpg"
             ]
         },
         {
             "id": 2,
             "name": "_WeCh****06822",
-            "user_id": "user_2627",
+            "user_id": 2627,
             "content": "风景不错，周末吃完晚饭，跟朋友来坐一下龙船赏鹭江两岸美景，也是很惬意，虽然有点小雨，不过吹的海风，很凉爽，舒服！",
             "time": "2024-05-26",
             "score": 4.0,
             "score_count": 10,
             "visited_time": 67,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg"
+                "data/scenic_spots/spot_284/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_284/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_284/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_284/reviews/review_2/images/2_3.jpg"
             ]
         },
         {
             "id": 3,
             "name": "136****9832",
-            "user_id": "user_2634",
+            "user_id": 2634,
             "content": "一登船，就感受到了龙船的氛围，船舶很美，木偶戏很好看，船上工作人员讲解感情丰富。",
             "time": "2024-04-26",
             "score": 3.6,
             "score_count": 8,
             "visited_time": 523,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg"
+                "data/scenic_spots/spot_284/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_284/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_284/reviews/review_3/images/3_2.jpg"
             ]
         },
         {
             "id": 4,
             "name": "_WeCh****06822",
-            "user_id": "user_2643",
+            "user_id": 2643,
             "content": "吹着凉爽的海风，观赏一下非遗的布袋木偶戏，带着孩子出来看看厦门的夜景。值得来散散心！",
             "time": "2024-04-26",
             "score": 3.3,
             "score_count": 8,
             "visited_time": 983,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg"
+                "data/scenic_spots/spot_284/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_284/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_284/reviews/review_4/images/4_2.jpg"
             ]
         },
         {
             "id": 5,
             "name": "爱睡觉的猪01",
-            "user_id": "user_2686",
+            "user_id": 2686,
             "content": "哎呀，怎么讲呢？这个录像啊，就是因为白鹭比较多吧，所以这边整出这么一个名头来，嗯，但是呢，其实鹭江夜游，海风还是挺大的，即使白天风平浪静告知，晚上可能是因为超级月亮的原因还是海浪也比较大，风也比较大，如果要想去的话，小伙伴一定要多穿点衣服",
             "time": "2019-06-07",
             "score": 3.1,
             "score_count": 7,
             "visited_time": 109,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg"
+                "data/scenic_spots/spot_284/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_284/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_284/reviews/review_5/images/5_2.jpg"
             ]
         },
         {
             "id": 6,
             "name": "M82****9976",
-            "user_id": "user_2693",
+            "user_id": 2693,
             "content": "游船价格实惠，菜品种类多且美味，歌手姐姐唱歌很好听₍˄·͈༝·͈˄*₎◞ ̑̑",
             "time": "2024-08-22",
             "score": 2.9,
             "score_count": 10,
             "visited_time": 347,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg"
+                "data/scenic_spots/spot_284/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_284/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_284/reviews/review_6/images/6_2.jpg"
             ]
         },
         {
             "id": 7,
             "name": "M74****4841",
-            "user_id": "user_2696",
+            "user_id": 2696,
             "content": "景色优美，游船干净整洁，龙年乘龙船氛围满满，下次还来。",
             "time": "2024-04-27",
             "score": 3.0,
             "score_count": 4,
             "visited_time": 112,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg"
+                "data/scenic_spots/spot_284/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_284/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_284/reviews/review_7/images/7_2.jpg"
             ]
         },
         {
             "id": 8,
             "name": "M34****6511",
-            "user_id": "user_2702",
+            "user_id": 2702,
             "content": "真的很不错 景色很美 没有选择错误 推荐给大家 单加钱去包厢 包桌 看的更清楚",
             "time": "2025-02-17",
             "score": 1.3,
             "score_count": 8,
             "visited_time": 316,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg"
+                "data/scenic_spots/spot_284/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_284/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_284/reviews/review_8/images/8_2.jpg"
             ]
         },
         {
             "id": 9,
             "name": "ㅣreccoㅣ",
-            "user_id": "user_2721",
+            "user_id": 2721,
             "content": "是一個遊船行程，時間為一小時，可以將海岸線旁的美景一覽無遺。",
             "time": "2024-12-20",
             "score": 3.6,
             "score_count": 7,
             "visited_time": 420,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg"
+                "data/scenic_spots/spot_284/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_284/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_284/reviews/review_9/images/9_2.jpg"
             ]
         }
     ],

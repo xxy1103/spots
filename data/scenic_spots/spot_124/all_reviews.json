@@ -4,178 +4,178 @@
         {
             "id": 0,
             "name": "M76****1240",
-            "user_id": "user_988",
+            "user_id": 988,
             "content": "节目震撼演出很棒！海底动物非常多，游乐设施非常多，一天玩不够啊！服务好，设施齐全，值得推荐！玩的很开心，还长知识，我还会再来的！我想推荐给朋友来玩！很棒！赞赞赞！",
             "time": "2024-06-09",
             "score": 4.6,
             "score_count": 9,
             "visited_time": 753,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg",
-                "images/0_4.jpg",
-                "images/0_5.jpg",
-                "images/0_6.jpg",
-                "images/0_7.jpg",
-                "images/0_8.jpg"
+                "data/scenic_spots/spot_124/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_124/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_124/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_124/reviews/review_0/images/0_3.jpg",
+                "data/scenic_spots/spot_124/reviews/review_0/images/0_4.jpg",
+                "data/scenic_spots/spot_124/reviews/review_0/images/0_5.jpg",
+                "data/scenic_spots/spot_124/reviews/review_0/images/0_6.jpg",
+                "data/scenic_spots/spot_124/reviews/review_0/images/0_7.jpg",
+                "data/scenic_spots/spot_124/reviews/review_0/images/0_8.jpg"
             ]
         },
         {
             "id": 1,
             "name": "WH1962",
-            "user_id": "user_1029",
+            "user_id": 1029,
             "content": "华夏文旅西安度假区项目包括西安华夏文旅大剧院、西安华夏文旅海洋公园、西安华夏文旅水世界、西安先祖部落景区及餐饮商业等配套设施。华夏文旅大剧院全天候上演会跑的实景演艺《驼铃传奇》秀，首创旋转行走式观众席，将现代高新科技与驼道丝路的传奇历史文化经典相融合，给观众带来超凡的视觉体验和心灵震撼，以正能量传播西安最辉煌历史时期的文化传奇。",
             "time": "2023-05-15",
             "score": 3.4,
             "score_count": 6,
             "visited_time": 522,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg"
+                "data/scenic_spots/spot_124/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_124/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_124/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_124/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_124/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_124/reviews/review_1/images/1_5.jpg"
             ]
         },
         {
             "id": 2,
             "name": "M51****6309",
-            "user_id": "user_1083",
+            "user_id": 1083,
             "content": "【景色】绿化做得特别好\n【趣味】性价比超级的高趣味性很强\n【性价比】游玩的项目非常的多，性价比比较高",
             "time": "2024-06-21",
             "score": 3.7,
             "score_count": 10,
             "visited_time": 973,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg",
-                "images/2_4.jpg"
+                "data/scenic_spots/spot_124/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_124/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_124/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_124/reviews/review_2/images/2_3.jpg",
+                "data/scenic_spots/spot_124/reviews/review_2/images/2_4.jpg"
             ]
         },
         {
             "id": 3,
             "name": "聚集记忆的时间0",
-            "user_id": "user_1128",
+            "user_id": 1128,
             "content": "华夏文旅西安度假区给我留下了深刻的印象！这里不仅有美丽的自然风光，还有丰富的人文景观。服务热情周到，让我们感受到了宾至如归的体验。强烈推荐给想要探索西安的朋友们！",
             "time": "2024-09-07",
             "score": 3.2,
             "score_count": 6,
             "visited_time": 161,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg"
+                "data/scenic_spots/spot_124/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_124/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_124/reviews/review_3/images/3_2.jpg"
             ]
         },
         {
             "id": 4,
             "name": "_CFT01****9156998",
-            "user_id": "user_1145",
+            "user_id": 1145,
             "content": "《驼铃传奇》秀，停演152天之后于2019年5月25日重新启航。当天演出开演三场，对细节变更，大型旋转舞台的保养，维护。旅友们看完都是赞不绝口。狠优惠找我，一三一一零四二四一二三威信同步。驼铃传奇秀，一带一路，丝绸之路。",
             "time": "2019-05-27",
             "score": 2.1,
             "score_count": 9,
             "visited_time": 470,
             "img_list": [
-                "images/4_0.jpg",
-                "images/4_1.jpg",
-                "images/4_2.jpg",
-                "images/4_3.jpg",
-                "images/4_4.jpg",
-                "images/4_5.jpg",
-                "images/4_6.jpg",
-                "images/4_7.jpg",
-                "images/4_8.jpg",
-                "images/4_9.jpg",
-                "images/4_10.jpg"
+                "data/scenic_spots/spot_124/reviews/review_4/images/4_0.jpg",
+                "data/scenic_spots/spot_124/reviews/review_4/images/4_1.jpg",
+                "data/scenic_spots/spot_124/reviews/review_4/images/4_2.jpg",
+                "data/scenic_spots/spot_124/reviews/review_4/images/4_3.jpg",
+                "data/scenic_spots/spot_124/reviews/review_4/images/4_4.jpg",
+                "data/scenic_spots/spot_124/reviews/review_4/images/4_5.jpg",
+                "data/scenic_spots/spot_124/reviews/review_4/images/4_6.jpg",
+                "data/scenic_spots/spot_124/reviews/review_4/images/4_7.jpg",
+                "data/scenic_spots/spot_124/reviews/review_4/images/4_8.jpg",
+                "data/scenic_spots/spot_124/reviews/review_4/images/4_9.jpg",
+                "data/scenic_spots/spot_124/reviews/review_4/images/4_10.jpg"
             ]
         },
         {
             "id": 5,
             "name": "M74****2730",
-            "user_id": "user_1199",
+            "user_id": 1199,
             "content": "这次去华夏文旅体验非常棒👏🏻设施丰富齐全，尤其是亲子游乐区和表演很精彩👍 服务人员态度也很好 很专业值得推荐给想要家庭出游的朋友们🤩🌟",
             "time": "2024-11-16",
             "score": 1.3,
             "score_count": 7,
             "visited_time": 547,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg"
+                "data/scenic_spots/spot_124/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_124/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_124/reviews/review_5/images/5_2.jpg"
             ]
         },
         {
             "id": 6,
             "name": "M76****5495",
-            "user_id": "user_1209",
+            "user_id": 1209,
             "content": "西安华夏文旅西安度假区是一个融合了历史与现代、文化与娱乐的绝佳去处，提供了丰富的旅游体验项目，适合亲子游玩和寻求独特旅行体验的游客。",
             "time": "2024-06-09",
             "score": 2.3,
             "score_count": 10,
             "visited_time": 613,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg"
+                "data/scenic_spots/spot_124/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_124/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_124/reviews/review_6/images/6_2.jpg"
             ]
         },
         {
             "id": 7,
             "name": "M41****0387",
-            "user_id": "user_1226",
+            "user_id": 1226,
             "content": "里面特别好玩很值得再来一次太开心啦哈哈哈哈哈",
             "time": "2024-06-29",
             "score": 1.6,
             "score_count": 4,
             "visited_time": 574,
             "img_list": [
-                "images/7_0.jpg",
-                "images/7_1.jpg",
-                "images/7_2.jpg",
-                "images/7_3.jpg",
-                "images/7_4.jpg",
-                "images/7_5.jpg"
+                "data/scenic_spots/spot_124/reviews/review_7/images/7_0.jpg",
+                "data/scenic_spots/spot_124/reviews/review_7/images/7_1.jpg",
+                "data/scenic_spots/spot_124/reviews/review_7/images/7_2.jpg",
+                "data/scenic_spots/spot_124/reviews/review_7/images/7_3.jpg",
+                "data/scenic_spots/spot_124/reviews/review_7/images/7_4.jpg",
+                "data/scenic_spots/spot_124/reviews/review_7/images/7_5.jpg"
             ]
         },
         {
             "id": 8,
             "name": "_wech****67322",
-            "user_id": "user_1241",
+            "user_id": 1241,
             "content": "孩子特别喜欢，园区特别大，很好玩，下次再来",
             "time": "2025-01-05",
             "score": 2.0,
             "score_count": 5,
             "visited_time": 524,
             "img_list": [
-                "https://dimg04.c-ctrip.com/images/1mh7112000hlkmxvn5831_W_640_10000.jpg?proc=autoorient",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg",
-                "images/8_4.jpg",
-                "images/8_5.jpg"
+                "data/scenic_spots/spot_124/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_124/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_124/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_124/reviews/review_8/images/8_3.jpg",
+                "data/scenic_spots/spot_124/reviews/review_8/images/8_4.jpg",
+                "data/scenic_spots/spot_124/reviews/review_8/images/8_5.jpg"
             ]
         },
         {
             "id": 9,
             "name": "赵慢慢_",
-            "user_id": "user_1336",
+            "user_id": 1336,
             "content": "设施特别完善，奔着演出来的，不妄此行",
             "time": "2024-06-21",
             "score": 2.0,
             "score_count": 9,
             "visited_time": 130,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "https://dimg04.c-ctrip.com/images/1mh6n12000eji8g1m822A_W_640_10000.jpg?proc=autoorient",
-                "https://dimg04.c-ctrip.com/images/1mh5612000eji8aypC29C_W_640_10000.jpg?proc=autoorient",
-                "https://dimg04.c-ctrip.com/images/1mh1412000ejicb2yA9BC_W_640_10000.jpg?proc=autoorient"
+                "data/scenic_spots/spot_124/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_124/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_124/reviews/review_9/images/9_2.jpg",
+                "data/scenic_spots/spot_124/reviews/review_9/images/9_3.jpg",
+                "data/scenic_spots/spot_124/reviews/review_9/images/9_4.jpg"
             ]
         }
     ],

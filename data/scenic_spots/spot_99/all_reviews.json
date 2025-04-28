@@ -4,82 +4,82 @@
         {
             "id": 0,
             "name": "秦添Sunning",
-            "user_id": "user_814",
+            "user_id": 814,
             "content": "亚龙湾为一个月牙湾，拥有7千米长的银白色海滩，沙质相当细腻。而这里的南海没有受到污染，海水洁净透明，远望呈现几种不同的蓝色，而水面下珊瑚种类丰富，可清楚观赏珊瑚，适合多种水面下活动包括潜水等，令海底成为了当地的旅游的核心。岸上林木郁郁葱葱。冬季这里的气温27摄氏度，水温20摄氏度，是一处理想的冬季避寒和休闲度假胜地。号称“东方夏威夷”。沿海岸一带布满多座高级酒店，包括国际五星级的假日酒店。",
             "time": "2018-11-04",
             "score": 3.5,
             "score_count": 8,
             "visited_time": 642,
             "img_list": [
-                "images/0_0.jpg",
-                "images/0_1.jpg",
-                "images/0_2.jpg",
-                "images/0_3.jpg",
-                "images/0_4.jpg",
-                "images/0_5.jpg"
+                "data/scenic_spots/spot_99/reviews/review_0/images/0_0.jpg",
+                "data/scenic_spots/spot_99/reviews/review_0/images/0_1.jpg",
+                "data/scenic_spots/spot_99/reviews/review_0/images/0_2.jpg",
+                "data/scenic_spots/spot_99/reviews/review_0/images/0_3.jpg",
+                "data/scenic_spots/spot_99/reviews/review_0/images/0_4.jpg",
+                "data/scenic_spots/spot_99/reviews/review_0/images/0_5.jpg"
             ]
         },
         {
             "id": 1,
             "name": "番禺天马行空",
-            "user_id": "user_844",
+            "user_id": 844,
             "content": "亚龙湾海底世界已建成包括海底世界半潜观光、美人礁水肺潜水、海底漫步、深海潜水摩托、香蕉船、拖曳伞、徒手潜水、玻璃观光船、快艇观光、摩托艇、冲浪飞车、沙滩摩托车等。",
             "time": "2019-02-17",
             "score": 4.1,
             "score_count": 6,
             "visited_time": 862,
             "img_list": [
-                "images/1_0.jpg",
-                "images/1_1.jpg",
-                "images/1_2.jpg",
-                "images/1_3.jpg",
-                "images/1_4.jpg",
-                "images/1_5.jpg",
-                "images/1_6.jpg"
+                "data/scenic_spots/spot_99/reviews/review_1/images/1_0.jpg",
+                "data/scenic_spots/spot_99/reviews/review_1/images/1_1.jpg",
+                "data/scenic_spots/spot_99/reviews/review_1/images/1_2.jpg",
+                "data/scenic_spots/spot_99/reviews/review_1/images/1_3.jpg",
+                "data/scenic_spots/spot_99/reviews/review_1/images/1_4.jpg",
+                "data/scenic_spots/spot_99/reviews/review_1/images/1_5.jpg",
+                "data/scenic_spots/spot_99/reviews/review_1/images/1_6.jpg"
             ]
         },
         {
             "id": 2,
             "name": "笨笨猪OY",
-            "user_id": "user_877",
+            "user_id": 877,
             "content": "在携程订票很方便，因为住的酒店就在海底世界旁边，所以下午没事就去了，本来200多一张感觉有点贵，来了一趟没有下海潜水这个就应该来讲算不用湿身的下海看海底了。要在海底世界入口换潜水服的吧台登记换纸质收据门票往里走，到海边长廊，等游船一般25分钟。坐船10多分钟会带你到潜海中间的游艇，下游艇舱左右两边就是玻璃窗，能看到海底的珊瑚，就是玻璃窗没有擦过，很脏看着含糊。",
             "time": "2018-04-11",
             "score": 2.9,
             "score_count": 6,
             "visited_time": 77,
             "img_list": [
-                "images/2_0.jpg",
-                "images/2_1.jpg",
-                "images/2_2.jpg",
-                "images/2_3.jpg",
-                "images/2_4.jpg",
-                "images/2_5.jpg"
+                "data/scenic_spots/spot_99/reviews/review_2/images/2_0.jpg",
+                "data/scenic_spots/spot_99/reviews/review_2/images/2_1.jpg",
+                "data/scenic_spots/spot_99/reviews/review_2/images/2_2.jpg",
+                "data/scenic_spots/spot_99/reviews/review_2/images/2_3.jpg",
+                "data/scenic_spots/spot_99/reviews/review_2/images/2_4.jpg",
+                "data/scenic_spots/spot_99/reviews/review_2/images/2_5.jpg"
             ]
         },
         {
             "id": 3,
             "name": "gz当地向导伊妹儿",
-            "user_id": "user_905",
+            "user_id": 905,
             "content": "亚龙湾海底世界景色迷人，虽然有玻璃器皿，仿佛置身于其中，神秘的海底世界呈现在眼前，感觉非常的不错，适合小朋友玩的地方，开心。",
             "time": "2019-08-10",
             "score": 1.2,
             "score_count": 5,
             "visited_time": 996,
             "img_list": [
-                "images/3_0.jpg",
-                "images/3_1.jpg",
-                "images/3_2.jpg",
-                "images/3_3.jpg",
-                "images/3_4.jpg",
-                "images/3_5.jpg",
-                "images/3_6.jpg",
-                "images/3_7.jpg"
+                "data/scenic_spots/spot_99/reviews/review_3/images/3_0.jpg",
+                "data/scenic_spots/spot_99/reviews/review_3/images/3_1.jpg",
+                "data/scenic_spots/spot_99/reviews/review_3/images/3_2.jpg",
+                "data/scenic_spots/spot_99/reviews/review_3/images/3_3.jpg",
+                "data/scenic_spots/spot_99/reviews/review_3/images/3_4.jpg",
+                "data/scenic_spots/spot_99/reviews/review_3/images/3_5.jpg",
+                "data/scenic_spots/spot_99/reviews/review_3/images/3_6.jpg",
+                "data/scenic_spots/spot_99/reviews/review_3/images/3_7.jpg"
             ]
         },
         {
             "id": 4,
             "name": "贩卖快乐的贝儿",
-            "user_id": "user_958",
+            "user_id": 958,
             "content": "海底世界半潜观光：乘坐由澳大利亚进口的国际最先进的半潜式海底游览船，可下潜2 - 3米，游客通过座位旁的玻璃钢窗口就能一睹海底神奇景观，整个海底观光行程约1小时。\n 玻璃观光船：透过玻璃船底，清晰观赏海底的珊瑚和热带鱼群，对于不适合潜水的游客来说是个不错的选择。",
             "time": "2025-02-04",
             "score": 1.6,
@@ -90,48 +90,48 @@
         {
             "id": 5,
             "name": "_m18****7668",
-            "user_id": "user_959",
+            "user_id": 959,
             "content": "亚龙湾海水是最好的，深蓝色。没有被污染，非常美！沙滩的沙子是金色的，细细的，光着脚在上面走很舒服，建议早上或者下午15点以后去玩。",
             "time": "2018-06-01",
             "score": 3.0,
             "score_count": 4,
             "visited_time": 440,
             "img_list": [
-                "images/5_0.jpg",
-                "images/5_1.jpg",
-                "images/5_2.jpg",
-                "images/5_3.jpg"
+                "data/scenic_spots/spot_99/reviews/review_5/images/5_0.jpg",
+                "data/scenic_spots/spot_99/reviews/review_5/images/5_1.jpg",
+                "data/scenic_spots/spot_99/reviews/review_5/images/5_2.jpg",
+                "data/scenic_spots/spot_99/reviews/review_5/images/5_3.jpg"
             ]
         },
         {
             "id": 6,
             "name": "M26****9498",
-            "user_id": "user_972",
+            "user_id": 972,
             "content": "玩了海南岛，现在海陵岛玩，这里的海很美，空气清新，还去恒大夏威夷看了房，这里的房很适合度假和养老，就在海边，第一次过来就喜欢这里了",
             "time": "2018-04-24",
             "score": 3.3,
             "score_count": 7,
             "visited_time": 412,
             "img_list": [
-                "images/6_0.jpg",
-                "images/6_1.jpg",
-                "images/6_2.jpg",
-                "images/6_3.jpg",
-                "images/6_4.jpg",
-                "images/6_5.jpg",
-                "images/6_6.jpg",
-                "images/6_7.jpg",
-                "images/6_8.jpg",
-                "images/6_9.jpg",
-                "images/6_10.jpg",
-                "images/6_11.jpg",
-                "images/6_12.jpg"
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_0.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_1.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_2.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_3.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_4.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_5.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_6.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_7.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_8.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_9.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_10.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_11.jpg",
+                "data/scenic_spots/spot_99/reviews/review_6/images/6_12.jpg"
             ]
         },
         {
             "id": 7,
             "name": "旅行生活体验",
-            "user_id": "user_1040",
+            "user_id": 1040,
             "content": "亚龙湾海底世界有丰富的海洋生物，珊瑚礁美不胜收。\n \n各种潜水项目让人亲近大海，感受海洋魅力。\n \n还有海洋表演可看。\n \n总的来说，这是一个非常有趣的海洋主题景区。",
             "time": "2024-12-13",
             "score": 1.9,
@@ -142,32 +142,32 @@
         {
             "id": 8,
             "name": "M22****7939",
-            "user_id": "user_1041",
+            "user_id": 1041,
             "content": "今天海浪较大，倾听海浪的声音，是非常不错的一种享受。看到了海鸥俯冲抓鱼的场面，可惜手机抓拍不上，动作有点慢。想倾听“鲸鱼喷水”的场累吗？可以涨潮时来听听。",
             "time": "2022-06-14",
             "score": 3.7,
             "score_count": 10,
             "visited_time": 804,
             "img_list": [
-                "images/8_0.jpg",
-                "images/8_1.jpg",
-                "images/8_2.jpg",
-                "images/8_3.jpg"
+                "data/scenic_spots/spot_99/reviews/review_8/images/8_0.jpg",
+                "data/scenic_spots/spot_99/reviews/review_8/images/8_1.jpg",
+                "data/scenic_spots/spot_99/reviews/review_8/images/8_2.jpg",
+                "data/scenic_spots/spot_99/reviews/review_8/images/8_3.jpg"
             ]
         },
         {
             "id": 9,
             "name": "老老倪",
-            "user_id": "user_1057",
+            "user_id": 1057,
             "content": "亚龙湾海底世界位于海南省三亚市亚龙湾国家旅游度假区，拥有世界上最大的、最完整的软珊瑚礁族祥以及丰富的硬珊瑚、热带鱼类等海洋生物，是世界上海底观光旅游的最佳景区之一。",
             "time": "2018-12-25",
             "score": 4.7,
             "score_count": 5,
             "visited_time": 299,
             "img_list": [
-                "images/9_0.jpg",
-                "images/9_1.jpg",
-                "images/9_2.jpg"
+                "data/scenic_spots/spot_99/reviews/review_9/images/9_0.jpg",
+                "data/scenic_spots/spot_99/reviews/review_9/images/9_1.jpg",
+                "data/scenic_spots/spot_99/reviews/review_9/images/9_2.jpg"
             ]
         }
     ],
