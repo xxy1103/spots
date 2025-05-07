@@ -13,7 +13,22 @@ from module.data_structure.merge import merge_sort
 @map.route('/<int:spot_id>') # 确保 spot_id 是整数
 @login_required
 def mapView(spot_id):
-    """显示地图页面"""
+    """
+    显示指定景点的地图页面。
+
+    **请求方法:** GET
+    **URL 参数:**
+      - `spot_id` (int): 要显示的景点的ID。
+
+    **行为:**
+      - 根据 `spot_id` 获取景点信息。
+      - 如果景点不存在，返回 404 错误。
+      - 如果景点位置信息格式不正确，返回 400 错误。
+      - 渲染 `map.html` 模板，并传递景点ID、纬度、经度和景点详细信息。
+
+    **认证:**
+      - 需要用户登录 (`@login_required`)。
+    """
     # spot_id 已经由 Flask 自动转换为整数
     spot = spotManager.getSpot(spot_id)
     if not spot:
@@ -46,7 +61,43 @@ def mapView(spot_id):
 @map.route('/<int:spot_id>/api/scenicSpots') # 确保 spot_id 是整数
 @login_required
 def scenicSpots(spot_id):
-    """获取景点数据"""
+    """
+    获取指定景点周边的其他景点数据 (POI - Points of Interest)。
+
+    **请求方法:** GET
+    **URL 参数:**
+      - `spot_id` (int): 中心景点的ID。
+
+    **返回数据格式 (成功 - 200 OK):**
+    ```json
+    // 假设 map_module.get_POI_reversal 返回的数据结构
+    {
+        "pois": [
+            {
+                "name": "周边景点A",
+                "location": "纬度,经度",
+                // ...其他POI属性
+            },
+            // ...更多POI
+        ]
+    }
+    
+    ```
+    **返回数据格式 (失败):**
+      - **404 Not Found:** 如果中心景点不存在或位置信息缺失。
+        ```json
+        {"error": "Spot not found"}
+        // 或
+        {"error": "Spot location not found"}
+        ```
+      - **500 Internal Server Error:** 如果获取POI数据失败。
+        ```json
+        {"error": "Failed to fetch POI data"}
+        ```
+
+    **认证:**
+      - 需要用户登录 (`@login_required`)。
+    """
     # spot_id 已经由 Flask 自动转换为整数
     spot = spotManager.getSpot(spot_id)
     if not spot:
@@ -67,7 +118,32 @@ def scenicSpots(spot_id):
 
 @map.route('/api/poi/<location>')
 def getPoi(location):
-    """获取兴趣点数据，合并所有类型并排序"""
+    """
+    根据指定位置获取所有类型的兴趣点 (POI) 数据，并进行合并排序。
+
+    **请求方法:** GET
+    **URL 参数:**
+      - `location` (str): 中心位置的坐标，格式通常为 "纬度,经度"。
+
+    **行为:**
+      - 从配置文件获取所有POI类型。
+      - 对每种POI类型，调用 `map_module.get_POI_reversal` 获取半径500米内的POI列表。
+      - 使用 `merge_sort` 合并所有类型的POI列表。
+      - 将合并后的列表反转（可能是为了按距离或其他标准降序排列）。
+
+    **返回数据格式 (成功 - 200 OK):**
+    ```json
+    [
+        {
+            "name": "POI 名称",
+            "distance": "距离", // 或其他排序依据的字段
+            // ...其他POI属性
+        },
+        // ...更多POI对象，已合并排序和反转
+    ]
+    ```
+    如果获取过程中出现问题或没有POI，可能返回空列表 `[]`。
+    """
     all_pois = []
     POI_types = configIo.getAllPoiTypes() # 获取所有兴趣点类型
     for poi_type in POI_types:
@@ -88,6 +164,30 @@ def getPoi(location):
 
 @map.route('/api/poi/<location>/<keyword>')
 def getPoiByKeyword(location, keyword):
+    """
+    根据指定位置和关键词（POI类型）获取兴趣点 (POI) 数据。
+
+    **请求方法:** GET
+    **URL 参数:**
+      - `location` (str): 中心位置的坐标，格式通常为 "纬度,经度"。
+      - `keyword` (str): POI的类型或关键词。
+
+    **行为:**
+      - 调用 `map_module.get_POI_reversal` 获取指定关键词和位置（半径500米内）的POI列表。
+      - 将获取的POI列表反转。
+
+    **返回数据格式 (成功 - 200 OK):**
+    ```json
+    [
+        {
+            "name": "POI 名称",
+            // ...其他POI属性
+        },
+        // ...更多POI对象，已反转
+    ]
+    ```
+    如果获取过程中出现问题或没有匹配的POI，可能返回空列表 `[]`。
+    """
     poi_list = map_module.get_POI_reversal(keyword, location, 500)
 
     # 检查返回数据是否为列表
@@ -97,7 +197,50 @@ def getPoiByKeyword(location, keyword):
 
 @map.route('/api/navigation', methods=['POST'])
 def navigation():
-    """获取导航数据"""
+    """
+    获取两点或多点之间的导航路线规划数据。
+
+    **请求方法:** POST
+    **请求类型:** JSON
+    **请求体参数:**
+    ```json
+    {
+        "points": [
+            {"lat": 纬度1, "lng": 经度1}, // 起点
+            {"lat": 纬度2, "lng": 经度2}, // 终点或途径点
+            // ...更多途径点
+        ]
+    }
+    ```
+
+    **返回数据格式 (成功 - 200 OK):**
+    ```json
+    {
+        "success": True,
+        "route": [
+            [纬度A, 经度A], // 路径点1
+            [纬度B, 经度B], // 路径点2
+            // ...更多路径点坐标
+        ],
+        "distance": 总距离, // 单位：米
+        "duration": null // 预计时间（秒），当前版本可能未实现或固定为null
+    }
+    ```
+
+    **返回数据格式 (失败):**
+      - **400 Bad Request:** 如果输入数据无效（如缺少 `points`，坐标点少于2个，或坐标点格式错误）。
+        ```json
+        {"success": False, "message": "无效的输入数据"}
+        // 或
+        {"success": False, "message": "无效的坐标点数据，至少需要两个点"}
+        // 或
+        {"success": False, "message": "坐标点格式错误，应为 {lat: number, lng: number}"}
+        ```
+      - **500 Internal Server Error:** 如果路线规划过程中发生内部错误（如地图模块规划失败）。
+        ```json
+        {"success": False, "message": "路线规划失败: <具体错误信息>"}
+        ```
+    """
     data = request.get_json()
     # 校验输入数据
     if not data or 'points' not in data: # 前端发送的是 'points'

@@ -13,6 +13,32 @@ from flask import g
 
 @api.route('/login', methods=['POST'])
 def login():
+    """
+    处理用户登录请求。
+
+    **请求方法:** POST
+    **请求类型:** JSON
+    **请求参数:**
+      - `username` (str): 用户名
+      - `password` (str): 密码
+
+    **返回数据格式 (成功 - 200 OK):**
+    ```json
+    {
+        "success": True,
+        "message": "登录成功"
+    }
+    ```
+    成功登录后，会在响应中设置一个名为 `user_session` 的HTTPOnly Cookie。
+
+    **返回数据格式 (失败 - 401 Unauthorized):**
+    ```json
+    {
+        "success": False,
+        "message": "用户名或密码错误"
+    }
+    ```
+    """
     # 获取JSON数据而非表单数据
     data = request.json
     username = data.get('username')
@@ -59,6 +85,34 @@ def login():
 
 @api.route('/guest-login', methods=['POST'])
 def guest_login():
+    """
+    处理游客登录请求。
+    创建一个临时的游客账户，并为其创建会话和设置cookie。
+
+    **请求方法:** POST
+    **请求类型:** JSON
+    **请求参数:** 无
+
+    **返回数据格式 (成功 - 200 OK):**
+    ```json
+    {
+        "success": True,
+        "message": "游客登录成功",
+        "user": {
+            "username": "guest_xxxxxxxx" // 随机生成的游客用户名
+        }
+    }
+    ```
+    成功登录后，会在响应中设置一个名为 `user_session` 的HTTPOnly Cookie。
+
+    **返回数据格式 (失败 - 400 Bad Request):**
+    ```json
+    {
+        "success": False,
+        "message": "游客登录失败"
+    }
+    ```
+    """
     # 生成随机游客用户名
     guest_username = f"guest_{secrets.token_hex(8)}"
     
@@ -106,6 +160,24 @@ def guest_login():
 from functools import wraps
 
 def login_required(f):
+    """
+    一个装饰器，用于保护需要用户登录才能访问的路由。
+
+    它会检查请求的Cookie中是否存在名为 `user_session` 的有效会话令牌，
+    并验证该令牌是否存在于服务器端的会话存储中。
+
+    **行为:**
+      - **验证成功:** 将当前用户信息（从服务器会话中获取）存储在 `flask.g.user` 中，
+        然后继续执行被装饰的视图函数。
+      - **验证失败 (API路由, e.g., /api/...)**: 返回一个JSON响应，状态码为401。
+        ```json
+        {
+            "success": False,
+            "message": "请先登录"
+        }
+        ```
+      - **验证失败 (页面路由)**: 重定向到登录页面 (通过 `url_for('login.loginView')`)。
+    """
     @wraps(f)
     def decorated_function(*args, **kwargs):
         # 获取cookie中的session_token
@@ -128,18 +200,38 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# filepath: d:\windows\desktop\数据结构课设\个性化旅游系统\app\api\routes.py
-# ... (import statements and existing code) ...
- # 确保导入 g
 
-# ... (existing routes like /login, login_required, /user-profile, /logout) ...
+
 
 @api.route('/check-session', methods=['GET'])
 @login_required  # 使用这个装饰器来验证cookie和session
 def check_session():
     """
     检查当前是否存在有效的用户会话。
-    如果 login_required 验证通过，说明用户已登录。
+    此路由受 `login_required` 装饰器保护。
+
+    **请求方法:** GET
+    **请求参数:** 无 (依赖 `user_session` Cookie 进行验证)
+
+    **返回数据格式 (成功 - 200 OK, 会话有效):**
+    ```json
+    {
+        "success": True,
+        "message": "会话有效",
+        "user": {
+            "username": "current_username"
+        }
+    }
+    ```
+
+    **返回数据格式 (失败 - 401 Unauthorized, 会话无效或未登录):**
+    (由 `login_required` 装饰器处理)
+    ```json
+    {
+        "success": False,
+        "message": "请先登录"
+    }
+    ```
     """
     # 如果代码执行到这里，说明login_required验证成功
     # g.user 已经被 login_required 设置
@@ -157,6 +249,22 @@ def check_session():
 
 @api.route('/logout', methods=['GET', 'POST'])
 def logout():
+    """
+    处理用户登出请求。
+    清除服务器端的会话信息并删除客户端的会话cookie。
+
+    **请求方法:** GET, POST
+    **请求参数:** 无 (依赖 `user_session` Cookie)
+
+    **返回数据格式 (成功 - 200 OK):**
+    ```json
+    {
+        "success": True,
+        "message": "已成功登出"
+    }
+    ```
+    成功登出后，会删除名为 `user_session` 的Cookie。
+    """
     # 获取cookie中的session_token
     session_token = request.cookies.get('user_session')
     
@@ -181,6 +289,55 @@ def logout():
 
 @api.route('/register', methods=['POST'])
 def register():
+    """
+    处理用户注册请求。
+    接收用户名、密码和兴趣标签，创建新用户。
+
+    **请求方法:** POST
+    **请求类型:** JSON
+    **请求参数:**
+      - `username` (str): 用户希望注册的用户名。
+      - `password` (str): 用户设置的密码。
+      - `selectedTags` (list of str): 用户选择的兴趣标签列表。
+
+    **返回数据格式 (成功 - 200 OK):**
+    ```json
+    {
+        "success": True,
+        "message": "注册成功"
+    }
+    ```
+
+    **返回数据格式 (失败 - 400 Bad Request, 无效输入):**
+    ```json
+    {
+        "success": False,
+        "message": "无效的请求数据" 
+    }
+    ```
+    或
+    ```json
+    {
+        "success": False,
+        "message": "缺少必要的注册信息"
+    }
+    ```
+    或
+    ```json
+    {
+        "success": False,
+        "message": "兴趣标签格式错误"
+    }
+    ```
+
+    **返回数据格式 (失败 - 409 Conflict, 用户名已存在):**
+    ```json
+    {
+        "success": False,
+        "message": "注册失败，用户名可能已存在"
+    }
+    ```
+    """
     # --- 修改这里：从 request.json 获取数据 ---
     data = request.get_json() 
     if not data:
@@ -216,7 +373,40 @@ def register():
 def recommended_spots():
     """
     获取推荐的旅游景点。
-    这里可以根据用户的兴趣标签来返回不同的推荐列表。
+    根据当前登录用户的兴趣标签返回推荐的景点列表。
+    此路由受 `login_required` 装饰器保护。
+
+    **请求方法:** GET
+    **请求参数:** 无 (依赖 `user_session` Cookie 进行用户识别)
+
+    **返回数据格式 (成功 - 200 OK):**
+    ```json
+    {
+        "success": True,
+        "spots": [
+            {
+                "name": "景点名称",
+                "id": "景点ID",
+                "score": 4.5, // 评分
+                "type": "景点类型",
+                "visited_time": 100, // 游览次数/热度
+                "img": "image_url.jpg" // 图片链接
+                // ... 其他景点相关字段
+            },
+            // ...更多景点对象
+        ]
+    }
+    ```
+    如果用户没有对应的推荐或推荐列表为空，`spots` 数组可能为空。
+
+    **返回数据格式 (失败 - 401 Unauthorized, 未登录):**
+    (由 `login_required` 装饰器处理)
+    ```json
+    {
+        "success": False,
+        "message": "请先登录"
+    }
+    ```
     """
     user = g.user
     user_id = user['user_id']
@@ -256,7 +446,45 @@ def recommended_spots():
 @login_required  # 确保用户已登录
 def search_spots():
     """
-    根据用户输入的关键词搜索景点。
+    根据用户输入的关键词、景点类型和排序方式搜索景点。
+    返回符合条件的景点列表。
+    此路由受 `login_required` 装饰器保护。
+
+    **请求方法:** GET
+    **请求参数 (Query Parameters):**
+      - `keyword` (str, 可选): 用于搜索景点名称的关键词。
+      - `type` (str, 可选): 用于筛选特定类型的景点。
+      - `sort_by` (str, 可选, 默认值: 'default'): 排序依据。
+        可选值: 'default' (默认排序), 'popularity_desc' (按热度降序)。
+
+    **返回数据格式 (成功 - 200 OK):**
+    ```json
+    {
+        "success": True,
+        "spots": [
+            {
+                "name": "景点名称",
+                "id": "景点ID",
+                "score": 4.5,
+                "type": "景点类型",
+                "visited_time": 120,
+                "img": "image_url.jpg"
+                // ... 其他景点相关字段
+            },
+            // ...更多景点对象
+        ]
+    }
+    ```
+    如果未找到匹配的景点，`spots` 数组可能为空。
+
+    **返回数据格式 (失败 - 401 Unauthorized, 未登录):**
+    (由 `login_required` 装饰器处理)
+    ```json
+    {
+        "success": False,
+        "message": "请先登录"
+    }
+    ```
     """
     keyword = request.args.get('keyword')
     spot_type = request.args.get('type')
@@ -313,5 +541,5 @@ def search_spots():
         'success': True, 
         'spots': filtered_spots
     })
-    
-        
+
+
