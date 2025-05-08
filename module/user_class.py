@@ -97,7 +97,12 @@ class User:
             "id": None, # id 应该由 userIo.addUser 分配
             "password": password, # 密码将在下面哈希
             "likes_type": liketype,
-            "reviews": []
+            "reviews": {
+                "total": 0, # 总日记数
+                "diary_ids": [], # 日记ID列表
+            },
+            "spot_marking": [],
+            "review_marking": []
         }
         # 对密码进行哈希处理
         user["password"] = hashPassword(user["password"])
