@@ -7,14 +7,123 @@
     <style>
         body { font-family: sans-serif; margin: 20px; }
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 20px; }
-        .header span { font-weight: bold; margin-right: auto; /* 让欢迎信息靠左 */}
-        .header .actions { display: flex; gap: 10px; /* 给按钮之间添加间距 */ }
+        .header span { font-weight: bold; margin-right: auto; }
+        .header .actions { display: flex; gap: 10px; }
         .header button, .header a.button { padding: 5px 10px; cursor: pointer; text-decoration: none; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 3px; color: #333; }
         .header a.button:hover { background-color: #e0e0e0; }
-        .spots-list { list-style: none; padding: 0; }
-        .spots-list li { border: 1px solid #eee; padding: 10px; margin-bottom: 10px; border-radius: 4px; }
-        .spots-list h3 { margin: 0 0 5px 0; }
-        .spots-list p { margin: 0; font-size: 0.9em; color: #555; }
+        
+        /* 标题样式优化 */
+        h2 { 
+            text-align: center; 
+            font-size: 2.5rem; 
+            text-shadow: 2px 2px 4px #f0f0f0;
+            margin-bottom: 40px;
+        }
+        
+        /* 景点网格布局 */
+        .spots-list { 
+            list-style: none; 
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 660px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .spots-list {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 景点卡片样式 */
+        .spots-list li { 
+            border: 1px solid #eee; 
+            padding: 0;
+            margin-bottom: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            transition: transform 300ms ease, box-shadow 300ms ease;
+        }
+        
+        .spots-list li:nth-child(odd) {
+            animation-delay: 100ms;
+        }
+        
+        .spots-list li:nth-child(even) {
+            animation-delay: 300ms;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .spots-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* 图片区域 */
+        .spots-list li img {
+            width: 100%;
+            height: 50%;
+            object-fit: cover;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .spot-info {
+            padding: 0.8rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-bottom: 1px solid #dfe6e9;
+        }
+        
+        .spot-info::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.05);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .spots-list li:hover .spot-info::after {
+            opacity: 1;
+        }
+        
+        .spots-list h3 { 
+            margin: 0 auto 15px auto; 
+            font-size: 1.4rem;
+            font-family: 'Noto Sans SC', sans-serif;
+            color: #2d3436;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .spots-list p { 
+            margin: 5px 0; 
+            font-size: 0.9em; 
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -32,6 +141,37 @@
     <!-- 推荐景点将在这里动态加载 -->
     <li>加载中...</li>
 </ul>
+
+<script>
+    // 修改fetchRecommendedSpots函数中的HTML生成部分
+    function fetchRecommendedSpots() {
+        fetch('/api/recommended-spots')
+            .then(response => response.json())
+            .then(data => {
+                spotsList.innerHTML = '';
+                if (data.success && data.spots && data.spots.length > 0) {
+                    data.spots.forEach(spot => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            ${spot.img ? `<img src="${spot.img}" alt="${spot.name || '未知景点'}">` : ''}
+                            <div class="spot-info">
+                                <h3><a href="/spots/spot_info/${spot.id || '未知ID'}">${spot.name || '未知景点'}</a></h3>
+                                <p>评分: ${spot.score !== undefined ? spot.score : 'N/A'}</p>
+                                <p title="${spot.type || '未知类型'}">类型: ${spot.type || '未知类型'}</p>
+                            </div>
+                        `;
+                        spotsList.appendChild(li);
+                    });
+                } else {
+                    spotsList.innerHTML = '<li>暂无推荐景点。</li>';
+                }
+            })
+            .catch(error => {
+                console.error('获取推荐景点时出错:', error);
+                spotsList.innerHTML = '<li>加载推荐景点时出错，请稍后重试。</li>';
+            });
+    }
+</script>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -103,10 +243,12 @@
                             li.innerHTML = `
                                 ${imgUrl ? `<img src="${imgUrl}" alt="${name}" style="max-width: 100px; max-height: 80px; float: left; margin-right: 10px;">` : ''}
                                 <h3><a href="/spots/spot_info/${id}">${name}</a></h3> <!-- 修改这里，将名字变为链接 -->
-                                <p>ID: ${id}</p> <!-- 可以单独显示 ID，或者如果不需要显示则移除 -->
-                                <p>评分: ${score}</p>
-                                <p>类型: ${type}</p>
-                                <p>被浏览次数: ${visitedTime}</p>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; font-family: serif; font-size: 0.9rem; line-height: 1.6; color: #636e72;">
+                                    <div>ID: ${id}</div>
+                                    <div>标签: ${type}</div>
+                                    <div>评分: ${score}</div>
+                                    <div>浏览: ${visitedTime}</div>
+                                </div>
                                 <div style="clear: both;"></div> <!-- 清除浮动 -->
                             `;
                             spotsList.appendChild(li);
