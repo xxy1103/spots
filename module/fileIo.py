@@ -137,16 +137,77 @@ class SpotIo:
             return spot["visited_time"]
         except:
             return -1
-    def spotReviewsAdd(self,spotId:int)->bool:
+
+    # Add和Decrease方法主要是保持评论数增减的一致性，
+    # 这样在SpotIo和DiaryIo中都有增减评论数的代码，避免出现“ouch，我是不是少了更新评论数的代码”的情况出现。
+    def spotReviewsAdd(self, spotId:int, save_immediately=False)->bool:
         """
-        当景区日记增加，加一
+        当景区添加新日记时，增加景点的评论数量
+    
+        Args:
+            spotId: 景点ID
+            save_immediately: 是否立即保存到文件，默认为False
+        
+        Returns:
+            bool: 更新成功返回True，失败返回False
         """
         try:
             spot = self.getSpot(spotId)
-            spot["reviews"]+=1
+            if not spot:
+                log.writeLog(f"景点 {spotId} 不存在，无法更新评论数")
+                return False
+
+            if "reviews" not in spot:
+                spot["reviews"] = 0
+
+            spot["reviews"] += 1
+            
+            # 只在需要时保存
+            if save_immediately:
+                self.saveSpots()
+                
+            log.writeLog(f"景点 {spotId} 的评论数更新为 {spot['reviews']}")
             return True
-        except:
+        except Exception as e:
+            log.writeLog(f"更新景点 {spotId} 评论数失败: {str(e)}")
             return False
+
+    def spotReviewsDecrease(self, spotId:int, save_immediately=False)->bool:
+        """
+        当景区删除日记时，减少景点的评论数量
+    
+        Args:
+            spotId: 景点ID
+            save_immediately: 是否立即保存到文件，默认为False
+    
+        Returns:
+            bool: 更新成功返回True，失败返回False
+        """
+        try:
+            spot = self.getSpot(spotId)
+            if not spot:
+                log.writeLog(f"景点 {spotId} 不存在，无法更新评论数")
+                return False
+
+            if "reviews" not in spot:
+                spot["reviews"] = 0
+                log.writeLog(f"景点 {spotId} 没有评论字段，已初始化为0")
+                return True
+
+            # 确保评论数不会小于0
+            if spot["reviews"] > 0:
+                spot["reviews"] -= 1
+            
+            # 只在需要时保存
+            if save_immediately:
+                self.saveSpots()
+                
+            log.writeLog(f"景点 {spotId} 的评论数更新为 {spot['reviews']}")
+            return True
+        except Exception as e:
+            log.writeLog(f"更新景点 {spotId} 评论数失败: {str(e)}")
+            return False
+
     def saveSpots(self):
         """
         保存景点信息到文件
@@ -289,8 +350,8 @@ class DiaryIo:
         
         # 保存到文件
         if self._saveDiaries():
-            # 更新景点评论数
-            self.spotIo.spotReviewsAdd(spot_id)
+            # 更新景点评论数，不立即保存
+            self.spotIo.spotReviewsAdd(spot_id, save_immediately=False)
             
             # 更新用户评论记录 - 修改这里的存储格式
             if "reviews" not in user:
@@ -304,7 +365,9 @@ class DiaryIo:
                 user["reviews"]["total"] += 1
                 user["reviews"]["diary_ids"].append(diary_id)
             
-            self.userIo.saveUsers()
+            # 最后，手动保存所有更改
+            self.spotIo.saveSpots()  # 保存景点数据
+            self.userIo.saveUsers()  # 保存用户数据
             
             log.writeLog(f"用户 {user_id} 为景点 {spot_id} 添加日记 {diary_id}，总日记数: {user['reviews']['total']}")
             return diary_id
