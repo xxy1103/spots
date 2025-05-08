@@ -1,25 +1,138 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <title>景点详情 - {{ spot.name }}</title> <!-- 使用 spot 字典中的 name 字段 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ spot.name }} - 景点详情</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-top: 20px;
+        }
+
+        .header {
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+        }
+
+        .spot-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .image-container {
+            border-radius: 8px;
+            overflow: hidden;
+            max-height: 400px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .metadata {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .rating {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        .description {
+            text-indent: 2em;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .spot-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ spot.name }}</h1> <!-- 这里可以展示的信息查看data/scenic_spots/spos.json的内容 -->
-    <p>ID: {{ spot.id }}</p>   
-    <p>类型: {{ spot.type }}</p> 
-    <p>评分: {{ spot.score }}</p> 
-    <p>介绍: {{ spot.introduce.介绍 }}</p> 
-    <p>简介: {{ spot.info }}</p> 
-    <p>浏览次数: {{ spot.visited_time }}</p> 
-    <!-- 显示其他景点信息 -->
-    {% if spot.img %}
-        <img src="{{ spot.img }}" alt="{{ spot.name }}"> <!-- 显示景点图片 -->
-    {% endif %}
+    <div class="container">
+        <div class="header">
+            <h1>{{ spot.name }}</h1>
+            <div class="metadata">
+                <span class="badge">{{ spot.type }}</span>
+                <span class="rating">⭐ {{ spot.score }}</span>
+                <span>👁️ {{ spot.visited_time }}次浏览</span>
+            </div>
+        </div>
 
-    <br><br> <!-- 添加一些间距 -->
-    <a href="/map/{{ spot.id }}">
-        <button>查看地图位置</button>
-    </a>
+        <div class="spot-info">
+            {% if spot.img %}
+            <div class="image-container">
+                <img src="{{ spot.img }}" alt="{{ spot.name }}封面图">
+            </div>
+            {% endif %}
 
+            <div>
+                <h2>景点介绍</h2>
+                <p class="description">{{ spot.introduce.介绍 }}</p>
+                
+                <h2>详细信息</h2>
+                <p class="description">{{ spot.info }}</p>
+
+                <a href="/map/{{ spot.id }}" class="button">
+                    查看地图位置
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
