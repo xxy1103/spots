@@ -13,7 +13,7 @@
             justify-content: flex-end;
             align-items: center;
             height: 100vh;
-            background: url('./images/bg.jpg') center center/cover no-repeat;
+            background: url('../static/background.jpg') center center/cover no-repeat;
             position: relative;
         }
         body::before {
@@ -23,28 +23,28 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0);
             z-index: 0;
         }
         .page-title {
             position: absolute;
-            top: 20px;
-            left: 300px;
+            top: 50px;
+            left: 460px;
             font-family: sans-serif;
-            font-size: 24px;
+            font-size: 28px;
             color: #fff;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             z-index: 2;
         }
         .image-container {
             position: absolute;
-            left: 90px;
-            top: 40px;
+            left: 160px;
+            top: 70px;
             transform: translateY(-50%);
-            width: 180px;
-            height: 50px;
-            background-color: black;
-            z-index: 2;
+            width: 280px;
+            height: 80px;
+            background: url('../static/dogo.png') center center/contain no-repeat;
+            z-index: 999;
         }
         .login-container {
             background-color: white;
