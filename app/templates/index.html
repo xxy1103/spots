@@ -5,12 +5,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>推荐景点</title>
     <style>
-        body { font-family: sans-serif; margin: 20px; }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 20px; }
-        .header span { font-weight: bold; margin-right: auto; }
-        .header .actions { display: flex; gap: 10px; }
-        .header button, .header a.button { padding: 5px 10px; cursor: pointer; text-decoration: none; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 3px; color: #333; }
-        .header a.button:hover { background-color: #e0e0e0; }
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            top: 20px;
+        }
+        .image-container {
+            position: absolute;
+            left: 330px;
+            top: 29px;
+            transform: translateY(-50%);
+            width: 280px;
+            height: 80px;
+            background: url('../static/dogo.png') center center/contain no-repeat;
+            z-index: 999;
+        }
+        .header span {
+            font-weight: bold;
+            position: absolute;
+            right: 32%;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            top: 22px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        .header .search-bar {
+            display: flex;
+            max-width: 400px;
+            height: 48px;
+            gap: 0px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 5px;
+        }
+        .header .search-bar select {
+            padding: 12px 16px;
+            border: 1px solid #CCCCCC;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+            min-width: 100px;
+        }
+        .header .search-input {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 46px;
+            top: 1px;
+        }
+        .header .search-input svg {
+            position: absolute;
+            left: 16px;
+            pointer-events: none;
+        }
+        .header .search-input input {
+            width: 100%;
+            height: 46px;
+            padding: 0 16px 0 48px;
+            border: 1px solid #CCCCCC;
+            border-left: none;
+            border-right: none;
+            font-size: 14px;
+        }
+        .header .search-input input::placeholder {
+            color: #999999;
+        }
+        .header .search-button {
+            padding: 12px 16px;
+            background-color: #FF6600;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .header .search-button:hover {
+            background-color: #E55C00;
+        }
+        .header .search-button:active {
+            transform: translateY(1px);
+        }
+        .header .actions {
+            display: flex;
+            gap: 10px;
+            position: absolute;
+            right: 29%;
+            top: 15px;
+        }
+        .header button, .header a.button {
+            padding: 0;
+            cursor: pointer;
+            text-decoration: none;
+            background-color: transparent;
+            border: none;
+            color: #333;
+        }
+        .header a.button:hover {
+            color: #0066cc;
+        }
+        #logout-button {
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        #logout-button:hover {
+            color: #0066cc;
+        }
+        
+        @media (max-width: 768px) {
+            .header .search-bar { height: 40px; }
+            .header .search-button span { display: none; }
+            .header .search-button::after { content: "🔍"; }
+        }
         
         /* 标题样式优化 */
         h2 { 
@@ -18,6 +140,7 @@
             font-size: 2.5rem; 
             text-shadow: 2px 2px 4px #f0f0f0;
             margin-bottom: 40px;
+            margin-top: 100px;
         }
         
         /* 景点网格布局 */
@@ -29,12 +152,19 @@
             gap: 30px;
             max-width: 660px;
             margin: 0 auto;
+            margin-top: 100px;
         }
         
         @media (max-width: 768px) {
             .spots-list {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
         }
         
         /* 景点卡片样式 */
@@ -129,9 +259,22 @@
 <body>
 
     <div class="header">
-        <span>欢迎, <span id="username">访客</span>!</span>
+        <div class="image-container"></div>
+        <span id="username">访客</span>
+        <div class="search-bar">
+            <select aria-label="搜索类型">
+                <option value="spot">景区</option>
+                <option value="diary">日记</option>
+            </select>
+            <div class="search-input">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#666666">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+                <input type="text" placeholder="请输入关键词" aria-label="搜索关键词">
+            </div>
+            <button class="search-button">搜索</button>
+        </div>
         <div class="actions">
-            <a href="/spots/search" class="button">搜索景点</a> <!-- 添加搜索按钮 -->
             <button id="logout-button">登出</button>
         </div>
     </div>
@@ -178,6 +321,10 @@
         const usernameSpan = document.getElementById('username');
         const spotsList = document.getElementById('spots-list');
         const logoutButton = document.getElementById('logout-button');
+        const searchBar = document.querySelector('.search-bar');
+        const searchSelect = searchBar.querySelector('select');
+        const searchInput = searchBar.querySelector('input');
+        const searchButton = searchBar.querySelector('.search-button');
 
         // 1. 检查会话并获取用户信息
         fetch('/api/check-session')
@@ -265,7 +412,76 @@
                 });
         }
 
-        // 3. 处理登出
+        // 3. 处理搜索
+        function handleSearch() {
+            const keyword = searchInput.value.trim();
+            if (!keyword) {
+                // 空关键词提示
+                searchInput.style.borderColor = 'red';
+                searchInput.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    searchInput.style.borderColor = '#CCCCCC';
+                    searchInput.style.animation = '';
+                }, 500);
+                return;
+            }
+            
+            const searchType = searchSelect.value;
+            const apiUrl = new URL('/api/search-spots', window.location.origin);
+            apiUrl.searchParams.append('keyword', keyword);
+            if (searchType === 'diary') {
+                apiUrl.searchParams.append('type', 'diary');
+            }
+            
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            window.location.href = '/login';
+                        }
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success && Array.isArray(data.spots)) {
+                        window.location.href = `/spots/search?keyword=${encodeURIComponent(keyword)}`;
+                    } else {
+                        showToast('搜索服务暂不可用，请稍后重试');
+                    }
+                })
+                .catch(error => {
+                    console.error('搜索时出错:', error);
+                    showToast('搜索服务暂不可用，请稍后重试');
+                });
+        }
+        
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = 'rgba(0,0,0,0.7)';
+            toast.style.color = 'white';
+            toast.style.padding = '10px 20px';
+            toast.style.borderRadius = '4px';
+            toast.style.zIndex = '1000';
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+        
+        searchButton.addEventListener('click', handleSearch);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+        
+        // 4. 处理登出
         logoutButton.addEventListener('click', () => {
             fetch('/api/logout', { method: 'POST' }) // 最好使用 POST 请求登出
                 .then(response => {
