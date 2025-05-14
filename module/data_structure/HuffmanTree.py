@@ -1,5 +1,6 @@
 from module.data_structure.heap import MinHeap # 最小堆的特性完全符合构建哈夫曼树的过程，使用自定义的最小堆实现，不依赖heapq库
 from collections import Counter # 用于统计字符频率
+import struct
 
 class Node:
     def __init__(self, char, freq):
@@ -11,6 +12,13 @@ class Node:
 # 构建哈夫曼树
 # 从频率最小的两个节点开始，从下至上构建
 def build_huffman_tree(freq):
+    """
+    构建哈夫曼树
+    Args:
+        freq: 频率
+    Returns:
+        root: 根节点
+    """
     # 创建节点列表
     nodes = [Node(char, freq) for char, freq in freq.items()]
     
@@ -42,6 +50,13 @@ def build_huffman_tree(freq):
 
 # 递归生成哈夫曼编码
 def generate_huffman_codes(root):
+    """
+    生成哈夫曼编码
+    Args:
+        root: 根节点
+    Returns:
+        codes: 哈夫曼编码字典
+    """
     codes = {}
     
     # 使用内部函数，免于每次递归传递所有codes字典
@@ -61,8 +76,17 @@ def generate_huffman_codes(root):
 
 # 对数据进行无损压缩
 def huffman_encoding(data):
+    """
+    压缩数据为真正的二进制格式
+    
+    Args:
+        data: 待压缩数据
+        
+    Returns:
+        tuple: (压缩后的二进制数据, 哈夫曼树根节点, 编码表)
+    """
     if not data:
-        return "", None
+        return bytes(), None, {}
     
     # 统计字符频率
     freq = Counter(data)
@@ -71,26 +95,98 @@ def huffman_encoding(data):
     # 生成哈夫曼编码
     codes = generate_huffman_codes(root)
     
-    # 编码数据
-    encoded_data = ''.join(codes[char] for char in data)
-    return encoded_data, root
+    # 1. 先获取编码后的位序列
+    bit_string = ''.join(codes[char] for char in data)
+    
+    # 2. 计算需要的填充位数，使总位数是8的倍数
+    padding = 8 - (len(bit_string) % 8) if len(bit_string) % 8 != 0 else 0
+    
+    # 3. 添加填充位
+    bit_string += '0' * padding
+    
+    # 4. 存储填充位数（1字节）
+    padded_info = format(padding, '08b')
+    bit_string = padded_info + bit_string
+    
+    # 5. 将位字符串转换为字节
+    binary_data = bytearray()
+    for i in range(0, len(bit_string), 8):
+        byte = bit_string[i:i+8]
+        binary_data.append(int(byte, 2))
+    
+    return bytes(binary_data), root, codes
 
-# 对数据进行解压缩
-def huffman_decoding(encoded_data, root):
-    if not encoded_data or not root:
+# 对数据进行解压缩 - 修改为处理二进制数据
+def huffman_decoding(binary_data, root):
+    """
+    解压缩二进制数据
+    
+    Args:
+        binary_data: 压缩后的二进制数据
+        root: 哈夫曼树的根节点
+        
+    Returns:
+        str: 解压缩后的原始数据
+    """
+    if not binary_data or not root:
         return ""
     
+    # 1. 提取填充信息
+    padded_info = binary_data[0]
+    
+    # 2. 将二进制数据转换为位字符串
+    bit_string = ""
+    for byte in binary_data[1:]:  # 跳过第一个字节（填充信息）
+        bits = bin(byte)[2:].zfill(8)  # 去掉'0b'前缀，并确保8位
+        bit_string += bits
+    
+    # 3. 去除填充位
+    bit_string = bit_string[:-padded_info] if padded_info > 0 else bit_string
+    
+    # 4. 使用哈夫曼树解码
     decoded_data = []
     current_node = root
     
-    for bit in encoded_data:
+    for bit in bit_string:
         if bit == '0':
             current_node = current_node.left
         else:
             current_node = current_node.right
         
+        # 到达叶子节点
         if current_node.char is not None:
             decoded_data.append(current_node.char)
             current_node = root
     
     return ''.join(decoded_data)
+
+# 辅助函数：用于将Huffman编码字符串直接转换为二进制数据
+def encode_to_binary(text, codes):
+    """
+    使用提供的编码表将文本转换为二进制数据
+    
+    Args:
+        text: 文本内容
+        codes: 编码表
+        
+    Returns:
+        bytes: 压缩后的二进制数据
+    """
+    # 获取编码
+    bit_string = ''.join(codes[char] for char in text)
+    
+    # 计算填充位
+    padding = 8 - (len(bit_string) % 8) if len(bit_string) % 8 != 0 else 0
+    padded_string = bit_string + '0' * padding
+    
+    # 存储填充信息
+    padded_info = format(padding, '08b')
+    final_string = padded_info + padded_string
+    
+    # 转换为字节
+    binary_data = bytearray()
+    for i in range(0, len(final_string), 8):
+        byte = final_string[i:i+8]
+        binary_data.append(int(byte, 2))
+    
+    return bytes(binary_data)
