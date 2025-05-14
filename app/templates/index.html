@@ -19,6 +19,49 @@
             background-color: white;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 0 10px;
+        }
+        
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 80px;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.3s;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .category-item:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .category-icon i {
+            font-size: 30px;
+            color: #0052d9;
+            font-style: normal;
+        }
+        
+        .category-item span {
+            font-size: 14px;
+            text-align: center;
         }
         
         .blue-container {
@@ -297,7 +340,86 @@
 </head>
 <body>
 
-    <div class="white-container"></div>
+    <div class="white-container">
+        <a href="/spots/search?type=历史建筑" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🏰</i>
+            </div>
+            <span>历史建筑</span>
+        </a>
+        <a href="/spots/search?type=赏花胜地" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🌸</i>
+            </div>
+            <span>赏花胜地</span>
+        </a>
+        <a href="/spots/search?type=萌萌动物" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🐼</i>
+            </div>
+            <span>萌萌动物</span>
+        </a>
+        <a href="/spots/search?type=城市漫步" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🏙️</i>
+            </div>
+            <span>城市漫步</span>
+        </a>
+        <a href="/spots/search?type=夜游观景" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🌃</i>
+            </div>
+            <span>夜游观景</span>
+        </a>
+        <a href="/spots/search?type=遛娃宝藏地" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">👨‍👩‍👧‍👦</i>
+            </div>
+            <span>遛娃宝藏地</span>
+        </a>
+        <a href="/spots/search?type=展馆展览" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🏛️</i>
+            </div>
+            <span>展馆展览</span>
+        </a>
+        <a href="/spots/search?type=地标观景" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🗼</i>
+            </div>
+            <span>地标观景</span>
+        </a>
+        <a href="/spots/search?type=登高爬山" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">⛰️</i>
+            </div>
+            <span>登高爬山</span>
+        </a>
+        <a href="/spots/search?type=踏青必去" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🍃</i>
+            </div>
+            <span>踏青必去</span>
+        </a>
+        <a href="/spots/search?type=自然山水" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🏞️</i>
+            </div>
+            <span>自然山水</span>
+        </a>
+        <a href="/spots/search?type=游乐场" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🎡</i>
+            </div>
+            <span>游乐场</span>
+        </a>
+        <a href="/spots/search?type=演出" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🎭</i>
+            </div>
+            <span>演出</span>
+        </a>
+    </div>
 
     <div class="blue-container">
     <div class="nav-item" onclick="window.location.href='/spots/spot_info/145'">

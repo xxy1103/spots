@@ -79,6 +79,24 @@
             option.textContent = type;
             typeFilter.appendChild(option);
         });
+        
+        // 解析URL参数，并设置对应的筛选条件
+        function parseUrlParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const keywordParam = urlParams.get('keyword');
+            const typeParam = urlParams.get('type');
+            
+            if (keywordParam) {
+                searchInput.value = keywordParam;
+            }
+            
+            if (typeParam && spotTypes.includes(typeParam)) {
+                typeFilter.value = typeParam;
+            }
+            
+            // 加载URL参数后立即获取数据
+            fetchAndDisplaySpots();
+        }
 
         // 获取并显示景点数据 (根据当前筛选和排序条件)
         function fetchAndDisplaySpots() {
@@ -172,8 +190,8 @@
         typeFilter.addEventListener('change', fetchAndDisplaySpots);
         sortBy.addEventListener('change', fetchAndDisplaySpots);
 
-        // 初始加载数据 (使用默认参数)
-        fetchAndDisplaySpots();
+        // 初始加载数据 (解析URL参数并应用)
+        parseUrlParameters();
     });
 </script>
 
