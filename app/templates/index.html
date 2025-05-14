@@ -203,13 +203,14 @@
         }
         .image-container {
             position: absolute;
-            left: 330px;
+            left: 380px;
             top: 29px;
             transform: translateY(-50%);
             width: 280px;
             height: 80px;
             background: url('../static/dogo.png') center center/contain no-repeat;
             z-index: 999;
+            cursor: pointer;
         }
         .header span {
             font-weight: bold;
@@ -600,7 +601,9 @@
 </div>
 
     <div class="header">
-        <div class="image-container"></div>
+        <a href="/" style="text-decoration: none;">
+            <div class="image-container"></div>
+        </a>
         <span id="username">访客</span>
         <div class="search-bar">
             <select aria-label="搜索类型">
