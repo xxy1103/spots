@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>景区搜索</title>
+    <link rel="icon" href="../static/logo.png" type="image/png">
+    <link rel="shortcut icon" href="../static/logo.png" type="image/png">
     <style>
         body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; }
-        .container { max-width: 960px; margin: 20px auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .container { max-width: 960px; margin: 190px auto 20px; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         h1 { text-align: center; color: #333; margin-bottom: 25px; }
         .controls { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 25px; padding: 20px; background-color: #eef; border-radius: 5px; }
         .controls > div { display: flex; flex-direction: column; flex: 1; min-width: 180px; }
@@ -23,9 +25,203 @@
         .spot-info .score { font-weight: bold; color: #e67e22; }
         .spot-info .type { background-color: #e7f5ff; color: #228be6; padding: 3px 8px; border-radius: 12px; display: inline-block; font-size: 0.8em; }
         .loading, .no-results { text-align: center; padding: 30px; color: #888; font-size: 1.1em; grid-column: 1 / -1; /* Span across all columns if grid is empty */}
+        
+        /* 从index.html复制的样式 */
+        .image-container {
+            position: absolute;
+            left: 20%;
+            top: 29px;
+            transform: translateY(-50%);
+            width: 280px;
+            height: 80px;
+            background: url('../static/dogo.png') center center/contain no-repeat;
+            z-index: 999;
+            cursor: pointer;
+        }
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            top: 20px;
+        }
+        .header span {
+            font-weight: bold;
+            position: absolute;
+            right: 32%;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            top: 22px;
+        }
+        .header .search-bar {
+            display: flex;
+            max-width: 400px;
+            height: 48px;
+            gap: 0px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 5px;
+        }
+        .header .search-bar select {
+            padding: 12px 16px;
+            border: 1px solid #CCCCCC;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+            min-width: 100px;
+        }
+        .header .search-input {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 46px;
+            top: 1px;
+        }
+        .header .search-input svg {
+            position: absolute;
+            left: 16px;
+            pointer-events: none;
+        }
+        .header .search-input input {
+            width: 100%;
+            height: 46px;
+            padding: 0 16px 0 48px;
+            border: 1px solid #CCCCCC;
+            border-left: none;
+            border-right: none;
+            font-size: 14px;
+        }
+        .header .search-input input::placeholder {
+            color: #999999;
+        }
+        .header .search-button {
+            padding: 12px 16px;
+            background-color: #FF6600;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .header .search-button:hover {
+            background-color: #E55C00;
+        }
+        .header .search-button:active {
+            transform: translateY(1px);
+        }
+        .header .actions {
+            display: flex;
+            gap: 10px;
+            position: absolute;
+            right: 29%;
+            top: 17px;
+        }
+        .header button, .header a.button {
+            padding: 0;
+            cursor: pointer;
+            text-decoration: none;
+            background-color: transparent;
+            border: none;
+            color: #333;
+        }
+        .header a.button:hover {
+            color: #0066cc;
+        }
+        #logout-button {
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        #logout-button:hover {
+            color: #0066cc;
+        }
+        
+        /* 蓝色导航栏样式 */
+        .blue-container {
+            position: absolute;
+            top: 125px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #0052d9;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .nav-item {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-item:hover {
+            background-color: #003bb3;
+        }
+        
+        /* 添加推荐景区的橙色背景样式 */
+        .nav-item.orange {
+            background-color: #FF6600;
+        }
+        
+        .nav-item.orange:hover {
+            background-color: #E55C00;
+        }
+        
+        @media (max-width: 768px) {
+            .header .search-bar { height: 40px; }
+            .header .search-button span { display: none; }
+            .header .search-button::after { content: "🔍"; }
+        }
     </style>
 </head>
 <body>
+
+<!-- 从index.html复制的头部元素 -->
+<div class="header">
+    <a href="/" style="text-decoration: none;">
+        <div class="image-container"></div>
+    </a>
+    <span id="username">访客</span>
+    <div class="search-bar">
+        <select aria-label="搜索类型">
+            <option value="spot">景区</option>
+            <option value="diary">日记</option>
+        </select>
+        <div class="search-input">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#666666">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+            <input type="text" placeholder="请输入关键词" aria-label="搜索关键词">
+        </div>
+        <button class="search-button">搜索</button>
+    </div>
+    <div class="actions">
+        <button id="logout-button">登出</button>
+    </div>
+</div>
+
+<!-- 从index.html复制的蓝色导航栏 -->
+<div class="blue-container">
+    <div class="nav-item orange" onclick="window.location.href='/spots/search'">
+        推荐景区
+    </div>
+    <div class="nav-item" onclick="window.location.href='/spots/spot_info/143'">
+        口碑日记
+    </div>
+</div>
 
 <div class="container">
     <h1>探索景区</h1>
@@ -65,6 +261,12 @@
         const sortBy = document.getElementById('sort-by');
         const spotsList = document.getElementById('spots-list');
         const noResultsDiv = document.getElementById('no-results');
+        const usernameSpan = document.getElementById('username');
+        const logoutButton = document.getElementById('logout-button');
+        const headerSearchBar = document.querySelector('.header .search-bar');
+        const headerSearchSelect = headerSearchBar.querySelector('select');
+        const headerSearchInput = headerSearchBar.querySelector('input');
+        const headerSearchButton = headerSearchBar.querySelector('.search-button');
 
         const spotTypes = [
             "历史建筑", "赏花胜地", "萌萌动物", "城市漫步", "夜游观景",
@@ -79,6 +281,24 @@
             option.textContent = type;
             typeFilter.appendChild(option);
         });
+        
+        // 解析URL参数，并设置对应的筛选条件
+        function parseUrlParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const keywordParam = urlParams.get('keyword');
+            const typeParam = urlParams.get('type');
+            
+            if (keywordParam) {
+                searchInput.value = keywordParam;
+            }
+            
+            if (typeParam && spotTypes.includes(typeParam)) {
+                typeFilter.value = typeParam;
+            }
+            
+            // 加载URL参数后立即获取数据
+            fetchAndDisplaySpots();
+        }
 
         // 获取并显示景点数据 (根据当前筛选和排序条件)
         function fetchAndDisplaySpots() {
@@ -154,13 +374,83 @@
                         <p>评分: <span class="score">${score}</span></p>
                         <p>热度: ${popularity}</p>
                         <p>类型: <span class="type">${type}</span></p>
-                        ${spot.id ? `<p style="font-size: 0.8em; color: #999;">ID: ${spot.id}</p>` : ''} <!-- ID 可以保留或移除 -->
                     </div>
                 `;
                 spotsList.appendChild(li);
 
             });
         }
+
+        // 处理顶部搜索栏
+        function handleHeaderSearch() {
+            const keyword = headerSearchInput.value.trim();
+            if (!keyword) {
+                // 空关键词提示
+                headerSearchInput.style.borderColor = 'red';
+                headerSearchInput.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    headerSearchInput.style.borderColor = '#CCCCCC';
+                    headerSearchInput.style.animation = '';
+                }, 500);
+                return;
+            }
+            
+            const searchType = headerSearchSelect.value;
+            const apiUrl = new URL('/api/search-spots', window.location.origin);
+            apiUrl.searchParams.append('keyword', keyword);
+            if (searchType === 'diary') {
+                apiUrl.searchParams.append('type', 'diary');
+            }
+            
+            window.location.href = `/spots/search?keyword=${encodeURIComponent(keyword)}`;
+        }
+        
+        // 添加顶部搜索栏事件监听
+        headerSearchButton.addEventListener('click', handleHeaderSearch);
+        headerSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleHeaderSearch();
+            }
+        });
+        
+        // 处理登出
+        logoutButton.addEventListener('click', () => {
+            fetch('/api/logout', { method: 'POST' })
+                .then(response => {
+                    window.location.href = '/login';
+                })
+                .catch(error => {
+                    console.error('登出时出错:', error);
+                    window.location.href = '/login';
+                });
+        });
+        
+        // 检查会话并获取用户信息
+        fetch('/api/check-session')
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        window.location.href = '/login';
+                    } else {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return null;
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.success) {
+                    usernameSpan.textContent = data.user.username || '用户';
+                } else if (data) {
+                    console.error('会话检查失败:', data.message);
+                    window.location.href = '/login';
+                }
+            })
+            .catch(error => {
+                console.error('检查会话时出错:', error);
+                usernameSpan.textContent = '错误';
+                window.location.href = '/login';
+            });
 
         // 添加事件监听器 (每次改变都重新获取数据)
         // 使用 debounce 或 throttle 优化频繁触发的 input 事件 (可选)
@@ -172,8 +462,8 @@
         typeFilter.addEventListener('change', fetchAndDisplaySpots);
         sortBy.addEventListener('change', fetchAndDisplaySpots);
 
-        // 初始加载数据 (使用默认参数)
-        fetchAndDisplaySpots();
+        // 初始加载数据 (解析URL参数并应用)
+        parseUrlParameters();
     });
 </script>
 

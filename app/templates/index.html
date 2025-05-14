@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>推荐景点</title>
+    <link rel="icon" href="../static/logo.png" type="image/png">
+    <link rel="shortcut icon" href="../static/logo.png" type="image/png">
     <style>
         body {
             font-family: sans-serif;
@@ -19,6 +21,150 @@
             background-color: white;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 0 10px;
+        }
+        
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 80px;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.3s;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .category-item:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .category-icon i {
+            font-size: 30px;
+            color: #0052d9;
+            font-style: normal;
+        }
+        
+        .category-item span {
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        /* 选项卡导航样式 */
+        .tabs-container {
+            position: absolute;
+            top: 305px;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid #eee;
+            width: 70%;
+            margin-bottom: 15px;
+        }
+        
+        .tab-item {
+            padding: 10px 30px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            position: relative;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .tab-item.active {
+            color: #0052d9;
+        }
+        
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #0052d9;
+        }
+        
+        .tab-content {
+            display: none;
+            width: 80%;
+            margin: 0 auto;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .spots-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .spot-card {
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: white;
+            width: 100%;
+            max-width: 290px;
+            margin: 0 auto;
+        }
+        
+        .spot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .spot-card img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+        }
+        
+        .spot-card-info {
+            padding: 10px;
+        }
+        
+        .spot-card-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        .spot-location {
+            color: #888;
+            font-size: 0.9em;
+            float: right;
         }
         
         .blue-container {
@@ -59,13 +205,14 @@
         }
         .image-container {
             position: absolute;
-            left: 330px;
+            left: 20%;
             top: 29px;
             transform: translateY(-50%);
             width: 280px;
             height: 80px;
             background: url('../static/dogo.png') center center/contain no-repeat;
             z-index: 999;
+            cursor: pointer;
         }
         .header span {
             font-weight: bold;
@@ -179,7 +326,7 @@
             font-size: 2.5rem; 
             text-shadow: 2px 2px 4px #f0f0f0;
             margin-bottom: 40px;
-            margin-top: 400px;
+            margin-top: 100px;
         }
         
         /* 景点网格布局 */
@@ -192,6 +339,7 @@
             max-width: 660px;
             margin: 0 auto;
             margin-top: 200px;
+            display: none; /* 隐藏原来的推荐景点列表 */
         }
         
         @media (max-width: 768px) {
@@ -293,14 +441,160 @@
             font-size: 0.9em; 
             color: #555;
         }
+        
+        .view-more {
+            display: block;
+            text-align: center;
+            margin: 0 auto 40px auto;
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            color: #0052d9;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            width: fit-content;
+        }
+        
+        .view-more:hover {
+            background-color: #e9ecef;
+        }
     </style>
 </head>
 <body>
 
-    <div class="white-container"></div>
+    <div class="white-container">
+        <a href="/spots/search?type=历史建筑" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🏰</i>
+            </div>
+            <span>历史建筑</span>
+        </a>
+        <a href="/spots/search?type=赏花胜地" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🌸</i>
+            </div>
+            <span>赏花胜地</span>
+        </a>
+        <a href="/spots/search?type=萌萌动物" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🐼</i>
+            </div>
+            <span>萌萌动物</span>
+        </a>
+        <a href="/spots/search?type=城市漫步" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🏙️</i>
+            </div>
+            <span>城市漫步</span>
+        </a>
+        <a href="/spots/search?type=夜游观景" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🌃</i>
+            </div>
+            <span>夜游观景</span>
+        </a>
+        <a href="/spots/search?type=遛娃宝藏地" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">👨‍👩‍👧‍👦</i>
+            </div>
+            <span>遛娃宝藏地</span>
+        </a>
+        <a href="/spots/search?type=展馆展览" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🏛️</i>
+            </div>
+            <span>展馆展览</span>
+        </a>
+        <a href="/spots/search?type=地标观景" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🗼</i>
+            </div>
+            <span>地标观景</span>
+        </a>
+        <a href="/spots/search?type=登高爬山" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">⛰️</i>
+            </div>
+            <span>登高爬山</span>
+        </a>
+        <a href="/spots/search?type=踏青必去" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🍃</i>
+            </div>
+            <span>踏青必去</span>
+        </a>
+        <a href="/spots/search?type=自然山水" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🏞️</i>
+            </div>
+            <span>自然山水</span>
+        </a>
+        <a href="/spots/search?type=游乐场" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🎡</i>
+            </div>
+            <span>游乐场</span>
+        </a>
+        <a href="/spots/search?type=演出" class="category-item">
+            <div class="category-icon">
+                <i class="iconfont">🎭</i>
+            </div>
+            <span>演出</span>
+        </a>
+    </div>
+
+    <div class="tabs-container">
+        <div class="tabs-nav">
+            <a href="#" class="tab-item active" data-target="recommended"><strong>推荐景区</strong></a>
+            <a href="#" class="tab-item" data-target="5star"><strong>5分景区</strong></a>
+            <a href="#" class="tab-item" data-target="4star"><strong>4分景区</strong></a>
+            <a href="#" class="tab-item" data-target="3star"><strong>3分景区</strong></a>
+            <a href="#" class="tab-item" data-target="shows"><strong>旅游演艺</strong></a>
+        </div>
+        
+        <div id="recommended" class="tab-content active">
+            <div class="spots-grid" id="recommended-grid">
+                <!-- 推荐景区卡片将通过JS动态加载 -->
+                <div class="spot-card">
+                    <div style="height: 150px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">加载中...</div>
+                </div>
+            </div>
+            <a href="/spots/search?user_preference=true&exclude_type=演出" class="view-more">查看更多</a>
+        </div>
+        
+        <div id="5star" class="tab-content">
+            <div class="spots-grid" id="5star-grid">
+                <!-- 5分景区卡片将通过JS动态加载 -->
+            </div>
+            <a href="/spots/search?min_score=5.0&max_score=5.0&exclude_type=演出" class="view-more">查看更多</a>
+        </div>
+        
+        <div id="4star" class="tab-content">
+            <div class="spots-grid" id="4star-grid">
+                <!-- 4分景区卡片将通过JS动态加载 -->
+            </div>
+            <a href="/spots/search?min_score=4.0&max_score=4.9&exclude_type=演出" class="view-more">查看更多</a>
+        </div>
+        
+        <div id="3star" class="tab-content">
+            <div class="spots-grid" id="3star-grid">
+                <!-- 3分景区卡片将通过JS动态加载 -->
+            </div>
+            <a href="/spots/search?min_score=3.0&max_score=3.9&exclude_type=演出" class="view-more">查看更多</a>
+        </div>
+        
+        <div id="shows" class="tab-content">
+            <div class="spots-grid" id="shows-grid">
+                <!-- 旅游演艺卡片将通过JS动态加载 -->
+            </div>
+            <a href="/spots/search?type=演出" class="view-more">查看更多</a>
+        </div>
+    </div>
 
     <div class="blue-container">
-    <div class="nav-item" onclick="window.location.href='/spots/spot_info/145'">
+    <div class="nav-item" onclick="window.location.href='/spots/search'">
         推荐景区
     </div>
     <div class="nav-item" onclick="window.location.href='/spots/spot_info/143'">
@@ -309,7 +603,9 @@
 </div>
 
     <div class="header">
-        <div class="image-container"></div>
+        <a href="/" style="text-decoration: none;">
+            <div class="image-container"></div>
+        </a>
         <span id="username">访客</span>
         <div class="search-bar">
             <select aria-label="搜索类型">
@@ -329,52 +625,176 @@
         </div>
     </div>
 
-<h2>为您推荐的景点</h2>
-<ul id="spots-list" class="spots-list">
-    <!-- 推荐景点将在这里动态加载 -->
-    <li>加载中...</li>
-</ul>
-
-<script>
-    // 修改fetchRecommendedSpots函数中的HTML生成部分
-    function fetchRecommendedSpots() {
-        fetch('/api/recommended-spots')
-            .then(response => response.json())
-            .then(data => {
-                spotsList.innerHTML = '';
-                if (data.success && data.spots && data.spots.length > 0) {
-                    data.spots.forEach(spot => {
-                        const li = document.createElement('li');
-                        li.innerHTML = `
-                            ${spot.img ? `<img src="${spot.img}" alt="${spot.name || '未知景点'}">` : ''}
-                            <div class="spot-info">
-                                <h3><a href="/spots/spot_info/${spot.id || '未知ID'}">${spot.name || '未知景点'}</a></h3>
-                                <p>评分: ${spot.score !== undefined ? spot.score : 'N/A'}</p>
-                                <p title="${spot.type || '未知类型'}">类型: ${spot.type || '未知类型'}</p>
-                            </div>
-                        `;
-                        spotsList.appendChild(li);
-                    });
-                } else {
-                    spotsList.innerHTML = '<li>暂无推荐景点。</li>';
-                }
-            })
-            .catch(error => {
-                console.error('获取推荐景点时出错:', error);
-                spotsList.innerHTML = '<li>加载推荐景点时出错，请稍后重试。</li>';
-            });
-    }
-</script>
-
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const usernameSpan = document.getElementById('username');
-        const spotsList = document.getElementById('spots-list');
         const logoutButton = document.getElementById('logout-button');
         const searchBar = document.querySelector('.search-bar');
         const searchSelect = searchBar.querySelector('select');
         const searchInput = searchBar.querySelector('input');
         const searchButton = searchBar.querySelector('.search-button');
+        
+        // 选项卡切换功能
+        const tabs = document.querySelectorAll('.tab-item');
+        const contents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // 移除所有激活状态
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                
+                // 设置当前选中项为激活状态
+                tab.classList.add('active');
+                
+                // 获取对应内容并显示
+                const targetId = tab.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+                
+                // 如果对应内容为空，则加载数据
+                const gridElement = document.getElementById(`${targetId}-grid`);
+                if (gridElement && gridElement.children.length === 0) {
+                    loadTabContent(targetId);
+                }
+            });
+        });
+        
+        // 按评分加载不同类别的景区
+        function loadTabContent(tabId) {
+            const gridElement = document.getElementById(`${tabId}-grid`);
+            if (!gridElement) return;
+            
+            // 显示加载中
+            gridElement.innerHTML = '<div class="spot-card"><div style="height: 150px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">加载中...</div></div>';
+            
+            // 构建API请求
+            let apiUrl = '/api/search-spots';
+            let params = new URLSearchParams();
+            
+            // 根据tabId设置不同的筛选条件
+            switch(tabId) {
+                case 'recommended':
+                    // 推荐景区：显示带有用户注册时选择的喜好标签的景区（刨去spot_type为"演出"）
+                    params.append('exclude_type', '演出');
+                    params.append('user_preference', 'true');
+                    break;
+                case '5star':
+                    // 5分景区：只显示spot.score为5.0的景区（刨去spot_type为"演出"）
+                    params.append('min_score', '5.0');
+                    params.append('max_score', '5.0');
+                    params.append('exclude_type', '演出');
+                    break;
+                case '4star':
+                    // 4分景区：只显示spot.score为4.0~4.9的景区（刨去spot_type为"演出"）
+                    params.append('min_score', '4.0');
+                    params.append('max_score', '4.9');
+                    params.append('exclude_type', '演出');
+                    break;
+                case '3star':
+                    // 3分景区：只显示spot.score为3.0~3.9的景区（刨去spot_type为"演出"）
+                    params.append('min_score', '3.0');
+                    params.append('max_score', '3.9');
+                    params.append('exclude_type', '演出');
+                    break;
+                case 'shows':
+                    // 旅游演艺：只显示spot_type为"演出"的
+                    params.append('type', '演出');
+                    break;
+            }
+            
+            // 发送请求
+            fetch(`${apiUrl}?${params.toString()}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success && Array.isArray(data.spots) && data.spots.length > 0) {
+                        // 清空网格
+                        gridElement.innerHTML = '';
+                        
+                        // 限制最多显示10个景区
+                        const spotsToShow = data.spots.slice(0, 10);
+                        
+                        // 添加景区卡片
+                        spotsToShow.forEach(spot => {
+                            const spotCard = createSpotCard(spot);
+                            gridElement.appendChild(spotCard);
+                        });
+                    } else {
+                        gridElement.innerHTML = '<div class="spot-card"><div style="height: 150px; display: flex; align-items: center; justify-content: center; color: #888;">暂无数据</div></div>';
+                    }
+                    
+                    // 确保"查看更多"按钮可见（无论是否有数据）
+                    const viewMoreBtn = document.getElementById(tabId).querySelector('.view-more');
+                    if (viewMoreBtn) {
+                        viewMoreBtn.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('加载景区数据出错:', error);
+                    gridElement.innerHTML = '<div class="spot-card"><div style="height: 150px; display: flex; align-items: center; justify-content: center; color: #888;">加载出错，请重试</div></div>';
+                    
+                    // 确保"查看更多"按钮可见（即使出错）
+                    const viewMoreBtn = document.getElementById(tabId).querySelector('.view-more');
+                    if (viewMoreBtn) {
+                        viewMoreBtn.style.display = 'block';
+                    }
+                });
+        }
+        
+        // 创建景区卡片元素
+        function createSpotCard(spot) {
+            const card = document.createElement('div');
+            card.className = 'spot-card';
+            
+            const id = spot.id || '';
+            const name = spot.name || '未知景点';
+            const imgUrl = spot.img || '';
+            const score = spot.score || 'N/A';
+            // 提取地址信息 - 假设info是一个数组，里面包含地址字段
+            let location = '未知地区';
+            if (spot.info && Array.isArray(spot.info)) {
+                const addressObj = spot.info.find(item => Object.keys(item)[0] === '地址');
+                if (addressObj && addressObj['地址']) {
+                    // 提取地址中的省市信息 (简化处理)
+                    const addressText = addressObj['地址'];
+                    const provinceMatch = addressText.match(/([^省]+省|北京|上海|天津|重庆|江苏|浙江|安徽|福建)/);
+                    const cityMatch = addressText.match(/([^市]+市|[^州]+州|[^县]+县|[^区]+区)/);
+                    
+                    // 避免重复地点名称，如"四川 四川"
+                    if (provinceMatch && cityMatch) {
+                        const province = provinceMatch[0].substring(0, 2);
+                        const city = cityMatch[0].substring(0, 2);
+                        
+                        if (province === city) {
+                            location = province;
+                        } else {
+                            location = `${province} ${city}`;
+                        }
+                    } else if (provinceMatch) {
+                        location = provinceMatch[0].substring(0, 2);
+                    } else if (cityMatch) {
+                        location = cityMatch[0].substring(0, 2);
+                    }
+                }
+            }
+            
+            card.innerHTML = `
+                ${imgUrl ? `<img src="${imgUrl}" alt="${name}">` : '<div style="height: 130px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">无图片</div>'}
+                <div class="spot-card-info">
+                    <h3><a href="/spots/spot_info/${id}" style="text-decoration: none; color: inherit;">${name}</a></h3>
+                    <span class="spot-location">[${location} ${score}分]</span>
+                    <div style="clear: both;"></div>
+                </div>
+            `;
+            
+            return card;
+        }
 
         // 1. 检查会话并获取用户信息
         fetch('/api/check-session')
@@ -394,7 +814,7 @@
                 if (data && data.success) {
                     usernameSpan.textContent = data.user.username || '用户';
                     // 用户信息获取成功后，获取推荐景点
-                    fetchRecommendedSpots();
+                    loadTabContent('recommended');
                 } else if (data) {
                      // 即使成功响应，也可能业务逻辑失败
                      console.error('会话检查失败:', data.message);
@@ -405,13 +825,12 @@
             .catch(error => {
                 console.error('检查会话时出错:', error);
                 usernameSpan.textContent = '错误';
-                spotsList.innerHTML = '<li>无法加载用户信息，请尝试重新登录。</li>';
                 // 可选：也在此处重定向到登录页
-                // window.location.href = '/login';
+                window.location.href = '/login';
             });
 
         // 2. 获取推荐景点函数
-        function fetchRecommendedSpots() {
+        function fetchAndDisplaySpots() {
             fetch('/api/recommended-spots') // 请求新的推荐 API
                 .then(response => {
                     if (!response.ok) {
@@ -544,6 +963,9 @@
                     window.location.href = '/login';
                 });
         });
+
+        // 初始加载推荐景区数据
+        loadTabContent('recommended');
     });
 </script>
 

@@ -382,6 +382,10 @@ def search_spots():
     **请求参数 (Query Parameters):**
       - `keyword` (str, 可选): 用于搜索景点名称的关键词。
       - `type` (str, 可选): 用于筛选特定类型的景点。
+      - `exclude_type` (str, 可选): 用于排除特定类型的景点。
+      - `min_score` (float, 可选): 最低评分。
+      - `max_score` (float, 可选): 最高评分。
+      - `user_preference` (bool, 可选): 是否使用用户偏好推荐。
       - `sort_by` (str, 可选, 默认值: 'default'): 排序依据。
         可选值: 'default' (默认排序), 'popularity_desc' (按热度降序)。
 
@@ -414,60 +418,74 @@ def search_spots():
     }
     ```
     """
+    # 获取所有查询参数
     keyword = request.args.get('keyword')
     spot_type = request.args.get('type')
-    sort_by = request.args.get('sort_by', default='default') # 可以设置默认值
+    exclude_type = request.args.get('exclude_type')
+    min_score = request.args.get('min_score')
+    max_score = request.args.get('max_score')
+    user_preference = request.args.get('user_preference', 'false').lower() == 'true'
+    sort_by = request.args.get('sort_by', default='default')
+
+    # 1. 获取景点列表的初始数据集
     if keyword:
         # 用快排算法对景点进行排序
         spots = spot_manager.getSpotByName(keyword)
-        if spot_type:
-            # 过滤出符合类型的景点
-            spots = [spot for spot in spots if spot['type'] == spot_type]
-            # 按照热度进行快排
-        
-        if sort_by == 'default':
-            spots = quicksort(spots)
-        elif sort_by == 'popularity_desc':
-            spots = quicksort(spots,sort_key="visited_time")
-        
+    elif user_preference:
+        # 基于用户偏好推荐景点
+        user = g.user
+        user_id = user['user_id']
+        spots = user_manager.getRecommendSpots(user_id)
     elif spot_type:
-        # 直接使用Spot类的方法获取
-        if sort_by == 'default':
-            spots = spot_manager.getTopKByType(spot_type,k=-1) # 获取所有景点
-            
-        elif sort_by == 'popularity_desc':
-            spots = spot_manager.getTopKByType(spot_type,k=-1)
-            # 按照热度进行快排
-            spots = quicksort(spots,sort_key="visited_time")    #按照浏览次数排序
-        
-
-    elif sort_by == 'default':
-        # 直接用Spot类的方法获取
-        spots = spot_manager.getAllSpotsSorted() # 获取所有景点
-        pass
-    elif sort_by == 'popularity_desc':
-        # 直接用Spot类的方法获取
-        spots = spot_manager.getAllSortedByVisitedTime() # 获取所有景点
+        # 直接使用Spot类的方法获取特定类型的景点
+        spots = spot_manager.getTopKByType(spot_type, k=-1)  # 获取所有景点
+    else:
+        # 获取所有景点
+        spots = spot_manager.getAllSpotsSorted()
     
-    filtered_spots = []
+    # 2. 应用过滤条件
+    # 初始化一个空列表存储经过完整处理的景点
+    processed_spots = []
     if spots:
-        for spot in spots:
-            spot_info = spot_manager.getSpot(spot['id'])
-            filtered_spot = {
-                'name': spot_info.get('name'),  # 假设原始数据是字典
-                'id': spot_info.get('id'),  # 假设原始数据是字典
-                'score': spot_info.get('score'),  # 假设原始数据是字典
-                'type': spot_info.get('type'),  # 假设原始数据是字典
-                'visited_time': spot_info.get('visited_time'),  # 假设原始数据是字典
-                'img': spot_info.get('img'),  # 假设原始数据是字典
-                # 添加其他你需要的字段
+        for spot_brief in spots:
+            # 获取完整的景点信息
+            spot_info = spot_manager.getSpot(spot_brief['id'])
+            
+            # 应用过滤条件
+            # 2.1 排除特定类型
+            if exclude_type and spot_info.get('type') == exclude_type:
+                continue
                 
-            }
-            filtered_spots.append(filtered_spot)
+            # 2.2 根据类型过滤
+            if spot_type and spot_info.get('type') != spot_type:
+                continue
+                
+            # 2.3 根据评分范围过滤
+            spot_score = float(spot_info.get('score', 0))
+            if min_score and spot_score < float(min_score):
+                continue
+            if max_score and spot_score > float(max_score):
+                continue
+                
+            # 添加通过过滤的景点到结果中
+            processed_spots.append({
+                'name': spot_info.get('name'),
+                'id': spot_info.get('id'),
+                'score': spot_info.get('score'),
+                'type': spot_info.get('type'),
+                'visited_time': spot_info.get('visited_time'),
+                'img': spot_info.get('img'),
+                'info': spot_info.get('info')
+            })
     
+    # 3. 排序
+    if sort_by == 'popularity_desc':
+        processed_spots = quicksort(processed_spots, sort_key="visited_time")
+    
+    # 4. 返回结果
     return jsonify({
         'success': True, 
-        'spots': filtered_spots
+        'spots': processed_spots
     })
 
 
