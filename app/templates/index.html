@@ -67,7 +67,7 @@
         /* 选项卡导航样式 */
         .tabs-container {
             position: absolute;
-            top: 290px;
+            top: 305px;
             left: 0;
             width: 100%;
             z-index: 1;
@@ -122,7 +122,7 @@
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(2, auto);
-            gap: 20px;
+            gap: 12px;
             margin-bottom: 20px;
         }
         
@@ -132,6 +132,9 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: transform 0.3s, box-shadow 0.3s;
             background-color: white;
+            width: 100%;
+            max-width: 290px;
+            margin: 0 auto;
         }
         
         .spot-card:hover {
@@ -141,7 +144,7 @@
         
         .spot-card img {
             width: 100%;
-            height: 150px;
+            height: 130px;
             object-fit: cover;
         }
         
@@ -153,11 +156,13 @@
             margin: 0 0 5px 0;
             font-size: 16px;
             font-weight: bold;
+            display: inline-block;
         }
         
         .spot-location {
             color: #888;
             font-size: 0.9em;
+            float: right;
         }
         
         .blue-container {
@@ -539,12 +544,11 @@
 
     <div class="tabs-container">
         <div class="tabs-nav">
-            <a href="#" class="tab-item active" data-target="recommended">推荐景区</a>
-            <a href="#" class="tab-item" data-target="5star">5分景区</a>
-            <a href="#" class="tab-item" data-target="4star">4分景区</a>
-            <a href="#" class="tab-item" data-target="3star">3分景区</a>
-            <a href="#" class="tab-item" data-target="other">其他景区</a>
-            <a href="#" class="tab-item" data-target="shows">旅游演艺</a>
+            <a href="#" class="tab-item active" data-target="recommended"><strong>推荐景区</strong></a>
+            <a href="#" class="tab-item" data-target="5star"><strong>5分景区</strong></a>
+            <a href="#" class="tab-item" data-target="4star"><strong>4分景区</strong></a>
+            <a href="#" class="tab-item" data-target="3star"><strong>3分景区</strong></a>
+            <a href="#" class="tab-item" data-target="shows"><strong>旅游演艺</strong></a>
         </div>
         
         <div id="recommended" class="tab-content active">
@@ -576,13 +580,6 @@
                 <!-- 3分景区卡片将通过JS动态加载 -->
             </div>
             <a href="/spots/search?min_score=3.0&max_score=3.9&exclude_type=演出" class="view-more">查看更多</a>
-        </div>
-        
-        <div id="other" class="tab-content">
-            <div class="spots-grid" id="other-grid">
-                <!-- 其他景区卡片将通过JS动态加载 -->
-            </div>
-            <a href="/spots/search?min_score=0.0&max_score=2.9&exclude_type=演出" class="view-more">查看更多</a>
         </div>
         
         <div id="shows" class="tab-content">
@@ -696,12 +693,6 @@
                     params.append('max_score', '3.9');
                     params.append('exclude_type', '演出');
                     break;
-                case 'other':
-                    // 其他景区：只显示spot.score为0.0~2.9的景区（刨去spot_type为"演出"）
-                    params.append('min_score', '0.0');
-                    params.append('max_score', '2.9');
-                    params.append('exclude_type', '演出');
-                    break;
                 case 'shows':
                     // 旅游演艺：只显示spot_type为"演出"的
                     params.append('type', '演出');
@@ -770,8 +761,16 @@
                     const provinceMatch = addressText.match(/([^省]+省|北京|上海|天津|重庆|江苏|浙江|安徽|福建)/);
                     const cityMatch = addressText.match(/([^市]+市|[^州]+州|[^县]+县|[^区]+区)/);
                     
+                    // 避免重复地点名称，如"四川 四川"
                     if (provinceMatch && cityMatch) {
-                        location = `${provinceMatch[0].substring(0, 2)} ${cityMatch[0].substring(0, 2)}`;
+                        const province = provinceMatch[0].substring(0, 2);
+                        const city = cityMatch[0].substring(0, 2);
+                        
+                        if (province === city) {
+                            location = province;
+                        } else {
+                            location = `${province} ${city}`;
+                        }
                     } else if (provinceMatch) {
                         location = provinceMatch[0].substring(0, 2);
                     } else if (cityMatch) {
@@ -781,10 +780,11 @@
             }
             
             card.innerHTML = `
-                ${imgUrl ? `<img src="${imgUrl}" alt="${name}">` : '<div style="height: 150px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">无图片</div>'}
+                ${imgUrl ? `<img src="${imgUrl}" alt="${name}">` : '<div style="height: 130px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">无图片</div>'}
                 <div class="spot-card-info">
                     <h3><a href="/spots/spot_info/${id}" style="text-decoration: none; color: inherit;">${name}</a></h3>
-                    <span class="spot-location">[${location}]</span>
+                    <span class="spot-location">[${location} ${score}分]</span>
+                    <div style="clear: both;"></div>
                 </div>
             `;
             
