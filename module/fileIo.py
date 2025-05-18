@@ -5,6 +5,7 @@ import json
 import datetime
 import module.printLog as log
 from module.data_structure.stack import Stack
+from module.data_structure.HuffmanTree import huffman_decoding, encode_to_binary
 
 dataPath = r"data/"
 
@@ -316,6 +317,33 @@ class DiaryIo:
         else:
             log.writeLog(f"日记 {diary_id} 不存在")
         return None     # 返回None表示对应日记不存在
+
+    def get_diary_with_content(self, diary_id): # 在要直接显示日记内容时使用这个方法
+        """
+        获取已压缩的日记并解压内容
+        
+        Args:
+            diary_id: 日记ID
+            
+        Returns:
+            dict: 包含解压内容的日记对象
+        """
+        diary = self.getDiary(diary_id)
+        if not diary:
+            return None
+            
+        # 确认已压缩，解压
+        if diary.get("compressed", True):
+            decompressed_diary = self.decompress_diary_content(diary_id)
+            if decompressed_diary and "original_content" in decompressed_diary:
+                # 解压缩的方法我都用了副本，本意是因为我们并不保存原始数据，希望这样能防止解压缩的过程中对本地数据或者用户输入的新数据产生什么影响
+                result = diary.copy()
+                result["content"] = decompressed_diary["original_content"]
+                result["_compressed_path"] = diary["content"]  # 保存原始压缩路径
+                return result
+                
+        # 未压缩或解压失败，返回原始对象
+        return diary
     
     def getSpotDiaries(self, spot_id): #改 使用合适的数据结构优化
         """获取指定景点的所有日记"""
@@ -359,7 +387,8 @@ class DiaryIo:
             "score": 0,
             "score_count": 0,
             "visited_time": 0,
-            "img_list": []
+            "img_list": [],
+            "compressed": False
         }
         # 处理图片
         if images:
@@ -520,20 +549,170 @@ class DiaryIo:
         
         log.writeLog(f"日记 {diary_id} 不存在，无法更新访问次数")
         return -1
-    # 这种与文件无关的操作，应该放在diaryClass中
-    # def getTopRatedDiaries(self, limit=10):
-    #     """获取评分最高的日记"""
-    #     # 过滤掉没有评分的日记
-    #     rated_diaries = [d for d in self.diaries if d.get("score_count", 0) > 0]
-    #     # 按评分降序排序
-    #     sorted_diaries = sorted(rated_diaries, key=lambda x: x.get("score", 0), reverse=True)
-    #     return sorted_diaries[:limit]
-    
-    # def getMostVisitedDiaries(self, limit=10):
-    #     """获取访问量最高的日记"""
-    #     # 按访问量降序排序
-    #     sorted_diaries = sorted(self.diaries, key=lambda x: x.get("visited_time", 0), reverse=True)
-    #     return sorted_diaries[:limit]
+
+    def load_global_huffman_tree(self):
+        """
+        加载全局哈夫曼树
+        
+        Returns:
+            tuple: (root, codes) 树根节点和编码表，加载失败时两个参数都返回None
+        """
+        try:
+            import pickle
+            from module.data_structure.HuffmanTree import generate_huffman_codes
+            
+            huffman_tree_path = os.path.join(dataPath, "diaries", "global_huffman_tree.pkl")
+            
+            if not os.path.exists(huffman_tree_path):
+                log.writeLog(f"全局哈夫曼树文件不存在: {huffman_tree_path}")
+                return None, None
+                
+            with open(huffman_tree_path, 'rb') as f:
+                huffman_data = pickle.load(f)
+            
+            # 全局哈夫曼树.pkl文件中储存的是树根节点，如要使用请注意，因为程序无法判断里面的内容
+            tree = huffman_data
+            codes = generate_huffman_codes(tree)
+            log.writeLog(f"从树根自动生成编码表")
+            
+            if not tree:
+                log.writeLog(f"加载的哈夫曼树无效")
+                return None, None
+                
+            log.writeLog(f"成功加载全局哈夫曼树，包含 {len(codes)} 个字符编码")
+            return tree, codes
+        except Exception as e:
+            log.writeLog(f"加载全局哈夫曼树失败: {str(e)}")
+            return None, None
+
+    def decompress_diary_content(self, diary_id):
+        """
+        解压缩日记内容并更新content字段
+        
+        Args:
+            diary_id: 日记ID
+            
+        Returns:
+            dict: 更新后的日记对象，失败返回None
+        """
+        # 获取日记对象
+        diary = self.getDiary(diary_id)
+        if not diary:
+            log.writeLog(f"日记 {diary_id} 不存在")
+            return None
+            
+        # 检查日记是否已压缩
+        if not diary.get("compressed", False):
+            log.writeLog(f"日记 {diary_id} 未被压缩，无需解压")
+            return diary
+            
+        # 加载全局哈夫曼树
+        tree, _ = self.load_global_huffman_tree()
+        if not tree:
+            return None
+            
+        try:
+            # 获取压缩文件路径
+            content_path = diary.get("content", "")
+            if not content_path:
+                log.writeLog(f"日记 {diary_id} 没有内容路径")
+                return None
+            # 检查文件是否存在
+            if not os.path.exists(content_path):
+                log.writeLog(f"压缩文件不存在: {content_path}")
+                return None
+                
+            # 读取压缩文件
+            with open(content_path, 'rb') as f:
+                binary_data = f.read()
+                
+            # 解码内容
+            decoded_content = huffman_decoding(binary_data, tree)
+            
+            # 更新日记对象
+            diary_copy = diary.copy()  # 创建副本避免修改原始对象
+            diary_copy["original_content"] = decoded_content  # 保存解码后的内容
+            
+            log.writeLog(f"日记 {diary_id} 内容解压成功，长度: {len(decoded_content)}")
+            return diary_copy
+        except Exception as e:
+            log.writeLog(f"解压日记 {diary_id} 内容失败: {str(e)}")
+            return None
+
+    def compress_diary(self, diary):
+        """
+        使用全局哈夫曼树压缩日记内容并保存
+        
+        Args:
+            diary: 日记对象
+            
+        Returns:
+            dict: 更新后的日记对象，失败返回None
+        """
+        if not diary:
+            log.writeLog("没有提供要压缩的日记对象")
+            return None
+            
+        diary_id = diary.get("id")
+        if diary_id is None:
+            log.writeLog("日记对象没有ID字段")
+            return None
+            
+        # 检查是否已经压缩过
+        if diary.get("compressed", False):
+            log.writeLog(f"日记 {diary_id} 已经压缩过")
+            return diary
+            
+        # 获取内容
+        content = diary.get("content", "")
+        if not content:
+            log.writeLog(f"日记 {diary_id} 没有内容可压缩")
+            return diary
+            
+        # 加载全局哈夫曼树
+        _, codes = self.load_global_huffman_tree()
+        if not codes:
+            return None
+            
+        try:
+            # 检查内容中是否存在不在编码表中的字符，因为不更新哈夫曼树，所以是直接终止压缩
+            for char in content:
+                if char not in codes:
+                    log.writeLog(f"日记 {diary_id} 包含未在全局哈夫曼树中的字符: {char}")
+                    return None
+                    
+            # 压缩内容
+            compressed_data = encode_to_binary(content, codes)
+            
+            # 获取相关信息
+            spot_id = diary.get("spot_id")
+            if not spot_id:
+                log.writeLog(f"日记 {diary_id} 没有关联的景点ID")
+                return None
+                
+            # 创建保存目录
+            diary_content_dir = os.path.join(dataPath, "scenic_spots", f"spot_{spot_id}", "diary_content")
+            os.makedirs(diary_content_dir, exist_ok=True)
+            
+            # 构建压缩文件路径
+            compressed_filename = f"compressed_content_{diary_id}.bin"
+            full_compressed_path = os.path.join(diary_content_dir, compressed_filename)
+            
+            # 保存压缩文件
+            with open(full_compressed_path, 'wb') as f:
+                f.write(compressed_data)
+                
+            # 更新日记对象
+            diary_copy = diary.copy()  # 创建副本
+            diary_copy["content"] = f"scenic_spots/spot_{spot_id}/diary_content/{compressed_filename}"  # 更新内容路径
+            diary_copy["compressed"] = True
+            
+            log.writeLog(f"日记 {diary_id} 压缩成功，保存到: {full_compressed_path}")
+            return diary_copy
+        except Exception as e:
+            log.writeLog(f"压缩日记 {diary_id} 失败: {str(e)}")
+            return None
+
 
 
 def __testUserIo():
@@ -667,13 +846,121 @@ def testDiaryIo():
     
     print(diary_io.holes)
 
+    # 测试加载全局哈夫曼树
+    print("\n测试load_global_huffman_tree方法:")
+    tree, codes = diary_io.load_global_huffman_tree()
+    if tree and codes:
+        print(f"全局哈夫曼树加载成功，编码表包含 {len(codes)} 个字符")
+        print("编码表示例(前5个字符):")
+        count = 0
+        for char, code in codes.items():
+            if count < 5:
+                print(f"字符: '{char}' -> 编码: {code}")
+                count += 1
+            else:
+                break
+    else:
+        print("全局哈夫曼树加载失败，请确保文件存在")
+
+    # 测试解压日记内容
+    print("\n测试decompress_diary_content方法:")
+    # 找一个已压缩的日记
+    compressed_diary = None
+    for diary in diary_io.getAllDiaries():
+        if diary and diary.get("compressed", False):
+            compressed_diary = diary
+            break
+
+    if compressed_diary:
+        diary_id = compressed_diary["id"]
+        print(f"找到已压缩日记 ID: {diary_id}, 标题: {compressed_diary.get('title', '无标题')}")
+        decompressed = diary_io.decompress_diary_content(diary_id)
+        if decompressed and "original_content" in decompressed:
+            content_preview = decompressed["original_content"][:100] + "..." if len(decompressed["original_content"]) > 100 else decompressed["original_content"]
+            print(f"日记解压成功，内容预览: {content_preview}")
+        else:
+            print(f"日记 {diary_id} 解压失败")
+    else:
+        print("没有找到已压缩的日记，跳过解压测试")
+
+    # 测试日记压缩
+    print("\n测试compress_diary方法:")
+    # 创建一个测试日记进行压缩
+    test_diary = {
+        "id": new_diary_id if new_diary_id > 0 else 9999,
+        "name": "测试用户",
+        "user_id": 1,
+        "spot_id": 1,
+        "content": "这是一条测试日记内容，用于测试哈夫曼压缩功能。包含一些中文和符号：！@#￥%……&*（）。",
+        "title": "压缩测试日记",
+        "time": datetime.datetime.now().strftime("%Y-%m-%d"),
+        "score": 0,
+        "score_count": 0,
+        "visited_time": 0,
+        "img_list": [],
+        "compressed": False
+    }
+
+    try:
+        compressed_diary = diary_io.compress_diary(test_diary)
+        if compressed_diary and compressed_diary.get("compressed", False):
+            print(f"日记压缩成功!")
+            print(f"压缩前内容路径: {test_diary['content']}")
+            print(f"压缩后内容路径: {compressed_diary['content']}")
+            
+            # 创建测试日记的副本但不保存到数据库
+            # diary_io.diaries.append(compressed_diary)
+            # diary_io.diary_count += 1
+            # diary_io.saveDiaries()
+        else:
+            print("日记压缩失败或未压缩")
+    except Exception as e:
+        print(f"压缩过程中发生错误: {str(e)}")
+
+    # 测试获取带解压内容的日记
+    print("\n测试get_diary_with_content方法:")
+    # 找一个已压缩的日记
+    if compressed_diary and compressed_diary.get("compressed", False):
+        diary_id = compressed_diary["id"]
+        print(f"使用刚压缩的日记 ID: {diary_id} 测试")
+    elif compressed_diary is None and all_diaries:
+        # 找第一个已压缩的日记
+        for d in all_diaries:
+            if d and d.get("compressed", False):
+                diary_id = d["id"]
+                print(f"使用已存在的压缩日记 ID: {diary_id} 测试")
+                break
+        else:
+            print("没有找到已压缩的日记，跳过测试")
+            diary_id = None
+    else:
+        diary_id = None
+        print("没有可用的压缩日记进行测试")
+
+    if diary_id is not None:
+        diary_with_content = diary_io.get_diary_with_content(diary_id)
+        if diary_with_content:
+            # 如果是字符串内容，显示前100个字符
+            content = diary_with_content.get("content", "")
+            if isinstance(content, str) and len(content) > 0:
+                if len(content) > 100:
+                    content_preview = content[:100] + "..."
+                else:
+                    content_preview = content
+                print(f"成功获取带解压内容的日记: {diary_with_content['title']}")
+                print(f"内容预览: {content_preview}")
+            else:
+                print(f"日记内容可能不是文本或为空: {type(content)}")
+        else:
+            print(f"获取日记 {diary_id} 失败")
+
     # 保存所有修改
     # 注释：在实际使用中，DiaryIo类的方法会自动保存修改
     # 但在测试中，我们可能需要手动保存
-    print("\n保存所有测试修改:")
-    diary_io.saveDiaries()
-    diary_io.spotIo.saveSpots()
-    diary_io.userIo.saveUsers()
+    # print("\n保存所有测试修改:")
+    # diary_io.saveDiaries()
+    # diary_io.spotIo.saveSpots()
+    # diary_io.userIo.saveUsers()
     
     print("\n===== DiaryIo类测试完成 =====")
 
