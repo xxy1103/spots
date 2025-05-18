@@ -310,14 +310,22 @@ class DiaryIo:
         """获取所有日记"""
         return self.diaries
     
-    def getDiary(self, diary_id): #改完 直接获取对应id的日记
+    def getDiary(self, diary_id):
         """获取单个日记"""
-        if diary_id < self.diary_count:
-            result = self.diaries[diary_id]
-            return result
-        else:
-            log.writeLog(f"日记 {diary_id} 不存在")
-        return None     # 返回None表示对应日记不存在
+        # 首先尝试直接索引访问
+        if diary_id < len(self.diaries):
+            diary = self.diaries[diary_id]
+            # 验证是否为有效日记且ID匹配
+            if diary is not None and diary.get("id") == diary_id:
+                return diary
+        
+        # 如果直接访问失败，遍历查找
+        for diary in self.diaries:
+            if diary is not None and diary.get("id") == diary_id:
+                return diary
+                
+        log.writeLog(f"日记 {diary_id} 不存在")
+        return None
 
     def get_diary_with_content(self, diary_id): # 在要直接显示日记内容时使用这个方法
         """
