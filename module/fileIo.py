@@ -312,20 +312,8 @@ class DiaryIo:
     
     def getDiary(self, diary_id):
         """获取单个日记"""
-        # 首先尝试直接索引访问
-        if diary_id < len(self.diaries):
-            diary = self.diaries[diary_id]
-            # 验证是否为有效日记且ID匹配
-            if diary is not None and diary.get("id") == diary_id:
-                return diary
-        
-        # 如果直接访问失败，遍历查找
-        for diary in self.diaries:
-            if diary is not None and diary.get("id") == diary_id:
-                return diary
-                
-        log.writeLog(f"日记 {diary_id} 不存在")
-        return None
+        if diary_id <= self.currentId:
+            return self.diaries[diary_id]
 
     def get_diary_with_content(self, diary_id): # 在要直接显示日记内容时使用这个方法
         """
@@ -411,7 +399,7 @@ class DiaryIo:
                     img_file.write(img_data)
                 
         # 添加到日记列表
-        self.diaries.append(new_diary)
+        self.diaries[new_diary["id"]] = new_diary
         self.diary_count += 1
         
         # 更新景点评论数，不立即保存
@@ -906,6 +894,8 @@ def testDiaryIo():
         "img_list": [],
         "compressed": False
     }
+
+    
 
     try:
         compressed_diary = diary_io.compress_diary(test_diary)
