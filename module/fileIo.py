@@ -895,7 +895,7 @@ def testDiaryIo():
         "compressed": False
     }
 
-    
+
 
     try:
         compressed_diary = diary_io.compress_diary(test_diary)
@@ -916,14 +916,11 @@ def testDiaryIo():
     # 测试获取带解压内容的日记
     print("\n测试get_diary_with_content方法:")
     # 找一个已压缩的日记
-    if compressed_diary and compressed_diary.get("compressed", False):
-        diary_id = compressed_diary["id"]
-        print(f"使用刚压缩的日记 ID: {diary_id} 测试")
-    elif compressed_diary is None and all_diaries:
+    if all_diaries:
         # 找第一个已压缩的日记
         for d in all_diaries:
             if d and d.get("compressed", False):
-                diary_id = d["id"]
+                diary_id = d["id"] +2
                 print(f"使用已存在的压缩日记 ID: {diary_id} 测试")
                 break
         else:
