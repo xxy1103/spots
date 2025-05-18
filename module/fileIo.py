@@ -4,8 +4,11 @@ import os
 import json
 import datetime
 import module.printLog as log
+from module.data_structure.stack import Stack
 
 dataPath = r"data/"
+
+
 
 class UserIo:
     def __init__(self):
@@ -219,29 +222,46 @@ class SpotIo:
         with open(self.spotsPath, "w", encoding="utf-8") as f:
             json.dump(spotsData, f, ensure_ascii=False, indent=4)
 
+class IdGenerator:      
+    def __init__(self, currentId, holes=[]):
+        self.holes = Stack(holes)
+        self.currentId = currentId
+
+    def getId(self):
+        if not self.holes.is_empty():
+            return self.holes.pop(), self.currentId,self.holes.getlist()
+        self.currentId += 1
+        return self.currentId, self.currentId,self.holes.getlist()
+
+    def releaseId(self, id):
+        if id <= self.currentId:
+            self.holes.push(id)
+        return self.holes.getlist()
 
 class DiaryIo:
     def __init__(self):
         """初始化日记IO类"""
-        self.spotIo = spotIo
-        self.userIo = userIo
-        
+        global userIo, spotIo
+        self.spotIo = spotIo 
+        self.userIo = userIo 
         # 集中存储路径
         self.diaries_path = os.path.join(dataPath, "diaries", "diaries.json")
-        self.reviews_base_path = os.path.join(dataPath, "diaries", "reviews")
-        
+        self.reviews_base_path = os.path.join(dataPath, "scenic_spots") # 改完 路径改为"scenic_spots"下
+
         # 确保目录存在
         os.makedirs(os.path.dirname(self.diaries_path), exist_ok=True)
         os.makedirs(self.reviews_base_path, exist_ok=True)
-        
+
         # 加载日记数据
         self.diaries = []
         self.diary_count = 0
+        self.currentId = 0
+        self.holes = []
         self._loadDiaries()
-        
+
         log.writeLog("日记IO系统初始化完成")
     
-    def _loadDiaries(self):
+    def _loadDiaries(self): #Checked
         """从diaries.json加载所有日记数据"""
         if os.path.exists(self.diaries_path):
             try:
@@ -249,6 +269,9 @@ class DiaryIo:
                     data = json.load(f)
                     self.diaries = data.get("diaries", [])
                     self.diary_count = data.get("counts", len(self.diaries))
+                    self.currentId = data.get("currentId", 0)
+                    self.holes = data.get("holes", [])
+                    self.diariesIdGenerator = IdGenerator(self.currentId, self.holes)
                 log.writeLog(f"已加载 {self.diary_count} 条日记")
             except Exception as e:
                 log.writeLog(f"加载日记文件失败: {str(e)}")
@@ -258,14 +281,16 @@ class DiaryIo:
             # 文件不存在，创建空数据
             self.diaries = []
             self.diary_count = 0
-            self._saveDiaries()
+            self.saveDiaries()
             log.writeLog("已创建新的日记数据文件")
     
-    def _saveDiaries(self):
+    def saveDiaries(self): #Checked
         """保存日记数据到文件"""
         try:
             data = {
                 "counts": self.diary_count,
+                "currentId": self.currentId,
+                "holes": self.holes,
                 "diaries": self.diaries
             }
             with open(self.diaries_path, "w", encoding="utf-8") as f:
@@ -275,31 +300,36 @@ class DiaryIo:
         except Exception as e:
             log.writeLog(f"保存日记文件失败: {str(e)}")
             return False
-    
-    def _getDiaryImagePath(self, diary_id):
+
+    def getDiaryImagePath(self, spot_id, diary_id): #改完 修改为图片实际存储路径
         """获取日记图片存储路径"""
-        return os.path.join(self.reviews_base_path, f"diary_{diary_id}", "images")
-    
-    def getAllDiaries(self):
+        return os.path.join(self.reviews_base_path, f"spot_{spot_id}", f"review_{diary_id}","images")
+
+    def getAllDiaries(self): #Checked
         """获取所有日记"""
         return self.diaries
     
-    def getDiary(self, diary_id):
+    def getDiary(self, diary_id): #改完 直接获取对应id的日记
         """获取单个日记"""
-        for diary in self.diaries:
-            if diary["id"] == diary_id:
-                return diary
-        return None
+        if diary_id < self.diary_count:
+            return self.diaries[diary_id]
+        else:
+            log.writeLog(f"日记 {diary_id} 不存在")
+        return None     # 返回None表示对应日记不存在
     
-    def getSpotDiaries(self, spot_id):
+    def getSpotDiaries(self, spot_id): #改 使用合适的数据结构优化
         """获取指定景点的所有日记"""
-        return [diary for diary in self.diaries if diary["spot_id"] == spot_id]
+        diarys = [diary for diary in self.diaries if diary != None and diary["spot_id"] == spot_id]
+        return diarys
+        #return [diary for diary in self.diaries if diary["spot_id"] == spot_id]
     
-    def getUserDiaries(self, user_id):
+    def getUserDiaries(self, user_id): #改 使用合适的数据结构优化
         """获取指定用户的所有日记"""
-        return [diary for diary in self.diaries if diary["user_id"] == user_id]
+        diarys = [diary for diary in self.diaries if diary != None and diary["user_id"] == user_id]
+        return diarys
+        #return [diary for diary in self.diaries if diary["user_id"] == user_id]
     
-    def addDiary(self, user_id, spot_id, title, content, images=None):
+    def addDiary(self, user_id, spot_id, title, content, images=None): #改完
         """添加新日记"""
         if images is None:
             images = []
@@ -317,7 +347,7 @@ class DiaryIo:
             return -1
         
         # 创建新日记
-        diary_id = self.diary_count
+        diary_id,self.currentId,self.holes = self.diariesIdGenerator.getId()
         new_diary = {
             "id": diary_id,
             "name": user.get("name", ""),
@@ -331,11 +361,10 @@ class DiaryIo:
             "visited_time": 0,
             "img_list": []
         }
-        
         # 处理图片
         if images:
             # 创建图片目录
-            img_dir = self._getDiaryImagePath(diary_id)
+            img_dir = self.getDiaryImagePath(spot_id, diary_id)
             os.makedirs(img_dir, exist_ok=True)
             
             # 保存图片路径
@@ -343,39 +372,43 @@ class DiaryIo:
                 img_path = os.path.join(img_dir, f"{diary_id}_{i}.jpg")
                 new_diary["img_list"].append(img_path)
                 # 实际的图片保存由前端处理
-        
+                with open(img_path, "wb") as img_file:
+                    img_file.write(img_data)
+                
         # 添加到日记列表
         self.diaries.append(new_diary)
         self.diary_count += 1
         
-        # 保存到文件
-        if self._saveDiaries():
-            # 更新景点评论数，不立即保存
-            self.spotIo.spotReviewsAdd(spot_id, save_immediately=False)
+        # 更新景点评论数，不立即保存
+        self.spotIo.spotReviewsAdd(spot_id, save_immediately=False) #待改 修改Spot后改
             
-            # 更新用户评论记录 - 修改这里的存储格式
-            if "reviews" not in user:
+        # 更新用户评论记录 - 修改这里的存储格式
+        if "reviews" not in user:
                 # 创建新的结构
-                user["reviews"] = {
-                    "total": 1,
-                    "diary_ids": [diary_id]
-                }
-            else:
-                # 直接增加
-                user["reviews"]["total"] += 1
-                user["reviews"]["diary_ids"].append(diary_id)
+            user["reviews"] = {
+                "total": 1,
+                "diary_ids": [diary_id]
+            }
+        else:
+            # 直接增加
+            user["reviews"]["total"] += 1
+            user["reviews"]["diary_ids"].append(diary_id)
             
-            # 最后，手动保存所有更改
-            self.spotIo.saveSpots()  # 保存景点数据
-            self.userIo.saveUsers()  # 保存用户数据
+        # 暂时不需要保存
+        # # 最后，手动保存所有更改
+        # self.spotIo.saveSpots()  # 保存景点数据
+        # self.userIo.saveUsers()  # 保存用户数据
             
-            log.writeLog(f"用户 {user_id} 为景点 {spot_id} 添加日记 {diary_id}，总日记数: {user['reviews']['total']}")
-            return diary_id
-        
-        return -1
+        log.writeLog(f"用户 {user_id} 为景点 {spot_id} 添加日记 {diary_id}，总日记数: {user['reviews']['total']}")
+        return diary_id
 
-    def deleteDiary(self, user_id, diary_id):
-        """删除日记"""
+    def deleteDiary(self, user_id, diary_id): #改完 删除一条日记后，id与下标的关系被打乱
+        
+        """
+        删除日记
+        user_id:执行操作的用户id
+        diary_id:被删除的日记id
+        """
         # 检查用户是否存在
         user = self.userIo.getUser(user_id)
         if not user:
@@ -385,13 +418,14 @@ class DiaryIo:
         # 查找日记
         diary_index = -1
         target_diary = None
-        for i, diary in enumerate(self.diaries):
-            if diary["id"] == diary_id:
-                diary_index = i
-                target_diary = diary
-                break
-        
-        if diary_index == -1:
+        # for i, diary in enumerate(self.diaries):
+        #     if diary["id"] == diary_id:
+        #         diary_index = i
+        #         target_diary = diary
+        #         break
+        target_diary = self.getDiary(diary_id)
+
+        if target_diary is None:
             log.writeLog(f"日记 {diary_id} 不存在，无法删除")
             return False
         
@@ -403,8 +437,8 @@ class DiaryIo:
         # 获取日记关联的景点ID
         spot_id = target_diary["spot_id"]
         
-        # 删除图片文件夹
-        img_dir = os.path.dirname(self._getDiaryImagePath(diary_id))
+        # 删除图片文件夹 #改 暂未实现
+        img_dir = os.path.dirname(self.getDiaryImagePath(spot_id, diary_id))
         if os.path.exists(img_dir):
             import shutil
             try:
@@ -413,34 +447,41 @@ class DiaryIo:
                 log.writeLog(f"删除日记 {diary_id} 的图片文件夹失败: {str(e)}")
         
         # 从列表中删除日记
-        self.diaries.pop(diary_index)
-        
-        # 保存更新
-        if not self._saveDiaries():
-            log.writeLog(f"保存日记数据失败")
-            return False
+        self.diaries[diary_id] = None
+        self.holes = self.diariesIdGenerator.releaseId(diary_id)  # 释放ID
+        self.diary_count -= 1
+
+        # 暂时不保存数据
+        # # 保存更新
+        # if not self._saveDiaries():
+        #     log.writeLog(f"保存日记数据失败")
+        #     return False
         
         # 更新用户的评论记录 - 使用新的存储格式
-        if "reviews" in user:
+        if "reviews" in user:   #思考 是否可以替换更加高效的数据结构
             # 直接更新
             if diary_id in user["reviews"]["diary_ids"]:
                 user["reviews"]["diary_ids"].remove(diary_id)
                 user["reviews"]["total"] -= 1
-        
-        self.userIo.saveUsers()
-        
+
+        # self.userIo.saveUsers()
+
         # 更新景点的评论数
         spot = self.spotIo.getSpot(spot_id)
         if spot and "reviews" in spot and spot["reviews"] > 0:
             spot["reviews"] -= 1
-            self.spotIo.saveSpots()
-        
+            # self.spotIo.saveSpots()
+
         log.writeLog(f"用户 {user_id} 成功删除日记 {diary_id}，剩余日记数: {user['reviews'].get('total', 0)}")
         return True
     
-    def updateScore(self, diary_id, new_score, old_score=0):
-        """更新日记评分"""
-        for diary in self.diaries:
+    def updateScore(self, diary_id, new_score, old_score=0): #改完
+        """
+        更新日记评分
+        old_score为0时，表示新评分
+        """
+        diary = self.getDiary(diary_id)
+        if diary is not None:
             if diary["id"] == diary_id:
                 # 计算新的评分
                 sum_score = float(diary.get("score", 0)) * diary.get("score_count", 0)
@@ -459,39 +500,40 @@ class DiaryIo:
                     diary["score"] = 0
                 
                 # 保存更新
-                self._saveDiaries()
+                #self.saveDiaries()
                 return diary["score"]
         
         log.writeLog(f"日记 {diary_id} 不存在，无法更新评分")
         return -1
     
-    def diaryVisited(self, diary_id):
+    def diaryVisited(self, diary_id): #改完
         """增加日记访问次数"""
-        for diary in self.diaries:
+        diary = self.getDiary(diary_id)
+        if diary is not None:
             if diary["id"] == diary_id:
                 if "visited_time" not in diary:
                     diary["visited_time"] = 0
                 
                 diary["visited_time"] += 1
-                self._saveDiaries()
+                # self._saveDiaries()
                 return diary["visited_time"]
         
         log.writeLog(f"日记 {diary_id} 不存在，无法更新访问次数")
         return -1
+    # 这种与文件无关的操作，应该放在diaryClass中
+    # def getTopRatedDiaries(self, limit=10):
+    #     """获取评分最高的日记"""
+    #     # 过滤掉没有评分的日记
+    #     rated_diaries = [d for d in self.diaries if d.get("score_count", 0) > 0]
+    #     # 按评分降序排序
+    #     sorted_diaries = sorted(rated_diaries, key=lambda x: x.get("score", 0), reverse=True)
+    #     return sorted_diaries[:limit]
     
-    def getTopRatedDiaries(self, limit=10):
-        """获取评分最高的日记"""
-        # 过滤掉没有评分的日记
-        rated_diaries = [d for d in self.diaries if d.get("score_count", 0) > 0]
-        # 按评分降序排序
-        sorted_diaries = sorted(rated_diaries, key=lambda x: x.get("score", 0), reverse=True)
-        return sorted_diaries[:limit]
-    
-    def getMostVisitedDiaries(self, limit=10):
-        """获取访问量最高的日记"""
-        # 按访问量降序排序
-        sorted_diaries = sorted(self.diaries, key=lambda x: x.get("visited_time", 0), reverse=True)
-        return sorted_diaries[:limit]
+    # def getMostVisitedDiaries(self, limit=10):
+    #     """获取访问量最高的日记"""
+    #     # 按访问量降序排序
+    #     sorted_diaries = sorted(self.diaries, key=lambda x: x.get("visited_time", 0), reverse=True)
+    #     return sorted_diaries[:limit]
 
 
 def __testUserIo():
@@ -530,9 +572,116 @@ def __testSpotIo(spotIo):
     print(spotIo.spotReviewsAdd(spotId))
     spotIo.saveSpots()
 
+def testDiaryIo():
+    """
+    全面测试DiaryIo类的各个方法
+    """
+    print("\n===== 开始测试DiaryIo类 =====")
+    
+    # 获取已初始化的DiaryIo实例
+    diary_io = diaryIo
+    
+    diary_io.deleteDiary(61,1)
+    # 测试获取所有日记
+    print("\n测试getAllDiaries方法:")
+    all_diaries = diary_io.getAllDiaries()
+    print(f"总日记数量: {len(all_diaries)}")
+    
+    # 测试获取单个日记
+    print("\n测试getDiary方法:")
+    if len(all_diaries) > 0:
+        diary_id = all_diaries[0]["id"]
+        print(f"获取日记ID {diary_id} 的详细信息:")
+        diary = diary_io.getDiary(diary_id)
+        if diary:
+            print(f"日记标题: {diary['title']}")
+            print(f"日记内容: {diary['content'][:30]}...")  # 只显示内容的前30个字符
+        else:
+            print(f"日记 {diary_id} 不存在")
+    else:
+        print("没有可用的日记进行测试")
+    
+    # 测试获取指定景点的所有日记
+    print("\n测试getSpotDiaries方法:")
+    spot_id = 1  # 假设使用ID为1的景点进行测试
+    spot_diaries = diary_io.getSpotDiaries(spot_id)
+    print(f"景点 {spot_id} 的日记数量: {len(spot_diaries)}")
+    if spot_diaries:
+        print(f"第一条日记标题: {spot_diaries[0]['title']}")
+    
+    # 测试获取指定用户的所有日记
+    print("\n测试getUserDiaries方法:")
+    user_id = 1  # 假设使用ID为1的用户进行测试
+    user_diaries = diary_io.getUserDiaries(user_id)
+    print(f"用户 {user_id} 的日记数量: {len(user_diaries)}")
+    if user_diaries:
+        print(f"第一条日记标题: {user_diaries[0]['title']}")
+    
+    # 测试添加新日记
+    print("\n测试addDiary方法:")
+    try:
+        user_id = 1  # 假设使用ID为1的用户
+        spot_id = 1  # 假设使用ID为1的景点
+        title = "测试日记标题"
+        content = "这是一条测试日记的内容，用于测试DiaryIo类的addDiary方法。"
+        new_diary_id = diary_io.addDiary(user_id, spot_id, title, content)
+        print(f"添加新日记成功，ID: {new_diary_id}")
+        
+        # 验证新日记是否添加成功
+        if new_diary_id > 0:
+            new_diary = diary_io.getDiary(new_diary_id)
+            if new_diary:
+                print(f"验证新日记: 标题={new_diary['title']}, 内容={new_diary['content'][:30]}...")
+            else:
+                print("无法获取新添加的日记")
+    except Exception as e:
+        print(f"添加日记失败: {str(e)}")
+    
+    # 测试更新日记评分
+    print("\n测试updateScore方法:")
+    if new_diary_id > 0:
+        new_score = 4.5
+        updated_score = diary_io.updateScore(new_diary_id, new_score)
+        print(f"日记 {new_diary_id} 的评分已更新为: {updated_score}")
+    
+    # 测试增加日记访问次数
+    print("\n测试diaryVisited方法:")
+    if new_diary_id > 0:
+        visits = diary_io.diaryVisited(new_diary_id)
+        print(f"日记 {new_diary_id} 的访问次数已更新为: {visits}")
+    
+    # 测试删除日记
+    print("\n测试deleteDiary方法:")
+    if new_diary_id > 0:
+        delete_success = diary_io.deleteDiary(user_id, new_diary_id)
+        if delete_success:
+            print(f"日记 {new_diary_id} 已成功删除")
+            # 验证删除结果
+            deleted_diary = diary_io.getDiary(new_diary_id)
+            if deleted_diary is None:
+                print("验证成功: 日记已被删除")
+            else:
+                print("警告: 日记似乎没有被完全删除")
+        else:
+            print(f"删除日记 {new_diary_id} 失败")
+    
+    print(diary_io.holes)
+
+    # 保存所有修改
+    # 注释：在实际使用中，DiaryIo类的方法会自动保存修改
+    # 但在测试中，我们可能需要手动保存
+    print("\n保存所有测试修改:")
+    diary_io.saveDiaries()
+    diary_io.spotIo.saveSpots()
+    diary_io.userIo.saveUsers()
+    
+    print("\n===== DiaryIo类测试完成 =====")
+
 # 初始化全局实例
 userIo = UserIo()
 spotIo = SpotIo()
 configIo = ConfigIo()
 diaryIo = DiaryIo()
+
+
 
