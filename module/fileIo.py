@@ -313,7 +313,8 @@ class DiaryIo:
     def getDiary(self, diary_id): #改完 直接获取对应id的日记
         """获取单个日记"""
         if diary_id < self.diary_count:
-            return self.diaries[diary_id]
+            result = self.diaries[diary_id]
+            return result
         else:
             log.writeLog(f"日记 {diary_id} 不存在")
         return None     # 返回None表示对应日记不存在
@@ -335,12 +336,9 @@ class DiaryIo:
         # 确认已压缩，解压
         if diary.get("compressed", True):
             decompressed_diary = self.decompress_diary_content(diary_id)
-            if decompressed_diary and "original_content" in decompressed_diary:
+            if decompressed_diary:
                 # 解压缩的方法我都用了副本，本意是因为我们并不保存原始数据，希望这样能防止解压缩的过程中对本地数据或者用户输入的新数据产生什么影响
-                result = diary.copy()
-                result["content"] = decompressed_diary["original_content"]
-                result["_compressed_path"] = diary["content"]  # 保存原始压缩路径
-                return result
+                return decompressed_diary
                 
         # 未压缩或解压失败，返回原始对象
         return diary
@@ -631,7 +629,7 @@ class DiaryIo:
             
             # 更新日记对象
             diary_copy = diary.copy()  # 创建副本避免修改原始对象
-            diary_copy["original_content"] = decoded_content  # 保存解码后的内容
+            diary_copy["content"] = decoded_content  # 保存解码后的内容
             
             log.writeLog(f"日记 {diary_id} 内容解压成功，长度: {len(decoded_content)}")
             return diary_copy
@@ -699,8 +697,8 @@ class DiaryIo:
             full_compressed_path = os.path.join(diary_content_dir, compressed_filename)
             
             # 保存压缩文件
-            with open(full_compressed_path, 'wb') as f:
-                f.write(compressed_data)
+            # with open(full_compressed_path, 'wb') as f:
+            #     f.write(compressed_data)
                 
             # 更新日记对象
             diary_copy = diary.copy()  # 创建副本
@@ -875,8 +873,8 @@ def testDiaryIo():
         diary_id = compressed_diary["id"]
         print(f"找到已压缩日记 ID: {diary_id}, 标题: {compressed_diary.get('title', '无标题')}")
         decompressed = diary_io.decompress_diary_content(diary_id)
-        if decompressed and "original_content" in decompressed:
-            content_preview = decompressed["original_content"][:100] + "..." if len(decompressed["original_content"]) > 100 else decompressed["original_content"]
+        if decompressed and "content" in decompressed:
+            content_preview = decompressed["content"][:100] + "..." if len(decompressed["content"]) > 100 else decompressed["original_content"]
             print(f"日记解压成功，内容预览: {content_preview}")
         else:
             print(f"日记 {diary_id} 解压失败")
