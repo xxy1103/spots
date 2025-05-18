@@ -89,7 +89,14 @@ class Stack:
             str: 栈的正式字符串表示
         """
         return f"Stack({self.items})"
-
+    def getlist(self):
+        """
+        获取栈的列表表示
+        
+        Returns:
+            list: 栈的列表表示
+        """
+        return self.items
 
 # 测试代码
 if __name__ == "__main__":
