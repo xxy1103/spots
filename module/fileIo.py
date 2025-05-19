@@ -355,9 +355,9 @@ class IdGenerator:
 
     def getId(self):
         if not self.holes.is_empty():
-            return self.holes.pop(), self.currentId,self.holes.getlist()
+            return self.holes.pop(), self.holes.getlist()
         self.currentId += 1
-        return self.currentId, self.currentId,self.holes.getlist()
+        return self.currentId, self.holes.getlist()
 
     def releaseId(self, id):
         if id <= self.currentId:
@@ -437,8 +437,10 @@ class DiaryIo:
 
     def getDiary(self, diary_id:int):
         """获取单个日记"""
-        if diary_id <= self.currentId:
+        if diary_id <= self.currentId and diary_id >= 0:
             return self.diaries[diary_id]
+        else:
+            return None
 
     def get_diary_with_content(self, diary_id:int): # 在要直接显示日记内容时使用这个方法
         """
@@ -494,7 +496,7 @@ class DiaryIo:
             return -1
         
         # 创建新日记
-        diary_id,self.currentId,self.holes = self.diariesIdGenerator.getId()
+        diary_id,self.holes = self.diariesIdGenerator.getId()
         new_diary = {
             "id": diary_id,
             "name": user.get("name", ""),
@@ -524,7 +526,11 @@ class DiaryIo:
                     img_file.write(img_data)
                 
         # 添加到日记列表
-        self.diaries[new_diary["id"]] = new_diary
+        if diary_id <= self.currentId:
+            self.diaries[new_diary["id"]] = new_diary
+        else:
+            self.diaries.append(new_diary)
+            self.currentId = diary_id
         self.diary_count += 1
         
         # 更新景点评论数，不立即保存

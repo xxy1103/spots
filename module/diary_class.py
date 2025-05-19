@@ -89,25 +89,25 @@ class DiaryManager:
     #         if diary_id not in entry["id"]:
     #             entry["id"].append(diary_id)
 
-    def _rebuildIndexes(self): #改 这个太离谱了，每添加一篇日记就重构整个索引
-        """重建所有索引"""
-        # 重新从磁盘加载日记
-        self.diaries = self.diaryIo.getAllDiaries()
+    # def _rebuildIndexes(self): #改 这个太离谱了，每添加一篇日记就重构整个索引
+    #     """重建所有索引"""
+    #     # 重新从磁盘加载日记
+    #     self.diaries = self.diaryIo.getAllDiaries()
         
-        # 清空所有索引
-        hash_table_size = max(1000, len(self.diaries) * 2)
-        self.titleHashTable = HashTable(hash_table_size)
-        self.visitedHeap = TopKHeap()
-        self.scoreHeap = TopKHeap()
-        self.spotDiaries = {}
-        self.userDiaries = {}
+    #     # 清空所有索引
+    #     hash_table_size = max(1000, len(self.diaries) * 2)
+    #     self.titleHashTable = HashTable(hash_table_size)
+    #     self.visitedHeap = TopKHeap()
+    #     self.scoreHeap = TopKHeap()
+    #     self.spotDiaries = {}
+    #     self.userDiaries = {}
         
-        # 重新构建索引
-        self._buildIndexes()
+    #     # 重新构建索引
+    #     self._buildIndexes()
         
-        writeLog("日记索引已重新构建")
+    #     writeLog("日记索引已重新构建")
     
-    def getDiary(self, diary_id):
+    def getDiary(self, diary_id:int):
         """获取单个日记"""
         return self.diaryIo.getDiary(diary_id)
     
@@ -123,30 +123,27 @@ class DiaryManager:
     #     """获取指定用户的所有日记"""
     #     return self.userDiaries.get(user_id, [])
     
-    def addDiary(self, user_id, spot_id, title, content, images=None):
+    def addDiary(self, user_id:int, spot_id:int, title, content, images=None):
         """添加新日记"""
         diary_id = self.diaryIo.addDiary(user_id, spot_id, title, content, images)
         
         if diary_id >= 0:
             # 重新构建索引
-            self._rebuildIndexes()
+            self.titleHashTable.insert({"id": diary_id, "name": title})
             writeLog(f"用户 {user_id} 添加日记 {diary_id} 成功，索引已更新")
             return diary_id
         
         return -1
     
-    def deleteDiary(self, user_id, diary_id):
+    def deleteDiary(self, user_id:int, diary_id:int):
         """删除日记"""
         success = self.diaryIo.deleteDiary(user_id, diary_id)
-        
         if success:
-            # 重新构建索引
-            self._rebuildIndexes()
-            writeLog(f"用户 {user_id} 删除日记 {diary_id} 成功，索引已更新")
+            self.titleHashTable.delete(diary_id)
         
         return success
     
-    def visitDiary(self, diary_id):
+    def visitDiary(self, diary_id:int):
         """浏览日记，增加浏览量"""
         visited_time = self.diaryIo.diaryVisited(diary_id)
         
@@ -163,8 +160,8 @@ class DiaryManager:
             #         break
         
         return visited_time
-    
-    def rateDiary(self, diary_id, newScore, oldScore):
+
+    def rateDiary(self, diary_id:int, newScore:float, oldScore:float):
         """为日记评分"""
         # 更新日记评分
         new_score = self.diaryIo.updateScore(diary_id, newScore, oldScore)
@@ -174,11 +171,12 @@ class DiaryManager:
             # 更新索引堆中的评分
             self.scoreHeap.updateScore(diary_id, new_score)
             
-            # 更新内存中的日记对象
-            for diary in self.diaries:
-                if diary["id"] == diary_id:
-                    diary["score"] = new_score
-                    break
+            # 没必要
+            # # 更新内存中的日记对象
+            # for diary in self.diaries:
+            #     if diary["id"] == diary_id:
+            #         diary["score"] = new_score
+            #         break
             
             return new_score
         
@@ -212,74 +210,70 @@ class DiaryManager:
     
     # 日记的全文搜索
     # 通过关键字的出现位置和次数增加权重分数，最后根据分数排序
-    def searchByContent(self, keyword):
+    def searchByTitle(self, keys):
         """搜索日记内容和标题"""
-        if not keyword or len(keyword) < 1:
+        if not keys:
             return []
-        
-        # 在标题中搜索
-        title_results = self._searchWithHash(keyword, self.titleHashTable)
-        
-        result_ids = set(title_results)#改 不能使用官方库set
-        # 获取完整的日记对象并计算相关度
-        results = []
-        for diary_id in result_ids:
-            diary = self.getDiary(diary_id)
-            if diary:
-                # 计算相关度分数
-                relevance = 0
-                
-                content = diary.get("content", "")
-                title = diary.get("title", "")
-                
-                # 标题匹配分数（标题匹配权重更高）
-                if keyword in title:
-                    relevance += 10
-                    relevance += title.count(keyword) * 2
-                
-                # 内容匹配分数
-                if keyword in content:
-                    relevance += 5
-                    relevance += content.count(keyword)
-                
-                # 其他权重因素（评分、浏览量）
-                relevance += min(diary.get("score", 0), 5)
-                relevance += min(diary.get("visited_time", 0) / 100, 5)
-                
-                # 添加相关度得分
-                diary_copy = diary.copy()
-                diary_copy["relevance"] = relevance
-                results.append(diary_copy)
-        
-        # 按相关度排序
-        sorted_results = quicksort(results, sort_key="relevance", reverse=True)
-        return sorted_results
+
+        # 获取第一个字符匹配的日记
+        first_char_diaries = self.titleHashTable.search(keys[0])
+        if not first_char_diaries:
+            # 如果第一个字符就没有匹配项，则不可能有交集
+            return []
+
+        # 使用第一个字符的结果初始化结果 ID 集合 (使用 MySet)
+        result_ids = MySet(diary['id'] for diary in first_char_diaries)
+
+        # 遍历关键词中的剩余字符
+        for char in keys[1:]:
+            # 获取包含当前字符的所有日记
+            current_char_diaries = self.titleHashTable.search(char)
+            if not current_char_diaries:
+                # 如果任何一个后续字符没有匹配项，则交集为空
+                return []
+
+            # 创建当前字符的日记 ID 集合 (使用 MySet)
+            current_ids = MySet(diary['id'] for diary in current_char_diaries)
+
+            # 计算与当前结果集的交集 (使用 MySet 的 intersection_update)
+            result_ids.intersection_update(current_ids)
+
+            # 如果交集为空，提前结束 (使用 is_empty 方法)
+            if result_ids.is_empty():
+                return []
+
+        # 根据最终的 ID 集合获取日记对象列表
+        # 使用 self.diaries 列表直接访问，假设 ID 是从 1 开始且连续的
+        # 迭代 MySet
+        result_list = [self.diaries[diary_id] for diary_id in result_ids if 0 <= diary_id <= self.diaryIo.currentId]
+
+        return result_list
     
-    def _searchWithHash(self, keyword, hash_table):
-        """使用哈希表进行搜索，返回匹配的日记ID列表"""
-        matching_ids = set()
-        first_char = True
+    # def _searchWithHash(self, keyword, hash_table):
+    #     """使用哈希表进行搜索，返回匹配的日记ID列表"""
+    #     matching_ids = set()
+    #     first_char = True
         
-        for char in keyword:
-            # 查找包含这个字符的所有日记ID
-            entry = hash_table.search(char)
-            if not entry:
-                continue
+    #     for char in keyword:
+    #         # 查找包含这个字符的所有日记ID
+    #         entry = hash_table.search(char)
+    #         if not entry:
+    #             continue
                 
-            diary_ids = set(entry.get("diaries", []))
+    #         diary_ids = set(entry.get("diaries", []))
             
-            if first_char:
-                matching_ids = diary_ids
-                first_char = False
-            else:
-                # 取交集，确保所有字符都匹配
-                matching_ids = matching_ids.intersection(diary_ids)
+    #         if first_char:
+    #             matching_ids = diary_ids
+    #             first_char = False
+    #         else:
+    #             # 取交集，确保所有字符都匹配
+    #             matching_ids = matching_ids.intersection(diary_ids)
             
-            # 如果已经没有匹配项，提前结束
-            if not matching_ids:
-                break
+    #         # 如果已经没有匹配项，提前结束
+    #         if not matching_ids:
+    #             break
         
-        return list(matching_ids)
+    #     return list(matching_ids)
     
     # def searchBySpot(self, spot_id):
     #     """按景点ID搜索日记"""
@@ -292,7 +286,7 @@ class DiaryManager:
     #     return self.getUserDiaries(user_id)
     
     # 根据发布日期排序
-    def getLatestDiaries(self, k=10):
+    def getLatestDiaries(self, k=10): #改 或删
         """获取最新发布的日记"""
         # 为日记添加日期对象以便排序
         dated_diaries = []
