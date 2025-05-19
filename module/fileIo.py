@@ -75,6 +75,119 @@ class UserIo:
         self.counts -= 1
         log.writeLog(f"删除用户：{userId}")
 
+    def userDiaryAdd(self, userId:int, diaryId:int):
+        """
+        当用户添加新日记时，增加用户的评论数量
+        :param userId: 用户id
+        :param diaryId: 日记id
+        """
+        try:
+            user = self.getUser(userId)
+            if not user:
+                log.writeLog(f"用户 {userId} 不存在，无法更新评论数")
+                return False
+
+            if "reviews" not in user:
+                user["reviews"] = {
+                    "total": 0,
+                    "diary_ids": []
+                }
+
+            user["reviews"]["total"] += 1
+            user["reviews"]["diary_ids"].append(diaryId)
+            #self.saveUsers()
+            log.writeLog(f"用户 {userId} 的评论数更新为 {user['reviews']}")
+            return True
+        except Exception as e:
+            log.writeLog(f"更新用户 {userId} 评论数失败: {str(e)}")
+            return False
+    def userDiaryDecrease(self, userId:int, diaryId:int):
+        """
+        当用户删除日记时，减少用户的评论数量
+        :param userId: 用户id
+        :param diaryId: 日记id
+        """
+        try:
+            user = self.getUser(userId)
+            if not user:
+                log.writeLog(f"用户 {userId} 不存在，无法更新评论数")
+                return False
+
+            if "reviews" not in user:
+                user["reviews"] = {
+                    "total": 0,
+                    "diary_ids": []
+                }
+                log.writeLog(f"用户 {userId} 没有评论字段，已初始化")
+                return True
+
+            # 确保评论数不会小于0
+            if user["reviews"]["total"] > 0:
+                user["reviews"]["total"] -= 1
+                if diaryId in user["reviews"]["diary_ids"]:
+                    user["reviews"]["diary_ids"].remove(diaryId)
+            #self.saveUsers()
+            log.writeLog(f"用户 {userId} 的评论数更新为 {user['reviews']}")
+            return True
+        except Exception as e:
+            log.writeLog(f"更新用户 {userId} 评论数失败: {str(e)}")
+            return False
+    def userUpdateSpotMark(self, userId:int, spotId:int, score:float):
+        """
+        当用户给景点评分时，增加用户的评分数量
+        """
+        try:
+            user = self.getUser(userId)
+            if not user:
+                log.writeLog(f"用户 {userId} 不存在，无法更新评分数")
+                return False
+            if "spot_marking" not in user:
+                spot_marking = []
+                user["spot_marking"] = spot_marking
+            # 检查是否已经评分
+            for item in user["spot_marking"]:   #改 最好修改为查找算法
+                if item["spot_id"] == spotId:
+                    # 如果已经评分，更新评分
+                    item["score"] = score
+                    log.writeLog(f"用户 {userId} 更新景点 {spotId} 的评分为 {score}")
+                    return True
+            # 如果没有评分，添加新的评分
+            item = {"spot_id": spotId, "score": score}
+            user["spot_marking"].append(item)
+            log.writeLog(f"用户 {userId} 的评分数更新为 {user['spot_marking']}")
+            return True
+        except Exception as e:
+            log.writeLog(f"更新用户 {userId} 评分数失败: {str(e)}")
+            return False
+    def userUpdateDiaryMark(self, userId:int, diaryId:int, score:float):
+        """
+        当用户给日记评分时，增加用户的评分数量
+        """
+        try:
+            user = self.getUser(userId)
+            if not user:
+                log.writeLog(f"用户 {userId} 不存在，无法更新评分数")
+                return False
+            if "review_marking" not in user:
+                review_marking = []
+                user["review_marking"] = review_marking
+            # 检查是否已经评分
+            for item in user["review_marking"]:   #改 最好修改为查找算法
+                if item["diary_id"] == diaryId:
+                    # 如果已经评分，更新评分
+                    item["score"] = score
+                    log.writeLog(f"用户 {userId} 更新日记 {diaryId} 的评分为 {score}")
+                    return True
+            # 如果没有评分，添加新的评分
+            item = {"diary_id": diaryId, "score": score}
+            user["review_marking"].append(item)
+            log.writeLog(f"用户 {userId} 的评分数更新为 {user['review_marking']}")
+            return True
+        except Exception as e:
+            log.writeLog(f"更新用户 {userId} 评分数失败: {str(e)}")
+            return False
+            
+
 class ConfigIo:
     def __init__(self):
         self.configPath = os.path.join(dataPath, r"config/config.json")
@@ -144,14 +257,15 @@ class SpotIo:
 
     # Add和Decrease方法主要是保持评论数增减的一致性，
     # 这样在SpotIo和DiaryIo中都有增减评论数的代码，避免出现“ouch，我是不是少了更新评论数的代码”的情况出现。
-    def spotReviewsAdd(self, spotId:int, save_immediately=False)->bool:
+    def spotReviewsAdd(self, spotId:int,diary_id:int, save_immediately=False)->bool:
         """
         当景区添加新日记时，增加景点的评论数量
     
         Args:
             spotId: 景点ID
+            diary_id: 日记ID
             save_immediately: 是否立即保存到文件，默认为False
-        
+
         Returns:
             bool: 更新成功返回True，失败返回False
         """
@@ -162,9 +276,13 @@ class SpotIo:
                 return False
 
             if "reviews" not in spot:
-                spot["reviews"] = 0
+                spot["reviews"] = {
+                    "total": 0,
+                    "diary_ids": []
+                }
 
-            spot["reviews"] += 1
+            spot["reviews"]["total"] += 1
+            spot["reviews"]["diary_ids"].append(diary_id)
             
             # 只在需要时保存
             if save_immediately:
@@ -176,14 +294,15 @@ class SpotIo:
             log.writeLog(f"更新景点 {spotId} 评论数失败: {str(e)}")
             return False
 
-    def spotReviewsDecrease(self, spotId:int, save_immediately=False)->bool:
+    def spotReviewsDecrease(self, spotId:int, diary_id:int, save_immediately=False)->bool:
         """
         当景区删除日记时，减少景点的评论数量
     
         Args:
             spotId: 景点ID
+            diary_id: 日记ID
             save_immediately: 是否立即保存到文件，默认为False
-    
+
         Returns:
             bool: 更新成功返回True，失败返回False
         """
@@ -194,14 +313,18 @@ class SpotIo:
                 return False
 
             if "reviews" not in spot:
-                spot["reviews"] = 0
-                log.writeLog(f"景点 {spotId} 没有评论字段，已初始化为0")
+                spot["reviews"] = {
+                    "total": 0,
+                    "diary_ids": []
+                }
+                log.writeLog(f"景点 {spotId} 没有评论字段，已初始化")
                 return True
 
             # 确保评论数不会小于0
-            if spot["reviews"] > 0:
-                spot["reviews"] -= 1
-            
+            if spot["reviews"]["total"] > 0:
+                spot["reviews"]["total"] -= 1
+                if diary_id in spot["reviews"]["diary_ids"]:
+                    spot["reviews"]["diary_ids"].remove(diary_id)
             # 只在需要时保存
             if save_immediately:
                 self.saveSpots()
@@ -302,20 +425,20 @@ class DiaryIo:
             log.writeLog(f"保存日记文件失败: {str(e)}")
             return False
 
-    def getDiaryImagePath(self, spot_id, diary_id): #改完 修改为图片实际存储路径
+    def getDiaryImagePath(self, spot_id:int, diary_id:int): #改完 修改为图片实际存储路径
         """获取日记图片存储路径"""
         return os.path.join(self.reviews_base_path, f"spot_{spot_id}", f"review_{diary_id}","images")
 
     def getAllDiaries(self): #Checked
         """获取所有日记"""
         return self.diaries
-    
-    def getDiary(self, diary_id):
+
+    def getDiary(self, diary_id:int):
         """获取单个日记"""
         if diary_id <= self.currentId:
             return self.diaries[diary_id]
 
-    def get_diary_with_content(self, diary_id): # 在要直接显示日记内容时使用这个方法
+    def get_diary_with_content(self, diary_id:int): # 在要直接显示日记内容时使用这个方法
         """
         获取已压缩的日记并解压内容
         
@@ -338,20 +461,20 @@ class DiaryIo:
                 
         # 未压缩或解压失败，返回原始对象
         return diary
-    
-    def getSpotDiaries(self, spot_id): #改 使用合适的数据结构优化
+
+    def getSpotDiaries(self, spot_id:int): #无用方法，仅在测试使用，实际使用时从spotIo中获取
         """获取指定景点的所有日记"""
         diarys = [diary for diary in self.diaries if diary != None and diary["spot_id"] == spot_id]
         return diarys
         #return [diary for diary in self.diaries if diary["spot_id"] == spot_id]
-    
-    def getUserDiaries(self, user_id): #改 使用合适的数据结构优化
+
+    def getUserDiaries(self, user_id:int): #无用方法，仅在测试使用，实际使用时从userIo中获取
         """获取指定用户的所有日记"""
         diarys = [diary for diary in self.diaries if diary != None and diary["user_id"] == user_id]
         return diarys
         #return [diary for diary in self.diaries if diary["user_id"] == user_id]
-    
-    def addDiary(self, user_id, spot_id, title, content, images=None): #改完
+
+    def addDiary(self, user_id:int, spot_id:int, title:str, content:str, images:list=None): #改完
         """添加新日记"""
         if images is None:
             images = []
@@ -403,19 +526,9 @@ class DiaryIo:
         self.diary_count += 1
         
         # 更新景点评论数，不立即保存
-        self.spotIo.spotReviewsAdd(spot_id, save_immediately=False) #待改 修改Spot后改
-            
-        # 更新用户评论记录 - 修改这里的存储格式
-        if "reviews" not in user:
-                # 创建新的结构
-            user["reviews"] = {
-                "total": 1,
-                "diary_ids": [diary_id]
-            }
-        else:
-            # 直接增加
-            user["reviews"]["total"] += 1
-            user["reviews"]["diary_ids"].append(diary_id)
+        self.spotIo.spotReviewsAdd(spot_id, diary_id, save_immediately=False) #待改 修改Spot后改
+
+        self.userIo.userDiaryAdd(user_id, diary_id)  # 更新用户评论数
             
         # 暂时不需要保存
         # # 最后，手动保存所有更改
@@ -425,8 +538,8 @@ class DiaryIo:
         log.writeLog(f"用户 {user_id} 为景点 {spot_id} 添加日记 {diary_id}，总日记数: {user['reviews']['total']}")
         return diary_id
 
-    def deleteDiary(self, user_id, diary_id): #改完 删除一条日记后，id与下标的关系被打乱
-        
+    def deleteDiary(self, user_id:int, diary_id:int): #改完 删除一条日记后，id与下标的关系被打乱
+
         """
         删除日记
         user_id:执行操作的用户id
@@ -439,13 +552,8 @@ class DiaryIo:
             return False
         
         # 查找日记
-        diary_index = -1
         target_diary = None
-        # for i, diary in enumerate(self.diaries):
-        #     if diary["id"] == diary_id:
-        #         diary_index = i
-        #         target_diary = diary
-        #         break
+
         target_diary = self.getDiary(diary_id)
 
         if target_diary is None:
@@ -474,31 +582,19 @@ class DiaryIo:
         self.holes = self.diariesIdGenerator.releaseId(diary_id)  # 释放ID
         self.diary_count -= 1
 
-        # 暂时不保存数据
-        # # 保存更新
-        # if not self._saveDiaries():
-        #     log.writeLog(f"保存日记数据失败")
-        #     return False
         
         # 更新用户的评论记录 - 使用新的存储格式
-        if "reviews" in user:   #思考 是否可以替换更加高效的数据结构
-            # 直接更新
-            if diary_id in user["reviews"]["diary_ids"]:
-                user["reviews"]["diary_ids"].remove(diary_id)
-                user["reviews"]["total"] -= 1
+        self.userIo.userDiaryDecrease(user_id, diary_id)  # 更新用户评论数
 
         # self.userIo.saveUsers()
 
         # 更新景点的评论数
-        spot = self.spotIo.getSpot(spot_id)
-        if spot and "reviews" in spot and spot["reviews"] > 0:
-            spot["reviews"] -= 1
-            # self.spotIo.saveSpots()
+        self.spotIo.spotReviewsDecrease(spot_id, diary_id, save_immediately=False)
 
         log.writeLog(f"用户 {user_id} 成功删除日记 {diary_id}，剩余日记数: {user['reviews'].get('total', 0)}")
         return True
-    
-    def updateScore(self, diary_id, new_score, old_score=0): #改完
+
+    def updateScore(self, diary_id:int, new_score:float, old_score:float=0): #改完
         """
         更新日记评分
         old_score为0时，表示新评分
@@ -528,8 +624,8 @@ class DiaryIo:
         
         log.writeLog(f"日记 {diary_id} 不存在，无法更新评分")
         return -1
-    
-    def diaryVisited(self, diary_id): #改完
+
+    def diaryVisited(self, diary_id:int): #改完
         """增加日记访问次数"""
         diary = self.getDiary(diary_id)
         if diary is not None:
@@ -579,7 +675,7 @@ class DiaryIo:
             log.writeLog(f"加载全局哈夫曼树失败: {str(e)}")
             return None, None
 
-    def decompress_diary_content(self, diary_id):
+    def decompress_diary_content(self, diary_id:int):
         """
         解压缩日记内容并更新content字段
         
