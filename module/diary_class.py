@@ -1,6 +1,6 @@
 from module.fileIo import diaryIo
 from module.Spot_class import spotManager
-from module.user_class import userManager
+
 from module.data_structure.hashtable import HashTable
 from module.data_structure.indexHeap import TopKHeap
 from module.data_structure.quicksort import quicksort
@@ -28,10 +28,7 @@ class DiaryManager:
         """构建各种索引结构以提高查询效率"""
         # 哈希表用于快速检索
         hash_table_size = max(1000, len(self.diaries) * 2)
-        self.contentHashTable = HashTable(hash_table_size)  # 内容索引
         self.titleHashTable = HashTable(hash_table_size)  # 标题索引
-        self.userHashTable = HashTable(hash_table_size)  # 用户ID索引
-        self.spotHashTable = HashTable(hash_table_size)  # 景点ID索引
         
         # 索引堆用于快速获取TopK
         self.visitedHeap = TopKHeap()  # 按浏览量排序
@@ -45,17 +42,6 @@ class DiaryManager:
         for diary in self.diaries:
             diary_id = diary.get("id")
             
-            # 添加到按景点分类的字典
-            spot_id = diary.get("spot_id")
-            if spot_id not in self.spotDiaries:
-                self.spotDiaries[spot_id] = []
-            self.spotDiaries[spot_id].append(diary)
-            
-            # 添加到按用户分类的字典
-            user_id = diary.get("user_id")
-            if user_id not in self.userDiaries:
-                self.userDiaries[user_id] = []
-            self.userDiaries[user_id].append(diary)
             
             # 添加到索引堆
             score = diary.get("score", 0)
@@ -63,62 +49,54 @@ class DiaryManager:
             self.scoreHeap.insert(diary_id, score, visited_time)
             self.visitedHeap.insert(diary_id, visited_time, score)
             
-            # 为内容、标题、用户ID和景点ID建立索引
-            content = diary.get("content", "")
-            if content:
-                self._indexText(content, diary_id, self.contentHashTable)
             
             title = diary.get("title", "")
             if title:
-                self._indexText(title, diary_id, self.titleHashTable)
+                # self._indexText(title, diary_id, self.titleHashTable)
+                self.titleHashTable.insert({"id": diary_id, "name": title})
             
-            self._indexNumber(user_id, diary_id, self.userHashTable)
-            self._indexNumber(spot_id, diary_id, self.spotHashTable)
         
         writeLog("日记索引构建完成")
     
-    def _indexText(self, text, diary_id, hash_table):
-        """为文本内容建立字符级索引"""
-        if not text:
-            return
+    # def _indexText(self, text, diary_id, hash_table):
+    #     """为文本内容建立字符级索引"""
+    #     if not text:
+    #         return
             
-        # 按字符索引
-        for char in text:
-            entry = hash_table.search(char)
+    #     # 按字符索引
+    #     for char in text:
+    #         entry = hash_table.search(char)
             
-            if not entry:
-                # 创建新条目
-                hash_table.insert({"key": char, "diaries": [diary_id]})
-            else:
-                # 添加到现有条目
-                if diary_id not in entry["diaries"]:
-                    entry["diaries"].append(diary_id)
-    
-    def _indexNumber(self, number, diary_id, hash_table):
-        """为数字字段建立索引"""
-        if number is None:
-            return
+    #         if not entry:
+    #             # 创建新条目
+    #             hash_table.insert({"name": char, "id": diary_id})
+    #         else:
+    #             # 添加到现有条目
+    #             if diary_id not in entry["id"]:
+    #                 entry["id"].append(diary_id)
+
+    # def _indexNumber(self, number, diary_id, hash_table):
+    #     """为数字字段建立索引"""
+    #     if number is None:
+    #         return
             
-        key = str(number)
-        entry = hash_table.search(key)
+    #     key = str(number)
+    #     entry = hash_table.search(key)
         
-        if not entry:
-            hash_table.insert({"key": key, "diaries": [diary_id]})
-        else:
-            if diary_id not in entry["diaries"]:
-                entry["diaries"].append(diary_id)
-    
-    def _rebuildIndexes(self):
+    #     if not entry:
+    #         hash_table.insert({"key": key, "id": diary_id})
+    #     else:
+    #         if diary_id not in entry["id"]:
+    #             entry["id"].append(diary_id)
+
+    def _rebuildIndexes(self): #改 这个太离谱了，每添加一篇日记就重构整个索引
         """重建所有索引"""
         # 重新从磁盘加载日记
         self.diaries = self.diaryIo.getAllDiaries()
         
         # 清空所有索引
         hash_table_size = max(1000, len(self.diaries) * 2)
-        self.contentHashTable = HashTable(hash_table_size)
         self.titleHashTable = HashTable(hash_table_size)
-        self.userHashTable = HashTable(hash_table_size)
-        self.spotHashTable = HashTable(hash_table_size)
         self.visitedHeap = TopKHeap()
         self.scoreHeap = TopKHeap()
         self.spotDiaries = {}
@@ -137,13 +115,13 @@ class DiaryManager:
         """获取所有日记"""
         return self.diaries
     
-    def getSpotDiaries(self, spot_id):
-        """获取指定景点的所有日记"""
-        return self.spotDiaries.get(spot_id, [])
+    # def getSpotDiaries(self, spot_id):
+    #     """获取指定景点的所有日记"""
+    #     return self.spotDiaries.get(spot_id, [])
     
-    def getUserDiaries(self, user_id):
-        """获取指定用户的所有日记"""
-        return self.userDiaries.get(user_id, [])
+    # def getUserDiaries(self, user_id):
+    #     """获取指定用户的所有日记"""
+    #     return self.userDiaries.get(user_id, [])
     
     def addDiary(self, user_id, spot_id, title, content, images=None):
         """添加新日记"""
@@ -175,46 +153,23 @@ class DiaryManager:
         if visited_time > 0:
             # 更新索引堆中的浏览次数
             self.visitedHeap.updateVisitedTime(diary_id, visited_time)
-            
-            # 更新内存中的日记对象
-            for diary in self.diaries:
-                if diary["id"] == diary_id:
-                    diary["visited_time"] = visited_time
-                    break
+
+            # 没必要
+
+            # # 更新内存中的日记对象
+            # for diary in self.diaries:
+            #     if diary["id"] == diary_id:
+            #         diary["visited_time"] = visited_time
+            #         break
         
         return visited_time
     
-    def rateDiary(self, user_id, diary_id, score):
+    def rateDiary(self, diary_id, newScore, oldScore):
         """为日记评分"""
-        # 获取用户信息
-        user = userManager.userIo.getUser(user_id)
-        if not user:
-            writeLog(f"用户 {user_id} 不存在，无法评分")
-            return False
-        
-        # 检查用户是否已经评分过
-        old_score = 0
-        if "diary_rating" not in user:
-            user["diary_rating"] = []
-        else:
-            for rating in user["diary_rating"]:
-                if rating["diary_id"] == diary_id:
-                    old_score = rating["score"]
-                    rating["score"] = score
-                    break
-            else:
-                # 添加新评分记录
-                user["diary_rating"].append({
-                    "diary_id": diary_id,
-                    "score": score
-                })
-        
         # 更新日记评分
-        new_score = self.diaryIo.updateScore(diary_id, score, old_score)
-        
-        # 保存用户数据
-        userManager.userIo.saveUsers()
-        
+        new_score = self.diaryIo.updateScore(diary_id, newScore, oldScore)
+
+
         if new_score >= 0:
             # 更新索引堆中的评分
             self.scoreHeap.updateScore(diary_id, new_score)
@@ -225,10 +180,9 @@ class DiaryManager:
                     diary["score"] = new_score
                     break
             
-            writeLog(f"用户 {user_id} 为日记 {diary_id} 评分 {score}，新平均分为 {new_score}")
-            return True
+            return new_score
         
-        return False
+        return -1
     
     def getTopKByVisited(self, k=10):
         """获取浏览量最高的K条日记"""
@@ -263,14 +217,10 @@ class DiaryManager:
         if not keyword or len(keyword) < 1:
             return []
         
-        # 在内容中搜索
-        content_results = self._searchWithHash(keyword, self.contentHashTable)
         # 在标题中搜索
         title_results = self._searchWithHash(keyword, self.titleHashTable)
         
-        # 合并结果（去重）
-        result_ids = set(content_results).union(set(title_results))
-        
+        result_ids = set(title_results)#改 不能使用官方库set
         # 获取完整的日记对象并计算相关度
         results = []
         for diary_id in result_ids:
@@ -331,15 +281,15 @@ class DiaryManager:
         
         return list(matching_ids)
     
-    def searchBySpot(self, spot_id):
-        """按景点ID搜索日记"""
-        # 直接从分类索引中获取
-        return self.getSpotDiaries(spot_id)
+    # def searchBySpot(self, spot_id):
+    #     """按景点ID搜索日记"""
+    #     # 直接从分类索引中获取
+    #     return self.getSpotDiaries(spot_id)
     
-    def searchByUser(self, user_id):
-        """按用户ID搜索日记"""
-        # 直接从分类索引中获取
-        return self.getUserDiaries(user_id)
+    # def searchByUser(self, user_id):
+    #     """按用户ID搜索日记"""
+    #     # 直接从分类索引中获取
+    #     return self.getUserDiaries(user_id)
     
     # 根据发布日期排序
     def getLatestDiaries(self, k=10):
@@ -363,54 +313,54 @@ class DiaryManager:
         # 返回前K条
         return sorted_diaries[:k]
     
-    def getRecommendedDiaries(self, user_id, k=10):
-        """根据用户兴趣推荐日记"""
-        # 获取用户信息
-        user = userManager.userIo.getUser(user_id)
-        if not user:
-            # 用户不存在，返回热门日记
-            return self.getTopKByVisited(k)
+    # def getRecommendedDiaries(self, user_id, k=10): #改 这个放进用户类
+    #     """根据用户兴趣推荐日记"""
+    #     # 获取用户信息
+    #     user = userManager.userIo.getUser(user_id)
+    #     if not user:
+    #         # 用户不存在，返回热门日记
+    #         return self.getTopKByVisited(k)
         
-        # 获取用户兴趣标签
-        user_likes = user.get("likes_type", [])
-        if isinstance(user_likes, str):
-            user_likes = [user_likes]
+    #     # 获取用户兴趣标签
+    #     user_likes = user.get("likes_type", [])
+    #     if isinstance(user_likes, str):
+    #         user_likes = [user_likes]
         
-        # 计算每篇日记的推荐分数
-        scored_diaries = []
+    #     # 计算每篇日记的推荐分数
+    #     scored_diaries = []
         
-        for diary in self.diaries:
-            # 跳过用户自己的日记
-            if diary.get("user_id") == user_id:
-                continue
+    #     for diary in self.diaries:
+    #         # 跳过用户自己的日记
+    #         if diary.get("user_id") == user_id:
+    #             continue
                 
-            # 初始推荐分数 = 评分*2 + 浏览量/100
-            score = diary.get("score", 0) * 2 + diary.get("visited_time", 0) / 100
+    #         # 初始推荐分数 = 评分*2 + 浏览量/100
+    #         score = diary.get("score", 0) * 2 + diary.get("visited_time", 0) / 100
             
-            # 景点类型匹配加分
-            spot_id = diary.get("spot_id")
-            spot = spotManager.getSpot(spot_id)
+    #         # 景点类型匹配加分
+    #         spot_id = diary.get("spot_id")
+    #         spot = spotManager.getSpot(spot_id)
             
-            if spot and any(like in spot.get("type", "") for like in user_likes):
-                score += 5
+    #         if spot and any(like in spot.get("type", "") for like in user_likes):
+    #             score += 5
             
-            # 用户已经评价过的日记降低分数
-            if "diary_rating" in user:
-                for rating in user["diary_rating"]:
-                    if rating["diary_id"] == diary["id"]:
-                        score -= 2
-                        break
+    #         # 用户已经评价过的日记降低分数
+    #         if "diary_rating" in user:
+    #             for rating in user["diary_rating"]:
+    #                 if rating["diary_id"] == diary["id"]:
+    #                     score -= 2
+    #                     break
             
-            # 添加推荐分数
-            diary_copy = diary.copy()
-            diary_copy["recommend_score"] = score
-            scored_diaries.append(diary_copy)
+    #         # 添加推荐分数
+    #         diary_copy = diary.copy()
+    #         diary_copy["recommend_score"] = score
+    #         scored_diaries.append(diary_copy)
         
-        # 按推荐分数降序排序
-        sorted_diaries = quicksort(scored_diaries, sort_key="recommend_score", reverse=True)
+    #     # 按推荐分数降序排序
+    #     sorted_diaries = quicksort(scored_diaries, sort_key="recommend_score", reverse=True)
         
-        # 返回前K条
-        return sorted_diaries[:k]
+    #     # 返回前K条
+    #     return sorted_diaries[:k]
 
 # 创建全局实例
 diaryManager = DiaryManager()
