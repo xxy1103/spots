@@ -1,6 +1,6 @@
 from module.fileIo import diaryIo
 from module.Spot_class import spotManager
-
+# userManager导入了DiaryManager，则diary_class中不能再导入user,否则报错
 from module.data_structure.hashtable import HashTable
 from module.data_structure.indexHeap import TopKHeap
 from module.data_structure.quicksort import quicksort
