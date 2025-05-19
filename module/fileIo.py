@@ -431,9 +431,9 @@ class DiaryIo:
         """获取日记图片存储路径"""
         return os.path.join(self.reviews_base_path, f"spot_{spot_id}", f"review_{diary_id}","images")
 
-    def getAllDiaries(self): #Checked
-        """获取所有日记"""
-        return self.diaries
+    def getAllDiaries(self):
+        """获取所有有效日记"""
+        return [diary for diary in self.diaries if diary is not None]
 
     def getDiary(self, diary_id:int):
         """获取单个日记"""
@@ -477,6 +477,123 @@ class DiaryIo:
         diarys = [diary for diary in self.diaries if diary != None and diary["user_id"] == user_id]
         return diarys
         #return [diary for diary in self.diaries if diary["user_id"] == user_id]
+
+    def searchDiaries(self, search_term, max_results=10):
+        """根据搜索词搜索日记
+
+        args:
+            search_term：搜索词
+            max_results: 返回结果的最大数量，默认为10
+        
+        return:
+            result：包含搜索词的日记对象list
+        """
+        # 1. 加载全局哈夫曼树，用于压缩内容搜索
+        tree, codes = self.load_global_huffman_tree()
+        if not tree or not codes:
+            log.writeLog("无法加载全局哈夫曼树，只能搜索未压缩日记")
+            # 如果无法加载树，仍然可以搜索未压缩日记
+            compressed_search = False # 用于标记将要执行的搜索是那种类型，just一种用于处理搜索词编码异常情况的保险
+        else:
+            # 2. 将搜索词编码 - 只用于压缩内容搜索
+            try:
+                search_encoded = ''
+                for char in search_term:
+                    #此处的编码是使用编码表直接进行编码，因此理论上不含填充位
+                    if char not in codes:
+                        log.writeLog(f"搜索词包含编码表中不存在的字符: {char}")
+                        compressed_search = False
+                        break
+                    search_encoded += codes[char]
+                compressed_search = True
+            except Exception as e:
+                log.writeLog(f"编码搜索词时出错: {e}")
+                compressed_search = False
+                
+        # 3. 开始搜索日记
+        candidates = [] # 匹配的日记id列表
+        
+        for diary in self.getAllDiaries():
+            if not diary:
+                print("\n日记为空\n")
+                continue  # 跳过已删除的日记
+                
+            diary_id = diary.get("id")
+            
+            # 有些日记可能已经解压了，根据不同的情况进行搜索
+            if diary.get("compressed", False) and compressed_search:
+                # 3.1 压缩日记: 在二进制数据中搜索编码后的搜索词
+                content_path = diary.get("content", "")
+                # print(f"正在搜索日记 {diary_id} 的内容: {content_path}")
+                if not content_path:
+                    print(f"日记 {diary_id} 的内容文件不存在: {content_path}")
+                    continue
+                    
+                try:
+                    # 读取压缩文件
+                    with open(content_path, 'rb') as f:
+                        binary_data = f.read()
+                        
+                    # 获取填充信息
+                    padding_info = binary_data[0]
+                    
+                    # 将二进制数据转换为位字符串
+                    # 使用列表然后再join，而不是连续拼接字符串
+                    bits_list = [format(byte, '08b') for byte in binary_data[1:]]
+                    bit_string = ''.join(bits_list)
+                        
+                    # 移除末尾填充位，确保正确的位流
+                    if padding_info > 0:
+                        bit_string = bit_string[:-padding_info]
+                    
+                    # if diary_id == 0:
+                    #     print(f"日记 {diary_id} 的位字符串: {bit_string}")
+                    #     print(f"搜索词的编码: {search_encoded}")
+
+                    # 在位级别搜索编码后的搜索词
+                    if search_encoded in bit_string:
+                        candidates.append(diary_id)
+                        
+                except Exception as e:
+                    log.writeLog(f"搜索压缩日记 {diary_id} 失败: {str(e)}")
+                    continue
+                    
+            else:  
+                # 3.2 未压缩日记: 直接在原文本中搜索
+                content = diary.get("content", "")
+                
+                # 在标题和内容中搜索，逻辑上或许与searchByTitle重复了，这里为了验证搜索功能先保留
+                title = diary.get("title", "")
+                if search_term in content or search_term in title:
+                    candidates.append(diary_id)
+                    
+            # 如果候选列表足够大，提前结束搜索
+            if len(candidates) >= max_results * 2:
+                print(f"候选列表已达到最大值: {len(candidates)}")
+                break
+        
+        # 4. 验证候选结果 (对于压缩过的内容，需要解压验证；对于未压缩内容，二次确认)
+        results = []
+        for diary_id in candidates:
+            diary = self.getDiary(diary_id)
+            
+            if diary.get("compressed", False):
+                # 压缩日记需要解压验证
+                decompressed = self.decompress_diary_content(diary_id)
+                if decompressed:
+                    # 在解压后的内容中搜索
+                    if search_term in decompressed.get("content", ""):
+                        results.append(diary)
+                        if len(results) >= max_results:
+                            break
+            else:
+                # 未压缩日记已经在上面确认过匹配，直接添加
+                results.append(diary)
+                if len(results) >= max_results:
+                    break
+        
+        log.writeLog(f"搜索结果: 找到 {len(results)}/{max_results} 条匹配的日记")
+        return results
 
     def addDiary(self, user_id:int, spot_id:int, title:str, content:str, images:list=None): #改完
         """添加新日记"""
@@ -963,7 +1080,7 @@ def testDiaryIo():
     # 测试解压日记内容
     print("\n测试decompress_diary_content方法:")
     # 找一个已压缩的日记
-    compressed_diary = None
+    # compressed_diary = diary_io.getDiary(5)
     for diary in diary_io.getAllDiaries():
         if diary and diary.get("compressed", False):
             compressed_diary = diary
@@ -974,7 +1091,7 @@ def testDiaryIo():
         print(f"找到已压缩日记 ID: {diary_id}, 标题: {compressed_diary.get('title', '无标题')}")
         decompressed = diary_io.decompress_diary_content(diary_id)
         if decompressed and "content" in decompressed:
-            content_preview = decompressed["content"][:100] + "..." if len(decompressed["content"]) > 100 else decompressed["original_content"]
+            content_preview = decompressed["content"]
             print(f"日记解压成功，内容预览: {content_preview}")
         else:
             print(f"日记 {diary_id} 解压失败")
@@ -998,8 +1115,6 @@ def testDiaryIo():
         "img_list": [],
         "compressed": False
     }
-
-
 
     try:
         compressed_diary = diary_io.compress_diary(test_diary)
@@ -1050,6 +1165,108 @@ def testDiaryIo():
                 print(f"日记内容可能不是文本或为空: {type(content)}")
         else:
             print(f"获取日记 {diary_id} 失败")
+
+    print("\n===== 测试搜索功能 =====")
+    import time
+
+    def display_search_results(results, start_idx=0, limit=10):
+        """显示搜索结果"""
+        if not results:
+            print("未找到匹配的日记")
+            return 0
+            
+        end_idx = min(start_idx + limit, len(results))
+        print(f"\n显示结果 {start_idx+1} 到 {end_idx}，共 {len(results)} 条：")
+        
+        for i in range(start_idx, end_idx):
+            diary = results[i]
+            diary_id = diary.get("id", "未知")
+            title = diary.get("title", "无标题")
+            
+            # 获取日记内容预览
+            try:
+                decompressed = diary_io.decompress_diary_content(diary_id)
+                if decompressed and "content" in decompressed:
+                    content = decompressed.get("content", "")
+                    preview = content[:100] + "..." if len(content) > 100 else content
+                else:
+                    preview = diary.get("content", "")[:100] + "..."
+            except:
+                preview = "无法获取内容预览"
+                
+            print(f"ID: {diary_id} | 标题: {title}")
+            print(f"内容预览: {preview}")
+            print("-" * 80)
+            
+        return end_idx
+
+    while True:
+        search_term = input("\n请输入搜索词(输入'q'退出搜索测试): ")
+        if search_term.lower() == 'q':
+            break
+            
+        # 初始化搜索参数
+        current_page = 1
+        batch_size = 10
+        total_fetched = 0
+        all_results = []
+        
+        # 执行初次搜索
+        start_time = time.time()
+        initial_results = diary_io.searchDiaries(search_term, batch_size)
+        search_time = time.time() - start_time
+        
+        # 保存所有结果
+        all_results.extend(initial_results)
+        
+        print(f"\n搜索完成! 耗时: {search_time:.4f} 秒, 找到 {len(initial_results)} 条匹配结果")
+        
+        if not initial_results:
+            print("未找到匹配的日记，请尝试其他搜索词")
+            continue
+            
+        # 显示初始结果
+        total_fetched = display_search_results(initial_results, 0, batch_size)
+        
+        # 提供选项
+        while True:
+            if total_fetched >= len(all_results):
+                # 已显示所有已获取的结果，可以尝试获取更多
+                choice = input("\n已显示所有当前结果。输入 'f' 获取更多结果，'n' 进行新搜索，其他任意键返回主菜单: ")
+                if choice.lower() == 'f':
+                    # 获取下一批结果
+                    print(f"\n正在搜索下一批结果...")
+                    start_time = time.time()
+                    current_page += 1
+                    # 获取更多结果 - 因为现有searchDiaries不支持分页，所以这里我们增加批量大小
+                    new_batch_size = current_page * batch_size
+                    more_results = diary_io.searchDiaries(search_term, new_batch_size)
+                    search_time = time.time() - start_time
+                    
+                    # 只保留新的结果
+                    if len(more_results) > len(all_results):
+                        all_results = more_results
+                        print(f"找到额外的 {len(all_results) - total_fetched} 条结果，总计: {len(all_results)} 条")
+                        # 显示新结果
+                        total_fetched = display_search_results(all_results, total_fetched, batch_size)
+                    else:
+                        print("没有更多匹配的结果了")
+                elif choice.lower() == 'n':
+                    break  # 进行新搜索
+                else:
+                    return  # 返回主菜单
+            else:
+                # 还有更多已获取结果可以显示
+                choice = input("\n输入 'm' 显示更多当前结果，'n' 进行新搜索，其他任意键返回主菜单: ")
+                if choice.lower() == 'm':
+                    # 显示下一批已获取结果
+                    total_fetched = display_search_results(all_results, total_fetched, batch_size)
+                elif choice.lower() == 'n':
+                    break  # 进行新搜索
+                else:
+                    return  # 返回主菜单
+
+    print("\n===== 搜索功能测试完成 =====")
 
     # 保存所有修改
     # 注释：在实际使用中，DiaryIo类的方法会自动保存修改
