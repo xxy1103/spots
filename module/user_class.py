@@ -1,6 +1,7 @@
 from module.data_structure.btree import BTree
 from module.fileIo import userIo
 from module.Spot_class import spotManager
+from module.diary_class import diaryManager
 from module.data_structure.merge import merge_sort
 import module.printLog as log
 import base64
@@ -209,30 +210,36 @@ class User:
         """
         用户对景点进行评分
         """
-        user = self.userIo.getUser(userId)
-        if user is None:
-            log.writeLog(f"用户{userId}不存在")
-            return False
-        
         # 获取景点信息
         spot = spotManager.getSpot(spotId)
         if spot is None:
             log.writeLog(f"景点{spotId}不存在")
             return False
-        
-        # 检查用户是否已经评分
-        for item in user["spot_marking"]:
-            if item["spot_id"] == spotId:
-                oldScore = item["score"]
-                spotManager.updateScore(spotId, newScore, oldScore)
-                item["score"] = newScore
-                log.writeLog(f"用户{userId}更新景点{spotId}评分为{newScore}")
-                return True
-        
-        spotManager.updateScore(spotId, newScore)
-        user["spot_marking"].append({"spot_id": spotId, "score": newScore})
-        return True
-        
+
+        oldScore = userIo.userUpdateSpotMark(userId, spotId, newScore)
+        if oldScore >= 0:
+            spotManager.updateScore(spotId, newScore, oldScore)
+            return True
+        else:   
+            log.writeLog(f"用户{userId}对景点{spotId}的评分更新失败")
+            return False
+    def markingReview(self, userId, reviewId, newScore):
+        """
+        用户对日记进行评分
+        """
+        # 获取日记信息
+        review = diaryManager.getDiary(reviewId)
+        if review is None:
+            log.writeLog(f"日记{reviewId}不存在")
+            return False
+
+        oldScore = userIo.userUpdateDiaryMark(userId, reviewId, newScore)
+        if oldScore >= 0:
+            diaryManager.rateDiary(reviewId, newScore, oldScore)
+            return True
+        else:   
+            log.writeLog(f"用户{userId}对日记{reviewId}的评分更新失败")
+            return False
         
 
 
@@ -240,8 +247,6 @@ class User:
         
         
         
-
-
 userManager = User()
 
 

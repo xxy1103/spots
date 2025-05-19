@@ -140,7 +140,7 @@ class UserIo:
             user = self.getUser(userId)
             if not user:
                 log.writeLog(f"用户 {userId} 不存在，无法更新评分数")
-                return False
+                return -1
             if "spot_marking" not in user:
                 spot_marking = []
                 user["spot_marking"] = spot_marking
@@ -148,17 +148,18 @@ class UserIo:
             for item in user["spot_marking"]:   #改 最好修改为查找算法
                 if item["spot_id"] == spotId:
                     # 如果已经评分，更新评分
+                    oldScore = item["score"]
                     item["score"] = score
                     log.writeLog(f"用户 {userId} 更新景点 {spotId} 的评分为 {score}")
-                    return True
+                    return oldScore
             # 如果没有评分，添加新的评分
             item = {"spot_id": spotId, "score": score}
             user["spot_marking"].append(item)
             log.writeLog(f"用户 {userId} 的评分数更新为 {user['spot_marking']}")
-            return True
+            return 0
         except Exception as e:
             log.writeLog(f"更新用户 {userId} 评分数失败: {str(e)}")
-            return False
+            return -1
     def userUpdateDiaryMark(self, userId:int, diaryId:int, score:float):
         """
         当用户给日记评分时，增加用户的评分数量
@@ -167,7 +168,7 @@ class UserIo:
             user = self.getUser(userId)
             if not user:
                 log.writeLog(f"用户 {userId} 不存在，无法更新评分数")
-                return False
+                return -1
             if "review_marking" not in user:
                 review_marking = []
                 user["review_marking"] = review_marking
@@ -175,17 +176,18 @@ class UserIo:
             for item in user["review_marking"]:   #改 最好修改为查找算法
                 if item["diary_id"] == diaryId:
                     # 如果已经评分，更新评分
+                    oldScore = item["score"]
                     item["score"] = score
                     log.writeLog(f"用户 {userId} 更新日记 {diaryId} 的评分为 {score}")
-                    return True
+                    return oldScore
             # 如果没有评分，添加新的评分
             item = {"diary_id": diaryId, "score": score}
             user["review_marking"].append(item)
             log.writeLog(f"用户 {userId} 的评分数更新为 {user['review_marking']}")
-            return True
+            return 0
         except Exception as e:
             log.writeLog(f"更新用户 {userId} 评分数失败: {str(e)}")
-            return False
+            return -1
             
 
 class ConfigIo:
