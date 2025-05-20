@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布日记</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .diary-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .diary-form h2 {
+            color: #343a40;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-group label {
+            font-weight: 500;
+        }
+        .btn-submit {
+            background-color: #28a745;
+            border-color: #28a745;
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .preview-container {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .preview-item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .preview-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .remove-preview {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            line-height: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="diary-form">
+                    <h2>发布旅行日记</h2>
+                    <form action="{{ url_for('diary.add_diary') }}" method="POST" enctype="multipart/form-data">                        <div class="form-group">
+                            <label for="spot_id">景点选择</label>
+                            <select class="form-control" id="spot_id" name="spot_id" required>
+                                <option value="">请选择景点</option>
+                                {% for spot in spots %}
+                                <option value="{{ spot.id }}">{{ spot.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="title">标题</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="为您的旅行日记添加一个吸引人的标题" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="content">内容</label>
+                            <textarea class="form-control" id="content" name="content" rows="8" placeholder="分享您的旅行故事、心得体会或建议..." required></textarea>
+                        </div>                        <div class="form-group">
+                            <label for="images">上传图片</label>
+                            <input type="file" class="form-control-file" id="images" name="images" multiple accept="image/*" onchange="previewImages(event)">
+                            <small class="form-text text-muted">可以选择多张图片</small>
+                            <div class="preview-container" id="imagePreview"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="videos">上传视频</label>
+                            <input type="file" class="form-control-file" id="videos" name="videos" multiple accept="video/*" onchange="previewVideos(event)">
+                            <small class="form-text text-muted">支持上传多个视频</small>
+                            <div class="preview-container" id="videoPreview"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit">发布日记</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>    <script>
+
+        // 预览选择的图片
+        function previewImages(event) {
+            const imagePreview = document.getElementById('imagePreview');
+            imagePreview.innerHTML = '';
+            
+            const files = event.target.files;
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (!file.type.startsWith('image/')) continue;
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'preview-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    
+                    const removeButton = document.createElement('button');
+                    removeButton.className = 'remove-preview';
+                    removeButton.innerHTML = '×';
+                    removeButton.onclick = function() {
+                        imagePreview.removeChild(previewItem);
+                    };
+                    
+                    previewItem.appendChild(img);
+                    previewItem.appendChild(removeButton);
+                    imagePreview.appendChild(previewItem);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // 预览选择的视频
+        function previewVideos(event) {
+            const videoPreview = document.getElementById('videoPreview');
+            videoPreview.innerHTML = '';
+            
+            const files = event.target.files;
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (!file || !file.type.startsWith('video/')) continue;
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'preview-item';
+                    previewItem.style.width = '200px';
+                    previewItem.style.height = '150px';
+                    
+                    const video = document.createElement('video');
+                    video.src = e.target.result;
+                    video.controls = true;
+                    
+                    const removeButton = document.createElement('button');
+                    removeButton.className = 'remove-preview';
+                    removeButton.innerHTML = '×';
+                    removeButton.onclick = function() {
+                        videoPreview.removeChild(previewItem);
+                        // 注意：这里不能清空整个文件输入，因为可能有多个视频
+                    };
+                    
+                    previewItem.appendChild(video);
+                    previewItem.appendChild(removeButton);
+                    videoPreview.appendChild(previewItem);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>

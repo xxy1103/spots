@@ -6,6 +6,7 @@ from module.data_structure.quicksort import quicksort
 import json
 import secrets
 from flask import g
+from functools import wraps
 
 # 创建User实例
 
@@ -85,7 +86,7 @@ def login():
     
 
 
-from functools import wraps
+
 
 def login_required(f):
     """
@@ -429,7 +430,7 @@ def search_spots():
 
     # 1. 获取景点列表的初始数据集
     if keyword:
-        # 用快排算法对景点进行排序
+        
         spots = spot_manager.getSpotByName(keyword)
     elif user_preference:
         # 基于用户偏好推荐景点

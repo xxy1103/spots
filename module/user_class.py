@@ -84,6 +84,17 @@ class User:
             self.btree.insert({"id":user["id"], "name":user["name"]})
         log.writeLog("用户数据加载完成")
 
+    def getUser(self, userId):
+        """
+        获取用户信息
+        """
+        user = self.userIo.getUser(userId)
+        if user is None:
+            log.writeLog(f"用户{userId}不存在")
+            return None
+        log.writeLog(f"找到用户{user['name']}")
+        return user
+
     def addUser(self, username, password, liketype):
         # --- 修改这里：使用传入的 username 进行搜索 ---
         existing_user_node = self.btree.search(username) 
@@ -169,21 +180,10 @@ class User:
         # --- 初始化空的已排序推荐列表 ---
         sorted_recommended_spots = []
 
-        if not user_likes: # 如果用户没有喜欢的类型，可以返回全局热门或空列表
-            log.writeLog(f"用户{userId}没有设置喜欢的景点类型")
-            # 方案1：返回全局热门 (需要 spotManager 支持)
-            # 注意：如果 spotManager.getAllSpotsSorted() 返回已排序列表，则无需额外排序
-            all_spots = spotManager.getAllSpotsSorted() 
-            # 确保 getAllSpotsSorted 返回的是按评分和访问次数排序的列表
-           
-            return all_spots[:topK] 
-            # 方案2：返回空列表
-            # return []
-
         # --- 迭代用户喜欢的类型，逐步合并排序 ---
         for spot_type in user_likes:
-            # 使用 k=-1 获取该类型所有排序后的景点
-            spots_of_type = spotManager.getTopKByType(spot_type, k=-1) 
+            # 使用 k=topK 获取该类型所有排序后的景点
+            spots_of_type = spotManager.getTopKByType(spot_type, k=topK)    #只获取前 topK 个
             if spots_of_type: # 确保列表非空
                 # 将新获取的有序列表与当前已合并的列表进行归并排序
                 sorted_recommended_spots = merge_sort(sorted_recommended_spots, spots_of_type)
@@ -192,19 +192,56 @@ class User:
              log.writeLog(f"未能根据用户{userId}的喜好找到任何景点")
              return []
 
-        # --- 在所有列表合并排序后，移除重复景点 ---
-        # 使用字典去重，保留ID唯一的景点，同时保持排序顺序（字典在Python 3.7+保持插入顺序）
-        unique_spots_dict = {}
-        final_unique_sorted_spots = []
-        for spot in sorted_recommended_spots:
-            if spot['id'] not in unique_spots_dict:
-                unique_spots_dict[spot['id']] = spot
-                final_unique_sorted_spots.append(spot)
+        # # --- 在所有列表合并排序后，移除重复景点 ---
+        # # 使用字典去重，保留ID唯一的景点，同时保持排序顺序（字典在Python 3.7+保持插入顺序）
+        # unique_spots_dict = {}
+        # final_unique_sorted_spots = []
+        # for spot in sorted_recommended_spots:
+        #     if spot['id'] not in unique_spots_dict:
+        #         unique_spots_dict[spot['id']] = spot
+        #         final_unique_sorted_spots.append(spot)
 
-        log.writeLog(f"为用户{userId}生成推荐景点列表，合并排序并去重后共{len(final_unique_sorted_spots)}个，返回前{topK}个")
+        # log.writeLog(f"为用户{userId}生成推荐景点列表，合并排序并去重后共{len(final_unique_sorted_spots)}个，返回前{topK}个")
         
         # 返回排序并去重后的前 topK 个景点
-        return final_unique_sorted_spots[:topK]
+        return sorted_recommended_spots[:topK]
+    
+    def getRecommendDiaries(self, userId, topK=10):
+        """
+        获取用户推荐的日记
+        """
+        user = self.userIo.getUser(userId)
+        if user is None:
+            log.writeLog(f"用户{userId}不存在")
+            return None
+        
+        # 获取用户的兴趣标签
+        user_likes = user["likes_type"]
+        
+        # --- 初始化空的已排序推荐列表 ---
+
+        recommended_diaries = []
+
+        for spot_type in user_likes:
+            spots_of_type = spotManager.getTopKByType(spot_type, k=-1)  #需要获取所有景点的日记
+            if spots_of_type: # 确保列表非空
+                # 迭代每个景点，获取其日记
+                for spot in spots_of_type:
+                    spot_id = spot["id"]
+                    diarys = spotManager.spotDiaryHeapArray[spot_id-1].getTopK(topK)
+                    if diarys: # 确保列表非空
+                        # 将新获取的有序列表与当前已合并的列表进行归并排序
+                        recommended_diaries = merge_sort(recommended_diaries, diarys)
+
+        if not recommended_diaries:
+            log.writeLog(f"未能根据用户{userId}的喜好找到任何日记")
+            return []
+        
+        return recommended_diaries[:topK]
+
+
+                    
+                    
     
     def markingSpot(self, userId, spotId, newScore):
         """
@@ -241,7 +278,6 @@ class User:
             log.writeLog(f"用户{userId}对日记{reviewId}的评分更新失败")
             return False
         
-
 
 
         

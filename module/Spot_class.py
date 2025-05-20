@@ -4,6 +4,7 @@ from module.data_structure.indexHeap import TopKHeap
 from module.printLog import writeLog
 from module.data_structure.quicksort import quicksort
 from module.data_structure.merge import merge_sort
+from module.diary_class import diaryManager
 # 导入自定义 Set 类
 from module.data_structure.set import MySet
 import json
@@ -29,11 +30,18 @@ class Spot:
         self.spotTypeDict = {}
         for i in range(len(spotTypes)):
             self.spotTypeDict[spotTypes[i]] = {
-                "ids": [], 
-                "top_10": [],
                 "heap": TopKHeap()  # 为每个类型创建单独的TopKHeap
             }
-        
+
+        self.spotDiaryHeapArray = [TopKHeap() for _ in range(self.counts)]
+        # 初始化索引堆
+        for spot in self.spots:
+            diarys = spot["reviews"]["diary_ids"]
+            for diary_id in diarys:
+                diary = diaryManager.getDiary(diary_id)
+                if diary:
+                    self.spotDiaryHeapArray[spot["id"] - 1].insert(diary["id"], diary["score"], diary["visited_time"])
+
         # 对景点进行分类
         self._classify()
         writeLog("景点分类完成")
@@ -99,24 +107,11 @@ class Spot:
             spotType = spot["type"]
             if spotType not in self.spotTypeDict:
                 self.spotTypeDict[spotType] = {
-                    "ids": [], 
-                    "top_10": [],
                     "heap": TopKHeap()  # 如果是新类型，也创建堆
                 }
-            self.spotTypeDict[spotType]["ids"].append(spot["id"])
             # 添加到对应类型的堆中
             self.spotTypeDict[spotType]["heap"].insert(spot["id"], spot["score"], spot["visited_time"])
         writeLog("景点分类完成")
-    #    感觉没什么用，所以注释掉了
-    # def getTopKForEachType(self, k=10):
-    #     """
-    #     为每个景点类型获取前K个评分最高的景点ID
-    #     """
-    #     for spotType in self.spotTypeDict:
-    #         topK = self.spotTypeDict[spotType]["heap"].getTopK(k)
-    #         self.spotTypeDict[spotType]["top_10"] = topK
-    #     writeLog("获取每个类型的前K个景点完成")
-    #     return self.spotTypeDict
     
     def getTopKByType(self, spotType, k=10):
         """
@@ -135,32 +130,18 @@ class Spot:
         if not heap_instance or not isinstance(heap_instance, TopKHeap):
             writeLog(f"错误：类型 '{spotType}' 的堆未正确初始化。")
             # 如果堆不存在或类型不正确，清空缓存并返回空列表
-            self.spotTypeDict[spotType]["top_10"] = [] 
             return []
 
-        # 当 k = -1 时，获取该类型所有景点并排序
-        if k == -1:
-            # 从堆中获取所有元素（传入堆的大小作为k）
-            all_sorted_spots = heap_instance.getTopK(heap_instance.size())
-            writeLog(f"使用堆获取 '{spotType}' 类型的所有景点并排序完成")
-            return all_sorted_spots
 
-        # --- 处理 k > 0 的现有逻辑 (使用缓存) ---
-        # 确保 "top_10" 键存在，如果不存在则初始化为空列表
-        if "top_10" not in self.spotTypeDict[spotType]:
-            self.spotTypeDict[spotType]["top_10"] = []
-            
-        # 如果缓存的 top_10 列表为空，或者请求的 k 与缓存的大小不同
-        cached_top_k = self.spotTypeDict[spotType]["top_10"]
-        if not cached_top_k or len(cached_top_k) != k:
-             # 从堆中获取 Top K 结果并更新缓存
-             self.spotTypeDict[spotType]["top_10"] = heap_instance.getTopK(k)
-             writeLog(f"从堆获取并缓存 '{spotType}' 类型的前{k}个景点")
+        # 从堆中获取所有元素（传入堆的大小作为k）
+        if k == -1:
+            length = heap_instance.size()
         else:
-             writeLog(f"从缓存获取 '{spotType}' 类型的前{k}个景点")
-            
-        # 返回缓存的 Top K 列表
-        return self.spotTypeDict[spotType]["top_10"]
+            length = min(k, heap_instance.size())
+        all_sorted_spots = heap_instance.getTopK(length)
+        writeLog(f"使用堆获取 '{spotType}' 类型的{length}个景点并排序完成")
+        return all_sorted_spots
+
     
     def updateScore(self, spotId:int, newScore:float, oldScore:float = 0)->float:
         """
@@ -184,20 +165,6 @@ class Spot:
         writeLog(f"更新景点{spotId}的访问次数为{newVisitedTime}")
         return newVisitedTime
         
-    def saveTypeIndex(self, filepath="index/global/type_index.json"):
-        """
-        将景点分类结果保存到JSON文件中
-        """
-        save_data = {}
-        for type_name in self.spotTypeDict:
-            save_data[type_name] = {
-                "ids": self.spotTypeDict[type_name]["ids"],
-                "top_10": self.spotTypeDict[type_name]["top_10"]
-            }
-        with open(filepath, "w", encoding="utf-8") as f:
-            json.dump(save_data, f, ensure_ascii=False, indent=4)
-        writeLog(f"景点分类索引已保存至{filepath}")
-
     def getAllSpotsSorted(self):
         """
         获取所有景点，并按评分和访问次数进行归并排序（降序）。
