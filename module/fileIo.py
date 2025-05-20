@@ -385,6 +385,15 @@ class DiaryIo:
         self.holes = []
         self._loadDiaries()
 
+        # 加载哈夫曼树
+        self.huffman_tree = None
+        self.codes = None
+        
+        if self.load_global_huffman_tree():
+            log.writeLog("全局哈夫曼树加载成功")
+        else:
+            log.writeLog("全局哈夫曼树加载失败，无法进行压缩搜索")
+
         log.writeLog("日记IO系统初始化完成")
     
     def _loadDiaries(self): #Checked
@@ -432,9 +441,9 @@ class DiaryIo:
         return os.path.join(self.reviews_base_path, f"spot_{spot_id}", f"review_{diary_id}","images")
 
     def getAllDiaries(self):
-        """获取所有有效日记"""
-        return [diary for diary in self.diaries if diary is not None]
-
+        """获取所有日记"""
+        return self.diaries     # 建议遍历使用时再增加判断条件 diary != None，避免空值的影响
+                                # 或者使用self.holes[] 获取None的下标
     def getDiary(self, diary_id:int):
         """获取单个日记"""
         if diary_id <= self.currentId and diary_id >= 0:
@@ -489,8 +498,7 @@ class DiaryIo:
             result：包含搜索词的日记对象list
         """
         # 1. 加载全局哈夫曼树，用于压缩内容搜索
-        tree, codes = self.load_global_huffman_tree()
-        if not tree or not codes:
+        if not self.huffman_tree or not self.codes:
             log.writeLog("无法加载全局哈夫曼树，只能搜索未压缩日记")
             # 如果无法加载树，仍然可以搜索未压缩日记
             compressed_search = False # 用于标记将要执行的搜索是那种类型，just一种用于处理搜索词编码异常情况的保险
@@ -500,11 +508,11 @@ class DiaryIo:
                 search_encoded = ''
                 for char in search_term:
                     #此处的编码是使用编码表直接进行编码，因此理论上不含填充位
-                    if char not in codes:
+                    if char not in self.codes:
                         log.writeLog(f"搜索词包含编码表中不存在的字符: {char}")
                         compressed_search = False
                         break
-                    search_encoded += codes[char]
+                    search_encoded += self.codes[char]
                 compressed_search = True
             except Exception as e:
                 log.writeLog(f"编码搜索词时出错: {e}")
@@ -595,7 +603,7 @@ class DiaryIo:
         log.writeLog(f"搜索结果: 找到 {len(results)}/{max_results} 条匹配的日记")
         return results
 
-    def addDiary(self, user_id:int, spot_id:int, title:str, content:str, images:list=None): #改完
+    def addDiary(self, user_id:int, spot_id:int, title:str, content:str, images:list=None, videos:list=None): #添加视频支持
         """添加新日记"""
         if images is None:
             images = []
@@ -625,23 +633,12 @@ class DiaryIo:
             "score": 0,
             "score_count": 0,
             "visited_time": 0,
-            "img_list": [],
+            "img_list": images,
+            "video_path": videos,  # 添加视频路径字段
             "compressed": False
         }
-        # 处理图片
-        if images:
-            # 创建图片目录
-            img_dir = self.getDiaryImagePath(spot_id, diary_id)
-            os.makedirs(img_dir, exist_ok=True)
-            
-            # 保存图片路径
-            for i, img_data in enumerate(images):
-                img_path = os.path.join(img_dir, f"{diary_id}_{i}.jpg")
-                new_diary["img_list"].append(img_path)
-                # 实际的图片保存由前端处理
-                with open(img_path, "wb") as img_file:
-                    img_file.write(img_data)
-                
+        
+        print(f"新日记: {new_diary}")
         # 添加到日记列表
         if diary_id <= self.currentId:
             self.diaries[new_diary["id"]] = new_diary
@@ -651,14 +648,9 @@ class DiaryIo:
         self.diary_count += 1
         
         # 更新景点评论数，不立即保存
-        self.spotIo.spotReviewsAdd(spot_id, diary_id, save_immediately=False) #待改 修改Spot后改
+        self.spotIo.spotReviewsAdd(spot_id, diary_id, save_immediately=False)
 
         self.userIo.userDiaryAdd(user_id, diary_id)  # 更新用户评论数
-            
-        # 暂时不需要保存
-        # # 最后，手动保存所有更改
-        # self.spotIo.saveSpots()  # 保存景点数据
-        # self.userIo.saveUsers()  # 保存用户数据
             
         log.writeLog(f"用户 {user_id} 为景点 {spot_id} 添加日记 {diary_id}，总日记数: {user['reviews']['total']}")
         return diary_id
@@ -786,19 +778,19 @@ class DiaryIo:
                 huffman_data = pickle.load(f)
             
             # 全局哈夫曼树.pkl文件中储存的是树根节点，如要使用请注意，因为程序无法判断里面的内容
-            tree = huffman_data
-            codes = generate_huffman_codes(tree)
+            self.huffman_tree = huffman_data
+            self.codes = generate_huffman_codes(self.huffman_tree)
             log.writeLog(f"从树根自动生成编码表")
-            
-            if not tree:
+
+            if not self.huffman_tree:
                 log.writeLog(f"加载的哈夫曼树无效")
                 return None, None
-                
-            log.writeLog(f"成功加载全局哈夫曼树，包含 {len(codes)} 个字符编码")
-            return tree, codes
+
+            log.writeLog(f"成功加载全局哈夫曼树，包含 {len(self.codes)} 个字符编码")
+            return True
         except Exception as e:
             log.writeLog(f"加载全局哈夫曼树失败: {str(e)}")
-            return None, None
+            return False
 
     def decompress_diary_content(self, diary_id:int):
         """
@@ -821,9 +813,8 @@ class DiaryIo:
             log.writeLog(f"日记 {diary_id} 未被压缩，无需解压")
             return diary
             
-        # 加载全局哈夫曼树
-        tree, _ = self.load_global_huffman_tree()
-        if not tree:
+       
+        if not self.huffman_tree:
             return None
             
         try:
@@ -842,7 +833,7 @@ class DiaryIo:
                 binary_data = f.read()
                 
             # 解码内容
-            decoded_content = huffman_decoding(binary_data, tree)
+            decoded_content = huffman_decoding(binary_data, self.huffman_tree)
             
             # 更新日记对象
             diary_copy = diary.copy()  # 创建副本避免修改原始对象
@@ -884,20 +875,19 @@ class DiaryIo:
             log.writeLog(f"日记 {diary_id} 没有内容可压缩")
             return diary
             
-        # 加载全局哈夫曼树
-        _, codes = self.load_global_huffman_tree()
-        if not codes:
+        
+        if not self.codes:
             return None
             
         try:
             # 检查内容中是否存在不在编码表中的字符，因为不更新哈夫曼树，所以是直接终止压缩
             for char in content:
-                if char not in codes:
+                if char not in self.codes:
                     log.writeLog(f"日记 {diary_id} 包含未在全局哈夫曼树中的字符: {char}")
                     return None
                     
             # 压缩内容
-            compressed_data = encode_to_binary(content, codes)
+            compressed_data = encode_to_binary(content, self.codes)
             
             # 获取相关信息
             spot_id = diary.get("spot_id")
@@ -1060,22 +1050,6 @@ def testDiaryIo():
             print(f"删除日记 {new_diary_id} 失败")
     
     print(diary_io.holes)
-
-    # 测试加载全局哈夫曼树
-    print("\n测试load_global_huffman_tree方法:")
-    tree, codes = diary_io.load_global_huffman_tree()
-    if tree and codes:
-        print(f"全局哈夫曼树加载成功，编码表包含 {len(codes)} 个字符")
-        print("编码表示例(前5个字符):")
-        count = 0
-        for char, code in codes.items():
-            if count < 5:
-                print(f"字符: '{char}' -> 编码: {code}")
-                count += 1
-            else:
-                break
-    else:
-        print("全局哈夫曼树加载失败，请确保文件存在")
 
     # 测试解压日记内容
     print("\n测试decompress_diary_content方法:")
