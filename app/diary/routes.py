@@ -102,7 +102,7 @@ def add_diary():
                 # 生成唯一文件名，避免冲突
                 timestamp = int(time.time() * 1000)
                 filename = f"{timestamp}_{secure_filename(image.filename)}"
-                file_path = os.path.join(image_dir, filename)
+                file_path = image_dir + "/" + filename
                 image.save(file_path)
                 image_paths.append(file_path)
     
@@ -120,7 +120,7 @@ def add_diary():
                 # 生成唯一文件名，避免冲突
                 timestamp = int(time.time() * 1000)
                 filename = f"{timestamp}_{secure_filename(video.filename)}"
-                file_path = os.path.join(video_dir, filename)
+                file_path = video_dir + "/" + filename
                 video.save(file_path)
                 video_paths.append(file_path)
 

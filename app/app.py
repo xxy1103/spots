@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, send_from_directory
 from app.map import map
 from app.login import login
 from app.api import api
@@ -32,6 +32,12 @@ app.secret_key = os.environ.get('SECRET_KEY', os.urandom(24))
 # 配置会话，默认过期时间30分钟
 app.config['PERMANENT_SESSION_LIFETIME'] = 1800  # 单位：秒
 
+# 提供外部静态资源的路由
+@app.route('/<path:filename>')
+def external_static(filename):
+    # 指定外部静态资源的根目录，例如指向data目录
+    external_static_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+    return send_from_directory(external_static_folder, filename)
 
 @app.errorhandler(404)
 def page_not_found(e):

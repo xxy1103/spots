@@ -136,24 +136,24 @@
                     
                     <div class="diary-content">
                         {{ diary.content }}
-                    </div>
-                    
+                    </div>                      
                     {% if diary.img_list and diary.img_list|length > 0 %}
                     <div class="image-gallery">
                         <h4>图片</h4>
                         {% for img in diary.img_list %}
-                        <img src="{{ url_for('static', filename=img) }}" alt="旅行图片" class="img-fluid">
+                        <img src="{{ url_for('external_static', filename=img) }}" alt="旅行图片" class="img-fluid">
                         {% endfor %}
                     </div>
-                    {% endif %}
-                    
+                    {% endif %}                      
                     {% if diary.video_path %}
                     <div class="video-container">
                         <h4>视频</h4>
-                        <video controls>
-                            <source src="{{ url_for('static', filename=diary.video_path) }}" type="video/mp4">
+                        {% for video in diary.video_path %}
+                        <video controls style="margin-bottom: 15px;">
+                            <source src="{{ url_for('external_static', filename=video) }}" type="video/mp4">
                             您的浏览器不支持视频播放
                         </video>
+                        {% endfor %}
                     </div>
                     {% endif %}
                     
