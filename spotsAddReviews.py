@@ -19,14 +19,18 @@ for diary in diaries:
         try:
             with open(img, "rb") as f:
                 img_data = f.read()
-            img_name = secure_filename(os.path.basename(img))
+            img_name = secure_filename(os.path.basename(img))            
             with open(os.path.join(path, f"spot_{spot_id}", "images", img_name), "wb") as img_f:
                 img_f.write(img_data)
-            new_img_list.append(path + f"spot_{spot_id}/images/{img_name}")
+            new_img_list.append(path + f"/spot_{spot_id}/images/{img_name}")
+            # 成功移动文件后删除源文件
+            os.remove(img)
+            print(f"成功移动并删除源文件: {img}")        
         except Exception as e:
             print(f"Error processing image {img}: {e}")
             continue
-        diary["img_list"] = new_img_list
+    # 处理完所有图片后更新日记的图片列表
+    diary["img_list"] = new_img_list
 
 with open("data/diaries/diaries.json", "w", encoding="utf-8") as f:
     json.dump(diaries_json, f, ensure_ascii=False, indent=4)
