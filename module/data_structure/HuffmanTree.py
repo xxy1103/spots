@@ -75,25 +75,35 @@ def generate_huffman_codes(root):
     return codes
 
 # 对数据进行无损压缩
-def huffman_encoding(data):
+def huffman_encoding(data, root=None, codes=None):
     """
-    压缩数据为真正的二进制格式
+    使用全局哈夫曼树压缩数据为真正的二进制格式
     
     Args:
         data: 待压缩数据
+        root: 全局哈夫曼树根节点
+        codes: 编码表
         
     Returns:
-        tuple: (压缩后的二进制数据, 哈夫曼树根节点, 编码表)
+        tuple: 压缩后的二进制数据
     """
+    # 在实际代码中对于用树还是编码表纯看编写时候的心情，于是都预留了位置
     if not data:
-        return bytes(), None, {}
+        print("数据为空，无法压缩")
+        return bytes()
     
-    # 统计字符频率
-    freq = Counter(data)
-    # 构建哈夫曼树
-    root = build_huffman_tree(freq)
-    # 生成哈夫曼编码
-    codes = generate_huffman_codes(root)
+    # 如果只提供了树而没有编码表，则生成编码表
+    if codes is None and root is not None:
+        # 根据树生成编码表
+        codes = generate_huffman_codes(root)
+    # 啥都没有你压缩个屁，收拾er滚吧
+    elif root is None and codes is  None:
+        raise ValueError("必须提供哈夫曼树或编码表")
+    
+    # 检查编码表是否完整,输出错误信息
+    for char in data:
+        if char not in codes:
+            raise ValueError(f"编码表中缺少字符: '{char}'")
     
     # 1. 先获取编码后的位序列
     bit_string = ''.join(codes[char] for char in data)
@@ -114,7 +124,7 @@ def huffman_encoding(data):
         byte = bit_string[i:i+8]
         binary_data.append(int(byte, 2))
     
-    return bytes(binary_data), root, codes
+    return bytes(binary_data)
 
 # 对数据进行解压缩 - 修改为处理二进制数据
 def huffman_decoding(binary_data, root):
@@ -159,34 +169,3 @@ def huffman_decoding(binary_data, root):
             current_node = root
     
     return ''.join(decoded_data)
-
-# 辅助函数：用于将Huffman编码字符串直接转换为二进制数据
-def encode_to_binary(text, codes):
-    """
-    使用提供的编码表将文本转换为二进制数据
-    
-    Args:
-        text: 文本内容
-        codes: 编码表
-        
-    Returns:
-        bytes: 压缩后的二进制数据
-    """
-    # 获取编码
-    bit_string = ''.join(codes[char] for char in text)
-    
-    # 计算填充位
-    padding = 8 - (len(bit_string) % 8) if len(bit_string) % 8 != 0 else 0
-    padded_string = bit_string + '0' * padding
-    
-    # 存储填充信息
-    padded_info = format(padding, '08b')
-    final_string = padded_info + padded_string
-    
-    # 转换为字节
-    binary_data = bytearray()
-    for i in range(0, len(final_string), 8):
-        byte = final_string[i:i+8]
-        binary_data.append(int(byte, 2))
-    
-    return bytes(binary_data)

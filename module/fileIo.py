@@ -5,7 +5,7 @@ import json
 import datetime
 import module.printLog as log
 from module.data_structure.stack import Stack
-from module.data_structure.HuffmanTree import huffman_decoding, encode_to_binary
+from module.data_structure.HuffmanTree import huffman_decoding, huffman_encoding
 
 dataPath = r"data/"
 
@@ -830,7 +830,6 @@ class DiaryIo:
             log.writeLog(f"日记 {diary_id} 未被压缩，无需解压")
             return diary
             
-       
         if not self.huffman_tree:
             return None
             
@@ -904,7 +903,7 @@ class DiaryIo:
                     return None
                     
             # 压缩内容
-            compressed_data = encode_to_binary(content, self.codes)
+            compressed_data = huffman_encoding(content, None, self.codes)
             
             # 获取相关信息
             spot_id = diary.get("spot_id")
