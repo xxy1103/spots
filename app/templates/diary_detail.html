@@ -145,16 +145,16 @@
                         {% endfor %}
                     </div>
                     {% endif %}                      
-                    {% if diary.video_path %}
-                    <div class="video-container">
-                        <h4>视频</h4>
-                        {% for video in diary.video_path %}
-                        <video controls style="margin-bottom: 15px;">
+                {% if diary.video_path %}
+                    <h4>视频</h4>
+                    {% for video in diary.video_path %}
+                    <div class="video-container" style="margin-bottom: 40px;">
+                        <video controls>
                             <source src="{{ url_for('external_static', filename=video) }}" type="video/mp4">
                             您的浏览器不支持视频播放
                         </video>
-                        {% endfor %}
                     </div>
+                    {% endfor %}
                     {% endif %}
                     
                     <div class="diary-author">

@@ -48,6 +48,8 @@ def get_diary(diary_id):
     if not user:
         return render_template('error.html', message="用户不存在")
     
+    print(diary["video_path"])
+
     return render_template('diary_detail.html', diary=diary, user=user)
 
 
@@ -63,7 +65,6 @@ def get_recommendations(user_id):
         return render_template('error.html', message="用户不存在或推荐内容为空")
     if not recommendations:
         return render_template('error.html', message="未找到推荐内容")
-    #return render_template('user_recommendations.html', recommendations=recommendations)
     return jsonify(recommendations)
 
 
@@ -81,7 +82,7 @@ def add_diary():
     
     if not spot_id or not title or not content:
         return render_template('error.html', message="请填写完整信息")
-    
+
     spot = spot_manager.getSpot(spot_id)
 
     import os
@@ -94,7 +95,7 @@ def add_diary():
     
     if images and images[0].filename != '':
         # 确保目录存在
-        image_dir = f"data/scenic_spots/spot_{spot_id}/reviews/review_{spot['reviews']['total']}/image"
+        image_dir = f"data/scenic_spots/spot_{spot_id}/images"
         os.makedirs(image_dir, exist_ok=True)
         
         for image in images:
@@ -112,7 +113,7 @@ def add_diary():
 
     if videos and videos[0].filename != '':
         # 确保目录存在
-        video_dir = f"data/scenic_spots/spot_{spot_id}/reviews/review_{spot['reviews']['total']}/videos"
+        video_dir = f"data/scenic_spots/spot_{spot_id}/videos"
         os.makedirs(video_dir, exist_ok=True)
 
         for video in videos:
