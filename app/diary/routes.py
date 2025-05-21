@@ -99,6 +99,13 @@ def add_diary():
     """
     user_id = g.user["user_id"]
     spot_id = request.form.get("spot_id", type=int)
+    spot_marking = request.form.get("spot_marking", default=0, type=float)
+    # 确保评分在合理范围内
+    if spot_marking is None or spot_marking < 0:
+        spot_marking = 0
+    elif spot_marking > 5:
+        spot_marking = 5
+    
     title = request.form.get("title")
     content = request.form.get("content")
     
@@ -152,7 +159,16 @@ def add_diary():
     
     if diary_id < 0:
         return render_template('error.html', message="添加日记失败")
-    
+    # 景点增加评分
+    spot_manager.updateScore(spot_id, diary_id, spot_marking, 0)
+    # 打印调试
+    spot = spot_manager.getSpot(spot_id)
+    print(spot)
+    # 用户
+    user_manager.addDiary(user_id, diary_id)  # 更新用户评论数
+    user = user_manager.getUser(user_id)
+    print(user)
+
     # 重定向到日记详情页
     return redirect(url_for('diary.get_diary', diary_id=diary_id))
 

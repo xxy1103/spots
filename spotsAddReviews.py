@@ -2,52 +2,31 @@ import os
 import sys
 import json
 from werkzeug.utils import secure_filename
+import random
+from module.diary_class import diaryManager
+from module.Spot_class import spotManager
+
+with open("data\scenic_spots\spots.json", "r", encoding="utf-8") as f:
+    spots_json = json.load(f)
+
+spots = spots_json["spots"]
+
+for spot in spots:
+    sum_score = 0
+    count = spot["reviews"]["total"]
+    diarys_id = spot["reviews"]["diary_ids"]
+    for diary_id in diarys_id:
+        diary = diaryManager.getDiary(diary_id)
+        if diary:
+            sum_score += diary["scoreToSpot"]
+
+        spot["score"] = round(sum_score / count, 1) if count > 0 else 0
 
 
-path = "data/scenic_spots"
-with open("data/diaries/diaries.json", "r", encoding="utf-8") as f:
-    diaries_json = json.load(f)
+with open("data\scenic_spots\spots.json", "w", encoding="utf-8") as f:
+    json.dump(spots_json, f, ensure_ascii=False, indent=4)
+        
 
-diaries = diaries_json["diaries"]
-for diary in diaries:
-    spot_id = diary["spot_id"]
-    os.makedirs(os.path.join(path, f"spot_{spot_id}", "images"), exist_ok=True)
-    os.makedirs(os.path.join(path, f"spot_{spot_id}", "videos"), exist_ok=True)
-    img_list = diary["img_list"]
-    new_img_list = []
-    for img in img_list:
-        try:
-            with open(img, "rb") as f:
-                img_data = f.read()
-            img_name = secure_filename(os.path.basename(img))            
-            with open(os.path.join(path, f"spot_{spot_id}", "images", img_name), "wb") as img_f:
-                img_f.write(img_data)
-            new_img_list.append(path + f"/spot_{spot_id}/images/{img_name}")
-            # 成功移动文件后删除源文件
-            os.remove(img)
-            print(f"成功移动并删除源文件: {img}")        
-        except Exception as e:
-            print(f"Error processing image {img}: {e}")
-            continue
-    # 处理完所有图片后更新日记的图片列表
-    diary["img_list"] = new_img_list
-
-with open("data/diaries/diaries.json", "w", encoding="utf-8") as f:
-    json.dump(diaries_json, f, ensure_ascii=False, indent=4)
-
-
-    
-# for i in os.listdir(path):
-#     current_path = os.path.join(path, i)
-#     if os.path.isdir(current_path):
-#         spots_Id = i.split("_")[1]
-#         spots_Id = int(spots_Id)
-#         reviews_path = os.path.join(current_path, "reviews")
-#         if os.path.isdir(reviews_path):
-#            images_path = os.path.join(current_path, "images")
-#            videos_path = os.path.join(current_path, "videos")
-#            os.makedirs(images_path, exist_ok=True)
-#            os.makedirs(videos_path, exist_ok=True)
            
 
 

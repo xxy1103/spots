@@ -243,23 +243,12 @@ class User:
                     
                     
     
-    def markingSpot(self, userId, spotId, newScore):
+    def addDiary(self, userId, diaryId):
         """
-        用户对景点进行评分
+        增加日记
         """
-        # 获取景点信息
-        spot = spotManager.getSpot(spotId)
-        if spot is None:
-            log.writeLog(f"景点{spotId}不存在")
-            return False
-
-        oldScore = userIo.userUpdateSpotMark(userId, spotId, newScore)
-        if oldScore >= 0:
-            spotManager.updateScore(spotId, newScore, oldScore)
-            return True
-        else:   
-            log.writeLog(f"用户{userId}对景点{spotId}的评分更新失败")
-            return False
+        self.userIo.userDiaryAdd(userId, diaryId)
+        
     def markingReview(self, userId, reviewId, newScore):
         """
         用户对日记进行评分

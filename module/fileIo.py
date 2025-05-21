@@ -132,7 +132,7 @@ class UserIo:
         except Exception as e:
             log.writeLog(f"更新用户 {userId} 评论数失败: {str(e)}")
             return False
-    def userUpdateSpotMark(self, userId:int, spotId:int, score:float):
+    def userUpdateSpotMark(self, userId:int, spotId:int, score:float): #好像没用
         """
         当用户给景点评分时，增加用户的评分数量
         """
@@ -238,11 +238,9 @@ class SpotIo:
         """
         try:
             spot = self.getSpot(spotId)
-            sumScore = float(spot["score"])*spot["score_count"]
+            sumScore = float(spot["score"])*spot["reviews"]["total"]
             sumScore += newScore - oldScore
-            if oldScore != 0:
-                spot["score_count"]+=1
-            spot["score"] = sumScore / spot["score_count"]
+            spot["score"] = sumScore / spot["reviews"]["total"]
             return spot["score"]
         except:
             return -1.0
@@ -647,11 +645,11 @@ class DiaryIo:
             self.currentId = diary_id
         self.diary_count += 1
         
-        # 更新景点评论数，不立即保存
-        self.spotIo.spotReviewsAdd(spot_id, diary_id, save_immediately=False)
+        # 解耦
+        # self.spotIo.spotReviewsAdd(spot_id, diary_id, save_immediately=False)
 
-        self.userIo.userDiaryAdd(user_id, diary_id)  # 更新用户评论数
-            
+        # self.userIo.userDiaryAdd(user_id, diary_id)  # 更新用户评论数
+
         log.writeLog(f"用户 {user_id} 为景点 {spot_id} 添加日记 {diary_id}，总日记数: {user['reviews']['total']}")
         return diary_id
 
