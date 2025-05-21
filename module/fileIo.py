@@ -638,7 +638,7 @@ class DiaryIo:
             "compressed": False
         }
         
-        print(f"新日记: {new_diary}")
+        #print(f"新日记: {new_diary}")
         # 添加到日记列表
         if diary_id <= self.currentId:
             self.diaries[new_diary["id"]] = new_diary
@@ -673,26 +673,43 @@ class DiaryIo:
 
         target_diary = self.getDiary(diary_id)
 
-        if target_diary is None:
-            log.writeLog(f"日记 {diary_id} 不存在，无法删除")
-            return False
-        
-        # 检查用户权限
-        if target_diary["user_id"] != user_id:
-            log.writeLog(f"用户 {user_id} 无权删除日记 {diary_id}")
-            return False
-        
         # 获取日记关联的景点ID
         spot_id = target_diary["spot_id"]
         
-        # 删除图片文件夹 #改 暂未实现
-        img_dir = os.path.dirname(self.getDiaryImagePath(spot_id, diary_id))
-        if os.path.exists(img_dir):
-            import shutil
+        diary = self.getDiary(diary_id)
+        if diary is None:
+            log.writeLog(f"日记 {diary_id} 不存在，无法删除")
+            return False
+        
+        # 删除文本文件：
+        text_path = diary.get("content", "")
+        if text_path and os.path.exists(text_path):
             try:
-                shutil.rmtree(img_dir)
+                os.remove(text_path)
+                log.writeLog(f"已删除日记 {diary_id} 的内容文件: {text_path}")
             except Exception as e:
-                log.writeLog(f"删除日记 {diary_id} 的图片文件夹失败: {str(e)}")
+                log.writeLog(f"删除日记 {diary_id} 的内容文件失败: {str(e)}")
+        
+        # 删除图片文件
+        images_path = diary.get("img_list", [])
+        if images_path:
+            for img_path in images_path:
+                if os.path.exists(img_path):
+                    try:
+                        os.remove(img_path)
+                        log.writeLog(f"已删除日记 {diary_id} 的图片文件: {img_path}")
+                    except Exception as e:
+                        log.writeLog(f"删除日记 {diary_id} 的图片文件失败: {str(e)}")
+        # 删除视频文件
+        videos_path = diary.get("video_path", [])
+        if videos_path:
+            for video_path in videos_path:
+                if os.path.exists(video_path):
+                    try:
+                        os.remove(video_path)
+                        log.writeLog(f"已删除日记 {diary_id} 的视频文件: {video_path}")
+                    except Exception as e:
+                        log.writeLog(f"删除日记 {diary_id} 的视频文件失败: {str(e)}")
         
         # 从列表中删除日记
         self.diaries[diary_id] = None

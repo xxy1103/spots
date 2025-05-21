@@ -76,7 +76,7 @@ class DiaryManager:
             return diary_id
         
         return -1
-    
+
     def deleteDiary(self, user_id:int, diary_id:int):
         """删除日记"""
         success = self.diaryIo.deleteDiary(user_id, diary_id)

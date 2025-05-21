@@ -52,6 +52,28 @@ def get_diary(diary_id):
 
     return render_template('diary_detail.html', diary=diary, user=user)
 
+@diary.route('/<int:diary_id>', methods=['DELETE', 'POST']) # 支持 DELETE 和 POST 请求
+@login_required
+def delete_diary(diary_id):
+    """
+    删除日记
+    """
+    # 如果是 POST 请求，检查是否是模拟的 DELETE 请求
+    if request.method == 'POST' and request.form.get('_method') == 'DELETE':
+        # 继续处理为 DELETE 请求
+        pass
+        
+    user_id = g.user["user_id"]
+    diary = diary_manager.getDiary(diary_id)
+    if not diary:
+        return render_template('error.html', message="日记不存在")
+
+    if diary["user_id"] != user_id:
+        return render_template('error.html', message="无权限删除该日记")
+
+    diary_manager.deleteDiary(user_id,diary_id)
+    return redirect(url_for('diary.get_user_diaries', user_id=user_id))
+
 
 @diary.route('/recommend/user/<int:user_id>', methods=['GET'])
 @login_required

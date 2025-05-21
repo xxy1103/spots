@@ -110,6 +110,14 @@
         .rating {
             color: #ffc107;
         }
+        .delete-btn {
+            color: #dc3545;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+        .delete-form {
+            display: inline;
+        }
     </style>
 </head>
 <body>
@@ -165,6 +173,17 @@
                             <span class="author-name">{{ user.name }}</span>
                             <span class="post-date">发布于 {{ diary.time }}</span>
                         </div>
+                        
+                        {% if g.user and g.user.user_id == diary.user_id %}
+                        <div class="ml-auto">
+                            <form id="delete-form" class="delete-form" action="{{ url_for('diary.delete_diary', diary_id=diary.id) }}" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="confirmDelete()">
+                                    <i class="fa fa-trash"></i> 删除日记
+                                </button>
+                            </form>
+                        </div>
+                        {% endif %}
                     </div>
                     
                     <div class="diary-stats">
@@ -185,5 +204,12 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        function confirmDelete() {
+            if (confirm("确定要删除这篇日记吗？此操作不可撤销。")) {
+                document.getElementById("delete-form").submit();
+            }
+        }
+    </script>
 </body>
 </html>
