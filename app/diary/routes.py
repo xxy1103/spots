@@ -1,8 +1,9 @@
 from flask import render_template,jsonify, request, redirect, url_for,g
 from . import diary  # 导入蓝图
 from app.api.routes import login_required # 导入登录验证装饰器
-
-
+import os
+from werkzeug.utils import secure_filename
+import time
 from module.user_class import userManager as user_manager
 from module.diary_class import diaryManager as diary_manager
 from module.Spot_class import spotManager as spot_manager
@@ -65,6 +66,8 @@ def delete_diary(diary_id):
         
     user_id = g.user["user_id"]
     diary = diary_manager.getDiary(diary_id)
+    score = diary["scoreToSpot"]
+    spot_id = diary["spot_id"]
     if not diary:
         return render_template('error.html', message="日记不存在")
 
@@ -72,6 +75,9 @@ def delete_diary(diary_id):
         return render_template('error.html', message="无权限删除该日记")
 
     diary_manager.deleteDiary(user_id,diary_id)
+    # 删除日记后，删除评分
+    spot_manager.updateScore(spot_id, 0, score)
+
     return redirect(url_for('diary.get_user_diaries', user_id=user_id))
 
 
@@ -114,9 +120,7 @@ def add_diary():
 
     spot = spot_manager.getSpot(spot_id)
 
-    import os
-    from werkzeug.utils import secure_filename
-    import time
+
     
     # 处理图片文件
     images = request.files.getlist("images")
@@ -155,17 +159,18 @@ def add_diary():
                 video_paths.append(file_path)
 
     # 添加日记
-    diary_id = diary_manager.addDiary(user_id, spot_id, title, content, images=image_paths, videos=video_paths)
+    # 更新景点评分
+    spot_manager.updateScore(spot_id, newScore=spot_marking, oldScore=0)
+    # 添加日记
+    diary_id = diary_manager.addDiary(user_id, spot_id, title, content, images=image_paths, videos=video_paths, scoreToSpot=spot_marking)
     
     if diary_id < 0:
         return render_template('error.html', message="添加日记失败")
-    # 景点增加评分
-    spot_manager.updateScore(spot_id, diary_id, spot_marking, 0)
+    
     # 打印调试
     spot = spot_manager.getSpot(spot_id)
     print(spot)
     # 用户
-    user_manager.addDiary(user_id, diary_id)  # 更新用户评论数
     user = user_manager.getUser(user_id)
     print(user)
 

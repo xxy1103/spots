@@ -65,9 +65,9 @@ class DiaryManager:
         """获取所有日记"""
         return self.diaries
 
-    def addDiary(self, user_id:int, spot_id:int, title, content, images=None, videos=None):
+    def addDiary(self, user_id:int, spot_id:int, title, content, images=None, videos=None, scoreToSpot:float=0):
         """添加新日记"""
-        diary_id = self.diaryIo.addDiary(user_id, spot_id, title, content, images, videos)
+        diary_id = self.diaryIo.addDiary(user_id, spot_id, title, content, images, videos, scoreToSpot=scoreToSpot)
 
         if diary_id >= 0:
             # 重新构建索引

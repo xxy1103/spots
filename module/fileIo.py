@@ -281,6 +281,7 @@ class SpotIo:
                     "diary_ids": []
                 }
 
+            
             spot["reviews"]["total"] += 1
             spot["reviews"]["diary_ids"].append(diary_id)
             
@@ -601,7 +602,7 @@ class DiaryIo:
         log.writeLog(f"搜索结果: 找到 {len(results)}/{max_results} 条匹配的日记")
         return results
 
-    def addDiary(self, user_id:int, spot_id:int, title:str, content:str, images:list=None, videos:list=None): #添加视频支持
+    def addDiary(self, user_id:int, spot_id:int, title:str, content:str, images:list=None, videos:list=None, scoreToSpot:float=None): #添加视频支持
         """添加新日记"""
         if images is None:
             images = []
@@ -633,7 +634,8 @@ class DiaryIo:
             "visited_time": 0,
             "img_list": images,
             "video_path": videos,  # 添加视频路径字段
-            "compressed": False
+            "compressed": False,
+            "scoreToSpot": scoreToSpot,  # 添加评分到景点的字段
         }
         
         #print(f"新日记: {new_diary}")
@@ -646,9 +648,9 @@ class DiaryIo:
         self.diary_count += 1
         
         # 解耦
-        # self.spotIo.spotReviewsAdd(spot_id, diary_id, save_immediately=False)
+        self.spotIo.spotReviewsAdd(spot_id, diary_id, save_immediately=False)
 
-        # self.userIo.userDiaryAdd(user_id, diary_id)  # 更新用户评论数
+        self.userIo.userDiaryAdd(user_id, diary_id)  # 更新用户评论数
 
         log.writeLog(f"用户 {user_id} 为景点 {spot_id} 添加日记 {diary_id}，总日记数: {user['reviews']['total']}")
         return diary_id

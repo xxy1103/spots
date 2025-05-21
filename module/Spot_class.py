@@ -143,7 +143,7 @@ class Spot:
         return all_sorted_spots
 
 
-    def updateScore(self, spotId:int, diaryId:int, newScore:float, oldScore:float = 0)->float:
+    def updateScore(self, spotId:int,  newScore:float, oldScore:float = 0)->float:
         """
         为指定景点添加评分
         """
@@ -152,7 +152,7 @@ class Spot:
             writeLog(f"更新景点{spotId}评分失败")
             return -1
         
-        self.spotIo.spotReviewsAdd(spotId, diaryId)
+        #self.spotIo.spotReviewsAdd(spotId, diaryId)
         type = self.spotIo.getSpot(spotId)["type"]
         # 更新对应类型的堆
         self.spotTypeDict[type]["heap"].updateScore(spotId, newScore)
