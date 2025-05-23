@@ -72,8 +72,8 @@ def login():
         
         # 在服务器端会话中存储用户信息，关联到令牌
         session[session_token] = {
-            'user_id': user_info['id'],
-            'username': user_info['name']
+            'user_id': user_info.id,
+            'username': user_info.name,
         }
         
         return response
@@ -84,10 +84,6 @@ def login():
             'message': '用户名或密码错误'
         }), 401  # 返回401未授权状态码
     
-
-
-
-
 def login_required(f):
     """
     一个装饰器，用于保护需要用户登录才能访问的路由。
@@ -296,7 +292,6 @@ def register():
             'message': '注册失败，用户名可能已存在' # 更具体的错误信息可能来自 addUser 方法
         }), 409 # 409 Conflict 更适合表示资源已存在
 
-# ...existing code...
 @api.route('/recommended-spots', methods=['GET'])
 @login_required  # 确保用户已登录
 def recommended_spots():
@@ -342,23 +337,22 @@ def recommended_spots():
     
     # 1. 获取原始推荐景点数据
     # 假设 getRecommendSpots 返回一个列表，其中每个元素是包含景点信息的字典或对象
-    raw_recommended_spots = user_manager.getRecommendSpots(user_id) 
+    raw_recommended_spots = user_manager.getRecommendSpots(user_id,10) 
 
     # 2. 处理数据，只选择需要的字段 (例如 'name' 和 'description')
     filtered_spots = []
     if raw_recommended_spots: # 确保列表不为空
         for spot in raw_recommended_spots:
-            # 假设 spot 是一个字典，如果它是对象，则使用 spot.name, spot.description
-            spot_info = spot_manager.getSpot(spot['id'])  
+            # 假设 spot 是一个对象
+            spot = spot_manager.getSpot(spot['id'])  
             filtered_spot = {
-                'name': spot_info.get('name'),  # 假设原始数据是字典
-                'id': spot_info.get('id'),  # 假设原始数据是字典
-                'score': spot_info.get('score'),  # 假设原始数据是字典
-                'type': spot_info.get('type'),  # 假设原始数据是字典
-                'visited_time': spot_info.get('visited_time'),  # 假设原始数据是字典
-                'img': spot_info.get('img'),  # 假设原始数据是字典
+                'name': spot.name,  # 假设原始数据是字典
+                'id': spot.id,  # 假设原始数据是字典
+                'score': spot.score,  # 假设原始数据是字典
+                'type': spot.type,  # 假设原始数据是字典
+                'visited_time': spot.visited_time,  # 假设原始数据是字典
+                'img': spot.img,  # 假设原始数据是字典
                 # 添加其他你需要的字段
-                
             }
             filtered_spots.append(filtered_spot)
 
@@ -430,8 +424,8 @@ def search_spots():
 
     # 1. 获取景点列表的初始数据集
     if keyword:
-        
         spots = spot_manager.getSpotByName(keyword)
+        spots = quicksort(spots, sort_key="value1")  # 按评分排序
     elif user_preference:
         # 基于用户偏好推荐景点
         user = g.user
@@ -448,21 +442,21 @@ def search_spots():
     # 初始化一个空列表存储经过完整处理的景点
     processed_spots = []
     if spots:
-        for spot_brief in spots:
+        for spot_id in spots:
             # 获取完整的景点信息
-            spot_info = spot_manager.getSpot(spot_brief['id'])
+            spot = spot_manager.getSpot(spot_id['id'])
             
             # 应用过滤条件
             # 2.1 排除特定类型
-            if exclude_type and spot_info.get('type') == exclude_type:
+            if exclude_type and spot.type == exclude_type:
                 continue
                 
             # 2.2 根据类型过滤
-            if spot_type and spot_info.get('type') != spot_type:
+            if spot_type and spot.type != spot_type:
                 continue
                 
             # 2.3 根据评分范围过滤
-            spot_score = float(spot_info.get('score', 0))
+            spot_score = float(spot.score)
             if min_score and spot_score < float(min_score):
                 continue
             if max_score and spot_score > float(max_score):
@@ -470,19 +464,19 @@ def search_spots():
                 
             # 添加通过过滤的景点到结果中
             processed_spots.append({
-                'name': spot_info.get('name'),
-                'id': spot_info.get('id'),
-                'score': spot_info.get('score'),
-                'type': spot_info.get('type'),
-                'visited_time': spot_info.get('visited_time'),
-                'img': spot_info.get('img'),
-                'info': spot_info.get('info')
+                'name': spot.name,
+                'id': spot.id,
+                'value1': spot.score,
+                'type': spot.type,
+                'value2': spot.visited_time,
+                'img': spot.img,
+                'info': spot.info
             })
     
     # 3. 排序
     if sort_by == 'popularity_desc':
-        processed_spots = quicksort(processed_spots, sort_key="visited_time")
-    
+        processed_spots = quicksort(processed_spots, sort_key="value2")
+
     # 4. 返回结果
     return jsonify({
         'success': True, 

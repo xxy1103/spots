@@ -35,7 +35,7 @@ def mapView(spot_id):
         # 处理景点不存在的情况，例如返回404页面或重定向
         return "Spot not found", 404
 
-    location = spot.get("location") # 使用 .get() 更安全，因为如果键 "location" 不存在，它不会抛出 KeyError，并且可以指定默认值
+    location = spot.location # 使用 .get() 更安全，因为如果键 "location" 不存在，它不会抛出 KeyError，并且可以指定默认值
     #获取经纬度从"纬度,经度"格式转换为列表
     if location:
         try:
@@ -103,7 +103,7 @@ def scenicSpots(spot_id):
     if not spot:
         return {"error": "Spot not found"}, 404
 
-    location = spot.get("location") # 使用 .get() 更安全
+    location = spot.location # 使用 .get() 更安全
     if not location:
         return {"error": "Spot location not found"}, 404
 

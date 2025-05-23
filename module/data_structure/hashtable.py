@@ -19,7 +19,7 @@ class HashTable:
         # 使用汉字的Unicode值对桶数量取模
         return ord(key) % self.size
 
-    def insert(self, item: dict):
+    def insert(self, item):
         """
         插入对象，将对象添加到对象name中每个汉字对应的桶中
         :param item: 形如 {"id": 1, "name": "故宫博物馆", ...} 的对象
@@ -30,11 +30,8 @@ class HashTable:
         obj_id = item["id"]
         name = item["name"]
         
-        # 创建只包含 id 和 name 的新字典
-        filtered_item = {"id": obj_id, "name": name,"score": item.get("score", 0), "visited_time": item.get("visited_time", 0),"type": item.get("type", "")}
-
         # 存储过滤后的对象，方便通过id查找
-        self.objects_by_id[obj_id] = filtered_item
+        self.objects_by_id[obj_id] = item
 
         for char in name:
             # 计算汉字的哈希值，确定桶索引
@@ -51,14 +48,14 @@ class HashTable:
                     # 检查对象是否已存在于列表中（基于id）
                     if not any(existing_item['id'] == obj_id for existing_item in node[1]):
                         # 插入过滤后的对象
-                        node[1].append(filtered_item)
+                        node[1].append(item)
                     node_found = True
                     break
 
             # 如果没有找到该汉字的节点，创建新节点
             if not node_found:
                 # 插入过滤后的对象
-                self.buckets[index].append((char, [filtered_item]))
+                self.buckets[index].append((char, [item]))
 
     def search(self, key: str) -> list[dict]:
         """

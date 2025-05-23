@@ -22,8 +22,8 @@ def spot(id):
     try:
         spot_id = int(id) # 尝试将 id 转换为整数
         spotManager.addVisitedTime(spot_id) # 增加访问次数
-        spot_data = spotManager.getSpot(spot_id) # 使用 spotManager 获取景点数据
-        if spot_data is None:
+        spot = spotManager.getSpot(spot_id) # 使用 spotManager 获取景点数据
+        if spot is None:
             # 如果找不到景点，可以返回 404 页面或错误信息
             return render_template('404.html'), 404 
         
@@ -36,5 +36,5 @@ def spot(id):
         return render_template('error.html', message="获取景点信息时出错"), 500
 
     # 将获取到的景点数据传递给模板
-    return render_template('spot_info.html', spot=spot_data) # 将整个 spot_data 字典传递过去
+    return render_template('spot_info.html', spot=spot) # 将整个 spot 字典传递过去
 
