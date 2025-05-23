@@ -1,4 +1,5 @@
 import os
+import random
 from module.data_structure.heap import MinHeap
 from module.data_structure.set import MySet
 from typing import List, Tuple, Any
@@ -16,15 +17,16 @@ class DijkstraRouter:
     """
     使用Dijkstra算法的路由器，用于在地图上计算最短路径
     """
-    
-    def __init__(self, map_path: str = 'data/map/map.osm'):
+    def __init__(self, map_path: str = 'data/map/map.osm', base_speed: float = 5.0):
         """
         初始化路由器，加载OSM地图数据
         
         Args:
             map_path: OSM地图文件路径
+            base_speed: 基础行走速度，单位：km/h
         """
         self.map_path = map_path
+        self.base_speed = base_speed  # 基础行走速度 km/h
         self.graph = None
         self.load_map()
     
@@ -35,8 +37,7 @@ class DijkstraRouter:
         # 检查文件是否存在
         if not os.path.exists(self.map_path):
             raise FileNotFoundError(f"地图文件不存在: {self.map_path}")
-        
-        # 加载OSM数据到NetworkX图
+          # 加载OSM数据到NetworkX图
         print(f"正在加载地图数据: {self.map_path}")
         try:
             # 尝试使用osmnx直接加载OSM数据
@@ -44,6 +45,108 @@ class DijkstraRouter:
         except Exception as e:
             print(f"使用osmnx加载失败: {e}")
         print(f"地图加载完成，节点数: {len(self.graph.nodes)}, 边数: {len(self.graph.edges)}")
+        
+        # 为所有边添加拥挤度和速度信息
+        self._initialize_traffic_conditions()
+    
+    def _initialize_traffic_conditions(self) -> None:
+        """
+        为地图中的所有边随机生成拥挤度和速度信息
+        """
+        if self.graph is None:
+            return
+            
+        print("正在初始化道路交通状况...")
+        edge_count = 0
+        
+        for u, v, key, data in self.graph.edges(keys=True, data=True):
+            # 生成随机拥挤度 (0.2 到 1.0 之间，避免完全堵塞)
+            congestion = random.uniform(0.2, 1.0)
+            
+            # 根据道路类型设定基础速度
+            road_type = data.get('highway', 'unclassified')
+            base_speed = self._get_road_base_speed(road_type)
+            
+            # 实际速度 = 拥挤度 * 基础速度
+            actual_speed = congestion * base_speed
+            
+            # 更新边的属性
+            data['congestion'] = congestion
+            data['base_speed'] = base_speed
+            data['actual_speed'] = actual_speed
+            
+            edge_count += 1
+            
+        print(f"交通状况初始化完成，处理了 {edge_count} 条道路")
+    
+    def _get_road_base_speed(self, road_type) -> float:
+        """
+        根据道路类型获取基础速度 (km/h)
+        Args:
+            road_type: OSM中的道路类型，可能为str或list
+        Returns:
+            float: 基础速度 km/h
+        """
+        speed_mapping = {
+            'motorway': 80,      # 高速公路
+            'trunk': 70,         # 国道
+            'primary': 60,       # 主要道路
+            'secondary': 50,     # 次要道路
+            'tertiary': 40,      # 三级道路
+            'residential': 30,   # 住宅区道路
+            'service': 20,       # 服务道路
+            'footway': 5,        # 人行道
+            'path': 5,           # 小径
+            'cycleway': 15,      # 自行车道
+            'unclassified': 30   # 未分类道路
+        }
+        # 如果是列表，取第一个元素
+        if isinstance(road_type, list) and road_type:
+            road_type = road_type[0]
+        # 兜底转为字符串
+        if not isinstance(road_type, str):
+            road_type = str(road_type)
+        # 如果类型不在映射中，可以考虑返回一个默认车辆速度或步行速度，这里按原逻辑返回 self.base_speed
+        return speed_mapping.get(road_type, self.base_speed) 
+    
+    def regenerate_traffic_conditions(self) -> None:
+        """
+        重新生成所有道路的交通状况
+        """
+        print("重新生成交通状况...")
+        self._initialize_traffic_conditions()
+    
+    def update_road_congestion(self, u: Any, v: Any, congestion: float) -> None:
+        """
+        更新特定道路的拥挤度
+        
+        Args:
+            u, v: 道路两端的节点
+            congestion: 新的拥挤度 (0-1)
+        """
+        if self.graph is None:
+            return
+            
+        congestion = max(0.1, min(1.0, congestion))  # 限制在0.1-1.0范围内
+        
+        try:
+            edge_data = self.graph.get_edge_data(u, v)
+            if edge_data:
+                if isinstance(edge_data, dict) and len(edge_data) > 1:
+                    # 多边情况，更新所有边
+                    for key, data in edge_data.items():
+                        base_speed = data.get('base_speed', self.base_speed)
+                        data['congestion'] = congestion
+                        data['actual_speed'] = congestion * base_speed
+                else:
+                    # 单边情况
+                    first_edge = next(iter(edge_data.values()))
+                    base_speed = first_edge.get('base_speed', self.base_speed)
+                    first_edge['congestion'] = congestion
+                    first_edge['actual_speed'] = congestion * base_speed
+                    
+        except Exception as e:
+            print(f"更新道路拥挤度失败: {e}")
     
     def _validate_nodes(self, start_node: Any, end_node: Any) -> None:
         """验证节点是否有效"""
@@ -55,10 +158,18 @@ class DijkstraRouter:
         
         if end_node not in self.graph:
             raise ValueError(f"终点节点 {end_node} 不存在于地图中")
-    
-    def _get_edge_weight(self, current_node: Any, neighbor: Any) -> float:
+    def _get_edge_weight(self, current_node: Any, neighbor: Any, weight_type: str = 'distance', use_vehicle: bool = False) -> float:
         """
         获取边的权重，统一处理多边情况
+        
+        Args:
+            current_node: 当前节点
+            neighbor: 邻居节点
+            weight_type: 权重类型，'distance'表示距离，'time'表示时间
+            use_vehicle: 是否使用交通工具进行时间估算 (仅当 weight_type 为 'time' 时有效)
+        
+        Returns:
+            float: 边的权重
         """
         try:
             edge_data = self.graph.get_edge_data(current_node, neighbor)
@@ -66,30 +177,80 @@ class DijkstraRouter:
             if edge_data is None:
                 return float('inf')
             
-            # 处理多边情况：选择最短边
+            # 处理多边情况：选择最优边
             if isinstance(edge_data, dict) and len(edge_data) > 1:
                 weights = []
                 for edge_key, data in edge_data.items():
-                    weight = data.get('length', data.get('weight', 1.0))
+                    weight = self._calculate_edge_weight(data, weight_type, use_vehicle=use_vehicle)
                     if isinstance(weight, (int, float)) and weight >= 0:
                         weights.append(weight)
-                return min(weights) if weights else 1.0
+                return min(weights) if weights else float('inf') # Changed 1.0 to float('inf') for consistency
             
             # 单边情况
             if isinstance(edge_data, dict):
                 first_edge = next(iter(edge_data.values()))
-                weight = first_edge.get('length', first_edge.get('weight', 1.0))
-            else:
-                weight = edge_data.get('length', edge_data.get('weight', 1.0))
+                return self._calculate_edge_weight(first_edge, weight_type, use_vehicle=use_vehicle)
+            else: # Should ideally not happen if graph structure is as expected
+                return self._calculate_edge_weight(edge_data, weight_type, use_vehicle=use_vehicle)
             
-            # 验证权重有效性
-            if not isinstance(weight, (int, float)) or weight < 0:
-                return 1.0
+        except Exception: # Broad exception, consider logging
+            return float('inf') # Changed 1.0 to float('inf')
+    
+    def _calculate_edge_weight(self, edge_data: dict, weight_type: str, use_vehicle: bool = False) -> float:
+        """
+        根据权重类型计算单条边的权重
+        
+        Args:
+            edge_data: 边的数据
+            weight_type: 权重类型，'distance'或'time'
+            use_vehicle: 是否使用交通工具进行时间估算 (仅当 weight_type 为 'time' 时有效)
             
+        Returns:
+            float: 计算得到的权重
+        """
+        if weight_type == 'distance':
+            # 距离权重（米）
+            weight = edge_data.get('length', edge_data.get('weight')) # Prefer length, then weight
+            if weight is None or not isinstance(weight, (int, float)) or weight < 0:
+                return float('inf') # More appropriate for unreachable/invalid
             return weight
             
-        except Exception:
-            return 1.0
+        elif weight_type == 'time':
+            # 时间权重（秒）
+            length = edge_data.get('length')
+
+            if length is None or not isinstance(length, (int, float)) or length < 0:
+                return float('inf')
+            
+            if length == 0:
+                return 0.0
+
+            congestion = edge_data.get('congestion', 1.0)
+            
+            base_speed_kmh: float
+            if use_vehicle:
+                road_type = edge_data.get('highway', 'unclassified')
+                base_speed_kmh = self._get_road_base_speed(road_type)
+            else:
+                base_speed_kmh = self.base_speed # Walking speed
+
+            effective_speed_kmh = congestion * base_speed_kmh
+            
+            if effective_speed_kmh <= 0:
+                return float('inf')
+
+            speed_ms = effective_speed_kmh * 1000 / 3600
+            
+            if speed_ms <= 0:
+                 return float('inf')
+
+            time_seconds = length / speed_ms
+            return time_seconds
+            
+        else:
+            # Should not happen if weight_type is strictly 'distance' or 'time'
+            # Consider raising an error or logging
+            return float('inf') 
     
     def _reconstruct_path(self, predecessors: dict, start_node: Any, end_node: Any) -> List[Any]:
         """重构路径，添加循环检测"""
@@ -115,13 +276,12 @@ class DijkstraRouter:
         
         path.reverse()
         return path
-    
-    def _relax_neighbors(self, current_node, distances, predecessors, priority_queue):
+    def _relax_neighbors(self, current_node, distances, predecessors, priority_queue, weight_type='distance', use_vehicle: bool = False):
         """松弛邻居节点"""
         current_distance = distances[current_node]
         
         for neighbor in self.graph.neighbors(current_node):
-            weight = self._get_edge_weight(current_node, neighbor)
+            weight = self._get_edge_weight(current_node, neighbor, weight_type, use_vehicle=use_vehicle)
             new_distance = current_distance + weight
             
             if new_distance < distances.get(neighbor, float('inf')):
@@ -129,16 +289,18 @@ class DijkstraRouter:
                 predecessors[neighbor] = current_node
                 priority_queue.push((new_distance, neighbor))
 
-    def dijkstra(self, start_node: Any, end_node: Any) -> Tuple[float, List[Any]]:
+    def dijkstra(self, start_node: Any, end_node: Any, optimize_for: str = 'distance', use_vehicle: bool = False) -> Tuple[float, List[Any]]:
         """
         使用Dijkstra算法计算从起点到终点的最短路径
 
         Args:
             start_node: 起点节点ID
             end_node: 终点节点ID
+            optimize_for: 优化目标，'distance'表示最短距离，'time'表示最短时间
+            use_vehicle: 是否使用交通工具进行时间估算 (仅当 optimize_for 为 'time' 时有效)
 
         Returns:
-            Tuple[float, List[Any]]: 总距离和路径节点列表
+            Tuple[float, List[Any]]: 总距离/时间和路径节点列表
         """
         # 验证输入
         self._validate_nodes(start_node, end_node)
@@ -177,15 +339,117 @@ class DijkstraRouter:
             visited.add(current_node)
             
             # 松弛邻居节点
-            self._relax_neighbors(current_node, distances, predecessors, priority_queue)
+            self._relax_neighbors(current_node, distances, predecessors, priority_queue, optimize_for, use_vehicle=use_vehicle)
         
         # 如果终点不可达
         if end_node not in distances:
             return float('inf'), []
-          # 重构路径
+        
+        # 重构路径
         path = self._reconstruct_path(predecessors, start_node, end_node)
         
         return distances[end_node], path
+    
+    def dijkstra_shortest_time(self, start_node: Any, end_node: Any, use_vehicle: bool = False) -> Tuple[float, List[Any]]:
+        """
+        使用Dijkstra算法计算从起点到终点的最短用时路径
+        考虑道路拥挤度对通行时间的影响
+
+        Args:
+            start_node: 起点节点ID
+            end_node: 终点节点ID
+            use_vehicle: 是否使用交通工具进行时间估算
+
+        Returns:
+            Tuple[float, List[Any]]: 总用时（秒）和路径节点列表
+        """
+        return self.dijkstra(start_node, end_node, optimize_for='time', use_vehicle=use_vehicle)
+    
+    def compare_routes(self, start_node: Any, end_node: Any, use_vehicle_for_time: bool = False) -> dict:
+        """
+        比较最短距离路径和最短时间路径
+        
+        Args:
+            start_node: 起点节点ID
+            end_node: 终点节点ID
+            use_vehicle_for_time: 计算时间相关路径或指标时是否考虑交通工具
+            
+        Returns:
+            dict: 包含两种路径的比较结果
+        """
+        # 计算最短距离路径 (use_vehicle is False by default for distance optimization)
+        distance_cost, distance_path = self.dijkstra(start_node, end_node, optimize_for='distance', use_vehicle=False)
+        
+        # 计算最短时间路径
+        time_cost, time_path = self.dijkstra(start_node, end_node, optimize_for='time', use_vehicle=use_vehicle_for_time)
+        
+        # 计算距离路径的实际用时
+        distance_path_time = self._calculate_path_time(distance_path, use_vehicle=use_vehicle_for_time)
+        
+        # 计算时间路径的实际距离
+        time_path_distance = self._calculate_path_distance(time_path)
+        
+        return {
+            'shortest_distance': {
+                'path': distance_path,
+                'distance': distance_cost,  # 米
+                'time': distance_path_time,  # 秒
+                'avg_speed': (distance_cost / 1000) / (distance_path_time / 3600) if distance_path_time > 0 else 0  # km/h
+            },
+            'shortest_time': {
+                'path': time_path,
+                'distance': time_path_distance,  # 米
+                'time': time_cost,  # 秒
+                'avg_speed': (time_path_distance / 1000) / (time_cost / 3600) if time_cost > 0 else 0  # km/h
+            }
+        }
+    
+    def _calculate_path_time(self, path: List[Any], use_vehicle: bool = False) -> float:
+        """
+        计算给定路径的总用时
+        
+        Args:
+            path: 路径节点列表
+            use_vehicle: 是否使用交通工具进行时间估算
+            
+        Returns:
+            float: 总用时（秒）
+        """
+        if len(path) < 2:
+            return 0.0
+            
+        total_time = 0.0
+        for i in range(len(path) - 1):
+            current_node = path[i]
+            next_node = path[i + 1]
+            edge_time = self._get_edge_weight(current_node, next_node, 'time', use_vehicle=use_vehicle)
+            if edge_time == float('inf'): # If any segment is impassable, total time is infinite
+                return float('inf')
+            total_time += edge_time
+            
+        return total_time
+    
+    def _calculate_path_distance(self, path: List[Any]) -> float:
+        """
+        计算给定路径的总距离
+        
+        Args:
+            path: 路径节点列表
+            
+        Returns:
+            float: 总距离（米）
+        """
+        if len(path) < 2:
+            return 0.0
+            
+        total_distance = 0.0
+        for i in range(len(path) - 1):
+            current_node = path[i]
+            next_node = path[i + 1]
+            edge_distance = self._get_edge_weight(current_node, next_node, 'distance')
+            total_distance += edge_distance
+            
+        return total_distance
     
     def get_nearest_node(self, lat: float, lng: float) -> Any:
         """
@@ -224,16 +488,19 @@ class DijkstraRouter:
                     continue
             
             return nearest_node
-    def plan_route(self, coordinates: List[Tuple[float, float]]) -> Tuple[float, List[Any]]:
+    
+    def plan_route(self, coordinates: List[Tuple[float, float]], optimize_for: str = 'distance', use_vehicle: bool = False) -> Tuple[float, List[Any]]:
         """
         规划经过所有给定坐标点的最短路线
         
         Args:
             coordinates: 经纬度坐标列表，第一个是起点，其余为途径点
                          每个坐标是一个(纬度,经度)的元组
+            optimize_for: 优化目标，'distance'表示最短距离，'time'表示最短时间
+            use_vehicle: 是否使用交通工具进行时间估算 (仅当 optimize_for 为 'time' 时有效)
         
         Returns:
-            Tuple[float, List[Any]]: 总距离和完整路径节点列表
+            Tuple[float, List[Any]]: 总距离/时间和完整路径节点列表
         """
         if len(coordinates) < 2:
             raise ValueError("至少需要提供2个坐标点")
@@ -250,21 +517,23 @@ class DijkstraRouter:
         
         # 如果只有一个途径点，直接计算从起点到终点的路径
         if len(waypoints) == 1:
-            return self.dijkstra(start_node, waypoints[0])
+            return self.dijkstra(start_node, waypoints[0], optimize_for, use_vehicle=use_vehicle)
             
         # 使用改进的贪心算法和2-opt局部优化
-        return self._solve_tsp_improved(start_node, waypoints)
-    
-    def _solve_tsp_improved(self, start_node: Any, waypoints: List[Any]) -> Tuple[float, List[Any]]:
+        return self._solve_tsp_improved(start_node, waypoints, optimize_for, use_vehicle=use_vehicle)
+
+    def _solve_tsp_improved(self, start_node: Any, waypoints: List[Any], optimize_for: str = 'distance', use_vehicle: bool = False) -> Tuple[float, List[Any]]:
         """
         使用改进的贪心算法和2-opt局部优化求解TSP问题
         
         Args:
             start_node: 起点节点
             waypoints: 途径点列表
+            optimize_for: 优化目标，'distance'或'time'
+            use_vehicle: 是否使用交通工具进行时间估算 (仅当 optimize_for 为 'time' 时有效)
             
         Returns:
-            Tuple[float, List[Any]]: 总距离和完整路径节点列表
+            Tuple[float, List[Any]]: 总距离/时间和完整路径节点列表
         """
         # 计算所有点对之间的最短路径
         all_nodes = [start_node] + waypoints
@@ -275,7 +544,7 @@ class DijkstraRouter:
         for i, node_i in enumerate(all_nodes):
             for j, node_j in enumerate(all_nodes):
                 if i != j:  # 避免计算自身到自身的距离
-                    dist, path = self.dijkstra(node_i, node_j)
+                    dist, path = self.dijkstra(node_i, node_j, optimize_for, use_vehicle=use_vehicle)
                     distances[(node_i, node_j)] = dist
                     paths[(node_i, node_j)] = path
         
@@ -286,7 +555,7 @@ class DijkstraRouter:
         improved_tour = self._two_opt_optimize(tour, distances)
         
         # 步骤3：构建完整路径
-        return self._construct_complete_path(improved_tour, paths)
+        return self._construct_complete_path(improved_tour, paths, optimize_for)
     
     def _nearest_neighbor_tsp(self, start_node: Any, waypoints: List[Any], distances: dict) -> List[Any]:
         """
@@ -374,36 +643,55 @@ class DijkstraRouter:
             total += dist
         return total
     
-    def _construct_complete_path(self, tour: List[Any], paths: dict) -> Tuple[float, List[Any]]:
+    def _construct_complete_path(self, tour: List[Any], paths: dict, optimize_for: str) -> Tuple[float, List[Any]]:
         """
-        基于节点访问顺序构建完整路径
-        
+        基于节点访问顺序构建完整路径和计算总成本
+
         Args:
             tour: 访问顺序的节点列表
             paths: 点对之间的路径字典
-            
+            optimize_for: 优化目标，'distance'或'time'
+
         Returns:
-            Tuple[float, List[Any]]: 总距离和完整路径节点列表
+            Tuple[float, List[Any]]: 总成本(距离或时间)和完整路径节点列表
         """
-        total_distance = 0
-        complete_path = [tour[0]]  # 起始点
-        
+        complete_path = []
+        total_cost = 0.0
+
+        if not tour:
+            return 0.0, []
+
+        # 添加起点到第一个途径点的路径
+        # 第一个节点是起点，tour[0] 已经是起点
+        # complete_path.extend(paths[(start_node, tour[0])][:-1]) # 避免重复添加节点
+        # total_cost += distances[(start_node, tour[0])]
+
         for i in range(len(tour) - 1):
-            current_node = tour[i]
-            next_node = tour[i + 1]
+            node1 = tour[i]
+            node2 = tour[i+1]
             
-            # 获取这两点之间的路径
-            segment_path = paths.get((current_node, next_node), [])
-            segment_distance = len(segment_path) - 1  # 简单估计距离
+            segment_path = paths.get((node1, node2))
+            if segment_path is None:
+                # 如果路径不存在，尝试反向查找，理论上不应该发生，因为dijkstra会处理
+                # 或者直接抛出错误，表示预计算不完整
+                raise ValueError(f"无法找到从 {node1} 到 {node2} 的预计算路径")
+
+            # 重新计算这一段的成本，而不是依赖预计算的distances字典中的值
+            # 因为distances字典可能存储的是原始的dijkstra结果，而我们需要的是根据optimize_for的成本
+            current_segment_cost = 0.0
+            if len(segment_path) >= 2:
+                for k in range(len(segment_path) - 1):
+                    current_segment_cost += self._get_edge_weight(segment_path[k], segment_path[k+1], optimize_for)
             
-            if not segment_path:
-                raise ValueError(f"无法找到从 {current_node} 到 {next_node} 的路径")
+            total_cost += current_segment_cost
             
-            # 添加除起点外的路径点（避免重复）
-            complete_path.extend(segment_path[1:])
-            total_distance += segment_distance
-            
-        return total_distance, complete_path
+            if not complete_path: # 如果是第一段路径
+                complete_path.extend(segment_path)
+            else:
+                # 拼接路径，移除重复的连接点
+                complete_path.extend(segment_path[1:])
+        
+        return total_cost, complete_path
     
     def get_route_coordinates(self, path: List[Any]) -> List[Tuple[float, float]]:
         """
@@ -604,19 +892,19 @@ class DijkstraRouter:
         c = 2 * atan2(sqrt(a), sqrt(1-a))
         r = 6371  # 地球半径，单位为公里
         
-        return r * c
-
-    def calculate_distances_to_points(self, start_coordinate: str, target_points: List[dict]) -> List[dict]:
+        return r * c    
+    def calculate_distances_to_points(self, start_coordinate: str, target_points: List[dict], optimize_for: str = 'distance') -> List[dict]:
         """
-        使用一次Dijkstra算法计算从起点到多个目标点的距离
+        使用一次Dijkstra算法计算从起点到多个目标点的距离或时间
         
         Args:
             start_coordinate: 起点坐标，格式为"纬度,经度"
             target_points: 目标点列表，每个元素为字典，包含location信息
                           可通过["location"]["lat"]和["location"]["lng"]获取坐标
+            optimize_for: 优化目标，'distance'表示距离，'time'表示时间
         
         Returns:
-            List[dict]: 更新后的目标点列表，每个点的["value1"]字段包含到起点的距离
+            List[dict]: 更新后的目标点列表，每个点的["value1"]字段包含到起点的距离/时间
         """
         try:
             # 解析起点坐标
@@ -641,10 +929,10 @@ class DijkstraRouter:
                     print(f"解析目标点坐标失败: {e}")
                     target_nodes.append(None)
             
-            # 使用修改后的Dijkstra算法一次性计算到所有目标点的距离
-            distances = self._dijkstra_multi_target(start_node, target_nodes)
+            # 使用修改后的Dijkstra算法一次性计算到所有目标点的距离/时间
+            distances = self._dijkstra_multi_target(start_node, target_nodes, optimize_for)
             
-            # 将距离结果写入目标点列表
+            # 将距离/时间结果写入目标点列表
             for i, point in enumerate(target_points):
                 if target_nodes[i] is not None:
                     point["value1"] = distances.get(target_nodes[i], float('inf'))
@@ -654,23 +942,22 @@ class DijkstraRouter:
             return target_points
             
         except Exception as e:
-            print(f"计算距离失败: {e}")
+            print(f"计算距离/时间失败: {e}")
             # 如果计算失败，将所有距离设为无穷大
             for point in target_points:
                 point["value1"] = float('inf')
-            return target_points
-
-    # 多目标Dijkstra算法，修正缩进
-    def _dijkstra_multi_target(self, start_node: Any, target_nodes: List[Any]) -> dict:
+            return target_points    # 多目标Dijkstra算法，修正缩进
+    def _dijkstra_multi_target(self, start_node: Any, target_nodes: List[Any], optimize_for: str = 'distance') -> dict:
         """
         单源多目标的Dijkstra算法，从一个起点计算到多个目标点的最短路径
         
         Args:
             start_node: 起点节点
             target_nodes: 目标节点列表
+            optimize_for: 优化目标，'distance'或'time'
             
         Returns:
-            dict: 从起点到每个目标点的距离字典
+            dict: 从起点到每个目标点的距离/时间字典
         """
         if not target_nodes:
             return {}
@@ -710,7 +997,7 @@ class DijkstraRouter:
             
             # 松弛邻居
             for neighbor in self.graph.neighbors(current_node):
-                weight = self._get_edge_weight(current_node, neighbor)
+                weight = self._get_edge_weight(current_node, neighbor, optimize_for)
                 new_distance = current_distance + weight
                 
                 if new_distance < distances.get(neighbor, float('inf')):

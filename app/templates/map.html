@@ -1,96 +1,15 @@
-<!-- 我对不起你，这个html页面功能太复杂了，我每次增加一个功能，就堆积成这个屎山前端了，希望你改的时候尽可能的重构一下，希望你能看懂，这么复杂反正我肯定看不懂了 -->
-
-
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>地图显示</title>
+    <title>个性化旅游地图</title>
+    <!-- 引入Leaflet地图库 -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            display: flex;
-            height: 80vh;
-        }
-        .map-container {
-            flex: 3;
-            height: 80vh; /* 留出底部空间 */
-        }
-        .right-sidebar {
-            flex: 1;
-            background-color: #f5f5f5;
-            padding: 10px;
-            height: 80vh; /* 留出底部空间 */
-            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-            display: flex; /* 使用 Flexbox 布局 */
-            flex-direction: column; /* 垂直排列 */
-        }
-        #map {
-            height: 100%;
-            width: 100%;
-        }
-        .bottom-area {
-            height: 20vh;
-            background-color: #f5f5f5;
-            padding: 10px;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-            overflow-y: auto; /* 如果内容过多则滚动 */
-        }
-
-        /* 标签切换样式 */
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid #ccc;
-            margin-bottom: 10px;
-            flex-shrink: 0; /* 防止标签区域被压缩 */
-        }
-        .tab-button {
-            padding: 8px 15px;
-            background: #e0e0e0;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px 5px 0 0;
-            margin-right: 2px;
-        }
-        .tab-button.active {
-            background: #fff;
-            border: 1px solid #ccc;
-            border-bottom: none;
-        }
-        .tab-content {
-            display: none;
-            flex-grow: 1; /* 占据剩余空间 */
-            overflow-y: auto; /* 内容过多时滚动 */
-            padding: 10px;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        /* POI 列表样式 */
-        #poi-list ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        #poi-list li {
-            padding: 5px 0;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-        }
-        #poi-list li:hover {
-            background-color: #f0f0f0;
-        }
-        #poi-list li:last-child {
-            border-bottom: none;
-        }
-    </style>
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- 主样式表 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
 </head>
 <body>
     <div class="container">
@@ -100,568 +19,111 @@
         <div class="right-sidebar">
             <!-- 标签按钮 -->
             <div class="tabs">
-                <button class="tab-button active" data-tab="info">信息面板</button>
-                <button class="tab-button" data-tab="poi-list">周边POI</button>
-                <button class="tab-button" data-tab="route">路线规划</button>
-                <!-- <button class="tab-button" data-tab="favorites">收藏景点</button> -->
+                <button class="tab-button active" data-tab="info">
+                    <i class="fas fa-info-circle"></i> 信息
+                </button>
+                <button class="tab-button" data-tab="poi-list">
+                    <i class="fas fa-map-marker-alt"></i> 周边
+                </button>
+                <button class="tab-button" data-tab="route">
+                    <i class="fas fa-route"></i> 路线
+                </button>
             </div>
 
             <!-- 标签内容 -->
-            <div id="info" class="tab-content active">
+            <div id="info" class="tab-content active info-panel">
                 <h3>信息面板</h3>
-                <p>点击地图上的<span style="color: blue;">蓝色标记</span>（景点）查看周边POI。</p>
-                <p>点击地图上的<span style="color: red;">红色标记</span>（POI）可查看详细信息。</p>
-                <div id="spot-details">
-                    <!-- 景点详情将显示在这里 -->
+                <div class="marker-info">
+                    <p><i class="fas fa-map-marker" style="color: blue;"></i> <strong>蓝色标记</strong> - 景点位置</p>
+                    <p><i class="fas fa-map-marker" style="color: red;"></i> <strong>红色标记</strong> - 周边兴趣点</p>
+                </div>
+                <div id="spot-details" class="spot-details">
+                    <p>请点击地图上的蓝色标记查看景点详情</p>
                 </div>
             </div>
 
             <div id="poi-list" class="tab-content">
                 <h3>周边POI列表</h3>
-                <!-- Add search bar here -->
-                <div style="margin-bottom: 10px; display: flex; align-items: center;">
-                    <input type="text" id="poi-search-keyword" placeholder="输入关键词搜索..." style="flex-grow: 1; margin-right: 5px;">
-                    <button id="poi-search-button">搜索</button>
+                <div class="search-container">
+                    <input type="text" id="poi-search-keyword" class="search-input" placeholder="输入关键词搜索...">
+                    <button id="poi-search-button" class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
-                <p>点击景点后，这里将显示周边的兴趣点。</p>
-                <ul id="poi-ul">
-                    <!-- POI 列表项将动态添加到这里 -->
+                <p>点击景点后，这里将显示周边的兴趣点</p>
+                <ul id="poi-ul" class="poi-list">
+                    <!-- POI列表项将动态添加到这里 -->
                 </ul>
             </div>
 
             <div id="route" class="tab-content">
                 <h3>路线规划</h3>
                 <p>在这里可以规划您的旅游路线</p>
-                <form>
-                    <div>
-                        <label>起点：</label>
-                        <input type="text" placeholder="选择起点">
+                <form class="route-form">
+                    <div class="input-group">
+                        <label><i class="fas fa-play-circle"></i> 起点：</label>
+                        <input type="text" class="route-input" placeholder="选择起点" disabled>
                     </div>
-                    <div style="margin-top: 10px;">
-                        <label>终点：</label>
-                        <input type="text" placeholder="选择终点">
+                    <div class="input-group">
+                        <label><i class="fas fa-flag-checkered"></i> 终点：</label>
+                        <input type="text" class="route-input" placeholder="选择终点" disabled>
                     </div>
-                    <button type="button" style="margin-top: 10px;" onclick="planRoute()">规划路线</button>
+                    <div class="input-group">
+                        <label><i class="fas fa-sliders-h"></i> 规划方式：</label>
+                        <div class="route-method-selector">
+                            <label class="route-method-option">
+                                <input type="radio" name="route-method" value="distance" checked> 
+                                <span><i class="fas fa-road"></i> 最短路径</span>
+                            </label>
+                            <label class="route-method-option">
+                                <input type="radio" name="route-method" value="time"> 
+                                <span><i class="fas fa-clock"></i> 最短时间</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block" onclick="planRoute()">
+                        <i class="fas fa-route"></i> 规划路线
+                    </button>
                 </form>
-                <hr> <!-- Optional separator -->
-                <h4>已选地点：</h4>
+                <hr>
+                <h4><i class="fas fa-list"></i> 已选地点：</h4>
                 <div id="selected-route-points">
-                    <p>尚未选择任何地点。请点击地图标记上的“添加到路线”按钮。</p>
+                    <p>尚未选择任何地点。请点击地图标记上的"添加到路线"按钮。</p>
+                </div>
+                
+                <!-- 添加路线操作按钮 -->
+                <div class="route-actions">
+                    <button type="button" class="btn btn-danger" id="clear-route-btn">
+                        <i class="fas fa-trash"></i> 清除路线
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="export-route-btn">
+                        <i class="fas fa-file-export"></i> 导出路线
+                    </button>
                 </div>
             </div>
-
-            <!-- <div id="favorites" class="tab-content">
-                <h3>美食列表</h3>
-                <p>或许你饿了，这里会显示美食列表</p>
-                <ul>
-                    <li>暂无美食</li>
-                </ul>
-            </div> -->
         </div>
     </div>
     <div class="bottom-area">
-        <h3>详细信息</h3>
-        <p id="details-content">点击地图上的标记以查看详细信息。</p>
+        <h3><i class="fas fa-info-circle"></i> 详细信息</h3>
+        <div id="details-content">点击地图上的标记以查看详细信息。</div>
     </div>
+
+    <!-- 引入Leaflet地图库 -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // 定义地图边界（根据需要调整）
-        // const southWest = L.latLng(39.89, 116.36);
-        // const northEast = L.latLng(39.94, 116.42);
-        // const bounds = L.latLngBounds(southWest, northEast);
-
+        // 设置全局变量供地图脚本使用
+        window.spotId = {{ spot_id | tojson }};
+    </script>
+    <!-- 引入主脚本文件 -->
+    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+    <script>
         // 初始化地图
-        const map = L.map('map', {
-            // minZoom: 15, // 可以根据需要设置
-            zoomControl: true, // 显示缩放控件
-            // maxBounds: bounds, // 可选：限制地图边界
-            // maxBoundsViscosity: 1.0
-        }).setView([{{lat}}, {{lng}}], 13); // 默认视图和缩放级别
+        const map = L.map('map').setView([{{lat}}, {{lng}}], 13);
 
         // 添加OSM瓦片图层
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-
-        // 用于存放 POI 标记的图层组
-        let poiLayer = L.layerGroup().addTo(map);
-        // 用于存放景点标记的图层组
-        let scenicSpotLayer = L.layerGroup().addTo(map);
-        // 存储当前显示的 POI 数据
-        let currentPois = [];
-        let routePoints = []; // 存储路线规划的点 {name, lat, lng}
-        let routeListContainer; // 在 DOMContentLoaded 后获取
-        let currentRouteLayer = null; // <--- 添加这一行：声明并初始化路线图层变量
-        let currentLocationStringForPoiSearch = null; // <--- 添加这一行：存储当前POI搜索的中心位置
-
-        // 地图大小改变时更新地图
-        window.addEventListener('resize', function() {
-            map.invalidateSize();
-        });
-
-        // --- 标签切换功能 ---
-        document.addEventListener('DOMContentLoaded', function() {
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const tabContents = document.querySelectorAll('.tab-content');
-            const poiListUl = document.getElementById('poi-ul');
-            const detailsContent = document.getElementById('details-content');
-            const spotDetailsDiv = document.getElementById('spot-details'); // 获取景点详情区域
-            routeListContainer = document.getElementById('selected-route-points'); // 获取路线点列表容器
-            updateRouteListDisplay(); // 初始化显示
-
-            tabButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    this.classList.add('active');
-                    const tabId = this.getAttribute('data-tab');
-                    document.getElementById(tabId).classList.add('active');
-                });
-            });
-
-            // --- 函数：将点添加到路线列表 ---
-            function addPointToRoute(point) {
-                // 检查是否已存在（基于坐标）
-                const exists = routePoints.some(p => p.lat === point.lat && p.lng === point.lng);
-                if (!exists) {
-                    routePoints.push(point);
-                    updateRouteListDisplay();
-                    alert(`"${point.name}" 已添加到路线规划列表！`);
-                } else {
-                    alert(`"${point.name}" 已在列表中。`);
-                }
-            }
-
-            // --- 函数：从路线列表中移除点 ---
-            function removePointFromRoute(index) {
-                if (index >= 0 && index < routePoints.length) {
-                    const removed = routePoints.splice(index, 1);
-                    console.log("Removed point:", removed[0]);
-                    updateRouteListDisplay();
-                }
-            }
-
-            // --- 函数：更新路线规划标签页中的列表显示 ---
-            function updateRouteListDisplay() {
-                if (!routeListContainer) return; // 确保容器存在
-
-                routeListContainer.innerHTML = ''; // 清空
-
-                if (routePoints.length === 0) {
-                    routeListContainer.innerHTML = '<p>尚未选择任何地点。请点击地图标记上的“添加到路线”按钮。</p>';
-                    return;
-                }
-
-                const ol = document.createElement('ol');
-                routePoints.forEach((point, index) => {
-                    const li = document.createElement('li');
-                    li.textContent = `${point.name}`; // (${point.lat.toFixed(4)}, ${point.lng.toFixed(4)})`; // 可选显示坐标
-
-                    // 添加移除按钮
-                    const removeBtn = document.createElement('button');
-                    removeBtn.textContent = '移除';
-                    removeBtn.style.marginLeft = '10px';
-                    removeBtn.style.cursor = 'pointer';
-                    // 使用闭包或 data-* 属性传递索引
-                    removeBtn.onclick = function() { removePointFromRoute(index); };
-
-                    li.appendChild(removeBtn);
-                    ol.appendChild(li);
-                });
-                routeListContainer.appendChild(ol);
-
-                // 更新起点/终点输入框（可选）
-                updateRouteFormInputs();
-            }
-
-            // --- 函数：更新路线规划表单的起点和终点（可选）---
-            function updateRouteFormInputs() {
-                const startInput = document.querySelector('#route form input[placeholder="选择起点"]');
-                const endInput = document.querySelector('#route form input[placeholder="选择终点"]');
-
-                if (startInput) {
-                    startInput.value = routePoints.length > 0 ? routePoints[0].name : '';
-                }
-                if (endInput) {
-                    endInput.value = routePoints.length > 1 ? routePoints[routePoints.length - 1].name : '';
-                }
-            }
-
-            // --- 监听 Popup 打开事件，为内部按钮绑定事件 ---
-            map.on('popupopen', function(e) {
-                const popupNode = e.popup.getElement();
-                const addButton = popupNode.querySelector('.add-to-route-btn');
-                if (addButton) {
-                    // 确保只绑定一次监听器，或先移除旧的
-                    const newButton = addButton.cloneNode(true); // 克隆以移除旧监听器
-                    addButton.parentNode.replaceChild(newButton, addButton);
-
-                    newButton.addEventListener('click', () => {
-                        const name = newButton.dataset.name;
-                        const lat = parseFloat(newButton.dataset.lat);
-                        const lng = parseFloat(newButton.dataset.lng);
-
-                        if (name && !isNaN(lat) && !isNaN(lng)) {
-                            addPointToRoute({ name, lat, lng });
-                            // e.popup._close(); // 可选：添加后关闭弹窗
-                        } else {
-                            console.error("无法从按钮获取地点数据:", newButton.dataset);
-                        }
-                    });
-                }
-            });
-
-            
-            window.planRoute = function() { // 将函数挂载到 window 使其可在 onclick 中调用
-                if (routePoints.length < 2) {
-                    alert("请至少选择两个地点（起点和终点）来规划路线。");
-                    return;
-                }
-
-                // 提取坐标点列表
-                const coordinates = routePoints.map(point => ({ lat: point.lat, lng: point.lng }));
-
-                console.log("准备规划路线，发送坐标:", coordinates);
-                // 显示加载提示或禁用按钮
-                const planButton = document.querySelector('#route button[onclick="planRoute()"]');
-                if (planButton) planButton.disabled = true;
-                detailsContent.innerHTML = '正在规划路线...'; // 更新底部信息
-
-                // 发送 POST 请求到后端
-                fetch('/map/api/navigation', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json' // 明确希望接收JSON
-                    },
-                    body: JSON.stringify({ points: coordinates }) // 发送坐标点数组
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        // 如果响应状态不是 2xx，尝试解析错误信息
-                        return response.json().then(errData => {
-                            throw new Error(errData.message || `HTTP error! status: ${response.status}`);
-                        }).catch(() => {
-                            // 如果无法解析 JSON 错误信息，抛出通用错误
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        });
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.success && data.route && data.route.length > 0) {
-                        console.log("收到路线数据:", data);
-
-                        // 清除旧路线 (现在 currentRouteLayer 已定义)
-                        if (currentRouteLayer) {
-                            map.removeLayer(currentRouteLayer);
-                        }
-
-                        // 绘制新路线 (现在 currentRouteLayer 已定义)
-                        currentRouteLayer = L.polyline(data.route, { color: 'red', weight: 5 }).addTo(map);
-
-                        // 缩放地图以适应路线
-                        map.fitBounds(currentRouteLayer.getBounds(), { padding: [50, 50] });
-
-                        // 更新底部信息显示结果
-                        let detailsHtml = `路线规划成功！`;
-                        if (data.value1) {
-                            detailsHtml += ` 总距离: ${(data.value1 / 1000).toFixed(2)} 公里。`;
-                        }
-                        if (data.duration) {
-                            detailsHtml += ` 预计时间: ${Math.round(data.duration / 60)} 分钟。`;
-                        }
-                        detailsContent.innerHTML = detailsHtml;
-
-                    } else {
-                        // 后端返回 success: false 或数据格式不正确
-                        throw new Error(data.message || '无法规划路线或返回数据无效');
-                    }
-                })
-                .catch(error => {
-                    console.error('路线规划失败:', error);
-                    alert('路线规划失败: ' + error.message);
-                    detailsContent.innerHTML = `路线规划失败: ${error.message}`;
-                })
-                .finally(() => {
-                    // 无论成功或失败，都重新启用按钮
-                    if (planButton) planButton.disabled = false;
-                });
-            }
-
-            // --- 获取并显示初始景点 ---
-            const spotId = {{ spot_id | tojson }}; // 从 Flask 获取 spot_id
-
-            if (spotId) {
-                fetch(`/map/${spotId}/api/scenicSpots`)
-                    .then(response => {
-                        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log("Fetched scenic spots:", data);
-                        scenicSpotLayer.clearLayers(); // 清除旧的景点标记
-
-                        if (Array.isArray(data) && data.length > 0) {
-                            const bounds = []; // 用于自动缩放地图以包含所有景点
-                            data.forEach(spot => {
-                                if (spot.location && typeof spot.location.lat === 'number' && typeof spot.location.lng === 'number') {
-                                    const lat = spot.location.lat;
-                                    const lng = spot.location.lng;
-                                    if (!isNaN(lat) && !isNaN(lng)) {
-                                        const marker = L.marker([lat, lng], {
-                                            // 可以为景点设置不同的图标，例如蓝色
-                                            icon: L.icon({
-                                                iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-                                                iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-                                                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-                                                iconSize: [25, 41],
-                                                iconAnchor: [12, 41],
-                                                popupAnchor: [1, -34],
-                                                shadowSize: [41, 41],
-                                            })
-                                        })
-                                        .addTo(scenicSpotLayer) // 添加到景点图层
-
-                                        const popupContent = `
-                                            <b>${spot.name}</b><br>
-                                            ${spot.address || '无地址信息'}<br>
-                                            <button class="add-to-route-btn" data-name="${spot.name}" data-lat="${lat}" data-lng="${lng}" style="margin-top: 5px;">添加到路线</button>
-                                        `;
-                                        marker.bindPopup(popupContent);
-
-                                        // 存储景点信息到标记对象，方便后续使用
-                                        marker.spotData = spot;
-
-                                        // --- 添加点击事件监听器 ---
-                                        marker.on('click', function() {
-                                            const clickedLatLng = this.getLatLng();
-                                            const locationString = `${clickedLatLng.lat},${clickedLatLng.lng}`; // 使用 "纬度,经度" 格式
-                                            console.log(`Fetching POIs for location: ${locationString}`);
-
-                                            // 更新信息面板显示当前点击的景点
-                                            spotDetailsDiv.innerHTML = `
-                                                <h4>当前选择: ${this.spotData.name}</h4>
-                                                <p>地址: ${this.spotData.address || '无'}</p>
-                                                <p>坐标: ${clickedLatLng.lat.toFixed(6)}, ${clickedLatLng.lng.toFixed(6)}</p>
-                                            `;
-                                            detailsContent.innerHTML = `点击了景点：<b>${this.spotData.name}</b>。正在加载周边POI...`;
-
-                                            // 切换到 POI 列表标签页
-                                            document.querySelector('.tab-button[data-tab="poi-list"]').click();
-                                            poiListUl.innerHTML = '<li>正在加载...</li>'; // 显示加载提示
-
-                                            currentLocationStringForPoiSearch = locationString; // <-- 更新当前搜索位置
-                                            fetchPOIs(locationString); // 调用函数获取并显示 POI
-                                        });
-
-                                        bounds.push([lat, lng]); // 添加到边界计算数组
-                                    } else {
-                                        console.warn("Invalid coordinates for spot:", spot.name, spot.location);
-                                    }
-                                } else {
-                                    console.warn("Missing or invalid location data for spot:", spot.name, spot.location);
-                                }
-                            });
-                            // 如果有有效的景点坐标，则自动调整地图视图
-                            if (bounds.length > 0) {
-                                map.fitBounds(bounds, { padding: [50, 50] }); // 添加一些边距
-                            }
-                        } else if (data && data.error) {
-                             console.error("API Error:", data.error);
-                             alert('加载景点信息失败: ' + data.error);
-                        }
-                         else {
-                            console.error("Invalid or empty data format received from API:", data);
-                            alert('加载景点信息失败：未找到景点数据或格式不正确。');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching or processing scenic spots:', error);
-                        alert('加载景点信息失败: ' + error.message);
-                        detailsContent.innerHTML = `加载景点信息失败: ${error.message}`;
-                    });
-            } else {
-                console.error('Spot ID not found in template.');
-                alert('无法加载景点信息，缺少景点ID。');
-                detailsContent.innerHTML = '无法加载景点信息，缺少景点ID。';
-            }
-
-            // --- 函数：统一处理 POI 的显示（标记和列表项） ---
-            function displayPOIs(pois, sourceDescription = "周边") {
-                poiLayer.clearLayers(); // 确保清除旧标记
-                poiListUl.innerHTML = ''; // 清空列表
-                currentPois = []; // 清空当前 POI 数据
-
-                if (Array.isArray(pois) && pois.length > 0) {
-                    currentPois = pois; // 存储 POI 数据
-                    pois.forEach((poi, index) => {
-                        if (poi.location && typeof poi.location.lat === 'number' && typeof poi.location.lng === 'number') {
-                            const lat = poi.location.lat;
-                            const lng = poi.location.lng;
-                            if (!isNaN(lat) && !isNaN(lng)) {
-                                // 创建 POI 标记 (红色)
-                                const poiMarker = L.marker([lat, lng], {
-                                    icon: L.icon({
-                                        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-                                        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-                                        iconSize: [25, 41],
-                                        iconAnchor: [12, 41],
-                                        popupAnchor: [1, -34],
-                                        shadowSize: [41, 41]
-                                    })
-                                }).addTo(poiLayer);
-
-                                // 创建弹出窗口内容
-                                const popupContent = `
-                                    <b>${poi.name}</b><br>
-                                    ${poi.address || '无地址信息'}<br>
-                                    距离: ${poi.value1 ? poi.value1 + '米' : '未知'}<br>
-                                    <button class="add-to-route-btn" data-name="${poi.name}" data-lat="${lat}" data-lng="${lng}" style="margin-top: 5px;">添加到路线</button>
-                                `;
-                                poiMarker.bindPopup(popupContent);
-
-                                // 将 POI 数据存储在标记上
-                                poiMarker.poiData = poi;
-
-                                // 添加标记点击事件，更新底部详细信息
-                                poiMarker.on('click', function() {
-                                    detailsContent.innerHTML = `
-                                        <h4>${this.poiData.name}</h4>
-                                        <p>地址: ${this.poiData.address || '无'}</p>
-                                        <p>类型: ${this.poiData.type || '未知'}</p>
-                                        <p>距离中心点: ${this.poiData.value1 ? this.poiData.value1 + '米' : '未知'}</p>
-                                        <p>坐标: ${this.poiData.location.lat.toFixed(6)}, ${this.poiData.location.lng.toFixed(6)}</p>
-                                    `;
-                                });
-
-                                // 在右侧边栏创建列表项
-                                const li = document.createElement('li');
-                                const poiId = poi.id || `poi-${index}`; // 使用 API 返回的 ID 或索引作为后备
-                                li.textContent = `${poi.name} (${poi.value1 ? poi.value1 + '米' : '未知距离'})`;
-                                li.dataset.poiId = poiId; // 存储 ID 用于关联
-                                li.style.cursor = 'pointer';
-                                li.addEventListener('click', function() {
-                                    const targetPoiId = this.dataset.poiId;
-                                    // 查找对应的 POI 数据和地图标记
-                                    const targetPoi = currentPois.find(p => (p.id || `poi-${currentPois.indexOf(p)}`) === targetPoiId);
-                                    let targetMarker = null;
-                                    poiLayer.eachLayer(layer => {
-                                        const layerPoiId = layer.poiData.id || `poi-${currentPois.indexOf(layer.poiData)}`;
-                                        if (layer.poiData && layerPoiId === targetPoiId) {
-                                            targetMarker = layer;
-                                        }
-                                    });
-
-                                    if (targetPoi && targetPoi.location && targetMarker) {
-                                        const targetLatLng = [targetPoi.location.lat, targetPoi.location.lng];
-                                        map.setView(targetLatLng, 17); // 缩放到 POI
-                                        targetMarker.openPopup(); // 打开标记的弹出窗口
-                                        // 同时更新底部详细信息
-                                        detailsContent.innerHTML = `
-                                            <h4>${targetPoi.name}</h4>
-                                            <p>地址: ${targetPoi.address || '无'}</p>
-                                            <p>类型: ${targetPoi.type || '未知'}</p>
-                                            <p>距离中心点: ${targetPoi.value1 ? targetPoi.value1 + '米' : '未知'}</p>
-                                            <p>坐标: ${targetPoi.location.lat.toFixed(6)}, ${targetPoi.location.lng.toFixed(6)}</p>
-                                        `;
-                                    } else {
-                                        console.warn("无法找到 POI 或标记，ID:", targetPoiId);
-                                    }
-                                });
-                                poiListUl.appendChild(li);
-
-                            } else {
-                                console.warn("无效的 POI 坐标:", poi.name, poi.location);
-                            }
-                        } else {
-                            console.warn("缺少或无效的 POI 位置数据:", poi.name);
-                        }
-                    });
-                    detailsContent.innerHTML = `已加载 ${pois.length} 个${sourceDescription}POI。点击标记或右侧列表项查看详情。`;
-                } else {
-                    poiListUl.innerHTML = `<li>未找到${sourceDescription}POI。</li>`;
-                    detailsContent.innerHTML = `未找到${sourceDescription}POI。`;
-                }
-            }
-
-
-            // --- 函数：获取并显示 POI (所有类型) ---
-            function fetchPOIs(locationString) {
-                poiLayer.clearLayers(); // 清除旧的 POI 标记
-                currentPois = []; // 清空当前 POI 数据
-                poiListUl.innerHTML = '<li>正在加载POI...</li>'; // 更新列表状态
-                detailsContent.innerHTML = '正在加载周边POI...';
-
-                fetch(`/map/api/poi/${locationString}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.json().then(errData => { throw new Error(errData.message || `HTTP error! status: ${response.status}`); }).catch(() => { throw new Error(`HTTP error! status: ${response.status}`); });
-                        }
-                        return response.json();
-                    })
-                    .then(pois => {
-                        console.log("Fetched all POIs:", pois);
-                        displayPOIs(pois, "周边"); // 使用统一的显示函数
-                    })
-                    .catch(error => {
-                        console.error('获取所有 POI 时出错:', error);
-                        poiListUl.innerHTML = `<li>加载POI失败: ${error.message}</li>`;
-                        detailsContent.innerHTML = `加载POI失败: ${error.message}`;
-                        alert(`加载POI失败: ${error.message}`);
-                    });
-            }
-
-            // --- 函数：获取并显示指定关键词的 POI ---
-            function fetchPOIsByKeyword(locationString, keyword) {
-                poiLayer.clearLayers(); // 清除旧的 POI 标记
-                currentPois = []; // 清空当前 POI 数据
-                poiListUl.innerHTML = `<li>正在搜索 "${keyword}"...</li>`; // 更新列表状态
-                detailsContent.innerHTML = `正在搜索 "${keyword}" 周边POI...`; // 更新底部详情
-
-                const encodedKeyword = encodeURIComponent(keyword); // URL编码关键词
-                fetch(`/map/api/poi/${locationString}/${encodedKeyword}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.json().then(errData => { throw new Error(errData.message || `HTTP error! status: ${response.status}`); }).catch(() => { throw new Error(`HTTP error! status: ${response.status}`); });
-                        }
-                        return response.json();
-                    })
-                    .then(pois => {
-                        console.log(`获取到关键词 "${keyword}" 的 POI:`, pois);
-                        displayPOIs(pois, `关于 "${keyword}" 的`); // 使用统一的显示函数
-                    })
-                    .catch(error => {
-                        console.error(`获取关键词 "${keyword}" 的 POI 时出错:`, error);
-                        poiListUl.innerHTML = `<li>加载POI失败: ${error.message}</li>`;
-                        detailsContent.innerHTML = `加载POI失败: ${error.message}`;
-                        alert(`搜索POI失败: ${error.message}`);
-                    });
-            }
-
-            // --- 添加搜索按钮的事件监听器 ---
-            const poiSearchInput = document.getElementById('poi-search-keyword');
-            const poiSearchButton = document.getElementById('poi-search-button');
-
-            poiSearchButton.addEventListener('click', function() {
-                if (!currentLocationStringForPoiSearch) {
-                    alert('请先点击一个地图上的蓝色景点标记以确定搜索中心。');
-                    return;
-                }
-                const keyword = poiSearchInput.value.trim();
-                if (!keyword) {
-                    // 如果关键词为空，则获取所有 POI
-                    console.log("关键词为空，获取当前位置的所有 POI:", currentLocationStringForPoiSearch);
-                    fetchPOIs(currentLocationStringForPoiSearch);
-                } else {
-                    // 如果关键词存在，则按关键词搜索
-                    console.log(`使用关键词 "${keyword}" 搜索 POI，中心位置:`, currentLocationStringForPoiSearch);
-                    fetchPOIsByKeyword(currentLocationStringForPoiSearch, keyword);
-                }
-            });
-
-
-        }); // End of DOMContentLoaded
     </script>
 </body>
 </html>

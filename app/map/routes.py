@@ -260,33 +260,59 @@ def navigation():
              valid_coordinates.append((point['lat'], point['lng'])) 
         else:
              return jsonify({"success": False, "message": "坐标点格式错误，应为 {lat: number, lng: number}"}), 400
-
-
     try:
         # 调用地图模块的规划路线方法
-        # 注意：假设 map_module.plan_route 返回 (总距离, 路径点列表, 预计时间)
-        # 如果只返回距离和路径，需要相应调整
-        # result = map_module.plan_route(valid_coordinates) 
+        # 获取规划方式，默认为distance（最短路径）
+        method = data.get("method", "distance")
+        # use_vehicle = data.get("use_vehicle", False) # 是否使用车辆
+
+        print(f"路线规划方式: {method}, 传递给 plan_route 的坐标: {valid_coordinates}")
         
-        # 假设 map_module.plan_route 返回 (total_distance, path_points)
-        print(f"传递给 plan_route 的坐标: {valid_coordinates}") # 调试输出，确认格式为 [(lat, lng), ...]
-        total_distance, path_points = map_module.plan_route(valid_coordinates) 
-        # 检查规划结果 - 确保 path_points 是一个非空列表或元组
-        # 使用 'not path_points' 来检查 None 或空列表/元组 []/()
-        if total_distance is None or not path_points: 
-             raise ValueError("地图模块未能成功规划路线或返回空路径") 
+        if method == "distance":
+            # 规划最短路径
+            total_distance, path_points = map_module.plan_route(valid_coordinates)
+            
+            # 检查规划结果 - 确保 path_points 是一个非空列表或元组
+            if total_distance is None or not path_points:
+                raise ValueError("地图模块未能成功规划最短路径或返回空路径")
+                
+            return jsonify({
+                "success": True,
+                "route": path_points,  # 确保返回给前端的是 [[lat1, lng1], ...]
+                "distance": total_distance,  # 总距离（米）
+                "duration": None  # 预计时间（秒），对于最短路径模式不返回
+            })
+            
+        elif method == "time":
+            # 规划最短时间
+            total_time, path_points = map_module.plan_route(valid_coordinates,"time")
 
-        # 假设没有返回预计时间，duration 设为 None 或不包含在响应中
-        duration = None # 如果 map_module.plan_route 返回时间，则替换这里
-
-
-        return jsonify({
-            "success": True,
-            "route": path_points, # 确保返回给前端的是 [[lat1, lng1], ...]
-            "distance": total_distance, # 总距离（米）
-            "duration": duration # 预计时间（秒），如果可用
-        })
-
+            # 检查规划结果 - 确保 path_points 是一个非空列表或元组
+            if total_time is None or not path_points:
+                raise ValueError("地图模块未能成功规划最短时间路线或返回空路径")
+                
+            return jsonify({
+                "success": True,
+                "route": path_points,
+                "distance": None,  # 对于最短时间模式不返回距离
+                "duration": total_time  # 预计时间（秒）
+            })
+            
+        else:
+            # 未知的规划方式，使用默认最短路径
+            print(f"警告：未知的规划方式 '{method}'，使用默认最短路径")
+            total_distance, path_points = map_module.plan_route(valid_coordinates)
+            
+            # 检查规划结果
+            if total_distance is None or not path_points:
+                raise ValueError("地图模块未能成功规划路线或返回空路径")
+                
+            return jsonify({
+                "success": True,
+                "route": path_points,
+                "distance": total_distance,
+                "duration": None
+            })
     except Exception as e:
         # 处理地图模块可能抛出的异常或其他错误
         print(f"路线规划出错: {e}") # 记录错误日志

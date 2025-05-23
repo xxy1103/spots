@@ -9,13 +9,13 @@ class Map:
         self.router = DijkstraRouter()
         self.poi_search = POISearch()
 
-    def plan_route(self, coordinates):
+    def plan_route(self, coordinates, method="distance"):
         """
         规划路线
         :param coordinates: 经纬度坐标列表
         :return: 路线总距离和路径节点
         """
-        total_distance, path = self.router.plan_route(coordinates)
+        total_distance, path = self.router.plan_route(coordinates, method)
         path = self.router.get_route_coordinates(path)
         return total_distance, path
     
