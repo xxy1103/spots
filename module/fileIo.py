@@ -1,9 +1,4 @@
 # 本类用于获取data中的数组，所用输入可以调用此类，统一方法
-from module.data_structure.HuffmanTree import huffman_decoding, encode_to_binary
-from module.data_structure.HuffmanTree import generate_huffman_codes
-from module.Model.Model import Diary, User, Reviews, Spot
-from module.data_structure.rb_tree import RedBlackTree
-from module.data_structure.stack import Stack
 import module.printLog as log
 import datetime
 import pickle

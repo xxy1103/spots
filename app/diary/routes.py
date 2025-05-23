@@ -44,10 +44,11 @@ def get_diary(diary_id):
     获取日记的详细信息
     """
     diary = diary_manager.getDiary(diary_id)
-    diary_manager.visitDiary(diary_id)
+    
     if not diary:
         return render_template('error.html', message="日记不存在")
     # 获取作者信息
+    diary_manager.visitDiary(diary_id)
     user = user_manager.getUser(diary.user_id)
     if not user:
         return render_template('error.html', message="用户不存在")
@@ -85,10 +86,10 @@ def delete_diary(diary_id):
         return render_template('error.html', message="无权限删除该日记")
     # 删除日记
     diary_manager.deleteDiary(user_id,diary_id)
-    spot.deleteDiary(diary_id)
-    spot_manager.updateScore(spot_id, newScore=0, oldScore=score)
-    user.deleteDiary(diary_id)
-    
+    newscore = spot.deleteDiary(diary)
+    spot_manager.updateScore(spot_id, newscore)
+    user.deleteDiary(diary)
+
     return redirect(url_for('diary.get_user_diaries', user_id=user_id))
 
 
@@ -175,8 +176,11 @@ def add_diary():
     user = user_manager.getUser(user_id)
     spot = spot_manager.getSpot(spot_id)
     diary = diary_manager.addDiary(user, spot, title, content, images=image_paths, videos=video_paths, scoreToSpot=spot_marking)
+
+    user.addDiary(diary)
+    newscore = spot.addDiary(diary)
     # 更新景点评分
-    spot_manager.updateScore(spot_id, newScore=spot_marking, oldScore=0)
+    spot_manager.updateScore(spot_id, newscore)
     if diary is None:
         return render_template('error.html', message="添加日记失败")
     

@@ -1,6 +1,6 @@
 import datetime
 from module.data_structure.rb_tree import RedBlackTree
-from module.data_structure.HuffmanTree import huffman_decoding, encode_to_binary
+from module.data_structure.HuffmanTree import huffman_decoding,huffman_encoding
 import os
 class Diary:
     def __init__(self, diary_id: int, user_name: str, user_id: int, spot_id: int, content: str, title: str, 
@@ -35,7 +35,7 @@ class Diary:
                 return False
             
         if not self.compressed:
-            self.content = encode_to_binary(self.content,codes)
+            self.content = huffman_encoding(self.content,None,codes)
             self.compressed = True
         # 写入压缩后的内容
         diary_content_dir = f"data/scenic_spots/spot_{self.spot_id}/diary_content"
@@ -252,21 +252,22 @@ class User:
             review_marking=reviews_marking
         )
     
-    def addDiary(self,diary_id):
+    def addDiary(self,diary):
         """
         用户增加一篇日记
         """
-        self.reviews.addOne(diary_id)
+        self.reviews.addOne(diary.id)
 
-    def deleteDiary(self,diary_id): 
+    def deleteDiary(self,diary): 
         """
         用户删除一篇日记
         """
-        self.reviews.deleteOne(diary_id)
+        
+        self.reviews.deleteOne(diary.id)
 
-    def diaryMarking(self,diary_id,score):
-        oldscore = self.review_marking.search(diary_id)
-        self.review_marking.insert(diary_id,score)
+    def diaryMarking(self,diary,score):
+        oldscore = self.review_marking.search(diary.id)
+        self.review_marking.insert(diary.id,score)
         return oldscore #通过返回旧分数来判断是否是第一次评分
 
 
@@ -348,16 +349,26 @@ class Spot:
         """
         self.visited_time += 1
         
-    def addDiary(self,diary_id):
+    def addDiary(self,diary):
         """
         增加一篇日记
         """
-        self.reviews.addOne(diary_id)
-        
-    def deleteDiary(self,diary_id):
+        sum_score = self.score * self.reviews.total
+        sum_score += diary.scoreToSpot - 0
+
+        self.score = round(sum_score / (self.reviews.total + 1), 1)
+        self.reviews.addOne(diary.id)
+        return self.score
+
+    def deleteDiary(self,diary):
         """
         删除一篇日记
         """
-        self.reviews.deleteOne(diary_id)
+        sum_score = self.score * self.reviews.total
+        sum_score -= diary.scoreToSpot
+        self.score = round(sum_score / (self.reviews.total - 1), 1)
+        self.reviews.deleteOne(diary.id)
+        return self.score
+
     
 

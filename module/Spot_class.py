@@ -152,7 +152,7 @@ class SpotManager:
         return all_sorted_spots  
 
 
-    def updateScore(self, spotId:int,  newScore:float, oldScore:float = 0)->float:
+    def updateScore(self, spotId:int,  newScore:float)->float:
         """
         为指定景点添加评分
         """
@@ -172,7 +172,6 @@ class SpotManager:
             writeLog(f"景点{spotId}不存在")
             return -1
         # 更新评分
-        spot.updateScore(newScore, oldScore)
         # 更新索引堆
         type = spot.type
         if self.spotTypeDict[type]["heap"].updateValue1(spotId, newScore):
