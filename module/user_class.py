@@ -1,12 +1,18 @@
+# -*- coding: utf-8 -*-
 from module.data_structure.btree import BTree
 from module.fileIo import userIo
-from module.Spot_class import spotManager
 from module.diary_class import diaryManager
+from module.Spot_class import spotManager
 from module.data_structure.merge import merge_sort
+from module.Model.Model import Diary, User, Reviews, Spot
+from module.data_structure.rb_tree import RedBlackTree as rb
+import module.data_structure.kwaymerge as kwaymerge
+
 import module.printLog as log
 import base64
 import hashlib
 import os
+
 
 def hashPassword(password, salt=None):
     """
@@ -74,29 +80,39 @@ class PasswordManager:
 
 
 
-class User:
-    def __init__(self):
-        self.userIo = userIo
-        self.users = userIo.getAlluser()
-        self.userCount = userIo.getCount()
+class UserManager:
+    def __init__(self, users=None, counts=0):
+
+        self.users = users if users is not None else []
+        self.counts = counts if counts > 0 else len(users)
         self.btree = BTree(t=3)
         for user in self.users:
-            self.btree.insert({"id":user["id"], "name":user["name"]})
+            self.btree.insert({"id":user.id, "name":user.name})
         log.writeLog("用户数据加载完成")
+
+    @classmethod
+    def from_dict(cls,data:dict):
+        """
+        从字典创建对象
+        """
+        users_json = data["users"]
+        count_json = data["counts"]
+        users = []
+        for user_json in users_json:
+            user = User.from_dict(user_json)
+            users.append(user)
+        return cls(
+            users=users,
+            counts=count_json
+        )
 
     def getUser(self, userId):
         """
         获取用户信息
         """
-        user = self.userIo.getUser(userId)
-        if user is None:
-            log.writeLog(f"用户{userId}不存在")
-            return None
-        log.writeLog(f"找到用户{user['name']}")
-        return user
+        return self.users[userId-1]
 
     def addUser(self, username, password, liketype):
-        # --- 修改这里：使用传入的 username 进行搜索 ---
         existing_user_node = self.btree.search(username) 
         if existing_user_node is not None:
             # --- 修改这里：日志记录也使用 username ---
@@ -106,7 +122,7 @@ class User:
         # 现在可以安全地创建新的 user 字典
         user = {
             "name": username,
-            "id": None, # id 应该由 userIo.addUser 分配
+            "id": self.counts + 1, 
             "password": password, # 密码将在下面哈希
             "likes_type": liketype,
             "reviews": {
@@ -119,15 +135,13 @@ class User:
         # 对密码进行哈希处理
         user["password"] = hashPassword(user["password"])
         
-        # 调用 userIo 添加用户，这应该会设置 user['id']
-        new_user_id = self.userIo.addUser(user) 
-        if new_user_id is None: # 假设 addUser 失败返回 None
-             log.writeLog(f"通过 userIo 添加用户 {username} 失败")
-             return False
+        user = User.from_dict(user)
+        self.users.append(user)
+        self.counts = self.counts + 1
 
         # 使用返回的 ID 更新 B 树
-        self.btree.insert({"id": new_user_id, "name": username}) 
-        log.writeLog(f"添加用户 {username} (ID: {new_user_id}) 成功")
+        self.btree.insert({"id": user.id, "name": user.name})
+        log.writeLog(f"添加用户 {username} (ID: {user.id}) 成功")
         return True # 返回 True 表示成功
     
     def searchUser(self, name):
@@ -139,44 +153,35 @@ class User:
         return user
     
     def loginUser(self, userName, userPassword):
-        user = self.btree.search(userName)
+        user = self.searchUser(userName)
         if user is None:
             log.writeLog(f"用户{userName}不存在")
             return None
             
         # 获取完整用户信息
-        full_user_info = self.userIo.getUser(user["id"])
+        full_user_info = self.getUser(user["id"]) # b树中返回的对象是字典{"id":,"name":}
         
         # 验证密码
-        if not verifyPassword(userPassword, full_user_info["password"]):
+        if not verifyPassword(userPassword, full_user_info.password):
             log.writeLog(f"用户{userName}密码错误")
             return None
             
         log.writeLog(f"用户{userName}登录成功")
         return full_user_info
     
-    def deleteUser(self, name):
-        user = self.btree.search(name)
-        if user is None:
-            log.writeLog(f"用户{name}不存在")
-            return False
-        
-        self.userIo.deleteUser(user["id"])
-        log.writeLog(f"删除用户{user['name']}成功")
-        return True   
 
     def getRecommendSpots(self, userId, topK=10):
         """
         获取用户推荐的景点
         """
-        user = self.userIo.getUser(userId)
+        user = self.getUser(userId)
         if user is None:
             log.writeLog(f"用户{userId}不存在")
             return None
         
         # 获取用户的兴趣标签
-        user_likes = user["likes_type"]
-        
+        user_likes = user.likes_type
+
         # --- 初始化空的已排序推荐列表 ---
         sorted_recommended_spots = []
 
@@ -186,38 +191,29 @@ class User:
             spots_of_type = spotManager.getTopKByType(spot_type, k=topK)    #只获取前 topK 个
             if spots_of_type: # 确保列表非空
                 # 将新获取的有序列表与当前已合并的列表进行归并排序
-                sorted_recommended_spots = merge_sort(sorted_recommended_spots, spots_of_type)
+                sorted_recommended_spots.append(spots_of_type)
         
-        if not sorted_recommended_spots:
+        merged_list = kwaymerge.k_way_merge_descending(sorted_recommended_spots)
+
+        if not merged_list:
              log.writeLog(f"未能根据用户{userId}的喜好找到任何景点")
              return []
 
-        # # --- 在所有列表合并排序后，移除重复景点 ---
-        # # 使用字典去重，保留ID唯一的景点，同时保持排序顺序（字典在Python 3.7+保持插入顺序）
-        # unique_spots_dict = {}
-        # final_unique_sorted_spots = []
-        # for spot in sorted_recommended_spots:
-        #     if spot['id'] not in unique_spots_dict:
-        #         unique_spots_dict[spot['id']] = spot
-        #         final_unique_sorted_spots.append(spot)
-
-        # log.writeLog(f"为用户{userId}生成推荐景点列表，合并排序并去重后共{len(final_unique_sorted_spots)}个，返回前{topK}个")
-        
         # 返回排序并去重后的前 topK 个景点
-        return sorted_recommended_spots[:topK]
-    
+        return merged_list[:topK]
+
     def getRecommendDiaries(self, userId, topK=10):
         """
         获取用户推荐的日记
         """
-        user = self.userIo.getUser(userId)
+        user = self.getUser(userId)
         if user is None:
             log.writeLog(f"用户{userId}不存在")
             return None
         
         # 获取用户的兴趣标签
-        user_likes = user["likes_type"]
-        
+        user_likes = user.likes_type
+
         # --- 初始化空的已排序推荐列表 ---
 
         recommended_diaries = []
@@ -231,48 +227,48 @@ class User:
                     diarys = spotManager.spotDiaryHeapArray[spot_id-1].getTopK(topK)
                     if diarys: # 确保列表非空
                         # 将新获取的有序列表与当前已合并的列表进行归并排序
-                        recommended_diaries = merge_sort(recommended_diaries, diarys)
-
+                        recommended_diaries.append(diarys)
+        # 使用 k-way merge 对推荐的日记进行排序
+        recommended_diaries = kwaymerge.k_way_merge_descending(recommended_diaries)
+        
         if not recommended_diaries:
             log.writeLog(f"未能根据用户{userId}的喜好找到任何日记")
             return []
-        
-        return recommended_diaries[:topK]
+        diarys = []
+        for i in range(topK):
+            diarys.append(diaryManager.getDiary(recommended_diaries[i]["id"]))
 
+        return diarys  # 返回对象列表
 
-                    
-                    
-    
     def addDiary(self, userId, diaryId):
         """
         增加日记
         """
-        self.userIo.userDiaryAdd(userId, diaryId)
+        user = self.getUser(userId)
+        user.addDiary(diaryId)
         
-    def markingReview(self, userId, reviewId, newScore):
+
+    def markingReview(self, userId, diary_id, score):
         """
         用户对日记进行评分
         """
         # 获取日记信息
-        review = diaryManager.getDiary(reviewId)
-        if review is None:
-            log.writeLog(f"日记{reviewId}不存在")
-            return False
+        user = self.getUser(userId)
+        oldscore = user.diaryMarking(diary_id, score)
+        if oldscore == rb.TNULL:
+            log.writeLog(f"用户{userId}对日记{diary_id}的评分不存在")
+            oldscore = 0
+        diary = diaryManager.getDiary(diary_id)
+        if diary is None:
+            log.writeLog(f"日记{diary_id}不存在")
+            return -1
 
-        oldScore = userIo.userUpdateDiaryMark(userId, reviewId, newScore)
-        if oldScore >= 0:
-            diaryManager.rateDiary(reviewId, newScore, oldScore)
-            return True
-        else:   
-            log.writeLog(f"用户{userId}对日记{reviewId}的评分更新失败")
-            return False
-        
+        diary.updateScore(score, oldscore)
+
+        return oldscore
 
 
-        
-        
-        
-userManager = User()
+userManager = UserManager.from_dict(userIo.load_users())
 
 
 

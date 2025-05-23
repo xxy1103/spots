@@ -139,8 +139,8 @@ class POISearch:
                     "area": poi.get("area", ""),
                     "telephone": poi.get("telephone", ""),
                     "location": poi_location,
-                    "score": distance,
-                    "visited_time":  0
+                    "value1": distance,
+                    "value2":  0
                 }
                 pois.append(poi_info)
             return pois

@@ -365,8 +365,8 @@
 
                         // 更新底部信息显示结果
                         let detailsHtml = `路线规划成功！`;
-                        if (data.score) {
-                            detailsHtml += ` 总距离: ${(data.score / 1000).toFixed(2)} 公里。`;
+                        if (data.value1) {
+                            detailsHtml += ` 总距离: ${(data.value1 / 1000).toFixed(2)} 公里。`;
                         }
                         if (data.duration) {
                             detailsHtml += ` 预计时间: ${Math.round(data.duration / 60)} 分钟。`;
@@ -516,7 +516,7 @@
                                 const popupContent = `
                                     <b>${poi.name}</b><br>
                                     ${poi.address || '无地址信息'}<br>
-                                    距离: ${poi.score ? poi.score + '米' : '未知'}<br>
+                                    距离: ${poi.value1 ? poi.value1 + '米' : '未知'}<br>
                                     <button class="add-to-route-btn" data-name="${poi.name}" data-lat="${lat}" data-lng="${lng}" style="margin-top: 5px;">添加到路线</button>
                                 `;
                                 poiMarker.bindPopup(popupContent);
@@ -530,7 +530,7 @@
                                         <h4>${this.poiData.name}</h4>
                                         <p>地址: ${this.poiData.address || '无'}</p>
                                         <p>类型: ${this.poiData.type || '未知'}</p>
-                                        <p>距离中心点: ${this.poiData.score ? this.poiData.score + '米' : '未知'}</p>
+                                        <p>距离中心点: ${this.poiData.value1 ? this.poiData.value1 + '米' : '未知'}</p>
                                         <p>坐标: ${this.poiData.location.lat.toFixed(6)}, ${this.poiData.location.lng.toFixed(6)}</p>
                                     `;
                                 });
@@ -538,7 +538,7 @@
                                 // 在右侧边栏创建列表项
                                 const li = document.createElement('li');
                                 const poiId = poi.id || `poi-${index}`; // 使用 API 返回的 ID 或索引作为后备
-                                li.textContent = `${poi.name} (${poi.score ? poi.score + '米' : '未知距离'})`;
+                                li.textContent = `${poi.name} (${poi.value1 ? poi.value1 + '米' : '未知距离'})`;
                                 li.dataset.poiId = poiId; // 存储 ID 用于关联
                                 li.style.cursor = 'pointer';
                                 li.addEventListener('click', function() {
@@ -562,7 +562,7 @@
                                             <h4>${targetPoi.name}</h4>
                                             <p>地址: ${targetPoi.address || '无'}</p>
                                             <p>类型: ${targetPoi.type || '未知'}</p>
-                                            <p>距离中心点: ${targetPoi.score ? targetPoi.score + '米' : '未知'}</p>
+                                            <p>距离中心点: ${targetPoi.value1 ? targetPoi.value1 + '米' : '未知'}</p>
                                             <p>坐标: ${targetPoi.location.lat.toFixed(6)}, ${targetPoi.location.lng.toFixed(6)}</p>
                                         `;
                                     } else {

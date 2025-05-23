@@ -4,110 +4,195 @@ from module.data_structure.hashtable import HashTable
 from module.data_structure.indexHeap import TopKHeap
 from module.data_structure.quicksort import quicksort
 from module.data_structure.merge import merge_sort
+from module.data_structure.stack import Stack
 from module.data_structure.set import MySet
 from module.printLog import writeLog
+from module.data_structure.HuffmanTree import generate_huffman_codes
+from module.Model.Model import Diary, User, Reviews, Spot
+import module.printLog as log
 import datetime #日期使用
 import re #正则表达式使用
+import os
+
+            
+class IdGenerator:      
+    def __init__(self, currentId, holes=[]):
+        self.holes = Stack(holes)
+        self.currentId = currentId
+
+    def getId(self):
+        if not self.holes.is_empty():
+            return self.holes.pop()
+        self.currentId += 1
+        return self.currentId
+
+    def releaseId(self, id):
+        if id <= self.currentId:
+            self.holes.push(id)
+        return self.holes.getlist()
+    
+    def getHolesList(self):
+        return self.holes.getlist()
+    
+    def getCurrentId(self):
+        return self.currentId
 
 class DiaryManager:
     """日记管理类，实现日记的搜索、排序和推荐功能"""
-    
-    def __init__(self):
+
+    def __init__(self,diaries,counts,titleHashTable=None,visitedHeap=None,scoreHeap=None,idGenerator=None,huffman_tree=None,codes=None):
         """初始化日记管理器"""
         # 获取所有日记
-        self.diaryIo = diaryIo
-        self.diaries = self.diaryIo.getAllDiaries()
-        
-        # 构建索引结构
-        self._buildIndexes()
-        
+        self.diaries = diaries
+        self.titleHashTable = titleHashTable
+        self.visitedHeap = visitedHeap
+        self.scoreHeap = scoreHeap
+        self.idGenerator = idGenerator
+        self.counts = counts
+        self.huffman_tree = huffman_tree
+        self.codes = codes
         writeLog("日记管理系统初始化完成")
-    
-    def _buildIndexes(self):
-        """构建各种索引结构以提高查询效率"""
-        # 哈希表用于快速检索
-        hash_table_size = max(1000, len(self.diaries) * 2)
-        self.titleHashTable = HashTable(hash_table_size)  # 标题索引
-        
-        # 索引堆用于快速获取TopK
-        self.visitedHeap = TopKHeap()  # 按浏览量排序
-        self.scoreHeap = TopKHeap()    # 按评分排序
-        
-        # 分类索引
-        self.spotDiaries = {}  # 按景点分类
-        self.userDiaries = {}  # 按用户分类
-        
-        # 构建所有索引
-        for diary in self.diaries:
-            diary_id = diary.get("id")
-            
-            
-            # 添加到索引堆
-            score = diary.get("score", 0)
-            visited_time = diary.get("visited_time", 0)
-            self.scoreHeap.insert(diary_id, score, visited_time)
-            self.visitedHeap.insert(diary_id, visited_time, score)
-            
-            
-            title = diary.get("title", "")
-            if title:
-                # self._indexText(title, diary_id, self.titleHashTable)
-                self.titleHashTable.insert({"id": diary_id, "name": title})
-            
-        
-        writeLog("日记索引构建完成")
+
+    @classmethod
+    def from_dict(cls, data: dict,huffman_tree):
+        """
+        从字典创建日记管理器
+        """
+        # 解析数据
+        diarys_json = data.get("diaries", [])
+        diaries = []
+        for diary in diarys_json:
+            diaries.append(Diary.from_dict(diary))
+        # id生成器
+        id_generator = IdGenerator(data.get("currentId", 0), data.get("holes", []))
+        counts = data.get("counts", 0)
+        # 创建title查找哈希表
+        hash_table_size = max(1000, counts * 3)
+        titleHashTable = HashTable(hash_table_size)
+        for diary in diaries:
+            titleHashTable.insert({"id": diary.id, "name": diary.title})
+        # 创建索引堆
+        scoreHeap = TopKHeap()
+        visitedHeap = TopKHeap()
+        for diary in diaries:
+            scoreHeap.insert(diary.id,  diary.score, diary.visited_time)
+            visitedHeap.insert(diary.id, diary.visited_time, diary.score)
+
+        # 加载哈夫曼树
+        codes = generate_huffman_codes(huffman_tree)
+        log.writeLog(f"成功加载全局哈夫曼树，包含 {len(codes)} 个字符编码")
+        # 创建对象
+        return cls(diaries,counts, titleHashTable, visitedHeap, scoreHeap, id_generator,huffman_tree, codes)
+
     
     def getDiary(self, diary_id:int):
         """获取单个日记"""
-        return self.diaryIo.getDiary(diary_id)
-    
-    def getAllDiaries(self):# 对完不用这个方法
-        """获取所有日记"""
-        return self.diaries
+        return self.diaries[diary_id] if 0 <= diary_id <= self.idGenerator.getCurrentId() else None
 
-    def addDiary(self, user_id:int, spot_id:int, title, content, images=None, videos=None, scoreToSpot:float=0):
+
+    def addDiary(self, user:User, spot:Spot, title, content, images=None, videos=None, scoreToSpot:float=0):
         """添加新日记"""
-        diary_id = self.diaryIo.addDiary(user_id, spot_id, title, content, images, videos, scoreToSpot=scoreToSpot)
 
-        if diary_id >= 0:
-            # 重新构建索引
-            self.titleHashTable.insert({"id": diary_id, "name": title})
-            writeLog(f"用户 {user_id} 添加日记 {diary_id} 成功，索引已更新")
-            return diary_id
+        """添加新日记"""
+        if images is None:
+            images = []
         
-        return -1
+        if videos is None:
+            videos = []
+
+        new_diary_json = {
+            "id": self.idGenerator.getId(),
+            "name": user.name,
+            "user_id": user.id,
+            "spot_id": spot.id,
+            "content": content,
+            "title": title,
+            "time": datetime.datetime.now().strftime("%Y-%m-%d"),
+            "score": 0,
+            "score_count": 0,
+            "visited_time": 0,
+            "img_list": images,
+            "video_path": videos,  # 添加视频路径字段
+            "compressed": False,
+            "scoreToSpot": scoreToSpot,  # 添加评分到景点的字段
+        }
+
+        # 创建日记对象
+        new_diary = Diary.from_dict(new_diary_json)
+        # 压缩日记内容
+        new_diary.compress(self.codes)
+        # 添加到日记列表
+        if new_diary.id < self.idGenerator.currentId:
+            self.diaries[new_diary.id] = new_diary
+        else:
+            self.diaries.append(new_diary)
+        # 日记总数+1
+        self.counts += 1    
+
+        # 将新名称添加到哈希表
+        self.titleHashTable.insert({"id": new_diary.id, "name": title})
+        self.visitedHeap.insert(new_diary.id, new_diary.visited_time,  new_diary.score)
+        self.scoreHeap.insert(new_diary.id, new_diary.score, new_diary.visited_time)
+        return new_diary # 返回新创建的对象
+
 
     def deleteDiary(self, user_id:int, diary_id:int):
         """删除日记"""
-        success = self.diaryIo.deleteDiary(user_id, diary_id)
-        if success:
-            self.titleHashTable.delete(diary_id)
+        # success = self.diaryIo.deleteDiary(user_id, diary_id)
+        # if success:
+        #     self.titleHashTable.delete(diary_id)
         
-        return success
-    
+        # return success
+        diary = self.getDiary(diary_id)
+        if not diary:
+            log.writeLog(f"日记 {diary_id} 不存在，无法删除")
+            return False
+        # 检查用户是否有权限删除日记
+        if diary.user_id != user_id:
+            log.writeLog(f"用户 {user_id} 无权限删除日记 {diary_id}")
+            return False
+        # 删除日记
+        diary.delete()
+        # 删除日记对象
+        self.diaries[diary_id] = None
+        self.idGenerator.releaseId(diary_id)
+        self.counts -= 1
+        # 从哈希表中删除日记
+        self.titleHashTable.delete(diary_id)
+        # 从索引堆中删除日记
+        self.visitedHeap.delete(diary_id)   
+        self.scoreHeap.delete(diary_id)
+
+
     def visitDiary(self, diary_id:int):
         """浏览日记，增加浏览量"""
-        visited_time = self.diaryIo.diaryVisited(diary_id)
         
-        if visited_time > 0:
+        diary = self.getDiary(diary_id)
+        if diary is not None:
+            diary.visited()
+
+        if diary.visited_time > 0:
             # 更新索引堆中的浏览次数
-            self.visitedHeap.updateVisitedTime(diary_id, visited_time)
-        return visited_time
+            self.visitedHeap.updateValue1(diary_id, diary.visited_time)
+            self.scoreHeap.updateValue2(diary_id, diary.visited_time)
+        
+        return diary.visited_time
+
 
     def rateDiary(self, diary_id:int, newScore:float, oldScore:float):
         """为日记评分"""
         # 更新日记评分
-        new_score = self.diaryIo.updateScore(diary_id, newScore, oldScore)
-
+        diary = self.getDiary(diary_id)
+        new_score = diary.updateScore(newScore, oldScore)
 
         if new_score >= 0:
             # 更新索引堆中的评分
-            self.scoreHeap.updateScore(diary_id, new_score)
-            
+            self.scoreHeap.updateValue1(diary_id, new_score)
+            self.visitedHeap.updateValue2(diary_id, new_score)
             return new_score
-        
         return -1
     
+
     def getTopKByVisited(self, k=10):
         """获取浏览量最高的K条日记"""
         top_ids = self.visitedHeap.getTopK(k)
@@ -171,35 +256,142 @@ class DiaryManager:
         # 根据最终的 ID 集合获取日记对象列表
         # 使用 self.diaries 列表直接访问，假设 ID 是从 1 开始且连续的
         # 迭代 MySet
-        result_list = [self.diaries[diary_id] for diary_id in result_ids if 0 <= diary_id <= self.diaryIo.currentId]
+        result_list = []
+        for diary_id in result_ids:
+            diary = self.getDiary(diary_id)
+            result_list.append(diary)
 
-        return result_list
+        return result_list  # 返回包含指定字符串中每个字符的所有日记对象列表
     
-    # 根据发布日期排序
-    def getLatestDiaries(self, k=10): #改 或删
-        """获取最新发布的日记"""
-        # 为日记添加日期对象以便排序
-        dated_diaries = []
-        
-        for diary in self.diaries:
-            diary_copy = diary.copy()
-            diary_copy["date_obj"] = diary.get("time", "1970-01-01")
-            dated_diaries.append(diary_copy)
-        
-        # 按日期降序排序
-        sorted_diaries = merge_sort(dated_diaries, sort_key="date_obj", reverse=True)
-        
-        # 清理辅助字段
-        for diary in sorted_diaries:
-            if "date_obj" in diary:
-                del diary["date_obj"]
-        
-        # 返回前K条
-        return sorted_diaries[:k] 
-    
-    def getDiariesWithContent(self,diary_id:int):
+    def getDiaryContent(self,diary_id:int):
         """获取日记的内容"""
-        return self.diaryIo.decompress_diary_content(diary_id)
+        diary = self.getDiary(diary_id)
+        if diary is None:
+            return None
+        # 获取日记内容
+        content = diary.getContent(self.huffman_tree)
+        return content
+    def searchDiaries(self, search_term, max_results=10):
+        """根据搜索词搜索日记
+
+        args:
+            search_term：搜索词
+            max_results: 返回结果的最大数量，默认为10
+        
+        return:
+            result：包含搜索词的日记对象list
+        """
+        # 1. 加载全局哈夫曼树，用于压缩内容搜索
+        if not self.huffman_tree or not self.codes:
+            log.writeLog("无法加载全局哈夫曼树，只能搜索未压缩日记")
+            # 如果无法加载树，仍然可以搜索未压缩日记
+            compressed_search = False # 用于标记将要执行的搜索是那种类型，just一种用于处理搜索词编码异常情况的保险
+        else:
+            # 2. 将搜索词编码 - 只用于压缩内容搜索
+            try:
+                search_encoded = ''
+                for char in search_term:
+                    #此处的编码是使用编码表直接进行编码，因此理论上不含填充位
+                    if char not in self.codes:
+                        log.writeLog(f"搜索词包含编码表中不存在的字符: {char}")
+                        compressed_search = False
+                        break
+                    search_encoded += self.codes[char]
+                compressed_search = True
+            except Exception as e:
+                log.writeLog(f"编码搜索词时出错: {e}")
+                compressed_search = False
+                
+        # 3. 开始搜索日记
+        candidates = [] # 匹配的日记id列表
+        
+        for i in range(self.currentId):
+            diary = self.getDiary(i)
+            if not diary:
+                continue  # 跳过已删除的日记
+            diary_id = diary.id
+
+            # 有些日记可能已经解压了，根据不同的情况进行搜索
+            if diary.compressed and compressed_search:
+                # 3.1 压缩日记: 在二进制数据中搜索编码后的搜索词
+                content_path = diary.content
+                # print(f"正在搜索日记 {diary_id} 的内容: {content_path}")
+                if not content_path:
+                    log.writeLog(f"日记 {diary_id} 的内容文件不存在: {content_path}")
+                    continue
+                    
+                try:
+                    # 读取压缩文件
+                    with open(content_path, 'rb') as f:
+                        binary_data = f.read()
+                        
+                    # 获取填充信息
+                    padding_info = binary_data[0]
+                    
+                    # 将二进制数据转换为位字符串
+                    # 使用列表然后再join，而不是连续拼接字符串
+                    bits_list = [format(byte, '08b') for byte in binary_data[1:]]
+                    bit_string = ''.join(bits_list)
+                        
+                    # 移除末尾填充位，确保正确的位流
+                    if padding_info > 0:
+                        bit_string = bit_string[:-padding_info]
+                    
+                    # if diary_id == 0:
+                    #     print(f"日记 {diary_id} 的位字符串: {bit_string}")
+                    #     print(f"搜索词的编码: {search_encoded}")
+
+                    # 在位级别搜索编码后的搜索词
+                    if search_encoded in bit_string:
+                        candidates.append(diary_id)
+                        
+                except Exception as e:
+                    log.writeLog(f"搜索压缩日记 {diary_id} 失败: {str(e)}")
+                    continue
+                    
+            else:  
+                # 3.2 未压缩日记: 直接在原文本中搜索
+                content = diary.content
+                
+                # 在标题和内容中搜索，逻辑上或许与searchByTitle重复了，这里为了验证搜索功能先保留
+                title = diary.title
+                if search_term in content or search_term in title:
+                    candidates.append(diary_id)
+                    
+            # 如果候选列表足够大，提前结束搜索
+            if len(candidates) >= max_results * 2:
+                print(f"候选列表已达到最大值: {len(candidates)}")
+                break
+        
+        # 4. 验证候选结果 (对于压缩过的内容，需要解压验证；对于未压缩内容，二次确认)
+        results = []
+        for diary_id in candidates:
+            diary = self.getDiary(diary_id)
+            if diary.compressed:
+                # 压缩日记需要解压验证
+                
+                decompressed = diary.getContent(self.huffman_tree)
+                if decompressed:
+                    # 在解压后的内容中搜索
+                    if search_term in decompressed:
+                        results.append(diary)
+                        if len(results) >= max_results:
+                            break
+            else:
+                # 未压缩日记已经在上面确认过匹配，直接添加
+                results.append(diary)
+                if len(results) >= max_results:
+                    break
+        
+        log.writeLog(f"搜索结果: 找到 {len(results)}/{max_results} 条匹配的日记")
+        return results
+
 
 # 创建全局实例
-diaryManager = DiaryManager()
+
+# 加载数据和哈夫曼树
+diary_data = diaryIo.load_Diaries()
+huffman_tree = diaryIo.load_global_huffman_tree()
+
+# 使用from_dict方法初始化DiaryManager
+diaryManager = DiaryManager.from_dict(diary_data, huffman_tree)

@@ -363,9 +363,9 @@
                 const li = document.createElement('li');
                 const imgHtml = spot.img ? `<img src="${spot.img}" alt="${spot.name || '景区图片'}">` : '<div style="height: 180px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">无图</div>';
                 const name = spot.name || '未知景点';
-                const score = (spot.score !== undefined && spot.score !== null) ? parseFloat(spot.score).toFixed(1) : 'N/A';
+                const score = (spot.value1 !== undefined && spot.value1 !== null) ? parseFloat(spot.value1).toFixed(1) : 'N/A';
                 const type = spot.type || '未知类型';
-                const popularity = (spot.visited_time !== undefined && spot.visited_time !== null) ? parseInt(spot.visited_time) : 'N/A'; // 假设 visited_time 是热度
+                const popularity = (spot.value2 !== undefined && spot.value2 !== null) ? parseInt(spot.value2) : 'N/A'; // value2 是热度
 
                 li.innerHTML = `
                     ${imgHtml}

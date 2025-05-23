@@ -1,6 +1,5 @@
 import module.fileIo
+import module.Spot_class as sp
 
 if __name__ == "__main__":
-    # 测试 DiaryIo 类
-    diaryIo = module.fileIo.DiaryIo()
-    module.fileIo.testDiaryIo()
+    sp.test_Spot(sp.spotManager)
