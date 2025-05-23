@@ -152,6 +152,7 @@ class UserManager:
         log.writeLog(f"找到用户{user['name']}")
         return user
     
+    
     def loginUser(self, userName, userPassword):
         user = self.searchUser(userName)
         if user is None:

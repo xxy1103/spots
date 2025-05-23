@@ -8,6 +8,7 @@ from module.user_class import userManager as user_manager
 from module.diary_class import diaryManager as diary_manager
 from module.Spot_class import spotManager as spot_manager
 import module.printLog as log
+from module.data_structure.quicksort import quicksort
 
 
 
@@ -230,6 +231,95 @@ def add_diary_marking(diary_id):
 
     return redirect(url_for('diary.get_diary', diary_id=diary_id))
 
+@diary.route("/search", methods=["GET"])
+@login_required
+def search_diary():
+    """
+    搜索日记
+    """
+    keyword = request.args.get("keyword", default="", type=str)
+    user_id = g.user["user_id"]
+    search_type = request.args.get("type", default="title", type=str)
+    sort_by = request.args.get("sort_by", default="value1", type=str) # value1表示默认排序，value2表示按热度排序
 
-    
+    if keyword !="":
+        match search_type:
+            case "title":
+                diaries = diary_manager.searchByTitle(keyword)
+            case "content":
+                diaries = diary_manager.searchByContent(keyword, 10)
+            case "user":
+                user = user_manager.searchUser(keyword) # 只支持精确查找
+                if user is None:
+                    diaries = []
+                else:
+                    user = user_manager.getUser(user["id"])
+                    diaries_id = user.getDiaryList()
+                    diaries = [diary_manager.getDiary(diary_id) for diary_id in diaries_id]
+            case "spot":
+                spots = spot_manager.getSpotByName(keyword)
+                if len(spots) == 0:
+                    diaries = []
+                else:
+                    diaries = []
+                    for i in spots:
+                        spot = spot_manager.getSpot(i["id"])
+                        diaries_id = spot.getDiaryList()
+                        for diary_id in diaries_id:
+                            diaries.append(diary_manager.getDiary(diary_id))
+            case _: # 上面的搜索方法全部搜索一遍
+                diaries = []
+                diaries.extend(diary_manager.searchByTitle(keyword))
+                diaries.extend(diary_manager.searchByContent(keyword))
+                user = user_manager.searchUser(keyword)
+                if user is not None:
+                    user = user_manager.getUser(user["id"])
+                    diaries_id = user.getDiaryList()
+                    for diary_id in diaries_id:
+                        diaries.append(diary_manager.getDiary(diary_id))
+                spots = spot_manager.getSpotByName(keyword)
+                if len(spots) != 0:
+                    for i in spots:
+                        spot = spot_manager.getSpot(i["id"])
+                        diaries_id = spot.getDiaryList()
+                        for diary_id in diaries_id:
+                            diaries.append(diary_manager.getDiary(diary_id))
+        diaries_json = []
+        for diary in diaries:
+            item = {
+                "title":diary.title,
+                "content":diary_manager.getDiaryContent(diary.id),
+                "user":diary.user_id,
+                "spot":diary.spot_id,
+                "value1":diary.score,
+                "value2":diary.visited_time,
+                "id":diary.id,
+                "img_list":diary.img_list,
+                "video_list":diary.video_path,
+                "scoreToSpot":diary.scoreToSpot,
+                "time":diary.time,
+            }
+            diaries_json.append(item)
+        
+    else:
+        diaries = diary_manager.getAllDiaries()
+        diaries_json = []
+        for diary in diaries:
+            item = {
+                "title":diary.title,
+                "content":diary_manager.getDiaryContent(diary.id),
+                "user":diary.user_id,
+                "spot":diary.spot_id,
+                "value1":diary.score,
+                "value2":diary.visited_time,
+                "id":diary.id,
+                "img_list":diary.img_list,
+                "video_list":diary.video_path,
+                "scoreToSpot":diary.scoreToSpot,
+                "time":diary.time,
+            }
+            diaries_json.append(item)
 
+    sorted_diaries = quicksort(diaries_json, sort_by)
+    # 返回搜索结果
+    return render_template('diary_search.html', diaries=sorted_diaries, keyword=keyword, user_id=user_id)

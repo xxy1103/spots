@@ -2,7 +2,7 @@ from module.fileIo import diaryIo
 # userManager导入了DiaryManager，则diary_class中不能再导入user,否则报错
 from module.data_structure.hashtable import HashTable
 from module.data_structure.indexHeap import TopKHeap
-from module.data_structure.quicksort import quicksort
+
 from module.data_structure.merge import merge_sort
 from module.data_structure.stack import Stack
 from module.data_structure.set import MySet
@@ -88,7 +88,10 @@ class DiaryManager:
     def getDiary(self, diary_id:int):
         """获取单个日记"""
         return self.diaries[diary_id] if 0 <= diary_id <= self.idGenerator.getCurrentId() else None
-
+    def getAllDiaries(self):
+        """获取所有日记的列表的一个拷贝"""
+        return self.diaries.copy() if self.diaries else []
+        
 
     def addDiary(self, user:User, spot:Spot, title, content, images=None, videos=None, scoreToSpot:float=0):
         """添加新日记"""
@@ -271,7 +274,7 @@ class DiaryManager:
         # 获取日记内容
         content = diary.getContent(self.huffman_tree)
         return content
-    def searchDiaries(self, search_term, max_results=10):
+    def searchByContent(self, search_term, max_results=10):
         """根据搜索词搜索日记
 
         args:
@@ -305,7 +308,7 @@ class DiaryManager:
         # 3. 开始搜索日记
         candidates = [] # 匹配的日记id列表
         
-        for i in range(self.currentId):
+        for i in range(self.idGenerator.currentId):
             diary = self.getDiary(i)
             if not diary:
                 continue  # 跳过已删除的日记

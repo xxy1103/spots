@@ -1,8 +1,4 @@
-import os
-import json
-import pickle
-import module.printLog as log
-
+# -*- coding: utf-8 -*- 
 class BTreeNode:
     def __init__(self, leaf=True, t=3):
         """
@@ -129,56 +125,7 @@ class BTree:
             
             level += 1
             print()
-    def save_to_file(self, filename):
-        """
-        将B树保存到文件
-        :param filename: 文件名（不含路径）
-        :return: 是否保存成功
-        """
-        try:
-            # 确保目录存在
-            save_dir = "index/global/"
-            if not os.path.exists(save_dir):
-                os.makedirs(save_dir)
-            
-            # 完整的文件路径
-            filepath = os.path.join(save_dir, filename)
-            
-            # 使用pickle序列化整个B树
-            with open(filepath, 'wb') as f:
-                pickle.dump(self, f)
-                
-            log.writeLog(f"B树已保存到 {filepath}")
-            return True
-        except Exception as e:
-            log.writeLog(f"保存B树失败: {str(e)}")
-            return False
-    
-    @staticmethod
-    def load_from_file(filename):
-        """
-        从文件加载B树
-        :param filename: 文件名（不含路径）
-        :return: 加载的B树对象，如果加载失败则返回None
-        """
-        try:
-            # 完整的文件路径
-            filepath = os.path.join("index/global/", filename)
-            
-            # 检查文件是否存在
-            if not os.path.exists(filepath):
-                log.writeLog(f"B树文件不存在: {filepath}")
-                return None
-                
-            # 使用pickle加载B树
-            with open(filepath, 'rb') as f:
-                btree = pickle.load(f)
-                
-            log.writeLog(f"B树已从 {filepath} 加载")
-            return btree
-        except Exception as e:
-            log.writeLog(f"加载B树失败: {str(e)}")
-            return None
+
 
 # 示例用法更新
 if __name__ == "__main__":
@@ -211,20 +158,3 @@ if __name__ == "__main__":
     else:
         print(f"未找到: {search_name}")
     
-    # 保存B树到文件
-    save_success = btree.save_to_file("name_index.btree")
-    print(f"保存B树: {'成功' if save_success else '失败'}")
-    
-    # 从文件加载B树
-    loaded_btree = BTree.load_from_file("name_index.btree")
-    if loaded_btree:
-        print("加载的B树结构:")
-        loaded_btree.print_tree()
-        
-        # 测试加载的B树搜索功能
-        search_name = "西瓜"
-        result = loaded_btree.search(search_name)
-        if result:
-            print(f"在加载的B树中找到: {result}")
-        else:
-            print(f"在加载的B树中未找到: {search_name}")

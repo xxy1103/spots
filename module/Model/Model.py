@@ -269,6 +269,12 @@ class User:
         oldscore = self.review_marking.search(diary.id)
         self.review_marking.insert(diary.id,score)
         return oldscore #通过返回旧分数来判断是否是第一次评分
+    
+    def getDiaryList(self):
+        """
+        获取用户的日记列表
+        """
+        return self.reviews.getDiaryIds()
 
 
 class Spot:
@@ -369,6 +375,8 @@ class Spot:
         self.score = round(sum_score / (self.reviews.total - 1), 1)
         self.reviews.deleteOne(diary.id)
         return self.score
-
-    
-
+    def getDiaryList(self):
+        """
+        景区的日记列表
+        """
+        return self.reviews.getDiaryIds()
