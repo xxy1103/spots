@@ -4,7 +4,7 @@ from app.api.routes import login_required # 导入登录验证装饰器
 from module.Spot_class import spotManager
 from module.fileIo import configIo
 from module.map import map as map_module # 导入地图模块, 重命名避免与蓝图冲突
-from module.data_structure.merge import merge_sort
+from module.data_structure.kwaymerge import k_way_merge_descending # 导入合并排序函数
 
 
 
@@ -155,7 +155,8 @@ def getPoi(location):
             # 使用 merge_sort 合并当前类型的 POI 列表和已有的 all_pois 列表
             # 假设 poi_list 和 all_pois 都已按 merge_sort 的标准排序
             # （或者 map_module.get_POI 返回的是按此标准排序的列表）
-            all_pois = merge_sort(all_pois, poi_list)
+            all_pois.append(poi_list)
+    all_pois = k_way_merge_descending(all_pois) # 合并排序
 
     # 循环结束后，all_pois 包含了所有类型、按指定标准合并排序后的 POI
     # 反转
