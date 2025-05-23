@@ -19,15 +19,14 @@ class RedBlackTree:
         self.root = self.TNULL
         self.TNULL.parent = self.TNULL # 让哨兵节点的父节点指向自身，简化某些边界处理
         self.TNULL.left = self.TNULL
-        self.TNULL.right = self.TNULL
-
-    def search(self, value_to_search): # Parameter renamed for clarity, was 'key'
+        self.TNULL.right = self.TNULL    
+    def search(self, key_to_search):
         """
-        查找具有给定值的节点。
+        查找具有给定键的节点。
         """
         current = self.root
-        while current != self.TNULL and value_to_search != current.value: # Compare with current.value
-            if value_to_search < current.value: # Compare with current.value
+        while current != self.TNULL and key_to_search != current.key: # 现在比较key而不是·value
+            if key_to_search < current.key: # 比较key
                 current = current.left
             else:
                 current = current.right
@@ -73,11 +72,10 @@ class RedBlackTree:
             y.parent.left = x
 
         x.right = y  # y 成为 x 的右孩子
-        y.parent = x
-
+        y.parent = x    
     def insert(self, key, value):
         """
-        插入新的键值对。树将根据 'value' 排序。
+        插入新的键值对。树将根据 'key' 排序。
         """
         # 创建新节点，默认为红色
         node = Node(key, value, color=RED, parent=self.TNULL, left=self.TNULL, right=self.TNULL)
@@ -85,22 +83,22 @@ class RedBlackTree:
         parent = self.TNULL
         current = self.root
 
-        # 找到新节点的插入位置，根据 'value' 进行比较
+        # 找到新节点的插入位置，根据 'key' 进行比较
         while current != self.TNULL:
             parent = current
-            if node.value < current.value: # Compare node.value with current.value
+            if node.key < current.key: # Compare node.key with current.key
                 current = current.left
-            elif node.value > current.value: # Compare node.value with current.value
+            elif node.key > current.key: # Compare node.key with current.key
                 current = current.right
-            else: # value 已存在，更新 key
-                current.key = key
+            else: # key 已存在，更新 value
+                current.value = value
                 return
 
         node.parent = parent # 设置新节点的父节点
 
         if parent == self.TNULL: # 如果树为空
             self.root = node
-        elif node.value < parent.value: # Compare node.value with parent.value
+        elif node.key < parent.key: # Compare node.key with parent.key
             parent.left = node
         else:
             parent.right = node
@@ -177,16 +175,15 @@ class RedBlackTree:
         """
         while node.left != self.TNULL:
             node = node.left
-        return node
-
-    def delete(self, value_to_delete): # Parameter renamed for clarity, was 'key'
+        return node    
+    def delete(self, key_to_delete):
         """
-        删除具有给定值的节点。
+        删除具有给定键的节点。
         """
-        z = self.search(value_to_delete) # Search will use value due to its modification
+        z = self.search(key_to_delete) # Search will use key
         if z == self.TNULL:
-            # print(f"Value {value_to_delete} not found in the tree.")
-            return # 值不存在
+            # print(f"Key {key_to_delete} not found in the tree.")
+            return # 键不存在
 
         y = z # y 是实际被删除或移动的节点
         y_original_color = y.color
@@ -289,11 +286,10 @@ class RedBlackTree:
             self.inorder_traversal(node.left, result)
             result.append((node.key, node.value, node.color))
             self.inorder_traversal(node.right, result)
-        return result
-
+        return result    
     def get_all_keys(self, node=None, keys_list=None):
         """
-        返回红黑树中所有原键的列表 (顺序由value决定)。
+        返回红黑树中所有键的列表 (按key排序)。
         """
         if node is None:
             node = self.root
@@ -302,7 +298,7 @@ class RedBlackTree:
 
         if node != self.TNULL:
             self.get_all_keys(node.left, keys_list)
-            keys_list.append(node.key) # Still appends original key, but order is by value
+            keys_list.append(node.key) # Appends key in order
             self.get_all_keys(node.right, keys_list)
         return keys_list
 
@@ -314,31 +310,28 @@ class RedBlackTree:
             node = self.root
         if node == self.TNULL:
             return 0
-        return 1 + max(self.get_height(node.left), self.get_height(node.right))
-
+        return 1 + max(self.get_height(node.left), self.get_height(node.right))    
     def print_tree(self, node=None, level=0, prefix="Root:"):
         """
         打印树的结构 (用于测试和调试)。
-        显示节点的 value 和 color。
+        显示节点的 key 和 color。
         """
         if node is None:
             node = self.root
 
         if node != self.TNULL:
-            print(" " * (level * 4) + prefix + str(node.value) + "(" + node.color + ") [key:" + str(node.key) + "]") # Display value for structure
+            print(" " * (level * 4) + prefix + str(node.key) + "(" + node.color + ") [value:" + str(node.value) + "]") # Display key for structure
             if node.left != self.TNULL or node.right != self.TNULL:
                 self.print_tree(node.right, level + 1, "R---")
                 self.print_tree(node.left, level + 1, "L---")
 
 # 示例用法:
 if __name__ == '__main__':
-    rbt = RedBlackTree()
-
-    # 注意：现在树是按字符串value排序的 ("value_X")
-    # 搜索和删除时，也应该使用这些字符串value
+    rbt = RedBlackTree()    # 注意：现在树是按key排序的
+    # 搜索和删除时，应该使用这些数字key
     keys_and_values_to_insert = [
-        (10, "value_10"), (20, "value_20"), (30, "value_05"), # value_05会较小
-        (15, "value_15"), (25, "value_25"), (5, "value_01"),  # value_01会最小
+        (10, "value_10"), (20, "value_20"), (30, "value_05"), 
+        (15, "value_15"), (25, "value_25"), (5, "value_01"),  
         (1, "value_07"), (7, "value_12"), (12, "value_17"),
         (17, "value_22"), (22, "value_27"), (27, "value_35"),
         (35, "value_40")
@@ -352,28 +345,27 @@ if __name__ == '__main__':
 
     print("\\nFinal tree structure:")
     rbt.print_tree() # print_tree now shows value
-    
-    # inorder_traversal 返回 (key, value, color) 元组列表，按 value 排序
+      # inorder_traversal 返回 (key, value, color) 元组列表，按 key 排序
     traversal_result = rbt.inorder_traversal()
-    print("\\nInorder traversal (sorted by value):", traversal_result)
-    print("Just values from traversal:", [item[1] for item in traversal_result])
+    print("\\nInorder traversal (sorted by key):", traversal_result)
+    print("Just keys from traversal:", [item[0] for item in traversal_result])
 
 
     print("Tree height:", rbt.get_height())
     
-    # get_all_keys 返回原始key的列表，但顺序是根据value排序的
+    # get_all_keys 返回原始key的列表，顺序是按key排序的
     all_original_keys = rbt.get_all_keys()
-    print("All original keys (order determined by value sorting):", all_original_keys)
+    print("All original keys (sorted by key):", all_original_keys)
 
-    # 搜索现在基于 value
-    print("\\nSearching for value 'value_15':", rbt.search("value_15").key if rbt.search("value_15") != rbt.TNULL else "Not found")
-    print("Searching for value 'value_100':", rbt.search("value_100").key if rbt.search("value_100") != rbt.TNULL else "Not found")
+    # 搜索现在基于 key
+    print("\\nSearching for key 15:", rbt.search(15).value if rbt.search(15) != rbt.TNULL else "Not found")
+    print("Searching for key 100:", rbt.search(100).value if rbt.search(100) != rbt.TNULL else "Not found")
 
-    values_to_delete = ["value_01", "value_12", "value_22", "value_35", "value_05", "value_15", "value_25", "value_40", "value_10", "value_20"]
-    print("\\nDeleting values:", values_to_delete)
-    for val_del in values_to_delete:
-        print(f"Deleting value {val_del}...")
-        rbt.delete(val_del) # Delete is by value
+    keys_to_delete = [5, 7, 12, 15, 17, 22, 25, 27, 30, 35]
+    print("\\nDeleting keys:", keys_to_delete)
+    for key_del in keys_to_delete:
+        print(f"Deleting key {key_del}...")
+        rbt.delete(key_del) # Delete is by key
         # print(f"After deleting {val_del}:")
         # rbt.print_tree()
         # print("Inorder traversal:", rbt.inorder_traversal())
@@ -385,11 +377,9 @@ if __name__ == '__main__':
     print("Inorder traversal after deletions (sorted by value):", traversal_after_delete)
     print("Just values from traversal after deletions:", [item[1] for item in traversal_after_delete])
     print("Tree height after deletions:", rbt.get_height())
-    print("All original keys after deletions:", rbt.get_all_keys())
-
-    # Test deleting non-existent value
-    print("\\nDeleting non-existent value 'value_100':")
-    rbt.delete("value_100")
+    print("All original keys after deletions:", rbt.get_all_keys())    # Test deleting non-existent key
+    print("\\nDeleting non-existent key 100:")
+    rbt.delete(100)
     rbt.print_tree()
 
     # Test inserting after deletions

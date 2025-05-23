@@ -121,12 +121,12 @@ class Diary:
 
         # 计算平均分
         if self.score_count > 0:
-            self["score"] = round(sum_score / self.score_count, 1)
+            self.score = round(sum_score / self.score_count, 1)
         else:
-            self["score"] = 0
+            self.score = 0
 
-        return self["score"]
-    
+        return self.score
+
     def visited(self):
         """
         访问次数+1

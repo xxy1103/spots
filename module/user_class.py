@@ -254,18 +254,13 @@ class UserManager:
         """
         # 获取日记信息
         user = self.getUser(userId)
-        oldscore = user.diaryMarking(diary_id, score)
-        if oldscore == rb.TNULL:
-            log.writeLog(f"用户{userId}对日记{diary_id}的评分不存在")
-            oldscore = 0
         diary = diaryManager.getDiary(diary_id)
-        if diary is None:
-            log.writeLog(f"日记{diary_id}不存在")
-            return -1
+        oldscore = user.diaryMarking(diary, score)
+        if oldscore.value == None:
+            log.writeLog(f"用户{userId}对日记{diary_id}的评分不存在")
+            return 0
 
-        diary.updateScore(score, oldscore)
-
-        return oldscore
+        return oldscore.value
 
 
 userManager = UserManager.from_dict(userIo.load_users())

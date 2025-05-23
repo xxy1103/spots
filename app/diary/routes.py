@@ -208,3 +208,28 @@ def add_diary_page():
     
     return render_template('diary_add.html', spots=spots)
 
+
+@diary.route("/<int:diary_id>/marking", methods=["POST"])
+@login_required
+def add_diary_marking(diary_id):
+    """
+    添加日记的评分
+    """
+
+    score = request.form.get("score", default=0, type=float)
+
+    # 确保评分在合理范围内
+    if score <= 0 or score > 5:
+        return render_template('error.html', message="评分必须大于0小于等于5")
+    user_id = g.user["user_id"]
+    # 在用户的评分中添加评分，同时查询是否有旧评分
+    oldscore = user_manager.markingReview(user_id, diary_id, score)
+
+    # 跟新索引和日记类中的评分
+    diary_manager.rateDiary(diary_id, score, oldscore)
+
+    return redirect(url_for('diary.get_diary', diary_id=diary_id))
+
+
+    
+

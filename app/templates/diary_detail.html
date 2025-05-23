@@ -196,6 +196,22 @@
                             <span>{{ diary.score_count }} 次评分</span>
                         </div>
                     </div>
+                    
+                    <!-- 添加评分表单 -->
+                    {% if g.user and g.user.user_id != diary.user_id %}
+                    <div class="mt-4">
+                        <h5>给这篇日记评分</h5>
+                        <form action="{{ url_for('diary.add_diary_marking', diary_id=diary.id) }}" method="POST" class="rating-form">
+                            <div class="form-group">
+                                <label for="score">评分 (0-5分):</label>
+                                <div class="d-flex align-items-center">
+                                    <input type="number" step="0.1" min="0" max="5" class="form-control" id="score" name="score" style="width: 100px;" required>
+                                    <button type="submit" class="btn btn-primary ml-3">提交评分</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
