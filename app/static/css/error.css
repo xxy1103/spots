@@ -21,7 +21,7 @@
     padding: 3rem 2rem;
     text-align: center;
     transform: translateY(30px);
-    animation: slideUpFadeIn 0.8s ease-out 1s forwards;
+    animation: slideUpFadeIn 0.4s ease-out 0.5s forwards;
 }
 
 @keyframes slideUpFadeIn {
@@ -41,7 +41,7 @@
     justify-content: center;
     background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
     box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
-    animation: pulse 2s infinite;
+    animation: pulse 1s infinite;
 }
 
 @keyframes pulse {
@@ -70,16 +70,15 @@
     color: #0052d9;
     font-weight: 700;
     opacity: 0;
-    animation: fadeInUp 0.6s ease-out 1.2s forwards;
+    animation: fadeInUp 0.3s ease-out 0.6s forwards;
 }
 
 .error-message {
     font-size: 1.2rem;
     line-height: 1.6;
     color: #555;
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeInUp 0.6s ease-out 1.4s forwards;
+    margin-bottom: 2rem;    opacity: 0;
+    animation: fadeInUp 0.3s ease-out 0.7s forwards;
 }
 
 .error-code {
@@ -92,7 +91,7 @@
     border-radius: 6px;
     display: inline-block;
     opacity: 0;
-    animation: fadeInUp 0.6s ease-out 1.6s forwards;
+    animation: fadeInUp 0.3s ease-out 0.8s forwards;
 }
 
 @keyframes fadeInUp {
@@ -112,7 +111,7 @@
     justify-content: center;
     flex-wrap: wrap;
     opacity: 0;
-    animation: fadeInUp 0.6s ease-out 1.8s forwards;
+    animation: fadeInUp 0.3s ease-out 0.9s forwards;
 }
 
 .btn-primary {
@@ -190,7 +189,7 @@
     padding-top: 2rem;
     border-top: 1px solid #eee;
     opacity: 0;
-    animation: fadeInUp 0.6s ease-out 2s forwards;
+    animation: fadeInUp 0.3s ease-out 0.9s forwards;
 }
 
 .suggestions h4 {
@@ -278,7 +277,7 @@
     height: 8px;
     border-radius: 50%;
     background: #0052d9;
-    animation: loading-dots 1.2s linear infinite;
+    animation: loading-dots 0.6s linear infinite;
 }
 
 .loading-dots div:nth-child(1) {
@@ -288,12 +287,12 @@
 
 .loading-dots div:nth-child(2) {
     left: 32px;
-    animation-delay: -0.4s;
+    animation-delay: -0.2s;
 }
 
 .loading-dots div:nth-child(3) {
     left: 56px;
-    animation-delay: -0.8s;
+    animation-delay: -0.4s;
 }
 
 @keyframes loading-dots {
@@ -319,7 +318,7 @@
     background: linear-gradient(45deg, rgba(0, 82, 217, 0.1) 0%, rgba(0, 82, 217, 0.05) 100%);
     border-radius: 50%;
     z-index: -1;
-    animation: float 6s ease-in-out infinite;
+    animation: float 3s ease-in-out infinite;
 }
 
 .error-container::after {
@@ -332,7 +331,7 @@
     background: linear-gradient(45deg, rgba(255, 167, 38, 0.1) 0%, rgba(255, 167, 38, 0.05) 100%);
     border-radius: 50%;
     z-index: -1;
-    animation: float 6s ease-in-out infinite reverse;
+    animation: float 1.5s ease-in-out infinite reverse;
 }
 
 @keyframes float {

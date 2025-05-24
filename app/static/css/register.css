@@ -32,7 +32,7 @@ body::before {
     color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     z-index: 2;
-    animation: fadeInDown 0.5s ease-out;
+    animation: fadeInDown 0.25s ease-out;
 }
 
 .image-container {
@@ -43,7 +43,7 @@ body::before {
     height: 60px; /* 调整大小 */
     background: url('../dogo.png') center center/contain no-repeat;
     z-index: 3;
-    animation: fadeInLeft 0.5s ease-out 0.2s;
+    animation: fadeInLeft 0.25s ease-out 0.1s;
     animation-fill-mode: backwards;
 }
 

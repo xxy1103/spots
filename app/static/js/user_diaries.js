@@ -310,7 +310,7 @@ function addInteractiveAnimations() {
         .diary-item-animate {
             opacity: 0;
             transform: translateX(-30px);
-            animation: slideInRight 0.6s ease-out forwards;
+            animation: slideInRight 0.3s ease-out forwards;
         }
         
         @keyframes slideInRight {
@@ -340,7 +340,7 @@ function animateStats() {
                 clearInterval(timer);
             }
             stat.textContent = currentValue;
-        }, 50);
+        }, 25);
     });
 }
 
@@ -353,7 +353,7 @@ function initLazyLoading() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    img.style.transition = 'opacity 0.3s ease'; // Ensure transition is set
+                    img.style.transition = 'opacity 0.2s ease'; // Ensure transition is set
 
                     // Check if image is already loaded (e.g., from cache) and is a valid image
                     if (img.complete && typeof img.naturalWidth !== "undefined" && img.naturalWidth !== 0) {
@@ -417,8 +417,7 @@ function showToast(message, type = 'info') {
         const toastStyle = document.createElement('style');
         toastStyle.id = 'toast-styles';
         toastStyle.textContent = `
-            @keyframes slideUp {
-                from {
+            @keyframes slideUp {                from {
                     opacity: 0;
                     transform: translateX(-50%) translateY(20px);
                 }
@@ -443,16 +442,14 @@ function showToast(message, type = 'info') {
     }
     
     document.body.appendChild(toast);
-    
-    // 3秒后消失
+      // 1.5秒后消失
     setTimeout(() => {
-        toast.style.animation = 'slideDown 0.3s ease forwards';
+        toast.style.animation = 'slideDown 0.2s ease forwards';
         setTimeout(() => {
             if (document.body.contains(toast)) {
                 document.body.removeChild(toast);
             }
-        }, 300);
-    }, 3000);
+        }, 300);        }, 1500);
 }
 
 // 工具函数：防抖

@@ -235,7 +235,7 @@
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    transition: transform 0.2s;
 }
 
 .preview-item:hover {
@@ -373,14 +373,14 @@
 .form-section {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInUp 0.6s ease-out forwards;
+    animation: fadeInUp 0.3s ease-out forwards;
 }
 
-.form-section:nth-child(1) { animation-delay: 0.6s; }
-.form-section:nth-child(2) { animation-delay: 0.8s; }
-.form-section:nth-child(3) { animation-delay: 1.0s; }
-.form-section:nth-child(4) { animation-delay: 1.2s; }
-.form-section:nth-child(5) { animation-delay: 1.4s; }
+.form-section:nth-child(1) { animation-delay: 0.3s; }
+.form-section:nth-child(2) { animation-delay: 0.4s; }
+.form-section:nth-child(3) { animation-delay: 0.5s; }
+.form-section:nth-child(4) { animation-delay: 0.6s; }
+.form-section:nth-child(5) { animation-delay: 0.7s; }
 
 @keyframes fadeInUp {
     to {

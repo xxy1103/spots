@@ -3,7 +3,7 @@ body {
     font-family: sans-serif;
     margin: 20px;
     opacity: 0;
-    animation: fadeIn 1s ease-in-out forwards;
+    animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 @keyframes fadeIn {
@@ -39,7 +39,7 @@ button:disabled {
     gap: 15px;
     padding: 0 10px;
     opacity: 0;
-    animation: slideInFromTop 0.8s ease-out 0.3s forwards;
+    animation: slideInFromTop 0.4s ease-out 0.15s forwards;
 }
 
 @keyframes slideInFromTop {
@@ -61,9 +61,8 @@ button:disabled {
     justify-content: center;
     width: 70px;
     height: 80px;
-    text-decoration: none;
-    color: #333;
-    transition: all 0.3s ease;
+    text-decoration: none;    color: #333;
+    transition: all 0.2s ease;
     border-radius: 4px;
     cursor: pointer;
     transform: scale(1);
@@ -80,9 +79,8 @@ button:disabled {
     height: 40px;
     margin-bottom: 5px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease;
+    justify-content: center;    align-items: center;
+    transition: transform 0.2s ease;
 }
 
 .category-item:hover .category-icon {
@@ -111,7 +109,7 @@ button:disabled {
     flex-direction: column;
     align-items: center;
     opacity: 0;
-    animation: slideInFromBottom 0.8s ease-out 0.6s forwards;
+    animation: slideInFromBottom 0.4s ease-out 0.3s forwards;
 }
 
 @keyframes slideInFromBottom {
@@ -204,15 +202,14 @@ button:disabled {
 .spot-card {
     border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background-color: white;
     width: 100%;
     max-width: 290px;
     margin: 0 auto;
     opacity: 0;
     transform: translateY(30px) scale(0.95);
-    animation: cardSlideIn 0.6s ease-out forwards;
+    animation: cardSlideIn 0.3s ease-out forwards;
 }
 
 @keyframes cardSlideIn {
@@ -222,16 +219,16 @@ button:disabled {
     }
 }
 
-.spot-card:nth-child(1) { animation-delay: 0.1s; }
-.spot-card:nth-child(2) { animation-delay: 0.2s; }
-.spot-card:nth-child(3) { animation-delay: 0.3s; }
-.spot-card:nth-child(4) { animation-delay: 0.4s; }
-.spot-card:nth-child(5) { animation-delay: 0.5s; }
-.spot-card:nth-child(6) { animation-delay: 0.6s; }
-.spot-card:nth-child(7) { animation-delay: 0.7s; }
-.spot-card:nth-child(8) { animation-delay: 0.8s; }
-.spot-card:nth-child(9) { animation-delay: 0.9s; }
-.spot-card:nth-child(10) { animation-delay: 1.0s; }
+.spot-card:nth-child(1) { animation-delay: 0.05s; }
+.spot-card:nth-child(2) { animation-delay: 0.1s; }
+.spot-card:nth-child(3) { animation-delay: 0.15s; }
+.spot-card:nth-child(4) { animation-delay: 0.2s; }
+.spot-card:nth-child(5) { animation-delay: 0.25s; }
+.spot-card:nth-child(6) { animation-delay: 0.3s; }
+.spot-card:nth-child(7) { animation-delay: 0.35s; }
+.spot-card:nth-child(8) { animation-delay: 0.4s; }
+.spot-card:nth-child(9) { animation-delay: 0.45s; }
+.spot-card:nth-child(10) { animation-delay: 0.5s; }
 
 .spot-card:hover {
     transform: translateY(-8px) scale(1.02);
@@ -240,9 +237,8 @@ button:disabled {
 
 .spot-card img {
     width: 100%;
-    height: 130px;
-    object-fit: cover;
-    transition: transform 0.4s ease;
+    height: 130px;    object-fit: cover;
+    transition: transform 0.2s ease;
 }
 
 .spot-card:hover img {
@@ -369,9 +365,8 @@ button:disabled {
     width: 100%;
     height: 46px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: all 0.3s ease;
+    border-radius: 8px;    overflow: hidden;
+    transition: all 0.2s ease;
 }
 
 .header .search-bar:focus-within {
@@ -387,9 +382,8 @@ button:disabled {
     min-width: 100px;
     background-color: #fff;
     color: #333;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s;
+    cursor: pointer;    outline: none;
+    transition: background-color 0.2s;
 }
 
 .header .search-bar select:hover,
@@ -407,9 +401,8 @@ button:disabled {
 
 .header .search-input svg {
     position: absolute;
-    left: 16px;
-    pointer-events: none;
-    transition: transform 0.3s ease;
+    left: 16px;    pointer-events: none;
+    transition: transform 0.2s ease;
 }
 
 .header .search-input input:focus + svg {
@@ -422,9 +415,8 @@ button:disabled {
     padding: 0 16px 0 48px;
     border: none;
     font-size: 14px;
-    outline: none;
-    background-color: #fff;
-    transition: background-color 0.3s;
+    outline: none;    background-color: #fff;
+    transition: background-color 0.2s;
 }
 
 .header .search-input input:focus {
@@ -440,10 +432,9 @@ button:disabled {
     background-color: #0052d9;
     color: #FFFFFF;
     border: none;
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 15px;    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .header .search-button:hover {
@@ -638,16 +629,16 @@ h2 {
     flex-direction: column;
     opacity: 0;
     transform: translateY(50px);
-    animation: fadeInUp 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    transition: transform 300ms ease, box-shadow 300ms ease;
+    animation: fadeInUp 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transition: transform 150ms ease, box-shadow 150ms ease;
 }
 
 .spots-list li:nth-child(odd) {
-    animation-delay: 100ms;
+    animation-delay: 50ms;
 }
 
 .spots-list li:nth-child(even) {
-    animation-delay: 300ms;
+    animation-delay: 150ms;
 }
 
 .spots-list li:hover {
@@ -663,7 +654,7 @@ h2 {
     overflow: hidden;
     border-radius: 12px 12px 0 0;
     display: block;
-    transition: transform 0.3s;
+    transition: transform 0.15s;
 }
 
 .spot-info {
@@ -777,16 +768,15 @@ h2 {
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
     opacity: 0;
-    transform: translateY(30px) scale(0.95);
-    animation: cardSlideIn 0.6s ease-out forwards;
+    transform: translateY(30px) scale(0.95);    animation: cardSlideIn 0.3s ease-out forwards;
 }
 
-.diary-card:nth-child(1) { animation-delay: 1.2s; }
-.diary-card:nth-child(2) { animation-delay: 1.3s; }
-.diary-card:nth-child(3) { animation-delay: 1.4s; }
-.diary-card:nth-child(4) { animation-delay: 1.5s; }
-.diary-card:nth-child(5) { animation-delay: 1.6s; }
-.diary-card:nth-child(6) { animation-delay: 1.7s; }
+.diary-card:nth-child(1) { animation-delay: 0.6s; }
+.diary-card:nth-child(2) { animation-delay: 0.65s; }
+.diary-card:nth-child(3) { animation-delay: 0.7s; }
+.diary-card:nth-child(4) { animation-delay: 0.75s; }
+.diary-card:nth-child(5) { animation-delay: 0.8s; }
+.diary-card:nth-child(6) { animation-delay: 0.85s; }
 
 .diary-card:hover {
     transform: translateY(-8px) scale(1.02);
@@ -801,9 +791,8 @@ h2 {
     background-color: #f5f5f5;
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: #999;
-    transition: transform 0.4s ease;
+    justify-content: center;    color: #999;
+    transition: transform 0.2s ease;
 }
 
 .diary-card:hover .diary-card-image {

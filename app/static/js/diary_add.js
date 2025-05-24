@@ -282,12 +282,11 @@ function initializeRating() {
             ratingInput.value = rating;
             ratingValue.textContent = rating + '分';
             highlightStars(rating);
-            
-            // 添加点击动画效果
+              // 添加点击动画效果
             this.style.transform = 'scale(1.3)';
             setTimeout(() => {
                 this.style.transform = '';
-            }, 200);
+            }, 100);
         });
     });
 }
@@ -394,8 +393,7 @@ function previewImageFile(file, container) {
             e.stopPropagation();  // 防止冒泡
             container.removeChild(previewItem);
         };
-        
-        previewItem.appendChild(img);
+          previewItem.appendChild(img);
         previewItem.appendChild(removeButton);
         container.appendChild(previewItem);
         
@@ -403,7 +401,7 @@ function previewImageFile(file, container) {
         previewItem.style.opacity = '0';
         previewItem.style.transform = 'scale(0.8)';
         setTimeout(() => {
-            previewItem.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            previewItem.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
             previewItem.style.opacity = '1';
             previewItem.style.transform = 'scale(1)';
         }, 10);
@@ -447,12 +445,11 @@ function previewVideoFile(file, container) {
         previewItem.appendChild(video);
         previewItem.appendChild(removeButton);
         container.appendChild(previewItem);
-        
-        // 添加动画效果
+          // 添加动画效果
         previewItem.style.opacity = '0';
         previewItem.style.transform = 'scale(0.8)';
         setTimeout(() => {
-            previewItem.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            previewItem.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
             previewItem.style.opacity = '1';
             previewItem.style.transform = 'scale(1)';
         }, 10);
@@ -517,8 +514,7 @@ function showToast(message, type = 'info') {
     setTimeout(() => {
         toast.style.opacity = '1';
     }, 10);
-    
-    // 3秒后消失
+      // 1.5秒后消失
     setTimeout(() => {
         toast.style.opacity = '0';
         toast.style.transform = 'translate(-50%, 20px)';
@@ -526,8 +522,8 @@ function showToast(message, type = 'info') {
             if (document.body.contains(toast)) {
                 document.body.removeChild(toast);
             }
-        }, 300);
-    }, 3000);
+        }, 150);
+    }, 1500);
 }
 
 // 页面卸载时确认

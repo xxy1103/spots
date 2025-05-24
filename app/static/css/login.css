@@ -32,7 +32,7 @@ body::before {
     color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 更明显的阴影 */
     z-index: 2;
-    animation: fadeInDown 0.5s ease-out; /* 标题淡入动画 - 加快 */
+    animation: fadeInDown 0.25s ease-out; /* 标题淡入动画 - 加快 */
 }
 
 .image-container {
@@ -43,7 +43,7 @@ body::before {
     height: 80px;
     background: url('../dogo.png') center center/contain no-repeat;
     z-index: 3; /* 确保在标题和遮罩之上 */
-    animation: fadeInLeft 0.5s ease-out 0.2s; /* Logo淡入动画 - 加快，延迟调整 */
+    animation: fadeInLeft 0.25s ease-out 0.1s; /* Logo淡入动画 - 加快，延迟调整 */
     animation-fill-mode: backwards; /* 确保动画开始前元素不可见 */
 }
 
@@ -56,7 +56,7 @@ body::before {
     margin-right: 8%;
     z-index: 1;
     position: relative;
-    animation: fadeInRight 0.5s ease-out 0.2s; /* 登录框淡入动画 - 加快，延迟调整 */
+    animation: fadeInRight 0.25s ease-out 0.1s; /* 登录框淡入动画 - 加快，延迟调整 */
     animation-fill-mode: backwards;
 }
 

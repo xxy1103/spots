@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         statNumbers.forEach(stat => {
             const target = parseInt(stat.dataset.count);
-            const duration = 2000;
+            const duration = 1000;
             const increment = target / (duration / 16);
             let current = 0;
             
@@ -99,9 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     stat.textContent = target;
                 }
             };
-            
-            // 延迟启动动画，营造更好的视觉效果
-            setTimeout(updateNumber, 1500);
+              // 延迟启动动画，营造更好的视觉效果
+            setTimeout(updateNumber, 750);
         });
     }
 
@@ -337,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (window.scrollY <= 300) {
                         elements.backToTop.style.display = 'none';
                     }
-                }, 300);
+                }, 150);
             }
         }
 

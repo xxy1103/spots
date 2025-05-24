@@ -312,10 +312,9 @@ document.addEventListener('DOMContentLoaded', () => {
         toast.style.padding = '10px 20px';
         toast.style.borderRadius = '4px';
         toast.style.zIndex = '1000';
-        document.body.appendChild(toast);
-        setTimeout(() => {
+        document.body.appendChild(toast);        setTimeout(() => {
             toast.remove();
-        }, 3000);
+        }, 1500);
     }
     
     searchButton.addEventListener('click', handleSearch);

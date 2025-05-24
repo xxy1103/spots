@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     opacity: 0;
-    animation: fadeIn 1s ease-in-out 0.8s forwards;
+    animation: fadeIn 0.5s ease-in-out 0.4s forwards;
 }
 
 .diary-detail-container {
@@ -16,7 +16,7 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transform: translateY(30px);
-    animation: slideUpFadeIn 0.8s ease-out 1s forwards;
+    animation: slideUpFadeIn 0.4s ease-out 0.5s forwards;
 }
 
 @keyframes slideUpFadeIn {

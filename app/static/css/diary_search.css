@@ -66,7 +66,7 @@
     justify-content: center;
     align-items: center;
     opacity: 1;
-    transition: opacity 0.5s ease-out;
+    transition: opacity 0.25s ease-out;
 }
 
 .page-loader.hidden {
@@ -225,7 +225,7 @@
 
 /* 日记卡片容器 */
 .diary-cards-container {
-    animation: fadeInUp 0.8s ease-out 0.9s both;
+    animation: fadeInUp 0.4s ease-out 0.45s both;
 }
 
 .diary-search-grid {
@@ -240,20 +240,19 @@
     background: white;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);    transition: all 0.2s ease;
     border: 1px solid rgba(0, 82, 217, 0.1);
     opacity: 0;
     transform: translateY(30px) scale(0.95);
-    animation: cardSlideIn 0.6s ease-out forwards;
+    animation: cardSlideIn 0.3s ease-out forwards;
 }
 
-.diary-card:nth-child(1) { animation-delay: 0.1s; }
-.diary-card:nth-child(2) { animation-delay: 0.2s; }
-.diary-card:nth-child(3) { animation-delay: 0.3s; }
-.diary-card:nth-child(4) { animation-delay: 0.4s; }
-.diary-card:nth-child(5) { animation-delay: 0.5s; }
-.diary-card:nth-child(6) { animation-delay: 0.6s; }
+.diary-card:nth-child(1) { animation-delay: 0.05s; }
+.diary-card:nth-child(2) { animation-delay: 0.1s; }
+.diary-card:nth-child(3) { animation-delay: 0.15s; }
+.diary-card:nth-child(4) { animation-delay: 0.2s; }
+.diary-card:nth-child(5) { animation-delay: 0.25s; }
+.diary-card:nth-child(6) { animation-delay: 0.3s; }
 
 .diary-card:hover {
     transform: translateY(-8px) scale(1.02);
@@ -279,20 +278,20 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 /* 懒加载图片样式 */
 .diary-card-image img.lazy-load {
     opacity: 0;
-    transition: opacity 0.6s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
     will-change: opacity; /* 优化opacity性能 */
     backface-visibility: hidden; /* 提高渲染性能 */
 }
 
 .diary-card-image img.lazy-load.loaded {
     opacity: 1;
-    animation: imageReveal 0.6s ease-out;
+    animation: imageReveal 0.3s ease-out;
 }
 
 .diary-card-image img.lazy-load.loading {
@@ -312,7 +311,7 @@
     height: 100%;
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
-    animation: skeleton-loading 1.5s infinite;
+    animation: skeleton-loading 0.75s infinite;
     transition: opacity 0.3s ease;
 }
 
@@ -339,7 +338,7 @@
         rgba(255, 255, 255, 0.4) 50%,
         transparent 100%
     );
-    animation: shimmer 2s infinite;
+    animation: shimmer 1s infinite;
 }
 
 @keyframes shimmer {
@@ -803,7 +802,7 @@
 }
 
 .image-progress-bar.loading {
-    animation: progressLoad 2s ease-in-out;
+    animation: progressLoad 1s ease-in-out;
 }
 
 @keyframes progressLoad {
