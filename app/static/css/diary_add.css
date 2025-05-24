@@ -1,0 +1,419 @@
+/* diary_add.css - 日记添加页面专用样式 */
+
+/* 主要内容区域 */
+.main-content {
+    position: absolute;
+    top: 285px; /* 位于头部和导航条下方 */
+    left: 0;
+    width: 100%;
+    min-height: calc(100vh - 285px);
+    background-color: #f8f9fa;
+    z-index: 1;
+    opacity: 0;
+    animation: slideInFromBottom 0.8s ease-out 0.5s forwards;
+}
+
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 日记表单容器 */
+.diary-form-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.diary-form {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+
+.diary-form h2 {
+    background: linear-gradient(135deg, #0052d9, #40a9ff);
+    color: white;
+    padding: 20px 30px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 表单样式 */
+.diary-add-form {
+    padding: 30px;
+}
+
+.form-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group .icon {
+    font-style: normal;
+    font-size: 18px;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: border 0.3s, box-shadow 0.3s;
+    font-size: 16px;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #0052d9;
+    box-shadow: 0 0 0 3px rgba(0, 82, 217, 0.1);
+    outline: none;
+    background-color: #fff;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 200px;
+}
+
+.hint {
+    display: block;
+    color: #666;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* 下拉框样式 */
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper:after {
+    content: '▼';
+    font-size: 12px;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none;
+}
+
+/* 评分星星样式 */
+.rating-stars {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.rating-stars:hover {
+    background: #f0f8ff;
+}
+
+.stars-container {
+    display: flex;
+    margin-right: 15px;
+}
+
+.stars-container i {
+    font-size: 28px;
+    color: #ffc107;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.stars-container i:hover {
+    transform: scale(1.2);
+    color: #ffb300;
+}
+
+.stars-container i.fas {
+    color: #ffb300;
+}
+
+.rating-value {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    background: linear-gradient(135deg, #ffb300, #ffc107);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 30px;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* 文件上传样式 */
+.file-upload-container {
+    margin: 10px 0;
+}
+
+.file-upload-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #0052d9, #40a9ff);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.file-upload-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 82, 217, 0.3);
+}
+
+.file-upload-button:active {
+    transform: translateY(0);
+}
+
+.hidden-file-input {
+    display: none;
+}
+
+/* 媒体预览样式 */
+.preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.preview-item {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.preview-item:hover {
+    transform: scale(1.05);
+}
+
+.preview-item img,
+.preview-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-preview {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 10;
+}
+
+.remove-preview:hover {
+    background-color: rgba(255, 0, 0, 1);
+    transform: scale(1.1);
+}
+
+/* 视频预览特殊样式 */
+.preview-item.video-preview {
+    width: 200px;
+    height: 150px;
+}
+
+/* 表单操作区域 */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.cancel-button {
+    padding: 12px 25px;
+    background: #f0f0f0;
+    color: #666;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.cancel-button:hover {
+    background: #e0e0e0;
+}
+
+.submit-button {
+    flex: 1;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #0052d9, #40a9ff);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.submit-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 82, 217, 0.3);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+/* 媒体查询 - 响应式设计 */
+@media (max-width: 768px) {
+    .main-content {
+        top: 225px;
+    }
+    
+    .diary-form-container {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+    
+    .diary-form h2 {
+        padding: 15px 20px;
+        font-size: 20px;
+    }
+    
+    .diary-add-form {
+        padding: 20px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .cancel-button,
+    .submit-button {
+        width: 100%;
+        padding: 12px 20px;
+    }
+    
+    .preview-item {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .preview-item.video-preview {
+        width: 160px;
+        height: 120px;
+    }
+}
+
+/* 动画效果 */
+.form-section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.form-section:nth-child(1) { animation-delay: 0.6s; }
+.form-section:nth-child(2) { animation-delay: 0.8s; }
+.form-section:nth-child(3) { animation-delay: 1.0s; }
+.form-section:nth-child(4) { animation-delay: 1.2s; }
+.form-section:nth-child(5) { animation-delay: 1.4s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 目标区域高亮效果 */
+.highlight-drop {
+    border: 2px dashed #0052d9;
+    background-color: rgba(0, 82, 217, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* 错误状态样式 */
+.form-group.error input,
+.form-group.error textarea,
+.form-group.error select {
+    border-color: #ff3b30;
+    box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
+}
+
+.error-message {
+    color: #ff3b30;
+    font-size: 14px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.error-message:before {
+    content: "⚠️";
+}

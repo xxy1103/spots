@@ -3,113 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>发布日记</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <title>发布旅行日记</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/diary_add.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            padding-top: 20px;
-        }
-        .diary-form {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-        .diary-form h2 {
-            color: #343a40;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .form-group label {
-            font-weight: 500;
-        }
-        .btn-submit {
-            background-color: #28a745;
-            border-color: #28a745;
-            width: 100%;
-            padding: 10px;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-        .preview-container {
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .preview-item {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            overflow: hidden;
-            border-radius: 5px;
-        }
-        .preview-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .preview-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .remove-preview {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: rgba(255, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 12px;
-            line-height: 20px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .rating-stars {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        .stars-container {
-            display: flex;
-            margin-right: 10px;
-        }
-        .stars-container i {
-            font-size: 24px;
-            color: #ffc107;
-            margin-right: 5px;
-            cursor: pointer;
-        }
-        .rating-value {
-            font-size: 16px;
-            font-weight: 500;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="diary-form">
-                    <h2>发布旅行日记</h2>
-                    <form action="{{ url_for('diary.add_diary') }}" method="POST" enctype="multipart/form-data">                        <div class="form-group">
-                            <label for="spot_id">景点选择</label>
-                            <select class="form-control" id="spot_id" name="spot_id" required>
-                                <option value="">请选择景点</option>
-                                {% for spot in spots %}
-                                <option value="{{ spot.id }}">{{ spot.name }}</option>
-                                {% endfor %}
-                            </select>
+    <!-- 头部导航 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="/spots" class="logo-link">
+                    <div class="image-container"></div>
+                </a>
+            </div>
+            
+            <div class="header-center">
+                <div class="search-bar">
+                    <select aria-label="搜索类型">
+                        <option value="spot">景区</option>
+                        <option value="diary">日记</option>
+                    </select>
+                    <div class="search-input">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#666666">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                        <input type="text" placeholder="请输入关键词" aria-label="搜索关键词">
+                    </div>
+                    <button class="search-button">搜索</button>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <div class="user-info">
+                    <a id="username" href="#" style="text-decoration: none; color: inherit; cursor: pointer;">{{ current_user.name if current_user else '访客' }}</a>
+                    <button id="logout-button" class="logout-button">登出</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 导航条 -->
+    <div class="blue-container">
+        <div class="nav-item" onclick="window.location.href='/spots/search'">
+            推荐景区
+        </div>
+        <div class="nav-item" onclick="window.location.href='/diary/search'">
+            口碑日记
+        </div>
+    </div>
+
+    <!-- 主要内容区域 -->
+    <div class="main-content">
+        <div class="diary-form-container">
+            <div class="diary-form">
+                <h2>✏️ 发布旅行日记</h2>                <form action="{{ url_for('diary.add_diary') }}" method="POST" enctype="multipart/form-data" class="diary-add-form">                    
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="spot_id">
+                                <i class="icon">🏞️</i>景点选择
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="spot_id" name="spot_id" required>
+                                    <option value="">请选择景点</option>
+                                    {% for spot in spots %}
+                                    <option value="{{ spot.id }}">{{ spot.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="spot_marking">景点评分</label>
+                            <label for="spot_marking">
+                                <i class="icon">⭐</i>景点评分
+                            </label>
                             <div class="rating-stars">
                                 <input type="hidden" id="spot_marking" name="spot_marking" value="0">
                                 <div class="stars-container">
@@ -121,162 +90,71 @@
                                 </div>
                                 <span class="rating-value">0分</span>
                             </div>
-                            <small class="form-text text-muted">请为该景点评分（1-5星）</small>
+                            <small class="hint">请为该景点评分（1-5星）</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="title">
+                                <i class="icon">📝</i>日记标题
+                            </label>
+                            <input type="text" id="title" name="title" placeholder="为您的旅行日记添加一个吸引人的标题" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="content">
+                                <i class="icon">📄</i>日记内容
+                            </label>
+                            <textarea id="content" name="content" rows="8" placeholder="分享您的旅行故事、心得体会或建议..." required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section media-section">
+                        <div class="form-group">
+                            <label>
+                                <i class="icon">🖼️</i>添加图片
+                            </label>
+                            <div class="file-upload-container">
+                                <div class="file-upload-button" id="imageUploadButton">
+                                    <i class="icon">➕</i>
+                                    <span>选择图片</span>
+                                </div>
+                                <input type="file" class="hidden-file-input" id="images" name="images" multiple accept="image/*">
+                                <small class="hint">可以选择多张图片</small>
+                            </div>
+                            <div class="preview-container" id="imagePreview"></div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="title">标题</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="为您的旅行日记添加一个吸引人的标题" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="content">内容</label>
-                            <textarea class="form-control" id="content" name="content" rows="8" placeholder="分享您的旅行故事、心得体会或建议..." required></textarea>
-                        </div>                        <div class="form-group">
-                            <label for="images">上传图片</label>
-                            <input type="file" class="form-control-file" id="images" name="images" multiple accept="image/*" onchange="previewImages(event)">
-                            <small class="form-text text-muted">可以选择多张图片</small>
-                            <div class="preview-container" id="imagePreview"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="videos">上传视频</label>
-                            <input type="file" class="form-control-file" id="videos" name="videos" multiple accept="video/*" onchange="previewVideos(event)">
-                            <small class="form-text text-muted">支持上传多个视频</small>
+                            <label>
+                                <i class="icon">🎬</i>添加视频
+                            </label>
+                            <div class="file-upload-container">
+                                <div class="file-upload-button" id="videoUploadButton">
+                                    <i class="icon">➕</i>
+                                    <span>选择视频</span>
+                                </div>
+                                <input type="file" class="hidden-file-input" id="videos" name="videos" multiple accept="video/*">
+                                <small class="hint">支持上传多个视频</small>
+                            </div>
                             <div class="preview-container" id="videoPreview"></div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-submit">发布日记</button>
-                    </form>
-                </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="cancel-button" onclick="window.history.back()">取消</button>
+                        <button type="submit" class="submit-button">
+                            <i class="icon">✅</i>发布日记
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>    <script>
-
-        // 处理星级评分
-        document.addEventListener('DOMContentLoaded', function() {
-            const stars = document.querySelectorAll('.stars-container i');
-            const ratingInput = document.getElementById('spot_marking');
-            const ratingValue = document.querySelector('.rating-value');
-            
-            // 设置默认值为0
-            ratingInput.value = 0;
-            
-            // 表单提交前验证，确保评分有值
-            document.querySelector('form').addEventListener('submit', function(e) {
-                const spotMarking = parseFloat(ratingInput.value);
-                if (isNaN(spotMarking) || spotMarking <= 0) {
-                    // 如果没有评分，设置为默认值3
-                    ratingInput.value = 3;
-                    ratingValue.textContent = '3分';
-                    highlightStars(3);
-                }
-            });
-            
-            stars.forEach(star => {
-                // 鼠标悬停效果
-                star.addEventListener('mouseover', function() {
-                    const rating = this.getAttribute('data-rating');
-                    highlightStars(rating);
-                });
-                
-                // 鼠标离开效果
-                star.addEventListener('mouseout', function() {
-                    const currentRating = ratingInput.value;
-                    highlightStars(currentRating);
-                });
-                
-                // 点击选择评分
-                star.addEventListener('click', function() {
-                    const rating = this.getAttribute('data-rating');
-                    ratingInput.value = rating;
-                    ratingValue.textContent = rating + '分';
-                    highlightStars(rating);
-                });
-            });
-            
-            // 高亮星星函数
-            function highlightStars(rating) {
-                stars.forEach(star => {
-                    const starRating = star.getAttribute('data-rating');
-                    if (starRating <= rating) {
-                        star.className = 'fas fa-star'; // 实心星星
-                    } else {
-                        star.className = 'far fa-star'; // 空心星星
-                    }
-                });
-            }
-        });
-
-        // 预览选择的图片
-        function previewImages(event) {
-            const imagePreview = document.getElementById('imagePreview');
-            imagePreview.innerHTML = '';
-            
-            const files = event.target.files;
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                if (!file.type.startsWith('image/')) continue;
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const previewItem = document.createElement('div');
-                    previewItem.className = 'preview-item';
-                    
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    
-                    const removeButton = document.createElement('button');
-                    removeButton.className = 'remove-preview';
-                    removeButton.innerHTML = '×';
-                    removeButton.onclick = function() {
-                        imagePreview.removeChild(previewItem);
-                    };
-                    
-                    previewItem.appendChild(img);
-                    previewItem.appendChild(removeButton);
-                    imagePreview.appendChild(previewItem);
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // 预览选择的视频
-        function previewVideos(event) {
-            const videoPreview = document.getElementById('videoPreview');
-            videoPreview.innerHTML = '';
-            
-            const files = event.target.files;
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                if (!file || !file.type.startsWith('video/')) continue;
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const previewItem = document.createElement('div');
-                    previewItem.className = 'preview-item';
-                    previewItem.style.width = '200px';
-                    previewItem.style.height = '150px';
-                    
-                    const video = document.createElement('video');
-                    video.src = e.target.result;
-                    video.controls = true;
-                    
-                    const removeButton = document.createElement('button');
-                    removeButton.className = 'remove-preview';
-                    removeButton.innerHTML = '×';
-                    removeButton.onclick = function() {
-                        videoPreview.removeChild(previewItem);
-                        // 注意：这里不能清空整个文件输入，因为可能有多个视频
-                    };
-                    
-                    previewItem.appendChild(video);
-                    previewItem.appendChild(removeButton);
-                    videoPreview.appendChild(previewItem);
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-    </script>
+    <script src="{{ url_for('static', filename='js/diary_add.js') }}"></script>
 </body>
 </html>
