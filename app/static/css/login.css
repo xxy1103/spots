@@ -61,25 +61,38 @@ body::before {
 }
 
 @media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        justify-content: flex-start; /* Align content to the top */
+        align-items: center; /* Center content horizontally */
+        padding-top: 30px; /* Add some padding at the top */
+        min-height: 100vh; /* Ensure body takes at least full viewport height */
+    }
+
+    .page-title {
+        position: static; /* Change from absolute to static for flex flow */
+        transform: none; /* Remove transform used with absolute positioning */
+        left: auto;
+        top: auto;
+        font-size: 28px; /* Adjusted font size */
+        margin-bottom: 15px; /* Space below the title */
+    }
+
+    .image-container {
+        position: static; /* Change from absolute to static for flex flow */
+        transform: none; /* Remove transform used with absolute positioning */
+        left: auto;
+        top: auto;
+        width: 160px; /* Adjusted width */
+        height: 50px; /* Adjusted height */
+        margin-bottom: 25px; /* Space below the logo */
+    }
+
     .login-container {
         margin-right: 0;
         width: 90%; /* 移动端适应 */
         padding: 30px;
-    }
-    .page-title {
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 24px; /* 移动端标题缩小 */
-    }
-    .image-container {
-        left: 50%;
-        transform: translateX(-50%);
-        top: 20px; /* 移动端logo位置调整 */
-        width: 200px; /* 移动端logo缩小 */
-        height: 60px;
-    }
-    body {
-        justify-content: center; /* 移动端登录框居中 */
+        margin-top: 0; /* Reset top margin as spacing is handled by body padding and other elements */
     }
 }
 
