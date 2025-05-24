@@ -264,7 +264,7 @@ def navigation():
         # 调用地图模块的规划路线方法
         # 获取规划方式，默认为distance（最短路径）
         method = data.get("method", "distance")
-        # use_vehicle = data.get("use_vehicle", False) # 是否使用车辆
+        use_vehicle = data.get("use_vehicle", False) # 是否使用车辆
 
         print(f"路线规划方式: {method}, 传递给 plan_route 的坐标: {valid_coordinates}")
         
@@ -285,7 +285,7 @@ def navigation():
             
         elif method == "time":
             # 规划最短时间
-            total_time, path_points = map_module.plan_route(valid_coordinates,"time")
+            total_time, path_points = map_module.plan_route(valid_coordinates,"time",use_vehicle)
 
             # 检查规划结果 - 确保 path_points 是一个非空列表或元组
             if total_time is None or not path_points:

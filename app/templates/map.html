@@ -67,8 +67,7 @@
                     <div class="input-group">
                         <label><i class="fas fa-flag-checkered"></i> 终点：</label>
                         <input type="text" class="route-input" placeholder="选择终点" disabled>
-                    </div>
-                    <div class="input-group">
+                    </div>                    <div class="input-group">
                         <label><i class="fas fa-sliders-h"></i> 规划方式：</label>
                         <div class="route-method-selector">
                             <label class="route-method-option">
@@ -78,6 +77,19 @@
                             <label class="route-method-option">
                                 <input type="radio" name="route-method" value="time"> 
                                 <span><i class="fas fa-clock"></i> 最短时间</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-car"></i> 交通方式：</label>
+                        <div class="vehicle-selector">
+                            <label class="vehicle-option">
+                                <input type="radio" name="vehicle-method" value="walking" checked> 
+                                <span><i class="fas fa-walking"></i> 步行</span>
+                            </label>
+                            <label class="vehicle-option">
+                                <input type="radio" name="vehicle-method" value="vehicle"> 
+                                <span><i class="fas fa-car"></i> 交通工具</span>
                             </label>
                         </div>
                     </div>

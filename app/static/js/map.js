@@ -376,8 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p><i class="fas fa-tag"></i> 类型: ${poi.type || '未知'}</p>
                     <p><i class="fas fa-ruler"></i> 距离中心点: ${poi.value1 ? poi.value1 + '米' : '未知'}</p>
                     <p><i class="fas fa-map-pin"></i> 坐标: ${poi.location.lat.toFixed(6)}, ${poi.location.lng.toFixed(6)}</p>
-                </div>
-            `;
+                </div>            `;
         },
         
         /**
@@ -477,8 +476,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.showMessage(`已从路线中移除 "${removed.name}"`);
             }
         },
-        
-        /**
+          /**
          * 清除所有路线点
          */
         clearRoutePoints: function() {
@@ -493,6 +491,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (this.currentRouteLayer) {
                 map.removeLayer(this.currentRouteLayer);
                 this.currentRouteLayer = null;
+            }
+            
+            // 清除路径图例
+            const existingLegend = document.querySelector('.route-legend');
+            if (existingLegend) {
+                existingLegend.remove();
             }
             
             // 更新显示
@@ -628,9 +632,189 @@ document.addEventListener('DOMContentLoaded', function() {
                 inputs[1].value = this.routePoints.length > 1 ? this.routePoints[this.routePoints.length - 1].name : '';
             }
         },
-          /**
-         * 规划路线
+        
+        /**
+         * 创建路径图例
          */
+        createRouteLegend: function() {
+            // 先移除现有图例
+            const existingLegend = document.querySelector('.route-legend');
+            if (existingLegend) {
+                existingLegend.remove();
+            }
+            
+            const legendData = [
+                { color: '#3498db', text: '距离优化路径' },
+                { color: '#e74c3c', text: '高速公路 (80km/h)' },
+                { color: '#f39c12', text: '打车 (70km/h)' },
+                { color: '#2ecc71', text: '公交车 (50km/h)' },
+                { color: '#34495e', text: '电瓶车 (30km/h)' },
+                { color: '#16a085', text: '自行车 (15km/h)' },
+                { color: '#8e44ad', text: '步行 (5km/h)' }
+            ];
+            
+            const legend = document.createElement('div');
+            legend.className = 'route-legend';
+            legend.innerHTML = '<h4><i class="fas fa-palette"></i> 路径图例</h4>';
+            
+            legendData.forEach(item => {
+                const legendItem = document.createElement('div');
+                legendItem.className = 'legend-item';
+                legendItem.innerHTML = `
+                    <div class="legend-color" style="background-color: ${item.color}"></div>
+                    <span class="legend-text">${item.text}</span>
+                `;
+                legend.appendChild(legendItem);
+            });
+            
+            // 添加关闭按钮
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            closeBtn.style.cssText = `
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #999;
+                font-size: 12px;
+                padding: 2px;
+            `;
+            closeBtn.onclick = () => legend.remove();
+            legend.appendChild(closeBtn);
+            
+            // 将图例添加到地图容器
+            document.querySelector('.map-container').appendChild(legend);
+        },        /**
+         * 显示多速度路径
+         * @param {Array} routeSegments - 路径段数组，每段包含speed和nodes
+         */
+        displayMultiSpeedRoute: function(routeSegments) {
+            // 输入验证
+            if (!Array.isArray(routeSegments) || routeSegments.length === 0) {
+                console.error('displayMultiSpeedRoute: 无效的路径段数据');
+                this.showMessage('路径数据格式错误', 'error');
+                return;
+            }
+            
+            // 速度到颜色的映射
+            const speedColorMapping = {
+                'distance_optimized': '#3498db', // 蓝色 - 距离优化
+                80: '#e74c3c', // 红色 - 高速公路
+                70: '#f39c12', // 橙色 - 国道
+                50: '#2ecc71', // 绿色 - 次要道路
+                30: '#95a5a6', // 深灰色 - 住宅区道路
+                15: '#16a085', // 青色 - 自行车道
+                5: '#8e44ad'   // 深紫色 - 人行道/小径
+            };
+            
+            let validSegmentsCount = 0;
+            
+            // 为每个路径段创建不同颜色的路线
+            routeSegments.forEach((segment, index) => {
+                // 验证路径段数据
+                if (!segment || !segment.nodes || !Array.isArray(segment.nodes) || segment.nodes.length < 2) {
+                    console.warn(`displayMultiSpeedRoute: 跳过无效的路径段 ${index}:`, segment);
+                    return;
+                }
+                
+                validSegmentsCount++;
+                const speed = segment.speed;
+                let color = speedColorMapping[speed] || '#7f8c8d'; // 默认灰色
+                let weight = 5;
+                let opacity = 0.8;
+                
+                // 对于距离优化模式，使用蓝色
+                if (speed === 'distance_optimized') {
+                    color = '#3498db';
+                }
+                // 对于较高速度的道路，使用更粗的线条
+                else if (typeof speed === 'number') {
+                    if (speed >= 60) {
+                        weight = 6;
+                    } else if (speed >= 30) {
+                        weight = 5;
+                    } else {
+                        weight = 4;
+                        opacity = 0.7;
+                    }
+                }
+                
+                // 验证节点数据
+                const validNodes = segment.nodes.filter(node => 
+                    node && 
+                    typeof node[0] === 'number' && 
+                    typeof node[1] === 'number' &&
+                    !isNaN(node[0]) && !isNaN(node[1])
+                );
+                
+                if (validNodes.length < 2) {
+                    console.warn(`displayMultiSpeedRoute: 路径段 ${index} 没有足够的有效节点`);
+                    return;
+                }
+                
+                try {
+                    const polyline = L.polyline(validNodes, {
+                        color: color,
+                        weight: weight,
+                        opacity: opacity,
+                        lineJoin: 'round',
+                        lineCap: 'round'
+                    });
+                    
+                    // 添加工具提示显示速度信息
+                    let speedText = '';
+                    if (speed === 'distance_optimized') {
+                        speedText = '距离优化路径';
+                    } else if (typeof speed === 'number') {
+                        const roadTypes = {
+                            80: '高速公路',
+                            70: '打车',
+                            50: '公交车', 
+                            30: '电瓶车',
+                            15: '自行车',
+                            5: '步行'
+                        };
+                        speedText = `${roadTypes[speed] || '未知道路'} (${speed} km/h)`;
+                    } else {
+                        speedText = `速度: ${speed}`;
+                    }
+                    
+                    polyline.bindTooltip(speedText, {
+                        permanent: false,
+                        direction: 'center',
+                        className: 'route-tooltip'
+                    });
+                    
+                    // 将路线段添加到路线图层组
+                    if (this.currentRouteLayer) {
+                        this.currentRouteLayer.addLayer(polyline);
+                    } else {
+                        console.error('displayMultiSpeedRoute: 当前路线图层未初始化');
+                    }
+                } catch (error) {
+                    console.error(`displayMultiSpeedRoute: 创建路径段 ${index} 时出错:`, error);
+                }
+            });
+            
+            if (validSegmentsCount === 0) {
+                console.error('displayMultiSpeedRoute: 没有有效的路径段可以显示');
+                this.showMessage('没有有效的路径数据可以显示', 'warning');
+                return;
+            }
+            
+            // 创建路径图例
+            try {
+                this.createRouteLegend();
+            } catch (error) {
+                console.error('displayMultiSpeedRoute: 创建图例时出错:', error);
+            }
+        },
+        
+        /**
+         * 规划路线
+         */        
         planRoute: function() {
             if (this.routePoints.length < 2) {
                 alert("请至少选择两个地点（起点和终点）来规划路线。");
@@ -650,13 +834,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            console.log(`准备规划路线，方式: ${selectedMethod}，发送坐标:`, coordinates);
+            // 获取选择的交通方式
+            const vehicleRadios = document.getElementsByName('vehicle-method');
+            let useVehicle = false; // 默认为步行
+            
+            for (const radio of vehicleRadios) {
+                if (radio.checked) {
+                    useVehicle = radio.value === 'vehicle';
+                    break;
+                }
+            }
+            
+            console.log(`准备规划路线，方式: ${selectedMethod}，交通工具: ${useVehicle ? '启用' : '步行'}，发送坐标:`, coordinates);
             const planButton = document.querySelector('.route-form .btn');
             if (planButton) planButton.disabled = true;
             
             // 根据选择的方式显示不同的加载提示
             const methodName = selectedMethod === 'distance' ? '最短路径' : '最短时间';
-            this.showLoading(`正在规划${methodName}路线...`);
+            const vehicleName = useVehicle ? '（交通工具）' : '（步行）';
+            this.showLoading(`正在规划${methodName}路线${vehicleName}...`);
             
             fetch('/map/api/navigation', {
                 method: 'POST',
@@ -666,7 +862,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({ 
                     points: coordinates,
-                    method: selectedMethod 
+                    method: selectedMethod,
+                    use_vehicle: useVehicle
                 })
             })
             .then(response => {
@@ -678,48 +875,55 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
                 return response.json();
-            })
-            .then(data => {                    if (data.success && data.route && data.route.length > 0) {
+            })            
+            .then(data => {
+                if (data.success && data.route && data.route.length > 0) {
                     console.log("收到路线数据:", data);
                     
                     if (this.currentRouteLayer) {
                         map.removeLayer(this.currentRouteLayer);
                     }
+                      // 创建路线图层组
+                    this.currentRouteLayer = L.layerGroup();
                     
-                    // 根据规划方式选择不同的路线颜色
-                    const routeColor = document.querySelector('input[value="distance"]:checked') ? '#3498db' : '#e67e22';
+                    // 处理新的路线数据格式
+                    this.displayMultiSpeedRoute(data.route);
                     
-                    this.currentRouteLayer = L.polyline(data.route, { 
-                        color: routeColor, 
-                        weight: 5,
-                        opacity: 0.7,
-                        lineJoin: 'round'
-                    }).addTo(map);
-                    
-                    // 确保路线在最底层显示，标记在最上层
-                    this.currentRouteLayer.bringToBack();
-                    // this.routeMarkersLayer.bringToFront(); // 旧的错误代码
-
-                    // 新方法：遍历 routeMarkersLayer 中的每个图层并将其置顶
+                    // 将路线图层添加到地图
+                    this.currentRouteLayer.addTo(map);                    // 确保标记图层在最上层
                     if (this.routeMarkersLayer && typeof this.routeMarkersLayer.eachLayer === 'function') {
                         this.routeMarkersLayer.eachLayer(function(layer) {
                             if (layer && typeof layer.bringToFront === 'function') {
-                                layer.bringToFront();
+                                try {
+                                    layer.bringToFront();
+                                } catch (error) {
+                                    console.warn('无法将标记置于前层:', error);
+                                }
                             }
                         });
-                    } else {
-                        console.warn('MapApp.routeMarkersLayer is not available or not a LayerGroup for bringToFront logic.');
                     }
                     
-                    map.fitBounds(this.currentRouteLayer.getBounds(), { padding: [50, 50] });
+                    // 获取所有路径点用于调整地图视图
+                    let allRoutePoints = [];
+                    data.route.forEach(segment => {
+                        if (segment.nodes && segment.nodes.length > 0) {
+                            allRoutePoints = allRoutePoints.concat(segment.nodes);
+                        }
+                    });
                     
-                    // 获取选择的规划方式
+                    if (allRoutePoints.length > 0) {
+                        const polyline = L.polyline(allRoutePoints);
+                        map.fitBounds(polyline.getBounds(), { padding: [50, 50] });
+                    }
+                      // 获取选择的规划方式和交通方式
                     const isDistanceMethod = document.querySelector('input[value="distance"]:checked') !== null;
+                    const isVehicleMode = document.querySelector('input[value="vehicle"]:checked') !== null;
                     
                     let detailsHtml = `
                         <div class="route-details">
                             <h4><i class="fas fa-check-circle"></i> 路线规划成功！</h4>
                             <p><i class="fas fa-info-circle"></i> 规划方式: ${isDistanceMethod ? '最短路径' : '最短时间'}</p>
+                            <p><i class="fas fa-${isVehicleMode ? 'car' : 'walking'}"></i> 交通方式: ${isVehicleMode ? '交通工具' : '步行'}</p>
                     `;
                     
                     if (isDistanceMethod && data.distance) {

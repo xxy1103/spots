@@ -9,15 +9,17 @@ class Map:
         self.router = DijkstraRouter()
         self.poi_search = POISearch()
 
-    def plan_route(self, coordinates, method="distance"):
+    def plan_route(self, coordinates, method="distance", use_vehicle=False):
         """
         规划路线
         :param coordinates: 经纬度坐标列表
-        :return: 路线总距离和路径节点
+        :param method: 路线规划方式 ("distance" 或 "time")
+        :param use_vehicle: 是否使用车辆 (仅在 method="time" 时有效)
+        :return: 路线总距离/时间和分段路径节点
         """
-        total_distance, path = self.router.plan_route(coordinates, method)
-        path = self.router.get_route_coordinates(path)
-        return total_distance, path
+        total_cost, segmented_path = self.router.plan_route(coordinates, method, use_vehicle)
+        route_segments = self.router.get_route_coordinates(segmented_path)
+        return total_cost, route_segments
     
     def get_POI_reversal(self, query, location, radius=500, page_num=0, page_size=20, output="json"):
         """

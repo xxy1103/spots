@@ -265,6 +265,53 @@ body, html {
     color: var(--primary-color);
 }
 
+/* 交通工具选择器样式 */
+.vehicle-selector {
+    display: flex;
+    margin-top: 5px;
+    gap: 10px;
+}
+
+.vehicle-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    flex: 1;
+    justify-content: center;
+}
+
+.vehicle-option:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.vehicle-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.vehicle-option span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.vehicle-option input[type="radio"]:checked + span {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.vehicle-option input[type="radio"]:checked {
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
 /* 按钮样式 */
 .btn {
     display: inline-block;
@@ -449,6 +496,60 @@ body, html {
 .route-details h4 {
     margin-top: 0;
     color: #27ae60;
+}
+
+/* 路径工具提示样式 */
+.route-tooltip {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    color: white !important;
+    padding: 5px 10px !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.route-tooltip::before {
+    border-top-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* 路径图例样式 */
+.route-legend {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-size: 12px;
+    max-width: 200px;
+}
+
+.route-legend h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 3px;
+    margin-right: 8px;
+    border-radius: 2px;
+}
+
+.legend-text {
+    color: var(--text-color);
+    font-size: 11px;
 }
 
 /* 响应式设计 */
