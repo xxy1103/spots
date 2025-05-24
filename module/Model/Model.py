@@ -76,7 +76,7 @@ class Diary:
 
         return {
             "id": self.id,
-            "name": self.user_name,
+            "user_name": self.user_name,
             "user_id": self.user_id,
             "spot_id": self.spot_id,
             "content": self.content,

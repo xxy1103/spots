@@ -156,15 +156,15 @@ def check_session():
         "success": False,
         "message": "请先登录"
     }
-    ```
-    """
+    ```    """
     # 如果代码执行到这里，说明login_required验证成功
     # g.user 已经被 login_required 设置
     return jsonify({
         'success': True,
         'message': '会话有效',
         'user': { # 可以选择性返回一些用户信息
-            'username': g.user.get('username')
+            'username': g.user.get('username'),
+            'user_id': g.user.get('user_id')
         }
     })
 

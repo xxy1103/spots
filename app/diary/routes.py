@@ -109,6 +109,11 @@ def get_recommendations(user_id):
     
     # 将推荐内容转换为字典列表
     recommendations = [diary.to_dict() for diary in recommendations]
+    # 获取每个日记的内容
+    for diary in recommendations:
+        diary["content"] = diary_manager.getDiaryContent(diary["id"])
+        
+
     return jsonify(recommendations)
 
 
