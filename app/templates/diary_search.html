@@ -3,303 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>旅游日记搜索</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --light-bg: #f8f9fa;
-            --text-color: #333;
-        }
-        
-        body {
-            background-color: var(--light-bg);
-            color: var(--text-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .navbar {
-            background-color: var(--primary-color);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .navbar-brand {
-            font-weight: 600;
-            color: white !important;
-        }
-
-        .nav-link {
-            color: rgba(255,255,255,0.85) !important;
-            margin: 0 10px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: white !important;
-            transform: translateY(-2px);
-        }
-
-        .search-container {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .form-control, .form-select {
-            border-radius: 8px;
-            padding: 12px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-color);
-            border: none;
-            border-radius: 8px;
-            padding: 12px 25px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .card {
-            border: none;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            height: 100%;
-            background-color: white;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .card-img-top {
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .card-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
-
-        .card-text {
-            color: #666;
-            margin-bottom: 15px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .rating-stars {
-            color: #f1c40f;
-            margin-right: 5px;
-        }
-        
-        .badge {
-            border-radius: 20px;
-            padding: 5px 12px;
-            font-weight: 500;
-        }
-
-        .badge-views {
-            background-color: #e0e0e0;
-            color: #555;
-        }
-
-        .badge-rating {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 30px 0;
-            margin-top: 50px;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.7);
-            margin-right: 15px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .search-count {
-            font-weight: 500;
-            margin-bottom: 20px;
-            color: #666;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 50px 0;
-        }
-
-        .no-results i {
-            font-size: 60px;
-            color: #d4d4d4;
-            margin-bottom: 20px;
-        }
-
-        .no-results h3 {
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .no-results p {
-            color: #999;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .card-date {
-            color: #888;
-            font-size: 0.9rem;
-        }
-    </style>
+    <title>旅游日记搜索 - 个性化旅游系统</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/diary_search.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- 页面加载动画 -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>正在为您搜寻精彩日记...</p>
+        </div>
+    </div>
 
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="/spots" class="logo-link">
+                    <div class="image-container"></div>
+                </a>
+            </div>
+            
+            <div class="header-center">
+                <div class="search-bar">
+                    <select aria-label="搜索类型">
+                        <option value="diary">日记</option>
+                        <option value="spot">景区</option>
+                    </select>
+                    <div class="search-input">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#666666">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                        <input type="text" placeholder="请输入关键词" aria-label="搜索关键词">
+                    </div>
+                    <button class="search-button">搜索</button>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <div class="user-info">
+                    <span id="username">访客</span>
+                    <button id="logout-button" class="logout-button">登出</button>
+                </div>
+            </div>
+        </div>
+    </header>
 
-    <div class="container">
-        <!-- 搜索表单 -->
-        <div class="search-container">
-            <h2 class="mb-4"><i class="bi bi-search"></i> 旅游日记搜索</h2>
-            <form action="{{ url_for('diary.search_diary') }}" method="GET">
-                <div class="row align-items-end">
-                    <div class="col-lg-5 mb-3">
-                        <label for="keyword" class="form-label">搜索关键词</label>
-                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="输入关键词..." value="{{ keyword }}">
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <label for="type" class="form-label">搜索类型</label>
-                        <select class="form-select" id="type" name="type">
-                            <option value="title" {% if request.args.get('type') == 'title' %}selected{% endif %}>标题</option>
-                            <option value="content" {% if request.args.get('type') == 'content' %}selected{% endif %}>内容</option>
-                            <option value="user" {% if request.args.get('type') == 'user' %}selected{% endif %}>用户</option>
-                            <option value="spot" {% if request.args.get('type') == 'spot' %}selected{% endif %}>景点</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <label for="sort_by" class="form-label">排序方式</label>
-                        <select class="form-select" id="sort_by" name="sort_by">
-                            <option value="value1" {% if request.args.get('sort_by') == 'value1' %}selected{% endif %}>按评分排序</option>
-                            <option value="value2" {% if request.args.get('sort_by') == 'value2' %}selected{% endif %}>按热度排序</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-3 mb-3">
-                        <button type="submit" class="btn btn-primary w-100">
-                            <i class="bi bi-search"></i> 搜索
-                        </button>
-                    </div>
+    <div class="blue-container">
+        <div class="nav-item" onclick="window.location.href='/spots/search'">
+            推荐景区
+        </div>
+        <div class="nav-item" onclick="window.location.href='/diary/search'">
+            口碑日记
+        </div>    </div>
+
+    <main class="diary-search-main-container">
+        <h1 class="diary-search-page-title">探索精彩旅游日记</h1>
+
+        <!-- 搜索控制区域 -->
+        <section class="diary-search-controls">
+            <form action="{{ url_for('diary.search_diary') }}" method="GET" class="search-form">
+                <div class="control-group">
+                    <label for="keyword">搜索关键词:</label>
+                    <input type="text" id="keyword" name="keyword" placeholder="输入关键词搜索日记..." value="{{ keyword }}">
+                </div>
+                <div class="control-group">
+                    <label for="type">搜索类型:</label>
+                    <select id="type" name="type">
+                        <option value="title" {% if request.args.get('type') == 'title' %}selected{% endif %}>标题</option>
+                        <option value="content" {% if request.args.get('type') == 'content' %}selected{% endif %}>内容</option>
+                        <option value="user" {% if request.args.get('type') == 'user' %}selected{% endif %}>用户</option>
+                        <option value="spot" {% if request.args.get('type') == 'spot' %}selected{% endif %}>景点</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="sort_by">排序方式:</label>
+                    <select id="sort_by" name="sort_by">
+                        <option value="value1" {% if request.args.get('sort_by') == 'value1' %}selected{% endif %}>按评分排序</option>
+                        <option value="value2" {% if request.args.get('sort_by') == 'value2' %}selected{% endif %}>按热度排序</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <button type="submit" class="search-submit-btn">
+                        <i class="fas fa-search"></i> 搜索日记
+                    </button>
                 </div>
             </form>
-        </div>
-
-        <!-- 搜索结果 -->
+        </section>        <!-- 搜索结果统计 -->
         {% if diaries %}
-            <div class="search-count">
-                <i class="bi bi-journal"></i> 找到 {{ diaries|length }} 篇相关日记
-            </div>
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                {% for diary in diaries %}
-                    <div class="col">
-                        <div class="card h-100">
-                            {% if diary.img_list and diary.img_list[0] %}
-                                <img src="/{{ diary.img_list[0] }}" class="card-img-top" alt="日记配图">
-                            {% else %}
-                                <div class="card-img-top bg-light d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-image text-secondary" style="font-size: 3rem;"></i>
-                                </div>
-                            {% endif %}
-                            <div class="card-body">
-                                <h5 class="card-title">{{ diary.title }}</h5>
-                                <p class="card-text">{{ diary.content[:100] }}{% if diary.content|length > 100 %}...{% endif %}</p>
-                                <div>
+        <div class="search-results-stats">
+            <i class="fas fa-book-open"></i> 找到 {{ diaries|length }} 篇相关日记
+        </div>
+        {% endif %}
+
+        <!-- 日记卡片网格 -->
+        <section class="diary-cards-container">
+            {% if diaries %}
+                <div id="diary-grid" class="diary-search-grid">                    {% for diary in diaries %}
+                        <div class="diary-card" data-diary-id="{{ diary.id }}">                            <div class="diary-card-image">
+                                {% if diary.img_list and diary.img_list[0] %}
+                                    <div class="image-wrapper">
+                                        <img 
+                                            class="lazy-load" 
+                                            data-src="/{{ diary.img_list[0] }}" 
+                                            alt="{{ diary.title }}"
+                                            loading="lazy">
+                                        <div class="image-skeleton">
+                                            <div class="skeleton-shimmer"></div>
+                                        </div>
+                                        <div class="image-loading-indicator">
+                                            <i class="fas fa-spinner image-loading-spinner"></i>
+                                        </div>
+                                        <div class="image-progress-bar"></div>
+                                    </div>
+                                {% else %}
+                                    <div class="diary-image-placeholder">
+                                        <i class="fas fa-image"></i>
+                                        <span>暂无图片</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="diary-card-content">
+                                <h3 class="diary-card-title">{{ diary.title }}</h3>
+                                <p class="diary-card-preview">{{ diary.content[:120] }}{% if diary.content|length > 120 %}...{% endif %}</p>
+                                
+                                <div class="diary-card-rating">
                                     <div class="rating-stars">
                                         {% for i in range(5) %}
                                             {% if i < diary.value1|int %}
-                                                <i class="bi bi-star-fill"></i>
+                                                <i class="fas fa-star"></i>
                                             {% elif (i + 0.5)|round == diary.value1|round %}
-                                                <i class="bi bi-star-half"></i>
+                                                <i class="fas fa-star-half-alt"></i>
                                             {% else %}
-                                                <i class="bi bi-star"></i>
+                                                <i class="far fa-star"></i>
                                             {% endif %}
                                         {% endfor %}
-                                        <span>{{ diary.value1 }}</span>
-                                    </div>
-                                    <div class="mt-2">
-                                        <span class="badge badge-views"><i class="bi bi-eye"></i> {{ diary.value2 }}</span>
-                                        <span class="badge badge-rating"><i class="bi bi-star"></i> {{ diary.scoreToSpot }}</span>
+                                        <span class="rating-score">{{ diary.value1 }}</span>
                                     </div>
                                 </div>
-                                <div class="card-meta">
-                                    <span class="card-date">{{ diary.time }}</span>
-                                    <a href="{{ url_for('diary.get_diary', diary_id=diary.id) }}" class="btn btn-sm btn-outline-primary">查看详情</a>
+                                
+                                <div class="diary-card-meta">
+                                    <div class="diary-stats">
+                                        <span class="stat-item">
+                                            <i class="fas fa-eye"></i>
+                                            {{ diary.value2 }}
+                                        </span>
+                                        <span class="stat-item">
+                                            <i class="fas fa-star"></i>
+                                            {{ diary.scoreToSpot }}
+                                        </span>
+                                    </div>
+                                    <div class="diary-date">{{ diary.time }}</div>
+                                </div>
+                                
+                                <div class="diary-card-actions">
+                                    <a href="{{ url_for('diary.get_diary', diary_id=diary.id) }}" class="view-diary-btn">
+                                        查看详情 <i class="fas fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-results-container">
+                    <div class="no-results-content">
+                        <i class="fas fa-search"></i>
+                        <h3>未找到相关日记</h3>
+                        <p>尝试使用其他关键词或搜索类型</p>
+                        <a href="{{ url_for('diary.search_diary') }}" class="retry-search-btn">查看所有日记</a>
                     </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div class="no-results">
-                <i class="bi bi-search"></i>
-                <h3>未找到相关日记</h3>
-                <p>尝试使用其他关键词或搜索类型</p>
-                <a href="{{ url_for('diary.search_diary') }}" class="btn btn-outline-secondary">查看所有日记</a>
-            </div>
-        {% endif %}
-    </div>
-
-    <!-- 页脚 -->
-    <footer class="footer mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>个性化旅游系统</h5>
-                    <p>发现美景，分享体验，记录精彩旅程</p>
                 </div>
-                <div class="col-md-6">
-                    <h5>链接</h5>
-      
-                </div>
-            </div>
-            <hr class="mt-4 mb-3" style="border-color: rgba(255,255,255,0.1);">
-            <p class="text-center mb-0">© 2025 个性化旅游系统 | 数据结构课程设计</p>
-        </div>
-    </footer>
+            {% endif %}
+        </section>
+    </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" id="back-to-top" aria-label="返回顶部">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="{{ url_for('static', filename='js/diary_search.js') }}"></script>
+
 </body>
 </html>

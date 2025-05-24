@@ -48,7 +48,7 @@ body::before {
 }
 
 .login-container {
-    background-color: rgba(255, 255, 255, 0.95); /* 略微透明的背景 */
+    background-color: rgba(255, 255, 255, 0.7); /* 略微透明的背景，透明度0.7 */
     border-radius: 10px; /* 更圆润的边角 */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 更柔和的阴影 */
     padding: 40px; /* 增加内边距 */

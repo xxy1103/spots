@@ -3,468 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>景区搜索</title>
-    <link rel="icon" href="../static/logo.png" type="image/png">
-    <link rel="shortcut icon" href="../static/logo.png" type="image/png">
-    <style>
-        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; }
-        .container { max-width: 960px; margin: 190px auto 20px; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #333; margin-bottom: 25px; }
-        .controls { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 25px; padding: 20px; background-color: #eef; border-radius: 5px; }
-        .controls > div { display: flex; flex-direction: column; flex: 1; min-width: 180px; }
-        .controls label { margin-bottom: 8px; font-weight: bold; font-size: 0.9em; color: #555; }
-        .controls input[type="text"],
-        .controls select { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; }
-        .spots-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; list-style: none; padding: 0; }
-        .spots-grid li { background-color: #fff; border: 1px solid #eee; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: transform 0.2s ease; }
-        .spots-grid li:hover { transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .spots-grid img { width: 100%; height: 180px; object-fit: cover; display: block; }
-        .spot-info { padding: 15px; }
-        .spot-info h3 { margin: 0 0 10px 0; font-size: 1.2em; color: #333; }
-        .spot-info p { margin: 5px 0; font-size: 0.9em; color: #666; }
-        .spot-info .score { font-weight: bold; color: #e67e22; }
-        .spot-info .type { background-color: #e7f5ff; color: #228be6; padding: 3px 8px; border-radius: 12px; display: inline-block; font-size: 0.8em; }
-        .loading, .no-results { text-align: center; padding: 30px; color: #888; font-size: 1.1em; grid-column: 1 / -1; /* Span across all columns if grid is empty */}
-        
-        /* 从index.html复制的样式 */
-        .image-container {
-            position: absolute;
-            left: 20%;
-            top: 29px;
-            transform: translateY(-50%);
-            width: 280px;
-            height: 80px;
-            background: url('../static/dogo.png') center center/contain no-repeat;
-            z-index: 999;
-            cursor: pointer;
-        }
-        .header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            position: relative;
-            top: 20px;
-        }
-        .header span {
-            font-weight: bold;
-            position: absolute;
-            right: 32%;
-            display: flex;
-            align-items: center;
-            height: 100%;
-            top: 22px;
-        }
-        .header .search-bar {
-            display: flex;
-            max-width: 400px;
-            height: 48px;
-            gap: 0px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 5px;
-        }
-        .header .search-bar select {
-            padding: 12px 16px;
-            border: 1px solid #CCCCCC;
-            border-radius: 4px 0 0 4px;
-            font-size: 14px;
-            min-width: 100px;
-        }
-        .header .search-input {
-            flex: 1;
-            position: relative;
-            display: flex;
-            align-items: center;
-            height: 46px;
-            top: 1px;
-        }
-        .header .search-input svg {
-            position: absolute;
-            left: 16px;
-            pointer-events: none;
-        }
-        .header .search-input input {
-            width: 100%;
-            height: 46px;
-            padding: 0 16px 0 48px;
-            border: 1px solid #CCCCCC;
-            border-left: none;
-            border-right: none;
-            font-size: 14px;
-        }
-        .header .search-input input::placeholder {
-            color: #999999;
-        }
-        .header .search-button {
-            padding: 12px 16px;
-            background-color: #FF6600;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 0 4px 4px 0;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .header .search-button:hover {
-            background-color: #E55C00;
-        }
-        .header .search-button:active {
-            transform: translateY(1px);
-        }
-        .header .actions {
-            display: flex;
-            gap: 10px;
-            position: absolute;
-            right: 29%;
-            top: 17px;
-        }
-        .header button, .header a.button {
-            padding: 0;
-            cursor: pointer;
-            text-decoration: none;
-            background-color: transparent;
-            border: none;
-            color: #333;
-        }
-        .header a.button:hover {
-            color: #0066cc;
-        }
-        #logout-button {
-            font-size: 16px;
-            margin-left: 10px;
-        }
-        #logout-button:hover {
-            color: #0066cc;
-        }
-        
-        /* 蓝色导航栏样式 */
-        .blue-container {
-            position: absolute;
-            top: 125px;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background-color: #0052d9;
-            z-index: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 60px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        
-        .nav-item {
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .nav-item:hover {
-            background-color: #003bb3;
-        }
-        
-        /* 添加推荐景区的橙色背景样式 */
-        .nav-item.orange {
-            background-color: #FF6600;
-        }
-        
-        .nav-item.orange:hover {
-            background-color: #E55C00;
-        }
-        
-        @media (max-width: 768px) {
-            .header .search-bar { height: 40px; }
-            .header .search-button span { display: none; }
-            .header .search-button::after { content: "🔍"; }
-        }
-    </style>
+    <title>景区搜索 - 个性化旅游系统</title>    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/spotSearch.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-<!-- 从index.html复制的头部元素 -->
-<div class="header">
-    <a href="/" style="text-decoration: none;">
-        <div class="image-container"></div>
-    </a>
-    <span id="username">访客</span>
-    <div class="search-bar">
-        <select aria-label="搜索类型">
-            <option value="spot">景区</option>
-            <option value="diary">日记</option>
-        </select>
-        <div class="search-input">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#666666">
-                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-            </svg>
-            <input type="text" placeholder="请输入关键词" aria-label="搜索关键词">
-        </div>
-        <button class="search-button">搜索</button>
-    </div>
-    <div class="actions">
-        <button id="logout-button">登出</button>
-    </div>
-</div>
-
-<!-- 从index.html复制的蓝色导航栏 -->
-<div class="blue-container">
-    <div class="nav-item orange" onclick="window.location.href='/spots/search'">
-        推荐景区
-    </div>
-    <div class="nav-item" onclick="window.location.href='/spots/spot_info/143'">
-        口碑日记
-    </div>
-</div>
-
-<div class="container">
-    <h1>探索景区</h1>
-
-    <div class="controls">
-        <div>
-            <label for="search-keyword">关键词搜索:</label>
-            <input type="text" id="search-keyword" placeholder="输入景区名称...">
-        </div>
-        <div>
-            <label for="filter-type">按类型筛选:</label>
-            <select id="filter-type">
-                <option value="">所有类型</option>
-                <!-- 类型选项将动态加载 -->
-            </select>
-        </div>
-        <div>
-            <label for="sort-by">排序方式:</label>
-            <select id="sort-by">
-                <option value="default">默认排序</option>
-                <option value="popularity_desc">热度 高 → 低</option>
-            </select>
+    <!-- 页面加载动画 -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>正在为您搜寻精彩景区...</p>
         </div>
     </div>
 
-    <ul id="spots-list" class="spots-grid">
-        <li class="loading">正在加载景区数据...</li>
-    </ul>
-    <div id="no-results" class="no-results" style="display: none;">抱歉，没有找到符合条件的景区。</div>
-
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const searchInput = document.getElementById('search-keyword');
-        const typeFilter = document.getElementById('filter-type');
-        const sortBy = document.getElementById('sort-by');
-        const spotsList = document.getElementById('spots-list');
-        const noResultsDiv = document.getElementById('no-results');
-        const usernameSpan = document.getElementById('username');
-        const logoutButton = document.getElementById('logout-button');
-        const headerSearchBar = document.querySelector('.header .search-bar');
-        const headerSearchSelect = headerSearchBar.querySelector('select');
-        const headerSearchInput = headerSearchBar.querySelector('input');
-        const headerSearchButton = headerSearchBar.querySelector('.search-button');
-
-        const spotTypes = [
-            "历史建筑", "赏花胜地", "萌萌动物", "城市漫步", "夜游观景",
-            "遛娃宝藏地", "展馆展览", "地标观景", "登高爬山", "踏青必去",
-            "自然山水", "游乐场", "演出"
-        ];
-
-        // 填充类型筛选下拉框
-        spotTypes.forEach(type => {
-            const option = document.createElement('option');
-            option.value = type;
-            option.textContent = type;
-            typeFilter.appendChild(option);
-        });
-        
-        // 解析URL参数，并设置对应的筛选条件
-        function parseUrlParameters() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const keywordParam = urlParams.get('keyword');
-            const typeParam = urlParams.get('type');
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="/spots" class="logo-link">
+                    <div class="image-container"></div>
+                </a>
+            </div>
             
-            if (keywordParam) {
-                searchInput.value = keywordParam;
-            }
-            
-            if (typeParam && spotTypes.includes(typeParam)) {
-                typeFilter.value = typeParam;
-            }
-            
-            // 加载URL参数后立即获取数据
-            fetchAndDisplaySpots();
-        }
-
-        // 获取并显示景点数据 (根据当前筛选和排序条件)
-        function fetchAndDisplaySpots() {
-            spotsList.innerHTML = '<li class="loading">正在加载景区数据...</li>'; // 显示加载提示
-            noResultsDiv.style.display = 'none';
-
-            // 1. 获取当前筛选和排序参数
-            const keyword = searchInput.value.trim();
-            const selectedType = typeFilter.value;
-            const sortValue = sortBy.value;
-
-            // 2. 构建 API 请求 URL (带查询参数)
-            // *** 确保后端有 /api/search-spots 接口来处理这些参数 ***
-            const apiUrl = new URL('/api/search-spots', window.location.origin); // 使用相对路径构建
-            if (keyword) {
-                apiUrl.searchParams.append('keyword', keyword);
-            }
-            if (selectedType) {
-                apiUrl.searchParams.append('type', selectedType);
-            }
-            if (sortValue !== 'default') {
-                apiUrl.searchParams.append('sort_by', sortValue);
-            }
-
-            // 3. 发送请求
-            fetch(apiUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // 4. 处理响应并显示结果
-                    if (data.success && Array.isArray(data.spots)) {
-                        displaySpots(data.spots);
-                    } else {
-                        spotsList.innerHTML = '<li class="loading">加载景点数据失败或格式错误。</li>';
-                        console.error('获取景点数据失败:', data.message || '格式错误');
-                        displaySpots([]); // 清空列表并可能显示无结果提示
-                    }
-                })
-                .catch(error => {
-                    spotsList.innerHTML = '<li class="loading">加载景点时出错，请检查网络或联系管理员。</li>';
-                    console.error('获取搜索结果时出错:', error);
-                    displaySpots([]); // 清空列表并可能显示无结果提示
-                });
-        }
-
-        // 显示景点列表 (此函数基本不变)
-        function displaySpots(spotsToDisplay) {
-            spotsList.innerHTML = ''; // 清空当前列表
-            noResultsDiv.style.display = 'none';
-
-            if (!spotsToDisplay || spotsToDisplay.length === 0) {
-                noResultsDiv.style.display = 'block';
-                spotsList.innerHTML = ''; // Ensure list is empty when showing no results
-                return;
-            }
-
-            spotsToDisplay.forEach(spot => {
-                const li = document.createElement('li');
-                const imgHtml = spot.img ? `<img src="${spot.img}" alt="${spot.name || '景区图片'}">` : '<div style="height: 180px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">无图</div>';
-                const name = spot.name || '未知景点';
-                const score = (spot.value1 !== undefined && spot.value1 !== null) ? parseFloat(spot.value1).toFixed(1) : 'N/A';
-                const type = spot.type || '未知类型';
-                const popularity = (spot.value2 !== undefined && spot.value2 !== null) ? parseInt(spot.value2) : 'N/A'; // value2 是热度
-
-                li.innerHTML = `
-                    ${imgHtml}
-                    <div class="spot-info">
-                        <h3><a href="/spots/spot_info/${spot.id}">${name}</a></h3> <!-- 修改这里，将名字变为链接 -->
-                        <p>评分: <span class="score">${score}</span></p>
-                        <p>热度: ${popularity}</p>
-                        <p>类型: <span class="type">${type}</span></p>
+            <div class="header-center">
+                <div class="search-bar">
+                    <select aria-label="搜索类型">
+                        <option value="spot">景区</option>
+                        <option value="diary">日记</option>
+                    </select>
+                    <div class="search-input">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#666666">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                        <input type="text" placeholder="请输入关键词" aria-label="搜索关键词">
                     </div>
-                `;
-                spotsList.appendChild(li);
+                    <button class="search-button">搜索</button>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <span id="username">访客</span>
+                    <button id="logout-button" class="logout-button">登出</button>
+                </div>
+            </div>
+        </div>
+    </header>
 
-            });
-        }
+    <div class="blue-container">
+        <div class="nav-item" onclick="window.location.href='/spots/search'">
+            推荐景区
+        </div>
+        <div class="nav-item" onclick="window.location.href='/diary/search'">
+            口碑日记
+        </div>
+    </div>
 
-        // 处理顶部搜索栏
-        function handleHeaderSearch() {
-            const keyword = headerSearchInput.value.trim();
-            if (!keyword) {
-                // 空关键词提示
-                headerSearchInput.style.borderColor = 'red';
-                headerSearchInput.style.animation = 'shake 0.5s';
+    <main class="search-main-container">
+        <h1 class="search-page-title">探索与发现特色景区</h1>
+
+        <section class="search-controls">
+            <div class="control-group">
+                <label for="search-keyword">关键词搜索:</label>
+                <input type="text" id="search-keyword" placeholder="例如：故宫, 主题公园, 自然风光">
+            </div>
+            <div class="control-group">
+                <label for="filter-type">按类型筛选:</label>
+                <select id="filter-type">
+                    <option value="">所有类型</option>
+                    <!-- 类型选项将由JS动态加载 -->
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="sort-by">排序方式:</label>
+                <select id="sort-by">
+                    <option value="default">默认排序</option>
+                    <option value="popularity_desc">热度 高 → 低</option>
+                    <option value="score_desc">评分 高 → 低</option>
+                </select>
+            </div>
+        </section>
+
+        <ul id="spots-list" class="search-spots-grid">
+            <!-- 初始加载提示 -->
+            <li class="loading-message">正在为您精心挑选景区...</li>
+        </ul>
+
+        <!-- 搜索结果统计 -->
+        <div class="search-results-stats" id="search-stats" style="display: none;">
+            <span id="results-count">0 个结果</span>
+        </div>
+
+        <div id="no-results" class="no-results-message" style="display: none;">
+            <p>抱歉，没有找到符合您筛选条件的景区。</p>
+            <p>尝试调整关键词或筛选选项，或者查看我们的全部推荐！</p>
+        </div>
+
+    </main>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" id="back-to-top" aria-label="返回顶部">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+<script src="{{ url_for('static', filename='js/spotSearch.js') }}"></script>
+
+<!-- 返回顶部功能脚本 -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const backToTopBtn = document.getElementById('back-to-top');
+    const pageLoader = document.getElementById('page-loader');
+    
+    // 页面加载动画
+    window.addEventListener('load', function() {
+        if (pageLoader) {
+            setTimeout(() => {
+                pageLoader.classList.add('hidden');
                 setTimeout(() => {
-                    headerSearchInput.style.borderColor = '#CCCCCC';
-                    headerSearchInput.style.animation = '';
+                    pageLoader.style.display = 'none';
                 }, 500);
-                return;
-            }
-            
-            const searchType = headerSearchSelect.value;
-            const apiUrl = new URL('/api/search-spots', window.location.origin);
-            apiUrl.searchParams.append('keyword', keyword);
-            if (searchType === 'diary') {
-                apiUrl.searchParams.append('type', 'diary');
-            }
-            
-            window.location.href = `/spots/search?keyword=${encodeURIComponent(keyword)}`;
+            }, 800);
         }
-        
-        // 添加顶部搜索栏事件监听
-        headerSearchButton.addEventListener('click', handleHeaderSearch);
-        headerSearchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleHeaderSearch();
+    });
+    
+    // 返回顶部功能
+    if (backToTopBtn) {
+        // 监听滚动事件
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
             }
         });
         
-        // 处理登出
-        logoutButton.addEventListener('click', () => {
-            fetch('/api/logout', { method: 'POST' })
-                .then(response => {
-                    window.location.href = '/login';
-                })
-                .catch(error => {
-                    console.error('登出时出错:', error);
-                    window.location.href = '/login';
-                });
+        // 点击返回顶部
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    // 搜索框焦点效果
+    const searchInputs = document.querySelectorAll('.control-group input, .control-group select');
+    searchInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
         });
         
-        // 检查会话并获取用户信息
-        fetch('/api/check-session')
-            .then(response => {
-                if (!response.ok) {
-                    if (response.status === 401) {
-                        window.location.href = '/login';
-                    } else {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return null;
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data && data.success) {
-                    usernameSpan.textContent = data.user.username || '用户';
-                } else if (data) {
-                    console.error('会话检查失败:', data.message);
-                    window.location.href = '/login';
-                }
-            })
-            .catch(error => {
-                console.error('检查会话时出错:', error);
-                usernameSpan.textContent = '错误';
-                window.location.href = '/login';
-            });
-
-        // 添加事件监听器 (每次改变都重新获取数据)
-        // 使用 debounce 或 throttle 优化频繁触发的 input 事件 (可选)
-        let searchTimeout;
-        searchInput.addEventListener('input', () => {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(fetchAndDisplaySpots, 300); // 延迟 300ms 触发搜索，避免频繁请求
+        input.addEventListener('blur', function() {
+            this.parentElement.classList.remove('focused');
         });
-        typeFilter.addEventListener('change', fetchAndDisplaySpots);
-        sortBy.addEventListener('change', fetchAndDisplaySpots);
-
-        // 初始加载数据 (解析URL参数并应用)
-        parseUrlParameters();
     });
+});
 </script>
 
 </body>

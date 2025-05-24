@@ -1,0 +1,860 @@
+/* diary_search.css - 旅游日记搜索页面专用样式 */
+/* 复用 index.css 的基础样式，这里只添加日记搜索页面特有的样式 */
+
+/* 确保与index.css的基础动画兼容 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 页面加载动画 */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.page-loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-content {
+    text-align: center;
+    color: #0052d9;
+}
+
+.loader-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #0052d9;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-content p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* 主容器 */
+.diary-search-main-container {
+    margin-top: 205px;
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+
+/* 页面标题 */
+.diary-search-page-title {
+    text-align: center;
+    color: #333;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    background: linear-gradient(45deg, #0052d9, #1976d2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+/* 搜索控制区域 */
+.diary-search-controls {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 32px rgba(0, 82, 217, 0.1);
+    border: 1px solid rgba(0, 82, 217, 0.1);
+    animation: slideInFromBottom 0.8s ease-out 0.7s both;
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    align-items: end;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.control-group label {
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.control-group input,
+.control-group select {
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+    color: #333;
+}
+
+.control-group input:focus,
+.control-group select:focus {
+    outline: none;
+    border-color: #0052d9;
+    box-shadow: 0 0 0 3px rgba(0, 82, 217, 0.1);
+    transform: translateY(-2px);
+}
+
+.control-group input::placeholder {
+    color: #999;
+}
+
+.search-submit-btn {
+    background: linear-gradient(45deg, #0052d9, #1976d2);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    min-height: 44px;
+}
+
+.search-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 82, 217, 0.3);
+}
+
+.search-submit-btn:active {
+    transform: translateY(0);
+}
+
+/* 搜索结果统计 */
+.search-results-stats {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 30px;
+    padding: 15px 20px;
+    background: rgba(0, 82, 217, 0.05);
+    border-radius: 10px;
+    border-left: 4px solid #0052d9;
+    animation: fadeInUp 0.6s ease-out 0.8s both;
+}
+
+.search-results-stats i {
+    color: #0052d9;
+    font-size: 18px;
+}
+
+/* 日记卡片容器 */
+.diary-cards-container {
+    animation: fadeInUp 0.8s ease-out 0.9s both;
+}
+
+.diary-search-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* 日记卡片样式 */
+.diary-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 82, 217, 0.1);
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    animation: cardSlideIn 0.6s ease-out forwards;
+}
+
+.diary-card:nth-child(1) { animation-delay: 0.1s; }
+.diary-card:nth-child(2) { animation-delay: 0.2s; }
+.diary-card:nth-child(3) { animation-delay: 0.3s; }
+.diary-card:nth-child(4) { animation-delay: 0.4s; }
+.diary-card:nth-child(5) { animation-delay: 0.5s; }
+.diary-card:nth-child(6) { animation-delay: 0.6s; }
+
+.diary-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(0, 82, 217, 0.15);
+}
+
+/* 日记卡片图片 */
+.diary-card-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    will-change: transform; /* 优化transform性能 */
+}
+
+.diary-card-image .image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.diary-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* 懒加载图片样式 */
+.diary-card-image img.lazy-load {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    will-change: opacity; /* 优化opacity性能 */
+    backface-visibility: hidden; /* 提高渲染性能 */
+}
+
+.diary-card-image img.lazy-load.loaded {
+    opacity: 1;
+    animation: imageReveal 0.6s ease-out;
+}
+
+.diary-card-image img.lazy-load.loading {
+    opacity: 0.3;
+}
+
+.diary-card-image img.lazy-load.error {
+    opacity: 0;
+}
+
+/* 图片骨架屏动画 */
+.image-skeleton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    transition: opacity 0.3s ease;
+}
+
+.image-skeleton.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-shimmer {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* 图片加载失败时的占位符 */
+.image-error-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #ccc;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.image-error-placeholder i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #dee2e6;
+}
+
+.image-error-placeholder span {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.diary-card:hover .diary-card-image img.loaded {
+    transform: scale(1.05);
+}
+
+.diary-image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #999;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.diary-image-placeholder i {
+    font-size: 40px;
+    margin-bottom: 10px;
+    opacity: 0.6;
+}
+
+.diary-image-placeholder span {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* 日记卡片内容 */
+.diary-card-content {
+    padding: 25px;
+}
+
+.diary-card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.diary-card-preview {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 15px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 评分样式 */
+.diary-card-rating {
+    margin: 15px 0;
+}
+
+.rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.rating-stars i {
+    color: #ffd700;
+    font-size: 14px;
+}
+
+.rating-stars .far {
+    color: #ddd;
+}
+
+.rating-score {
+    margin-left: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+/* 日记卡片元信息 */
+.diary-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.diary-stats {
+    display: flex;
+    gap: 15px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #666;
+    font-size: 12px;
+}
+
+.stat-item i {
+    color: #0052d9;
+}
+
+.diary-date {
+    color: #999;
+    font-size: 12px;
+}
+
+/* 日记卡片操作 */
+.diary-card-actions {
+    margin-top: 20px;
+}
+
+.view-diary-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(45deg, #0052d9, #1976d2);
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.view-diary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 82, 217, 0.3);
+    text-decoration: none;
+    color: white;
+}
+
+.view-diary-btn i {
+    transition: transform 0.3s ease;
+}
+
+.view-diary-btn:hover i {
+    transform: translateX(3px);
+}
+
+/* 无结果状态 */
+.no-results-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    text-align: center;
+}
+
+.no-results-content {
+    max-width: 400px;
+    padding: 40px 20px;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+
+.no-results-content i {
+    font-size: 80px;
+    color: #ddd;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.no-results-content h3 {
+    color: #666;
+    font-size: 24px;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+}
+
+.no-results-content p {
+    color: #999;
+    font-size: 16px;
+    margin: 0 0 25px 0;
+    line-height: 1.5;
+}
+
+.retry-search-btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #0052d9, #1976d2);
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.retry-search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 82, 217, 0.3);
+    text-decoration: none;
+    color: white;
+}
+
+/* 重试按钮样式 */
+.retry-load-btn {
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: #0052d9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.retry-load-btn:hover {
+    background: #003bb3;
+}
+
+.retry-load-btn:active {
+    transform: translateY(1px);
+}
+
+/* 图片加载指示器控制 */
+.image-loading-indicator {
+    display: none;
+}
+
+.image-loading-indicator.show {
+    display: block;
+}
+
+/* 返回顶部按钮 */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #0052d9, #1976d2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0, 82, 217, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 82, 217, 0.4);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .diary-search-main-container {
+        margin-top: 185px;
+        padding: 20px 15px;
+    }
+
+    .diary-search-page-title {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .diary-search-controls {
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .search-form {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .diary-search-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .diary-card-content {
+        padding: 20px;
+    }
+
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
+
+    .blue-container,
+    .header {
+        position: relative;
+        animation: none;
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .diary-search-main-container {
+        padding: 15px 10px;
+    }
+
+    .diary-search-page-title {
+        font-size: 20px;
+    }
+
+    .diary-search-controls {
+        padding: 15px;
+    }
+
+    .control-group input,
+    .control-group select,
+    .search-submit-btn {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .diary-card-image {
+        height: 160px;
+    }
+
+    .diary-card-title {
+        font-size: 16px;
+    }
+
+    .diary-card-preview {
+        font-size: 13px;
+    }
+}
+
+/* 加载状态和性能优化 */
+.diary-card img {
+    transition: opacity 0.3s ease;
+}
+
+.diary-card img[loading="lazy"] {
+    opacity: 0;
+}
+
+.diary-card img[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+/* 提升交互反馈 */
+.control-group input:focus,
+.control-group select:focus {
+    transform: translateY(-1px);
+}
+
+.search-submit-btn:active {
+    transform: translateY(1px);
+}
+
+.view-diary-btn:active {
+    transform: translateY(1px);
+}
+
+/* 特殊效果 */
+.diary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(0, 82, 217, 0.02), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.diary-card:hover::before {
+    opacity: 1;
+}
+
+/* 图片加载性能优化 */
+.diary-card-image {
+    will-change: transform; /* 优化transform性能 */
+}
+
+.diary-card-image img.lazy-load {
+    will-change: opacity; /* 优化opacity性能 */
+    backface-visibility: hidden; /* 提高渲染性能 */
+}
+
+/* 图片加载状态指示器 */
+.image-loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #0052d9;
+    font-size: 1.5rem;
+    z-index: 2;
+}
+
+.image-loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* 图片加载进度条 */
+.image-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: #0052d9;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    z-index: 2;
+}
+
+.image-progress-bar.loading {
+    animation: progressLoad 2s ease-in-out;
+}
+
+@keyframes progressLoad {
+    0% { transform: scaleX(0); }
+    50% { transform: scaleX(0.7); }
+    100% { transform: scaleX(1); }
+}
+
+/* 图片渐现动画优化 */
+@keyframes imageReveal {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+        filter: blur(5px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+.diary-card-image img.lazy-load.loaded {
+    animation: imageReveal 0.6s ease-out;
+}
+
+/* 低质量图片优先显示 */
+.diary-card-image img.lazy-load.low-quality {
+    filter: blur(2px);
+    transform: scale(1.05);
+}
+
+.diary-card-image img.lazy-load.high-quality {
+    filter: blur(0);
+    transform: scale(1);
+}
+
+/* 网络优化样式 */
+.slow-network .diary-card-image img.lazy-load {
+    transition: opacity 1s ease-in-out; /* 慢网络下延长过渡时间 */
+}
+
+.fast-network .diary-card-image img.lazy-load {
+    transition: opacity 0.3s ease-in-out; /* 快网络下缩短过渡时间 */
+}
+
+/* 内存优化：减少重绘 */
+.diary-card {
+    contain: layout style paint; /* CSS containment 优化 */
+}
+
+.diary-card-image {
+    contain: layout size; /* 图片容器优化 */
+}
