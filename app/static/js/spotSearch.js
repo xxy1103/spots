@@ -616,11 +616,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 return;
             }
-            
-            const data = await response.json();
+              const data = await response.json();
             if (data && data.success && data.user) {
                 if (elements.username) {
                     elements.username.textContent = data.user.username || '用户';
+                    
+                    // 设置用户名链接到用户的日记页面
+                    if (data.user.user_id) {
+                        elements.username.href = `/diary/user/${data.user.user_id}`;
+                    }
                     
                     // 添加欢迎动画
                     elements.username.style.opacity = '0';

@@ -181,10 +181,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 return null; // 防止进一步处理
             }
             return response.json();
-        })
-        .then(data => {
+        })        .then(data => {
             if (data && data.success) {
                 usernameSpan.textContent = data.user.username || '用户';
+                // 设置用户名链接到用户的日记页面
+                if (data.user.user_id) {
+                    usernameSpan.href = `/diary/user/${data.user.user_id}`;
+                }
                 // 用户信息获取成功后，获取推荐景点
                 loadTabContent('recommended');
             } else if (data) {
