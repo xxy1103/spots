@@ -1,0 +1,231 @@
+body {
+    font-family: 'Microsoft YaHei', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    background: url('../background.jpg') center center/cover no-repeat; /* 修改图片路径 */
+    position: relative;
+    overflow: hidden; /* 避免动画可能导致的滚动条 */
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1); /* 稍微加深背景遮罩，使文字更突出 */
+    z-index: 0;
+}
+
+.page-title {
+    position: absolute;
+    top: 50px;
+    left: 50%; /* 居中 */
+    transform: translateX(-50%); /* 精确居中 */
+    font-family: 'Arial', sans-serif; /* 更现代的字体 */
+    font-size: 32px; /* 稍大一些 */
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 更明显的阴影 */
+    z-index: 2;
+    animation: fadeInDown 0.5s ease-out; /* 标题淡入动画 - 加快 */
+}
+
+.image-container {
+    position: absolute;
+    left: 160px; /* 根据布局调整 */
+    top: 70px; /* 根据布局调整 */
+    width: 280px;
+    height: 80px;
+    background: url('../dogo.png') center center/contain no-repeat;
+    z-index: 3; /* 确保在标题和遮罩之上 */
+    animation: fadeInLeft 0.5s ease-out 0.2s; /* Logo淡入动画 - 加快，延迟调整 */
+    animation-fill-mode: backwards; /* 确保动画开始前元素不可见 */
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.95); /* 略微透明的背景 */
+    border-radius: 10px; /* 更圆润的边角 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 更柔和的阴影 */
+    padding: 40px; /* 增加内边距 */
+    width: 380px; /* 稍宽一些 */
+    margin-right: 8%;
+    z-index: 1;
+    position: relative;
+    animation: fadeInRight 0.5s ease-out 0.2s; /* 登录框淡入动画 - 加快，延迟调整 */
+    animation-fill-mode: backwards;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        margin-right: 0;
+        width: 90%; /* 移动端适应 */
+        padding: 30px;
+    }
+    .page-title {
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 24px; /* 移动端标题缩小 */
+    }
+    .image-container {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 20px; /* 移动端logo位置调整 */
+        width: 200px; /* 移动端logo缩小 */
+        height: 60px;
+    }
+    body {
+        justify-content: center; /* 移动端登录框居中 */
+    }
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h1 {
+    color: #3498db;
+    margin: 0;
+    font-size: 28px; /* 标题字体稍大 */
+    font-weight: 600; /* 字体加粗 */
+}
+
+.form-group {
+    margin-bottom: 25px; /* 增加间距 */
+    position: relative; /* 为动画/图标定位做准备 */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px; /* 增加标签与输入框间距 */
+    color: #333; /* 更深的标签颜色 */
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px; /* 增加内边距 */
+    border: 1px solid #ccc; /* 边框颜色稍浅 */
+    border-radius: 6px; /* 更圆润的边角 */
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* 添加过渡效果 */
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25); /* 聚焦时的光晕效果 */
+}
+
+.btn { /* 通用按钮样式 */
+    width: 100%;
+    padding: 14px; /* 增加按钮内边距 */
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 17px; /* 稍大字体 */
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* 添加过渡效果 */
+    text-transform: uppercase; /* 按钮文字大写 */
+    letter-spacing: 0.5px; /* 字符间距 */
+}
+
+.btn:hover {
+    transform: translateY(-2px); /* 悬停时轻微上移 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* 悬停时增加阴影 */
+}
+
+.btn:active {
+    transform: translateY(0); /* 点击时恢复 */
+}
+
+.btn-login {
+    background-color: #3498db;
+}
+
+.btn-login:hover {
+    background-color: #2980b9;
+}
+
+.btn-guest { /* 如果有游客登录按钮，也应用此样式 */
+    background-color: #2ecc71;
+    margin-top: 15px; /* 与登录按钮的间距 */
+}
+
+.btn-guest:hover {
+    background-color: #27ae60;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #555; /* 页脚文字颜色稍深 */
+}
+
+.login-footer a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+    color: #2980b9;
+}
+
+/* 动画效果 */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 输入框动画 */
+.form-control:focus + label,
+.form-control:not(:placeholder-shown) + label { /* 如果需要浮动标签效果，可以扩展 */
+    /* 示例：浮动标签动画，需要调整HTML结构或使用JS辅助 */
+}
+
+/* 错误提示样式 (如果需要) */
+.error-message {
+    color: #e74c3c;
+    font-size: 13px;
+    margin-top: 5px;
+    text-align: center;
+}

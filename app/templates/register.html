@@ -4,147 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>注册 - 个性化旅游系统</title>
-    <style>
-        body {
-            font-family: 'Microsoft YaHei', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('../static/background.jpg') center center/cover no-repeat;
-            position: relative;
-        }
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0);
-            z-index: 0;
-        }
-        .page-title {
-            position: absolute;
-            top: 50px;
-            left: 460px;
-            font-family: sans-serif;
-            font-size: 28px;
-            color: #fff;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-        }
-        .image-container {
-            position: absolute;
-            left: 160px;
-            top: 70px;
-            transform: translateY(-50%);
-            width: 280px;
-            height: 80px;
-            background: url('../static/dogo.png') center center/contain no-repeat;
-            z-index: 999;
-        }
-        .register-container {
-            position: relative;
-            z-index: 1;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            width: 400px;
-            max-width: 90%;
-            margin: 0 auto;
-        }
-        .register-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .register-header h1 {
-            color: #3498db;
-            margin: 0;
-            font-size: 24px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-size: 14px;
-        }
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-        .form-control:focus {
-            border-color: #3498db;
-            outline: none;
-        }
-        .tags-container {
-            margin-top: 5px;
-        }
-        .tag-item {
-            display: inline-block;
-            margin: 5px;
-            padding: 8px 12px;
-            background-color: #f0f0f0;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.2s;
-        }
-        .tag-item:hover {
-            background-color: #e0e0e0;
-        }
-        .tag-item.selected {
-            background-color: #3498db;
-            color: white;
-        }
-        .tag-limit-warning {
-            color: #e74c3c;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
-        .btn-register {
-            width: 100%;
-            padding: 12px;
-            background-color: #3498db;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .btn-register:hover {
-            background-color: #2980b9;
-        }
-        .register-footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #777;
-        }
-        .register-footer a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        .register-footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 </head>
 <body>
     <div class="page-title">注册界面</div>
-    <div class="image-container"></div>
+    <div class="image-container"></div> <!-- 用于显示dogo.png -->
+    
+    <!-- 全局消息容器 -->
+    <div id="globalMessageContainer" style="display:none;"></div> 
+
     <div class="register-container">
         <div class="register-header">
             <h1>注册个性化旅游账号</h1>
@@ -155,12 +23,12 @@
                 <input type="text" class="form-control" id="username" name="username" placeholder="请创建用户名" required>
             </div>
             <div class="form-group">
-                <label for="password">密码</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="请设置密码" required>
+                <label for="password">密码 (至少6位)</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="请设置密码" required minlength="6">
             </div>
             <div class="form-group">
                 <label for="confirm-password">确认密码</label>
-                <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="请再次输入密码" required>
+                <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="请再次输入密码" required minlength="6">
             </div>
             <div class="form-group">
                 <label>兴趣标签 (最多选择5个)</label>
@@ -169,131 +37,14 @@
                 <input type="hidden" id="selectedTags" name="selectedTags">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn-register">创建账号</button>
+                <button type="submit" class="btn btn-register">创建账号</button>
             </div>
         </form>
         <div class="register-footer">
-            <p>已有账号？<a href="/login">立即登录</a></p>
+            <p>已有账号？<a href="{{ url_for('login.loginView') }}">立即登录</a></p>
         </div>
     </div>
 
-    <!-- ... (head and body structure up to the script tag) ... -->
-    <script>
-        // 标签数据
-        const spotTypes = [
-            "历史建筑", "赏花胜地", "萌萌动物", "城市漫步", "夜游观景",
-            "遛娃宝藏地", "展馆展览", "地标观景", "登高爬山", "踏青必去",
-            "自然山水", "游乐场", "演出"
-        ];
-
-        // 初始化标签选择
-        const tagsContainer = document.getElementById('tagsContainer');
-        const tagLimitWarning = document.getElementById('tagLimitWarning');
-        const selectedTagsInput = document.getElementById('selectedTags'); // 虽然我们直接用JS数组，但保留以防万一
-        const maxTags = 5;
-        let selectedTags = []; // 直接使用这个数组
-
-        // 创建标签
-        spotTypes.forEach(tag => {
-            const tagElement = document.createElement('div');
-            tagElement.className = 'tag-item';
-            tagElement.textContent = tag;
-            tagElement.addEventListener('click', () => {
-                toggleTag(tagElement, tag);
-            });
-            tagsContainer.appendChild(tagElement);
-        });
-
-        // 切换标签选择状态
-        function toggleTag(element, tag) {
-            if (element.classList.contains('selected')) {
-                // 取消选择
-                element.classList.remove('selected');
-                selectedTags = selectedTags.filter(t => t !== tag);
-                tagLimitWarning.style.display = 'none';
-            } else {
-                // 选择标签
-                if (selectedTags.length < maxTags) {
-                    element.classList.add('selected');
-                    selectedTags.push(tag);
-                } else {
-                    // 显示警告
-                    tagLimitWarning.style.display = 'block';
-                    setTimeout(() => {
-                        tagLimitWarning.style.display = 'none';
-                    }, 2000);
-                    return; // 阻止进一步操作
-                }
-            }
-            // 更新隐藏字段的值（可选，因为我们直接用JS数组提交）
-            selectedTagsInput.value = JSON.stringify(selectedTags);
-            console.log("Selected tags:", selectedTags); // 调试用
-        }
-
-        // 表单提交处理 - 使用 Fetch API
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // 阻止表单默认提交行为
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-
-            // --- 客户端验证 ---
-            if (username.trim() === '') {
-                alert('请输入用户名');
-                return;
-            }
-            if (password.trim() === '') {
-                alert('请设置密码');
-                return;
-            }
-            if (password !== confirmPassword) {
-                alert('两次输入的密码不一致');
-                return;
-            }
-            if (selectedTags.length === 0) {
-                alert('请至少选择一个兴趣标签');
-                return;
-            }
-            // --- 验证结束 ---
-
-            // 准备要发送的数据
-            const formData = {
-                username: username,
-                password: password,
-                // 后端期望的是字符串列表，直接发送JS数组，Flask的 request.json 会自动处理
-                selectedTags: selectedTags 
-            };
-
-            // 使用 Fetch 发送 POST 请求到后端 API
-            fetch('/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json', // 明确发送JSON数据
-                },
-                body: JSON.stringify(formData) // 将JS对象转换为JSON字符串
-            })
-            .then(response => {
-                // 检查响应状态码，即使是400错误，也要解析JSON获取错误信息
-                return response.json().then(data => ({ status: response.status, body: data }));
-            })
-            .then(({ status, body }) => {
-                if (status === 200 && body.success === true) {
-                    // 注册成功
-                    alert(body.message || '注册成功！');
-                    // 重定向到登录页面
-                    window.location.href = '/login'; 
-                } else {
-                    // 注册失败 (包括用户名已存在等情况)
-                    alert('注册失败：' + (body.message || '未知错误'));
-                }
-            })
-            .catch(error => {
-                // 网络错误或其他Fetch本身的错误
-                console.error('注册请求失败:', error);
-                alert('注册过程中发生网络错误，请稍后再试。');
-            });
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
 </body>
 </html>

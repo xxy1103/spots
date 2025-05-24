@@ -1,0 +1,237 @@
+body {
+    font-family: 'Microsoft YaHei', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* 注册页面内容通常居中 */
+    align-items: center;
+    min-height: 100vh;
+    background: url('../background.jpg') center center/cover no-repeat;
+    position: relative;
+    overflow-x: hidden; /* 避免横向滚动条 */
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 0;
+}
+
+.page-title {
+    position: absolute;
+    top: 30px; /* 调整位置 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Arial', sans-serif;
+    font-size: 30px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    animation: fadeInDown 0.5s ease-out;
+}
+
+.image-container {
+    position: absolute;
+    left: 40px; /* 调整位置 */
+    top: 40px;  /* 调整位置 */
+    width: 200px; /* 调整大小 */
+    height: 60px; /* 调整大小 */
+    background: url('../dogo.png') center center/contain no-repeat;
+    z-index: 3;
+    animation: fadeInLeft 0.5s ease-out 0.2s;
+    animation-fill-mode: backwards;
+}
+
+.register-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 30px 40px; /* 调整内边距 */
+    width: 450px; /* 调整宽度 */
+    max-width: 90%;
+    z-index: 1;
+    position: relative;
+    margin-top: 120px; /* 为标题和logo留出空间 */
+    margin-bottom: 40px; /* 底部留白 */
+    animation: fadeInRight 0.5s ease-out 0.2s;
+    animation-fill-mode: backwards;
+}
+
+@media (max-width: 768px) {
+    .register-container {
+        width: 90%;
+        padding: 20px;
+        margin-top: 100px;
+    }
+    .page-title {
+        font-size: 24px;
+        top: 20px;
+    }
+    .image-container {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 60px; /* 在标题下方 */
+        width: 150px;
+        height: 45px;
+    }
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.register-header h1 {
+    color: #3498db;
+    margin: 0;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 18px; /* 调整间距 */
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+/* 标签样式 */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* 标签之间的间隙 */
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.tag-item {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    border: 1px solid transparent;
+}
+
+.tag-item:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-1px);
+}
+
+.tag-item.selected {
+    background-color: #3498db;
+    color: white;
+    border-color: #2980b9;
+}
+
+.tag-limit-warning {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none; /* 默认隐藏 */
+    height: 15px; /* 占据空间防止抖动 */
+}
+
+.btn { /* 通用按钮样式 */
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-register {
+    background-color: #3498db;
+}
+
+.btn-register:hover {
+    background-color: #2980b9;
+}
+
+.register-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+.register-footer a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.register-footer a:hover {
+    text-decoration: underline;
+    color: #2980b9;
+}
+
+/* 动画效果 (与login.css共享或类似) */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translate(-50%, -20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* 错误提示样式 */
+.error-message {
+    color: #e74c3c;
+    font-size: 13px;
+    margin-top: 8px; /* 与上方元素的间距 */
+    margin-bottom: 5px; /* 与下方元素的间距 */
+    text-align: left; /* 通常在表单内左对齐 */
+    padding-left: 5px;
+}

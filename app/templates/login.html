@@ -4,139 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录 - 个性化旅游系统</title>
-    <style>
-        body {
-            font-family: 'Microsoft YaHei', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            height: 100vh;
-            background: url('../static/background.jpg') center center/cover no-repeat;
-            position: relative;
-        }
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0);
-            z-index: 0;
-        }
-        .page-title {
-            position: absolute;
-            top: 50px;
-            left: 460px;
-            font-family: sans-serif;
-            font-size: 28px;
-            color: #fff;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-        }
-        .image-container {
-            position: absolute;
-            left: 160px;
-            top: 70px;
-            transform: translateY(-50%);
-            width: 280px;
-            height: 80px;
-            background: url('../static/dogo.png') center center/contain no-repeat;
-            z-index: 999;
-        }
-        .login-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            width: 350px;
-            margin-right: 8%;
-            z-index: 1;
-            position: relative;
-        }
-        @media (max-width: 768px) {
-            .login-container {
-                margin-right: 0;
-            }
-        }
-        .login-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .login-header h1 {
-            color: #3498db;
-            margin: 0;
-            font-size: 24px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-size: 14px;
-        }
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-        .form-control:focus {
-            border-color: #3498db;
-            outline: none;
-        }
-        .btn-login {
-            width: 100%;
-            padding: 12px;
-            background-color: #3498db;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .btn-login:hover {
-            background-color: #2980b9;
-        }
-        .btn-guest {
-            width: 100%;
-            padding: 12px;
-            background-color: #2ecc71;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .btn-guest:hover {
-            background-color: #27ae60;
-        }
-        .login-footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #777;
-        }
-        .login-footer a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        .login-footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
     <div class="page-title">登录界面</div>
-    <div class="image-container"></div>
+    <div class="image-container"></div> <!-- 用于显示dogo.png -->
+
     <div class="login-container">
         <div class="login-header">
             <h1>个性化旅游系统</h1>
@@ -151,108 +24,18 @@
                 <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" required>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn-login">登录</button>
+                <button type="submit" class="btn btn-login">登录</button>
             </div>
+            <!-- 如果有游客登录功能，可以添加一个按钮 -->
+            <!-- <div class="form-group">
+                <button type="button" id="guestLogin" class="btn btn-guest">游客访问</button>
+            </div> -->
         </form>
         <div class="login-footer">
-            <p>还没有账号？<a href="/login/register">立即注册</a></p>
+            <p>还没有账号？<a href="{{ url_for('login.registerView') }}">立即注册</a></p>
         </div>
     </div>
 
-    <script>
-        // 页面加载完成后执行检查
-    document.addEventListener('DOMContentLoaded', function() {
-        fetch('/api/check-session', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json', // 明确希望接收JSON
-            },
-            credentials: 'same-origin' // 确保发送cookie
-        })
-        .then(response => {
-            if (response.ok && response.status === 200) {
-                return response.json(); // 如果状态码是200 OK，解析JSON
-            } else if (response.status === 401) {
-                // 401 Unauthorized 表示未登录或会话无效
-                console.log('无有效会话，请登录。');
-                return null; // 返回null或其他标记，表示无需跳转
-            } else {
-                // 其他错误情况
-                throw new Error('检查会话时发生错误: ' + response.statusText);
-            }
-        })
-        .then(data => {
-            if (data && data.success === true) {
-                // 后端确认会话有效，直接跳转到地图页面
-                console.log('检测到有效会话，用户:', data.user.username, '正在跳转...');
-                window.location.href = '/spots'; // 跳转标记
-            }
-            // 如果 data 为 null 或 data.success 不为 true，则不执行任何操作，停留在登录页
-        })
-        .catch(error => {
-            // 网络错误或其他fetch本身的错误
-            console.error('检查会话请求失败:', error);
-            // 在这种情况下，也让用户停留在登录页
-        });
-    });
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        // 这里可以添加登录验证逻辑
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        
-        // 简单的前端验证示例
-        if(username.trim() === '' || password.trim() === '') {
-            alert('用户名和密码不能为空');
-            return;
-        }
-        
-        // 使用fetch API向后端发送请求
-        fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-            credentials: 'same-origin'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success === true) {
-                // 登录成功，重定向到地图页面
-                window.location.href = '/spots'; // 跳转标记
-            } else {
-                // 登录失败，显示错误信息
-                alert('登录失败：' + (data.message || '用户名或密码错误'));
-            }
-        })
-        .catch(error => {
-            console.error('登录错误:', error);
-            alert('登录过程中发生错误，请稍后再试');
-        });
-    });
-    
-    document.getElementById('guestLogin').addEventListener('click', function() {
-        fetch('/api/guest-login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'same-origin'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success === true) {
-                window.location.href = '/spots';
-            } else {
-                alert('游客登录失败：' + (data.message || '无法创建游客账号'));
-            }
-        })
-        .catch(error => {
-            console.error('游客登录错误:', error);
-            alert('游客登录过程中发生错误，请稍后再试');
-        });
-    });
-    </script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
 </html>
