@@ -17,6 +17,12 @@ body {
     }
 }
 
+/* 按钮样式 */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* 白色容器样式 */
 .white-container {
     position: absolute;

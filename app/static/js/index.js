@@ -339,18 +339,49 @@ document.addEventListener('DOMContentLoaded', () => {
     // 初始加载推荐景区数据
     loadTabContent('recommended');
     
+    let currentDiaryCount = 6; // 当前已加载的日记数量
+    const diariesPerLoad = 6; // 每次加载的日记数量
+
     // 加载推荐日记
-    loadRecommendedDiaries();
+    loadRecommendedDiaries(currentDiaryCount);    // "查看更多日记"按钮事件监听
+    const viewMoreDiariesButton = document.getElementById('view-more-diaries-btn');
+    if (viewMoreDiariesButton) {
+        viewMoreDiariesButton.addEventListener('click', () => {
+            // 防止重复点击
+            if (viewMoreDiariesButton.disabled) return;
+            
+            // 显示加载中状态
+            viewMoreDiariesButton.disabled = true;
+            viewMoreDiariesButton.textContent = '加载中...';
+            
+            // 增加请求数量
+            currentDiaryCount += diariesPerLoad;
+            console.log(`当前请求数量增加到: ${currentDiaryCount} 条`);
+            loadRecommendedDiaries(currentDiaryCount, true); // true 表示是追加加载
+        });
+    }
 });
 
 // 加载推荐日记功能
-function loadRecommendedDiaries() {
+function loadRecommendedDiaries(topK, append = false) {
     const diaryGrid = document.getElementById('diary-grid');
     if (!diaryGrid) return;
     
-    // 显示加载中
-    diaryGrid.innerHTML = '<div class="diary-card"><div style="height: 200px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">加载中...</div></div>';
-      // 获取当前用户信息
+    const viewMoreDiariesButton = document.getElementById('view-more-diaries-btn');
+
+    if (!append) {
+        // 初始加载时显示加载中
+        diaryGrid.innerHTML = '<div class="diary-card"><div style="height: 200px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">加载中...</div></div>';
+    } else {
+        // 追加加载时，可以显示一个小的加载提示或禁用按钮
+        if(viewMoreDiariesButton) viewMoreDiariesButton.disabled = true;
+        const loadingMoreIndicator = document.createElement('div');
+        loadingMoreIndicator.className = 'loading-more-indicator';
+        loadingMoreIndicator.innerHTML = '<div style="text-align: center; padding: 10px; color: #aaa;">正在加载更多日记...</div>';
+        diaryGrid.appendChild(loadingMoreIndicator);
+    }
+
+    // 获取当前用户信息
     fetch('/api/check-session')
         .then(response => {
             if (!response.ok) {
@@ -361,9 +392,8 @@ function loadRecommendedDiaries() {
         .then(userData => {
             if (userData.success && userData.user && userData.user.user_id) {
                 const userId = userData.user.user_id;
-                
                 // 获取推荐日记
-                return fetch(`/diary/recommend/user/${userId}?topK=6`);
+                return fetch(`/diary/recommend/user/${userId}?topK=${topK}`);
             } else {
                 throw new Error('无法获取用户信息');
             }
@@ -374,21 +404,63 @@ function loadRecommendedDiaries() {
             }
             return response.json();
         })
-        .then(diaries => {
-            if (Array.isArray(diaries) && diaries.length > 0) {
-                // 清空网格
-                diaryGrid.innerHTML = '';
-                
-                // 限制最多显示6个日记
-                const diariesToShow = diaries.slice(0, 6);
-                
-                // 添加日记卡片
-                diariesToShow.forEach(diary => {
-                    const diaryCard = createDiaryCard(diary);
-                    diaryGrid.appendChild(diaryCard);
-                });
-            } else {
-                // 没有推荐日记
+        .then(diaries => {            // 移除加载更多提示
+            const loadingMoreIndicator = diaryGrid.querySelector('.loading-more-indicator');
+            if (loadingMoreIndicator) {
+                loadingMoreIndicator.remove();
+            }
+            // 恢复按钮状态 - 但只有在确定有更多日记的情况下才恢复
+            if(viewMoreDiariesButton && !append) {
+                viewMoreDiariesButton.disabled = false;
+                viewMoreDiariesButton.textContent = '查看更多日记';
+            } else if (viewMoreDiariesButton && append) {
+                // 追加加载时，需要等判断是否有更多日记后再设置状态
+                // 先恢复默认文本
+                if (diaries.length >= topK) {
+                    viewMoreDiariesButton.textContent = '查看更多日记';
+                    viewMoreDiariesButton.disabled = false;
+                }
+            }
+
+            if (!append) {
+                diaryGrid.innerHTML = ''; // 初始加载时清空
+            }            if (Array.isArray(diaries) && diaries.length > 0) {
+                let diariesToShow;
+                if (append) {
+                    // 追加加载时，只添加新的日记
+                    // API 返回的是全量前 topK 条数据，我们需要筛选出尚未显示的新增日记
+                    const existingDiaryIds = Array.from(diaryGrid.querySelectorAll('.diary-card')).map(card => card.dataset.diaryId);
+                    diariesToShow = diaries.filter(diary => !existingDiaryIds.includes(String(diary.id)));
+                    console.log(`获取到 ${diaries.length} 条日记，其中新增 ${diariesToShow.length} 条`);
+                } else {
+                    diariesToShow = diaries;
+                }                if (diariesToShow.length > 0) {
+                    diariesToShow.forEach(diary => {
+                        const diaryCard = createDiaryCard(diary);
+                        // 无需在这里设置dataset属性，已在createDiaryCard中设置
+                        diaryGrid.appendChild(diaryCard);
+                    });
+                    
+                    // 检查是否还有更多日记可以加载
+                    // 如果当前返回的日记总数小于请求的topK，说明服务器没有更多日记了
+                    if (diaries.length < topK && viewMoreDiariesButton) {
+                        viewMoreDiariesButton.textContent = '没有更多日记了';
+                        viewMoreDiariesButton.disabled = true;
+                        console.log(`服务器返回 ${diaries.length} 条，少于请求的 ${topK} 条，无更多日记`);
+                    } else {
+                        console.log(`服务器返回 ${diaries.length} 条，请求了 ${topK} 条，可能还有更多日记`);
+                    }
+                } else if (append) {
+                    // 追加加载时，如果没有新增日记，也表示没有更多了
+                    if(viewMoreDiariesButton) {
+                        viewMoreDiariesButton.textContent = '没有更多日记了';
+                        viewMoreDiariesButton.disabled = true;
+                        console.log('无新增日记，已加载全部');
+                    }
+                }
+
+            } else if (!append) {
+                // 初始加载且没有日记
                 diaryGrid.innerHTML = `
                     <div class="diary-card">
                         <div style="height: 200px; background: #f5f5f5; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #999;">
@@ -398,19 +470,62 @@ function loadRecommendedDiaries() {
                         </div>
                     </div>
                 `;
+                if(viewMoreDiariesButton) {
+                    viewMoreDiariesButton.style.display = 'none'; // 如果初始就没有日记，隐藏按钮
+                }
+            } else {
+                 // 追加加载时，如果没有更多日记
+                if(viewMoreDiariesButton) {
+                    viewMoreDiariesButton.textContent = '没有更多日记了';
+                    viewMoreDiariesButton.disabled = true;
+                }
             }
-        })
-        .catch(error => {
+        })        .catch(error => {
             console.error('加载推荐日记时出错:', error);
-            diaryGrid.innerHTML = `
-                <div class="diary-card">
-                    <div style="height: 200px; background: #ffebee; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #f44336;">
-                        <div style="font-size: 24px; margin-bottom: 8px;">⚠️</div>
-                        <div>加载失败</div>
-                        <div style="font-size: 12px; margin-top: 4px;">请稍后重试</div>
+            const loadingMoreIndicator = diaryGrid.querySelector('.loading-more-indicator');
+            if (loadingMoreIndicator) {
+                loadingMoreIndicator.remove();
+            }
+            
+            // 恢复按钮状态
+            if(viewMoreDiariesButton) {
+                viewMoreDiariesButton.disabled = false;
+                viewMoreDiariesButton.textContent = '查看更多日记';
+            }
+
+            if (!append) {
+                // 首次加载失败时，显示错误信息
+                diaryGrid.innerHTML = `
+                    <div class="diary-card">
+                        <div style="height: 200px; background: #ffebee; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #f44336;">
+                            <div style="font-size: 24px; margin-bottom: 8px;">⚠️</div>
+                            <div>加载失败</div>
+                            <div style="font-size: 12px; margin-top: 4px;">请稍后重试</div>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+            } else {
+                // 追加加载失败时，显示提示
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'load-more-error';
+                errorMsg.innerHTML = `<div style="text-align: center; padding: 10px; color: #f44336;">加载更多日记失败，请重试</div>`;
+                
+                // 移除之前可能存在的错误信息
+                const oldErrorMsg = diaryGrid.querySelector('.load-more-error');
+                if (oldErrorMsg) {
+                    oldErrorMsg.remove();
+                }
+                
+                diaryGrid.appendChild(errorMsg);
+                
+                // 3秒后自动移除错误提示
+                setTimeout(() => {
+                    const currentErrorMsg = diaryGrid.querySelector('.load-more-error');
+                    if (currentErrorMsg) {
+                        currentErrorMsg.remove();
+                    }
+                }, 3000);
+            }
         });
 }
 
@@ -418,6 +533,7 @@ function loadRecommendedDiaries() {
 function createDiaryCard(diary) {
     const card = document.createElement('div');
     card.className = 'diary-card';
+    card.dataset.diaryId = diary.id; // 设置日记ID为数据属性
     card.onclick = () => window.location.href = `/diary/${diary.id}`;
     
     // 处理图片
@@ -436,7 +552,7 @@ function createDiaryCard(diary) {
     }
     
     // 处理评分显示
-    const score = diary.scoreToSpot || 0;
+    const score = diary.score || 0;
     const scoreDisplay = score > 0 ? score.toFixed(1) : '暂无';
     
     // 处理时间显示
