@@ -187,21 +187,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== 用户会话处理 =====
     function checkUserSession() {
-        const token = localStorage.getItem('token');
-        if (token) {
-            fetch('/api/user/info', {
-                headers: { 'Authorization': `Bearer ${token}` }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success && elements.username) {
-                    elements.username.textContent = data.username;
+        const usernameSpan = elements.username;
+        fetch('/api/check-session')
+            .then(response => {
+                if (!response.ok) {
+                    // 如果未授权 (401) 或其他错误，重定向到登录页
+                    if (response.status === 401) {
+                        window.location.href = '/login'; // 跳转到登录页面的路由
+                    } else {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return null; // 防止进一步处理
                 }
+                return response.json();
             })
-            .catch(() => {
-                // 静默处理错误
+            .then(data => {
+                if (data && data.success) {
+                    if (usernameSpan) {
+                        usernameSpan.textContent = data.user.username || '用户';
+                    }
+                    // 用户信息获取成功后，获取推荐景点
+                    if (typeof loadTabContent === 'function') {
+                        loadTabContent('recommended');
+                    }
+                } else if (data) {
+                    // 即使成功响应，也可能业务逻辑失败
+                    console.error('会话检查失败:', data.message);
+                    window.location.href = '/login';
+                }
+                // 如果 response.ok 为 false 且非 401，则不会执行到这里
+            })
+            .catch(error => {
+                console.error('检查会话时出错:', error);
+                if (usernameSpan) {
+                    usernameSpan.textContent = '错误';
+                }
+                // 可选：也在此处重定向到登录页
+                window.location.href = '/login';
             });
-        }
     }
 
     function handleLogout() {
