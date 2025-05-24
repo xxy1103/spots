@@ -66,11 +66,11 @@
                     <div class="user-name">{{ user.name }}</div>
                     <div class="user-stats">
                         <div class="stat-item">
-                            <span class="stat-number">{{ diaries|length }}</span>
+                            <span class="stat-number">{{ user.reviews.total if user.reviews else 0 }}</span>
                             <span class="stat-label">旅行日记</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">{{ user.reviews.total if user.reviews else 0 }}</span>
+                            <span class="stat-number">{{ user.review_marking.get_size() }}</span>
                             <span class="stat-label">景点评价</span>
                         </div>
                     </div>
@@ -106,9 +106,8 @@
                                     <i class="icon">⭐</i>
                                     {{ diary.score }}分
                                 </span>
-                            </div>
-                            <div class="diary-preview">
-                                {{ diary.content|truncate(150) }}
+                            </div>                            <div class="diary-preview">
+                                {{ (diary.content or "暂无内容")|truncate(150) }}
                             </div>
                             {% if diary.img_list and diary.img_list|length > 0 %}
                             <div class="diary-preview-images">

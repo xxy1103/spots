@@ -19,7 +19,8 @@ class RedBlackTree:
         self.root = self.TNULL
         self.TNULL.parent = self.TNULL # 让哨兵节点的父节点指向自身，简化某些边界处理
         self.TNULL.left = self.TNULL
-        self.TNULL.right = self.TNULL    
+        self.TNULL.right = self.TNULL
+        self.size = 0  # 维护树中有效节点的数量
     def search(self, key_to_search):
         """
         查找具有给定键的节点。
@@ -81,9 +82,7 @@ class RedBlackTree:
         node = Node(key, value, color=RED, parent=self.TNULL, left=self.TNULL, right=self.TNULL)
 
         parent = self.TNULL
-        current = self.root
-
-        # 找到新节点的插入位置，根据 'key' 进行比较
+        current = self.root        # 找到新节点的插入位置，根据 'key' 进行比较
         while current != self.TNULL:
             parent = current
             if node.key < current.key: # Compare node.key with current.key
@@ -92,7 +91,7 @@ class RedBlackTree:
                 current = current.right
             else: # key 已存在，更新 value
                 current.value = value
-                return
+                return  # 不增加size，因为没有添加新节点
 
         node.parent = parent # 设置新节点的父节点
 
@@ -102,6 +101,9 @@ class RedBlackTree:
             parent.left = node
         else:
             parent.right = node
+
+        # 增加节点数量
+        self.size += 1
 
         # 如果新节点的父节点是 TNULL (即树是空的，新节点是根节点)，
         # 则不需要修复，直接将其颜色置为黑色即可。
@@ -175,7 +177,8 @@ class RedBlackTree:
         """
         while node.left != self.TNULL:
             node = node.left
-        return node    
+        return node
+        
     def delete(self, key_to_delete):
         """
         删除具有给定键的节点。
@@ -184,6 +187,9 @@ class RedBlackTree:
         if z == self.TNULL:
             # print(f"Key {key_to_delete} not found in the tree.")
             return # 键不存在
+
+        # 减少节点数量
+        self.size -= 1
 
         y = z # y 是实际被删除或移动的节点
         y_original_color = y.color
@@ -325,6 +331,44 @@ class RedBlackTree:
                 self.print_tree(node.right, level + 1, "R---")
                 self.print_tree(node.left, level + 1, "L---")
 
+    def get_size(self):
+        """
+        快速返回红黑树中当前有效数据的数目。
+        时间复杂度: O(1)
+        
+        Returns:
+            int: 树中有效节点的数量
+        """
+        return self.size
+    
+    def is_empty(self):
+        """
+        判断红黑树是否为空。
+        时间复杂度: O(1)
+        
+        Returns:
+            bool: 如果树为空返回True，否则返回False
+        """
+        return self.size == 0
+    
+    def get_node_count(self):
+        """
+        通过遍历计算节点数量（用于验证size属性的正确性）。
+        时间复杂度: O(n)
+        
+        Returns:
+            int: 通过遍历计算得到的节点数量
+        """
+        return self._count_nodes(self.root)
+    
+    def _count_nodes(self, node):
+        """
+        递归计算以node为根的子树中的节点数量。
+        """
+        if node == self.TNULL:
+            return 0
+        return 1 + self._count_nodes(node.left) + self._count_nodes(node.right)
+
 # 示例用法:
 if __name__ == '__main__':
     rbt = RedBlackTree()    # 注意：现在树是按key排序的
@@ -377,10 +421,19 @@ if __name__ == '__main__':
     print("Inorder traversal after deletions (sorted by value):", traversal_after_delete)
     print("Just values from traversal after deletions:", [item[1] for item in traversal_after_delete])
     print("Tree height after deletions:", rbt.get_height())
-    print("All original keys after deletions:", rbt.get_all_keys())    # Test deleting non-existent key
+    print("All original keys after deletions:", rbt.get_all_keys())
+    
+    # 测试新增的数量统计方法
+    print(f"\n=== 测试数量统计方法 ===")
+    print(f"当前树中有效节点数量 (get_size): {rbt.get_size()}")
+    print(f"通过遍历计算的节点数量 (get_node_count): {rbt.get_node_count()}")
+    print(f"树是否为空 (is_empty): {rbt.is_empty()}")
+    
+    # Test deleting non-existent key
     print("\\nDeleting non-existent key 100:")
     rbt.delete(100)
     rbt.print_tree()
+    print(f"删除不存在的键后，树中节点数量: {rbt.get_size()}")
 
     # Test inserting after deletions
     print("\\nInserting (50, 'value_50') and (60, 'value_60'):")
@@ -389,3 +442,16 @@ if __name__ == '__main__':
     rbt.print_tree()
     print("Inorder traversal:", rbt.inorder_traversal())
     print("All original keys after re-insertion:", rbt.get_all_keys())
+    
+    # 最终测试数量统计
+    print(f"\n=== 最终数量统计测试 ===")
+    print(f"插入新节点后树中有效节点数量: {rbt.get_size()}")
+    print(f"通过遍历计算的节点数量: {rbt.get_node_count()}")
+    print(f"两种方法结果是否一致: {rbt.get_size() == rbt.get_node_count()}")
+    
+    # 测试空树情况
+    print(f"\n=== 测试空树情况 ===")
+    empty_tree = RedBlackTree()
+    print(f"空树节点数量: {empty_tree.get_size()}")
+    print(f"空树是否为空: {empty_tree.is_empty()}")
+    print(f"空树遍历计算节点数量: {empty_tree.get_node_count()}")

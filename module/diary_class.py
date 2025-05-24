@@ -265,14 +265,18 @@ class DiaryManager:
             result_list.append(diary)
 
         return result_list  # 返回包含指定字符串中每个字符的所有日记对象列表
-    
     def getDiaryContent(self,diary_id:int):
         """获取日记的内容"""
         diary = self.getDiary(diary_id)
         if diary is None:
+            log.writeLog(f"日记 {diary_id} 不存在")
             return None
         # 获取日记内容
         content = diary.getContent(self.huffman_tree)
+        if content is None:
+            log.writeLog(f"日记 {diary_id} 内容获取失败，可能是压缩文件损坏或不存在")
+            # 返回空字符串而不是 None，避免模板错误
+            return ""
         return content
     def searchByContent(self, search_term, max_results=10):
         """根据搜索词搜索日记

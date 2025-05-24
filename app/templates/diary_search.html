@@ -128,7 +128,7 @@
                             </div>
                             <div class="diary-card-content">
                                 <h3 class="diary-card-title">{{ diary.title }}</h3>
-                                <p class="diary-card-preview">{{ diary.content[:120] }}{% if diary.content|length > 120 %}...{% endif %}</p>
+                                <p class="diary-card-preview">{{ (diary.content or "暂无内容")[:120] }}{% if (diary.content or "")|length > 120 %}...{% endif %}</p>
                                 
                                 <div class="diary-card-rating">
                                     <div class="rating-stars">

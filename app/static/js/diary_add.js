@@ -1,5 +1,8 @@
 // diary_add.js - 日记添加页面专用JavaScript
 
+// 全局变量：跟踪表单提交状态
+let isFormSubmitting = false;
+
 document.addEventListener('DOMContentLoaded', () => {
     // 初始化页面
     initializePage();
@@ -25,34 +28,45 @@ function initializePage() {
 
 // 检查用户会话
 function checkUserSession() {
+    const usernameSpan = document.getElementById('username');
     fetch('/api/check-session')
         .then(response => {
             if (!response.ok) {
+                // 如果未授权 (401) 或其他错误，重定向到登录页
                 if (response.status === 401) {
-                    // 未登录，重定向到登录页面
-                    showToast("请先登录后再发布日记", "warning");
-                    setTimeout(() => {
-                        window.location.href = '/login';
-                    }, 1500);
+                    window.location.href = '/login'; // 跳转到登录页面的路由
                 } else {
-                    throw new Error('服务器错误');
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                return null; // 防止进一步处理
             }
             return response.json();
         })
         .then(data => {
-            // 如果接口返回成功但用户信息不完整
             if (data && data.success) {
-                const usernameElement = document.getElementById('username');
-                if (usernameElement && data.user && data.user.name) {
-                    usernameElement.textContent = data.user.name;
+                if (usernameSpan) {
+                    usernameSpan.textContent = data.user.username || '用户';
+                    // 设置用户名链接到用户的日记页面
+                    if (data.user.user_id) {
+                        usernameSpan.href = `/diary/user/${data.user.user_id}`;
+                    }
                 }
-            } else {
-                throw new Error('无法获取用户信息');
+                // 用户信息获取成功后，获取推荐景点
+                if (typeof loadTabContent === 'function') {
+                    loadTabContent('recommended');
+                }
+            } else if (data) {
+                // 即使成功响应，也可能业务逻辑失败
+                console.error('会话检查失败:', data.message);
+                window.location.href = '/login';
             }
+            // 如果 response.ok 为 false 且非 401，则不会执行到这里
         })
         .catch(error => {
             console.error('检查会话时出错:', error);
+            if (usernameSpan) usernameSpan.textContent = '错误';
+            // 可选：也在此处重定向到登录页
+            window.location.href = '/login';
         });
 }
 
@@ -209,8 +223,8 @@ function setupFormValidation() {
             }
             highlightStars(3);
         }
-        
-        // 验证通过，提交表单
+          // 验证通过，提交表单
+        isFormSubmitting = true; // 设置提交标志
         showToast('提交中...', 'info');
         form.submit();
     });
@@ -518,6 +532,11 @@ function showToast(message, type = 'info') {
 
 // 页面卸载时确认
 window.addEventListener('beforeunload', function(e) {
+    // 如果正在提交表单，不显示警告
+    if (isFormSubmitting) {
+        return;
+    }
+    
     const title = document.getElementById('title');
     const content = document.getElementById('content');
     

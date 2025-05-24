@@ -56,6 +56,7 @@ def get_diary(diary_id):
 
     diary_json = diary.to_dict()
     diary_json["content"] = diary_manager.getDiaryContent(diary_id)
+    diary_json["spot_name"] = spot_manager.getSpot(diary.spot_id).name
 
     log.writeLog(diary.video_path)
 
