@@ -463,12 +463,13 @@ function createDiaryCard(diary) {
         <div class="diary-card-content">
             <h3 class="diary-card-title" title="${diary.title || '无标题'}">${diary.title || '无标题'}</h3>
             <div class="diary-card-meta">
-                <span class="diary-card-author">${diary.user_name}</span>
-                <span class="diary-card-score">${scoreDisplay}分</span>
+                <span class="diary-card-author">${diary.user_name || '匿名用户'}</span>
+                <span class="diary-card-spot-name">📍 ${diary.spot_name || '未知景点'}</span> 
             </div>
             <div class="diary-card-preview">${content || '暂无内容预览'}</div>
             <div class="diary-card-stats">
                 <span>📅 ${timeDisplay}</span>
+                <span>⭐ ${scoreDisplay}分</span>
                 <span>👁️ ${diary.visited_time || 0}次访问</span>
             </div>
         </div>

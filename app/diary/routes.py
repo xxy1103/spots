@@ -112,7 +112,7 @@ def get_recommendations(user_id):
     # 获取每个日记的内容
     for diary in recommendations:
         diary["content"] = diary_manager.getDiaryContent(diary["id"])
-        
+        diary["spot_name"] = spot_manager.getSpot(diary["spot_id"]).name
 
     return jsonify(recommendations)
 
