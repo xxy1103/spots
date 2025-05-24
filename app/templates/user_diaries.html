@@ -4,224 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ user.name }}的日记 - 个性化旅游系统</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            padding-top: 20px;
-            padding-bottom: 50px;
-        }
-        .page-header {
-            margin-bottom: 30px;
-        }
-        .diary-list {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        .diary-item {
-            padding: 20px;
-            border-bottom: 1px solid #eaeaea;
-            transition: background-color 0.2s;
-        }
-        .diary-item:last-child {
-            border-bottom: none;
-        }
-        .diary-item:hover {
-            background-color: #f8f9fa;
-        }
-        .diary-title {
-            font-size: 18px;
-            font-weight: 500;
-            color: #343a40;
-            margin-bottom: 10px;
-        }
-        .diary-title a {
-            color: #343a40;
-            text-decoration: none;
-        }
-        .diary-title a:hover {
-            color: #007bff;
-        }
-        .diary-meta {
-            color: #6c757d;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-        }
-        .diary-meta > span {
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-        }
-        .diary-meta i {
-            margin-right: 5px;
-        }
-        .diary-preview {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #6c757d;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .user-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 20px;
-        }
-        .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .user-details {
-            display: flex;
-            flex-direction: column;
-        }
-        .user-name {
-            font-size: 24px;
-            font-weight: 600;
-            color: #343a40;
-            margin-bottom: 5px;
-        }
-        .user-stats {
-            display: flex;
-            align-items: center;
-            color: #6c757d;
-        }
-        .user-stats > div {
-            margin-right: 15px;
-        }
-        .diary-preview-images {
-            display: flex;
-            margin-top: 10px;
-        }
-        .preview-image {
-            width: 60px;
-            height: 60px;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-right: 10px;
-        }
-        .preview-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .rating {
-            color: #ffc107;
-        }
-        .no-diaries {
-            padding: 40px;
-            text-align: center;
-            color: #6c757d;
-        }
-    </style>
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_diaries.css') }}">
 </head>
 <body>
-    <div class="container">
-        <div class="page-header">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="user-info">
-                        <div class="user-avatar">
-                            <img src="{{ url_for('static', filename='dogo.png') }}" alt="{{ user.name }}">
-                        </div>
-                        <div class="user-details">
-                            <div class="user-name">{{ user.name }}</div>
-                            <div class="user-stats">
-                                <div>旅行日记：{{ diaries|length }}</div>
-                                <div>景点评价：{{ user.reviews.total }}</div>
-                            </div>
-                        </div>
+    <!-- 头部导航 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="/spots" class="logo-link">
+                    <div class="image-container"></div>
+                </a>
+            </div>
+            
+            <div class="header-center">
+                <div class="search-bar">
+                    <select aria-label="搜索类型">
+                        <option value="spot">景区</option>
+                        <option value="diary">日记</option>
+                    </select>
+                    <div class="search-input">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#666666">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                        <input type="text" placeholder="请输入关键词" aria-label="搜索关键词">
                     </div>
+                    <button class="search-button">搜索</button>
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <h2>我的旅行日记</h2>
-                </div>
-                <div class="col-md-6 text-right">
-                    <a href="{{ url_for('diary.add_diary_page') }}" class="btn btn-primary">写日记</a>
+            
+            <div class="header-right">
+                <div class="user-info">
+                    <a id="username" href="#" style="text-decoration: none; color: inherit; cursor: pointer;">{{ user.name }}</a>
+                    <button id="logout-button" class="logout-button">登出</button>
                 </div>
             </div>
         </div>
-        
-        <div class="diary-list">
-            {% if diaries %}
-                {% for diary in diaries %}
-                <div class="diary-item">
-                    <h3 class="diary-title">
-                        <a href="{{ url_for('diary.get_diary', diary_id=diary.id) }}">{{ diary.title }}</a>
-                    </h3>
-                    <div class="diary-meta">
-                        <span>
-                            <i class="far fa-calendar-alt"></i>
-                            {{ diary.time }}
-                        </span>
-                        <span>
-                            <i class="far fa-eye"></i>
-                            {{ diary.visited_time }} 次浏览
-                        </span>
-                        <span class="rating">
-                            {% for i in range(5) %}
-                                {% if i < (diary.score|int) %}
-                                    ★
-                                {% else %}
-                                    ☆
-                                {% endif %}
-                            {% endfor %}
-                            {{ diary.score }}
-                        </span>
-                    </div>
-                    <div class="diary-preview">
-                        {{ diary.content|truncate(150) }}
-                    </div>
-                    {% if diary.img_list and diary.img_list|length > 0 %}
-                    <div class="diary-preview-images">
-                        {% for img in diary.img_list[:3] %}
-                        <div class="preview-image">
-                            <img src="{{ url_for('static', filename=img) }}" alt="旅行图片">
-                        </div>
-                        {% endfor %}
-                        {% if diary.img_list|length > 3 %}
-                        <div class="preview-image">
-                            <div class="d-flex justify-content-center align-items-center bg-secondary text-white h-100">
-                                +{{ diary.img_list|length - 3 }}
-                            </div>
-                        </div>
-                        {% endif %}
-                    </div>
-                    {% endif %}
-                    {% if diary.video_path %}
-                    <div class="diary-meta mt-2">
-                        <span><i class="fas fa-video"></i> 包含视频</span>
-                    </div>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            {% else %}
-                <div class="no-diaries">
-                    <p>暂无旅行日记。</p>
-                    <a href="{{ url_for('diary.add_diary_page') }}" class="btn btn-outline-primary">立即写日记</a>
-                </div>
-            {% endif %}
+    </header>
+
+    <!-- 导航条 -->
+    <div class="blue-container">
+        <div class="nav-item" onclick="window.location.href='/spots/search'">
+            推荐景区
+        </div>
+        <div class="nav-item" onclick="window.location.href='/diary/search'">
+            口碑日记
         </div>
     </div>
-    
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <!-- 主要内容区域 -->
+    <div class="main-content">
+        <!-- 用户信息区域 -->
+        <div class="user-profile-section">
+            <div class="user-info-card">
+                <div class="user-avatar">
+                    <img src="{{ url_for('static', filename='dogo.png') }}" alt="{{ user.name }}">
+                </div>
+                <div class="user-details">
+                    <div class="user-name">{{ user.name }}</div>
+                    <div class="user-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">{{ diaries|length }}</span>
+                            <span class="stat-label">旅行日记</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">{{ user.reviews.total if user.reviews else 0 }}</span>
+                            <span class="stat-label">景点评价</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 日记区域 -->
+        <div class="diaries-section">
+            <div class="section-header">
+                <h2>我的旅行日记</h2>
+                <a href="{{ url_for('diary.add_diary_page') }}" class="write-diary-btn">写日记</a>
+            </div>
+            
+            <div class="diary-list">
+                {% if diaries %}
+                    {% for diary in diaries %}
+                    <div class="diary-item" data-diary-id="{{ diary.id }}">
+                        <div class="diary-item-content">
+                            <h3 class="diary-title">
+                                <a href="{{ url_for('diary.get_diary', diary_id=diary.id) }}">{{ diary.title }}</a>
+                            </h3>
+                            <div class="diary-meta">
+                                <span class="meta-item">
+                                    <i class="icon">📅</i>
+                                    {{ diary.time }}
+                                </span>
+                                <span class="meta-item">
+                                    <i class="icon">👁️</i>
+                                    {{ diary.visited_time }} 次浏览
+                                </span>
+                                <span class="meta-item rating">
+                                    <i class="icon">⭐</i>
+                                    {{ diary.score }}分
+                                </span>
+                            </div>
+                            <div class="diary-preview">
+                                {{ diary.content|truncate(150) }}
+                            </div>
+                            {% if diary.img_list and diary.img_list|length > 0 %}
+                            <div class="diary-preview-images">
+                                {% for img in diary.img_list[:3] %}
+                                <div class="preview-image">
+                                    <img src="{{ url_for('external_static', filename=img) }}" alt="旅行图片">
+                                </div>
+                                {% endfor %}
+                                {% if diary.img_list|length > 3 %}
+                                <div class="preview-image more-images">
+                                    <span>+{{ diary.img_list|length - 3 }}</span>
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            {% if diary.video_path %}
+                            <div class="diary-extras">
+                                <span class="video-indicator">
+                                    <i class="icon">🎥</i>
+                                    包含视频
+                                </span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-diaries">
+                        <div class="no-diaries-icon">📝</div>
+                        <h3>暂无旅行日记</h3>
+                        <p>快去记录你的精彩旅程吧！</p>
+                        <a href="{{ url_for('diary.add_diary_page') }}" class="write-diary-btn primary">立即写日记</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/user_diaries.js') }}"></script>
 </body>
 </html>
