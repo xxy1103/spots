@@ -1,14 +1,17 @@
 // ===== 现代化景区搜索交互脚本 =====
 
-document.addEventListener('DOMContentLoaded', () => {
-    // ===== 全局状态管理 =====
+document.addEventListener('DOMContentLoaded', () => {    // ===== 全局状态管理 =====
     const state = {
         currentSpots: [],
+        allSpots: [], // 存储所有景区数据
+        displayedSpots: [], // 当前显示的景区
         isLoading: false,
         viewMode: 'grid',
         searchTimeout: null,
         currentPage: 1,
-        hasMoreData: true
+        hasMoreData: true,
+        itemsPerPage: 16, // 每页显示16个
+        currentDisplayCount: 0 // 当前显示的数量
     };
 
     // ===== DOM元素获取 =====
@@ -38,9 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 视图模式切换
         viewModeButtons: document.querySelectorAll('.view-mode-btn'),
-        
-        // 返回顶部按钮
+          // 返回顶部按钮
         backToTop: document.getElementById('back-to-top'),
+        
+        // 加载更多相关元素
+        loadMoreContainer: document.getElementById('load-more-container'),
+        loadMoreButton: document.getElementById('load-more-button'),
+        loadMoreText: document.querySelector('.load-more-text'),
+        loadMoreSpinner: document.querySelector('.spinner'),
         
         // 重置搜索按钮
         resetSearchBtn: document.querySelector('.reset-search-btn'),
@@ -184,10 +192,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     fetchAndDisplaySpots();
                 }
             });
-        });
-
-        // 窗口滚动事件
+        });        // 窗口滚动事件
         window.addEventListener('scroll', handleScroll);
+        
+        // 加载更多按钮事件
+        if (elements.loadMoreButton) {
+            elements.loadMoreButton.addEventListener('click', loadMoreSpots);
+        }
         
         // 窗口大小变化
         window.addEventListener('resize', handleResize);
@@ -294,9 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         fetchAndDisplaySpots();
-    }
-
-    // ===== 重置搜索 =====
+    }    // ===== 重置搜索 =====
     function resetSearch() {
         if (elements.searchKeyword) elements.searchKeyword.value = '';
         if (elements.filterType) elements.filterType.value = '';
@@ -306,6 +315,9 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.filterTags.forEach(tag => {
             tag.classList.remove('active');
         });
+        
+        // 重置分页状态
+        resetPaginationState();
         
         fetchAndDisplaySpots();
         
@@ -399,23 +411,152 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            
-            const data = await response.json();
-
-            if (data.success && Array.isArray(data.spots)) {
-                state.currentSpots = data.spots;
-                displaySpots(data.spots);
+              const data = await response.json();            if (data.success && Array.isArray(data.spots)) {
+                state.allSpots = data.spots; // 存储所有数据
+                state.currentDisplayCount = 0; // 重置显示计数
+                
+                // 显示前16个景区
+                displayInitialSpots();
                 updateResultsInfo(data.spots.length, keyword, selectedType);
+                // updateLoadMoreButton 已在 displayInitialSpots 中调用
             } else {
                 handleError('数据格式错误');
                 displaySpots([]);
-            }
-        } catch (error) {
+            }} catch (error) {
             console.error('Error fetching search results:', error);
             handleError('网络连接失败，请检查网络或稍后重试');
+            resetPaginationState(); // 重置分页状态
             displaySpots([]);
         } finally {
             state.isLoading = false;
+        }
+    }    // ===== 显示初始景区 =====
+    function displayInitialSpots() {
+        const spotsToShow = state.allSpots.slice(0, state.itemsPerPage);
+        state.displayedSpots = spotsToShow;
+        state.currentDisplayCount = spotsToShow.length;
+        
+        displaySpots(spotsToShow);
+        updateLoadMoreButton(); // 确保按钮状态正确更新
+    }    // ===== 性能监控 =====
+    function measureLoadTime(label, fn) {
+        const startTime = performance.now();
+        const result = fn();
+        const endTime = performance.now();
+        console.log(`${label}: ${endTime - startTime}ms`);
+        return result;
+    }
+
+    // ===== 优化的加载更多景区（带性能监控）=====
+    function loadMoreSpotsOptimized() {
+        return measureLoadTime('LoadMore', () => {
+            if (state.isLoading || state.currentDisplayCount >= state.allSpots.length) {
+                return;
+            }
+
+            // 显示加载状态
+            showLoadMoreLoading();
+
+            // 立即获取下一批数据
+            const nextBatch = state.allSpots.slice(
+                state.currentDisplayCount, 
+                state.currentDisplayCount + state.itemsPerPage
+            );
+
+            if (nextBatch.length > 0) {
+                // 立即追加新的景区卡片到现有列表
+                appendSpots(nextBatch);
+                state.displayedSpots.push(...nextBatch);
+                state.currentDisplayCount += nextBatch.length;
+            }
+
+            // 立即隐藏加载状态并更新按钮
+            hideLoadMoreLoading();
+            updateLoadMoreButton();
+        });
+    }
+
+    // 覆盖原函数以使用优化版本
+    // loadMoreSpots = loadMoreSpotsOptimized;
+
+    // ===== 加载更多景区 =====
+    function loadMoreSpots() {
+        if (state.isLoading || state.currentDisplayCount >= state.allSpots.length) {
+            return;
+        }
+
+        // 显示加载状态
+        showLoadMoreLoading();
+
+        // 立即获取下一批数据
+        const nextBatch = state.allSpots.slice(
+            state.currentDisplayCount, 
+            state.currentDisplayCount + state.itemsPerPage
+        );
+
+        if (nextBatch.length > 0) {
+            // 立即追加新的景区卡片到现有列表
+            appendSpots(nextBatch);
+            state.displayedSpots.push(...nextBatch);
+            state.currentDisplayCount += nextBatch.length;
+            
+            // 异步加载新图片（不阻塞UI）
+            loadSpotImages(nextBatch);
+        }
+
+        // 立即隐藏加载状态并更新按钮
+        hideLoadMoreLoading();
+        updateLoadMoreButton();
+    }    // ===== 追加景区卡片 =====
+    function appendSpots(spotsToAdd) {
+        if (!elements.spotsList || !spotsToAdd || spotsToAdd.length === 0) return;
+
+        // 先批量添加所有卡片到DOM
+        const fragment = document.createDocumentFragment();
+        const cards = [];
+
+        spotsToAdd.forEach((spot, index) => {
+            const li = createSpotCard(spot, state.currentDisplayCount + index);
+            fragment.appendChild(li);
+            cards.push(li);
+        });
+
+        // 一次性添加到DOM中
+        elements.spotsList.appendChild(fragment);
+
+        // 立即触发所有卡片的动画，提供最快的视觉反馈
+        requestAnimationFrame(() => {
+            cards.forEach(card => {
+                card.classList.add('animate-in');
+            });
+        });
+
+        // 重新设置观察器
+        setupScrollEffects();
+    }// ===== 更新加载更多按钮状态 =====
+    function updateLoadMoreButton() {
+        if (!elements.loadMoreContainer || !elements.loadMoreButton) return;
+
+        const hasMore = state.currentDisplayCount < state.allSpots.length;
+        
+        if (state.allSpots.length === 0) {
+            // 没有数据时隐藏按钮
+            elements.loadMoreContainer.style.display = 'none';
+        } else if (hasMore) {
+            // 还有更多数据时显示按钮
+            elements.loadMoreContainer.style.display = 'block';
+            elements.loadMoreButton.disabled = false;
+            
+            const remaining = state.allSpots.length - state.currentDisplayCount;
+            const nextBatchSize = Math.min(remaining, state.itemsPerPage);
+            // 修复：显示当前已显示数量和总数量
+            elements.loadMoreText.textContent = `显示更多景区 (${state.currentDisplayCount}/${state.allSpots.length})`;
+        } else {
+            // 没有更多数据时隐藏按钮或显示完成状态
+            elements.loadMoreContainer.style.display = 'none';
+            // 或者可以显示"已显示全部"的消息
+            // elements.loadMoreText.textContent = '已显示全部景区';
+            // elements.loadMoreButton.disabled = true;
         }
     }
 
@@ -439,7 +580,147 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ===== 更新结果信息 =====
+    // ===== 显示加载更多的加载状态 =====
+    function showLoadMoreLoading() {
+        if (elements.loadMoreText) {
+            elements.loadMoreText.textContent = '正在加载更多...';
+        }
+        if (elements.loadMoreSpinner) {
+            elements.loadMoreSpinner.style.display = 'inline-block';
+        }
+        if (elements.loadMoreButton) {
+            elements.loadMoreButton.disabled = true;
+        }
+        state.isLoading = true;
+    }
+
+    // ===== 隐藏加载更多的加载状态 =====
+    function hideLoadMoreLoading() {
+        if (elements.loadMoreSpinner) {
+            elements.loadMoreSpinner.style.display = 'none';
+        }
+        if (elements.loadMoreButton) {
+            elements.loadMoreButton.disabled = false;
+        }
+        state.isLoading = false;
+    }    // ===== 加载景区图片 =====    // ===== 加载景区图片 =====
+    async function loadSpotImages(spots) {
+        // 暂时禁用图片加载功能以提升性能
+        // 可以在后端实现 /api/spots/{id}/cover 接口后重新启用
+        return;
+        
+        if (!spots || spots.length === 0) return;
+
+        // 并发加载所有图片，提高速度
+        const imagePromises = spots.map(async (spot) => {
+            if (!spot.id) return;
+            
+            // 为每个卡片显示加载指示器
+            showImageLoading(spot.id);
+            
+            try {
+                const response = await fetch(`/api/spots/${spot.id}/cover`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success && data.cover_url) {
+                        // 更新对应卡片的图片
+                        updateSpotCardImage(spot.id, data.cover_url);
+                    } else {
+                        // 图片加载失败，隐藏加载指示器
+                        hideImageLoading(spot.id);
+                    }
+                } else {
+                    hideImageLoading(spot.id);
+                }
+            } catch (error) {
+                console.warn(`Failed to load cover for spot ${spot.id}:`, error);
+                hideImageLoading(spot.id);
+            }
+        });
+
+        // 等待所有图片加载完成（不阻塞UI）
+        await Promise.allSettled(imagePromises);
+    }
+
+    // ===== 显示图片加载指示器 =====
+    function showImageLoading(spotId) {
+        const spotCard = document.querySelector(`[data-spot-id="${spotId}"]`);
+        if (spotCard) {
+            const placeholder = spotCard.querySelector('.spot-image-placeholder');
+            if (placeholder) {
+                placeholder.innerHTML = `
+                    <div class="image-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>加载中...</span>
+                    </div>
+                `;
+                placeholder.style.opacity = '0.7';
+            }
+        }
+    }
+
+    // ===== 隐藏图片加载指示器 =====
+    function hideImageLoading(spotId) {
+        const spotCard = document.querySelector(`[data-spot-id="${spotId}"]`);
+        if (spotCard) {
+            const placeholder = spotCard.querySelector('.spot-image-placeholder');
+            if (placeholder) {
+                placeholder.innerHTML = '暂无图片';
+                placeholder.style.opacity = '1';
+            }
+        }
+    }    // ===== 更新景区卡片图片 =====
+    function updateSpotCardImage(spotId, imageUrl) {
+        const spotCard = document.querySelector(`[data-spot-id="${spotId}"]`);
+        if (!spotCard) return;
+
+        const img = spotCard.querySelector('img');
+        const placeholder = spotCard.querySelector('.spot-image-placeholder');
+        
+        if (img) {
+            // 如果已有图片元素，直接更新
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.3s ease';
+            img.src = imageUrl;
+            
+            img.onload = () => {
+                img.style.opacity = '1';
+            };
+            
+            img.onerror = () => {
+                img.style.opacity = '1';
+            };
+        } else if (placeholder) {
+            // 创建新的图片元素
+            const newImg = document.createElement('img');
+            newImg.src = imageUrl;
+            newImg.alt = `景区图片`;
+            newImg.loading = 'lazy';
+            newImg.style.opacity = '0';
+            newImg.style.transition = 'opacity 0.3s ease';
+            newImg.style.width = '100%';
+            newImg.style.height = '100%';
+            newImg.style.objectFit = 'cover';
+            
+            newImg.onload = () => {
+                newImg.style.opacity = '1';
+                // 图片加载成功后替换占位符
+                if (placeholder.parentNode) {
+                    placeholder.parentNode.replaceChild(newImg, placeholder);
+                }
+            };
+            
+            newImg.onerror = () => {
+                // 图片加载失败，恢复占位符显示
+                hideImageLoading(spotId);
+            };
+            
+            // 预加载图片
+            newImg.src = imageUrl;
+        }
+    }
+
+    // ===== 显示结果信息 =====
     function updateResultsInfo(count, keyword, type) {
         if (elements.resultsTitle) {
             let title = '推荐景区';
@@ -454,9 +735,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (elements.resultsCount) {
             elements.resultsCount.textContent = `找到 ${count} 个景区`;
         }
-    }
-
-    // ===== 显示景区列表 =====
+    }    // ===== 显示景区列表 =====
     function displaySpots(spotsToDisplay) {
         if (!elements.spotsList) return;
         
@@ -467,24 +746,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (!spotsToDisplay || spotsToDisplay.length === 0) {
+            resetPaginationState(); // 重置分页状态
             showNoResults();
             return;
         }
 
+        // 使用文档片段批量添加卡片
+        const fragment = document.createDocumentFragment();
+        const cards = [];
+
         spotsToDisplay.forEach((spot, index) => {
             const li = createSpotCard(spot, index);
-            elements.spotsList.appendChild(li);
+            fragment.appendChild(li);
+            cards.push(li);
+        });
+
+        // 一次性添加到DOM
+        elements.spotsList.appendChild(fragment);
+
+        // 立即触发所有卡片的动画
+        requestAnimationFrame(() => {
+            cards.forEach(card => {
+                card.classList.add('animate-in');
+            });
         });
 
         // 重新设置观察器
         setupScrollEffects();
-    }
-
-    // ===== 创建景区卡片 =====
+    }// ===== 创建景区卡片 =====
     function createSpotCard(spot, index) {
         const li = document.createElement('li');
         li.classList.add('spot-card');
-        li.style.animationDelay = `${index * 0.1}s`;
+        li.setAttribute('data-spot-id', spot.id); // 添加 data-spot-id 属性
+        // 移除 animationDelay 设置，避免累积延迟
+        // li.style.animationDelay = `${index * 0.1}s`;
 
         const imgHtml = spot.img 
             ? `<img src="${spot.img}" alt="${spot.name || '景区图片'}" loading="lazy">` 
@@ -534,10 +829,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 elements.noResults.style.transform = 'translateY(0)';
             }, 100);
         }
-    }
-
-    // ===== 错误处理 =====
+    }    // ===== 错误处理 =====
     function handleError(message) {
+        resetPaginationState(); // 重置分页状态
+        
         if (elements.spotsList) {
             elements.spotsList.innerHTML = `
                 <li class="loading-placeholder">

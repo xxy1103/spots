@@ -736,3 +736,103 @@ html {
         border: 1px solid #ccc;
     }
 }
+
+/* 加载更多按钮样式 - 优化响应速度 */
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    padding: 20px;
+}
+
+.load-more-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease; /* 从0.3s减少到0.2s */
+    position: relative;
+    overflow: hidden;
+    min-width: 200px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.load-more-button:hover {
+    transform: translateY(-1px); /* 减少位移距离 */
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5); /* 减少阴影强度 */
+}
+
+.load-more-button:active {
+    transform: translateY(0);
+    transition: all 0.1s ease; /* 按下时更快的过渡 */
+}
+
+.load-more-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.load-more-button .spinner {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.load-more-text {
+    transition: opacity 0.2s ease; /* 减少过渡时间 */
+}
+
+/* 卡片进入动画 - 优化速度 */
+.spot-card.animate-in {
+    animation: cardSlideIn 0.3s ease forwards; /* 从0.6s减少到0.3s */
+}
+
+@keyframes cardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98); /* 减少位移距离 */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 加载状态样式增强 */
+.loading-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    grid-column: 1 / -1;
+}
+
+.placeholder-content {
+    text-align: center;
+    color: #666;
+}
+
+.placeholder-spinner {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #667eea;
+}
+
+/* 响应式加载更多按钮 */
+@media (max-width: 768px) {
+    .load-more-button {
+        width: 100%;
+        max-width: 300px;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .load-more-container {
+        padding: 15px;
+        margin: 30px 0;
+    }
+}

@@ -446,7 +446,7 @@ function createReviewElement(review) {
     // 用户名信息
     const userName = review.user_name || '匿名用户';
       // 构建评价项的HTML结构
-    const userId = review.user || '';
+    const userId = review.user_id || '';
     const diaryId = review.id || '';
     
     reviewItem.innerHTML = `

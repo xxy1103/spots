@@ -82,9 +82,7 @@
                     <option value="score_desc">评分 高 → 低</option>
                 </select>
             </div>
-        </section>
-
-        <ul id="spots-list" class="search-spots-grid">
+        </section>        <ul id="spots-list" class="search-spots-grid">
             <!-- 初始加载提示 -->
             <li class="loading-message">正在为您精心挑选景区...</li>
         </ul>
@@ -92,6 +90,16 @@
         <!-- 搜索结果统计 -->
         <div class="search-results-stats" id="search-stats" style="display: none;">
             <span id="results-count">0 个结果</span>
+        </div>
+
+        <!-- 加载更多按钮 -->
+        <div class="load-more-container" id="load-more-container" style="display: none;">
+            <button class="load-more-button" id="load-more-button">
+                <span class="load-more-text">显示更多景区</span>
+                <div class="spinner" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+            </button>
         </div>
 
         <div id="no-results" class="no-results-message" style="display: none;">
