@@ -95,22 +95,28 @@
         </section>        <!-- 搜索结果统计 -->
         {% if diaries %}
         <div class="search-results-stats">
-            <i class="fas fa-book-open"></i> 找到 {{ diaries|length }} 篇相关日记
+            <i class="fas fa-book-open"></i> 找到 {{ total_count or diaries|length }} 篇相关日记
+            {% if pagination %}
+            <span class="pagination-info">
+                （第 {{ pagination.page }} 页，共 {{ pagination.pages }} 页）
+            </span>
+            {% endif %}
         </div>
-        {% endif %}
-
-        <!-- 日记卡片网格 -->
+        {% endif %}        <!-- 日记卡片网格 -->
         <section class="diary-cards-container">
             {% if diaries %}
-                <div id="diary-grid" class="diary-search-grid">                    {% for diary in diaries %}
-                        <div class="diary-card" data-diary-id="{{ diary.id }}">                            <div class="diary-card-image">
+                <!-- 虚拟滚动容器 -->
+                <div id="virtual-scroll-container" class="virtual-scroll-container">
+                    <div id="diary-grid" class="diary-search-grid">                    {% for diary in diaries %}
+                        <div class="diary-card" data-diary-id="{{ diary.id }}" data-index="{{ loop.index0 }}">                            <div class="diary-card-image">
                                 {% if diary.img_list and diary.img_list[0] %}
                                     <div class="image-wrapper">
                                         <img 
                                             class="lazy-load" 
                                             data-src="/{{ diary.img_list[0] }}" 
                                             alt="{{ diary.title }}"
-                                            loading="lazy">
+                                            loading="lazy"
+                                            decoding="async">
                                         <div class="image-skeleton">
                                             <div class="skeleton-shimmer"></div>
                                         </div>
@@ -167,6 +173,36 @@
                             </div>
                         </div>
                     {% endfor %}
+                    </div>
+                    
+                    <!-- 加载更多按钮 -->
+                    {% if pagination and pagination.has_next %}
+                    <div class="load-more-container">
+                        <button id="load-more-btn" class="load-more-btn" data-next-page="{{ pagination.next_num }}">
+                            <i class="fas fa-plus"></i> 加载更多日记
+                        </button>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- 无限滚动加载指示器 -->
+                    <div id="scroll-loading" class="scroll-loading" style="display: none;">
+                        <div class="loading-spinner"></div>
+                        <p>正在加载更多日记...</p>
+                    </div>                </div>
+                  <!-- 分页导航已删除 -->
+                
+                <!-- 加载更多按钮 -->
+                <div class="load-more-container" id="load-more-container" style="display: none;">
+                    <button class="load-more-button" id="load-more-button">
+                        <span class="load-more-text">加载更多日记</span>
+                        <div class="spinner" style="display: none;"></div>
+                    </button>
+                </div>
+                
+                <!-- 无限滚动指示器 -->
+                <div class="infinite-scroll-indicator" id="infinite-scroll-indicator" style="display: none;">
+                    <div class="spinner"></div>
+                    <span>正在加载更多日记...</span>
                 </div>
             {% else %}
                 <div class="no-results-container">
@@ -179,14 +215,18 @@
                 </div>
             {% endif %}
         </section>
-    </main>
-
-    <!-- 返回顶部按钮 -->
+    </main>    <!-- 返回顶部按钮 -->
     <button class="back-to-top" id="back-to-top" aria-label="返回顶部">
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="{{ url_for('static', filename='js/diary_search.js') }}"></script>
+    
+    <!-- 内存使用监控 -->
+    <div class="memory-usage" id="memory-usage" style="display: none;">
+        内存: <span id="memory-info">--</span>    </div>
+
+    <script src="{{ url_for('static', filename='js/lazy-load-fix.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/diary_search_optimized.js') }}"></script>
 
 </body>
 </html>

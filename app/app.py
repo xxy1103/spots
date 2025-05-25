@@ -44,3 +44,9 @@ def page_not_found(e):
     """处理 404 错误，重定向到登录页面"""
     # 'login.loginView' 指向 login 蓝图中的 loginView 函数
     return redirect(url_for('login.loginView'))
+
+if __name__ == '__main__':
+    print("Flask应用启动中...")
+    print(f"访问地址: http://localhost:5000")
+    print("日记搜索页面: http://localhost:5000/diary/search")
+    app.run(debug=True, host='0.0.0.0', port=5000, threaded=True)

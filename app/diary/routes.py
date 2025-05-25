@@ -241,19 +241,23 @@ def add_diary_marking(diary_id):
 @login_required
 def search_diary():
     """
-    搜索日记
+    搜索日记 - 优化版本，支持分页和性能优化
     """
     keyword = request.args.get("keyword", default="", type=str)
     user_id = g.user["user_id"]
     search_type = request.args.get("type", default="title", type=str)
     sort_by = request.args.get("sort_by", default="value1", type=str) # value1表示默认排序，value2表示按热度排序
-
-    if keyword !="":
+    
+    # 添加分页参数
+    page = request.args.get("page", default=1, type=int)
+    per_page = request.args.get("per_page", default=20, type=int)  # 每页显示20个日记
+    is_ajax = request.args.get("ajax", default="", type=str) == "1"  # 判断是否为AJAX请求    # 获取搜索结果
+    if keyword != "":
         match search_type:
             case "title":
                 diaries = diary_manager.searchByTitle(keyword)
             case "content":
-                diaries = diary_manager.searchByContent(keyword, 10)
+                diaries = diary_manager.searchByContent(keyword, 100)  # 增加搜索数量限制
             case "user":
                 user = user_manager.searchUser(keyword) # 只支持精确查找
                 if user is None:
@@ -290,42 +294,80 @@ def search_diary():
                         diaries_id = spot.getDiaryList()
                         for diary_id in diaries_id:
                             diaries.append(diary_manager.getDiary(diary_id))
-        diaries_json = []
+                            
+        # 转换为字典格式并去重
+        diaries_dict = {}
         for diary in diaries:
-            item = {
-                "title":diary.title,
-                "content":diary_manager.getDiaryContent(diary.id),
-                "user":diary.user_id,
-                "spot":diary.spot_id,
-                "value1":diary.score,
-                "value2":diary.visited_time,
-                "id":diary.id,
-                "img_list":diary.img_list,
-                "video_list":diary.video_path,
-                "scoreToSpot":diary.scoreToSpot,
-                "time":diary.time,
-            }
-            diaries_json.append(item)
+            if diary and diary.id not in diaries_dict:
+                diaries_dict[diary.id] = {
+                    "title": diary.title,
+                    "content": diary_manager.getDiaryContent(diary.id)[:200] + "..." if len(diary_manager.getDiaryContent(diary.id)) > 200 else diary_manager.getDiaryContent(diary.id),  # 限制内容长度
+                    "user": diary.user_id,
+                    "spot": diary.spot_id,
+                    "value1": diary.score,
+                    "value2": diary.visited_time,
+                    "id": diary.id,
+                    "img_list": diary.img_list[:3] if diary.img_list else [],  # 只加载前3张图片
+                    "video_list": diary.video_path[:2] if diary.video_path else [],  # 只加载前2个视频
+                    "scoreToSpot": diary.scoreToSpot,
+                    "time": diary.time,
+                }
+        diaries_json = list(diaries_dict.values())
         
     else:
-        diaries = diary_manager.getAllDiaries()
-        diaries_json = []
-        for diary in diaries:
-            item = {
-                "title":diary.title,
-                "content":diary_manager.getDiaryContent(diary.id),
-                "user":diary.user_id,
-                "spot":diary.spot_id,
-                "value1":diary.score,
-                "value2":diary.visited_time,
-                "id":diary.id,
-                "img_list":diary.img_list,
-                "video_list":diary.video_path,
-                "scoreToSpot":diary.scoreToSpot,
-                "time":diary.time,
-            }
-            diaries_json.append(item)
+        # 如果没有搜索关键词，只获取前100个日记进行初始显示
+        all_diaries = diary_manager.getAllDiaries()
+        diaries_dict = {}
+        for diary in all_diaries[:100]:  # 限制初始加载数量
+            if diary:
+                diaries_dict[diary.id] = {
+                    "title": diary.title,
+                    "content": diary_manager.getDiaryContent(diary.id)[:200] + "..." if len(diary_manager.getDiaryContent(diary.id)) > 200 else diary_manager.getDiaryContent(diary.id),
+                    "user": diary.user_id,
+                    "spot": diary.spot_id,
+                    "value1": diary.score,
+                    "value2": diary.visited_time,
+                    "id": diary.id,
+                    "img_list": diary.img_list[:3] if diary.img_list else [],
+                    "video_list": diary.video_path[:2] if diary.video_path else [],
+                    "scoreToSpot": diary.scoreToSpot,
+                    "time": diary.time,
+                }
+        diaries_json = list(diaries_dict.values())
 
+    # 排序
     sorted_diaries = quicksort(diaries_json, sort_by)
+    
+    # 计算分页信息
+    total_count = len(sorted_diaries)
+    start_index = (page - 1) * per_page
+    end_index = start_index + per_page
+    page_diaries = sorted_diaries[start_index:end_index]
+    
+    # 构造分页信息
+    pagination_info = {
+        'page': page,
+        'per_page': per_page,
+        'total': total_count,
+        'pages': (total_count + per_page - 1) // per_page,
+        'has_prev': page > 1,
+        'has_next': end_index < total_count,
+        'prev_num': page - 1 if page > 1 else None,
+        'next_num': page + 1 if end_index < total_count else None
+    }
+    
+    # 如果是AJAX请求，只返回JSON数据
+    if is_ajax:
+        return jsonify({
+            'success': True,
+            'diaries': page_diaries,
+            'pagination': pagination_info
+        })
+    
     # 返回搜索结果
-    return render_template('diary_search.html', diaries=sorted_diaries, keyword=keyword, user_id=user_id)
+    return render_template('diary_search.html', 
+                         diaries=page_diaries, 
+                         keyword=keyword, 
+                         user_id=user_id,
+                         pagination=pagination_info,
+                         total_count=total_count)
