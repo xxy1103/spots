@@ -25,23 +25,45 @@ function initializePage() {
 
 // 检查用户会话
 function checkUserSession() {
+    const usernameSpan = document.getElementById('username');
     fetch('/api/check-session')
         .then(response => {
             if (!response.ok) {
-                throw new Error('未登录');
+                // 如果未授权 (401) 或其他错误，重定向到登录页
+                if (response.status === 401) {
+                    window.location.href = '/login'; // 跳转到登录页面的路由
+                } else {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return null; // 防止进一步处理
             }
             return response.json();
         })
         .then(data => {
-            if (!data.success) {
-                // 如果会话无效，重定向到登录页
+            if (data && data.success) {
+                if (usernameSpan) {
+                    usernameSpan.textContent = data.user.username || '用户';
+                    // 设置用户名链接到用户的日记页面
+                    if (data.user.user_id) {
+                        usernameSpan.href = `/diary/user/${data.user.user_id}`;
+                    }
+                }
+                // 用户信息获取成功后，获取推荐景点
+                if (typeof loadTabContent === 'function') {
+                    loadTabContent('recommended');
+                }
+            } else if (data) {
+                // 即使成功响应，也可能业务逻辑失败
+                console.error('会话检查失败:', data.message);
                 window.location.href = '/login';
             }
+            // 如果 response.ok 为 false 且非 401，则不会执行到这里
         })
         .catch(error => {
             console.error('检查会话时出错:', error);
-            // 可选择重定向到登录页
-            // window.location.href = '/login';
+            if (usernameSpan) usernameSpan.textContent = '错误';
+            // 可选：也在此处重定向到登录页
+            window.location.href = '/login';
         });
 }
 
@@ -91,20 +113,56 @@ function bindEventListeners() {
 
 // 处理搜索
 function handleSearch() {
-    const keyword = document.querySelector('.search-input input').value.trim();
-    const searchType = document.querySelector('.search-bar select').value;
+    const searchInput = document.querySelector('.search-input input');
+    const searchSelect = document.querySelector('.search-bar select');
     
+    if (!searchInput || !searchSelect) return;
+    
+    const keyword = searchInput.value.trim();
     if (!keyword) {
-        showToast('请输入搜索关键词');
+        // 空关键词提示
+        searchInput.style.borderColor = 'red';
+        searchInput.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            searchInput.style.borderColor = '#CCCCCC';
+            searchInput.style.animation = '';
+        }, 500);
         return;
     }
     
-    // 根据搜索类型跳转
+    const searchType = searchSelect.value;
+    
+    // 如果搜索类型是日记，直接跳转到日记搜索页面
     if (searchType === 'diary') {
         window.location.href = `/diary/search?keyword=${encodeURIComponent(keyword)}`;
-    } else {
-        window.location.href = `/spots/search?keyword=${encodeURIComponent(keyword)}`;
+        return;
     }
+    
+    // 其他搜索类型使用景点搜索API
+    const apiUrl = new URL('/api/search-spots', window.location.origin);
+    apiUrl.searchParams.append('keyword', keyword);
+    
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                if (response.status === 401) {
+                    window.location.href = '/login';
+                }
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success && Array.isArray(data.spots)) {
+                window.location.href = `/spots/search?keyword=${encodeURIComponent(keyword)}`;
+            } else {
+                showToast('搜索服务暂不可用，请稍后重试');
+            }
+        })
+        .catch(error => {
+            console.error('搜索时出错:', error);
+            showToast('搜索服务暂不可用，请稍后重试');
+        });
 }
 
 // 处理登出

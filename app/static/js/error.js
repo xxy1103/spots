@@ -68,26 +68,64 @@ function setupSearch() {
     
     if (!searchButton) return;
     
-    searchButton.addEventListener('click', function() {
-        const searchType = searchTypeSelect.value;
-        const searchQuery = searchInput.value.trim();
-        
-        if (searchQuery) {
-            if (searchType === 'spot') {
-                window.location.href = `/spots/search?keyword=${encodeURIComponent(searchQuery)}`;
-            } else if (searchType === 'diary') {
-                window.location.href = `/diary/search?keyword=${encodeURIComponent(searchQuery)}`;
-            }
+    function handleSearch() {
+        const keyword = searchInput.value.trim();
+        if (!keyword) {
+            // 空关键词提示
+            searchInput.style.borderColor = 'red';
+            searchInput.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                searchInput.style.borderColor = '#CCCCCC';
+                searchInput.style.animation = '';
+            }, 500);
+            return;
         }
-    });
+        
+        const searchType = searchTypeSelect.value;
+        
+        // 如果搜索类型是日记，直接跳转到日记搜索页面
+        if (searchType === 'diary') {
+            window.location.href = `/diary/search?keyword=${encodeURIComponent(keyword)}`;
+            return;
+        }
+        
+        // 其他搜索类型使用景点搜索API
+        const apiUrl = new URL('/api/search-spots', window.location.origin);
+        apiUrl.searchParams.append('keyword', keyword);
+        
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        window.location.href = '/login';
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success && Array.isArray(data.spots)) {
+                    window.location.href = `/spots/search?keyword=${encodeURIComponent(keyword)}`;
+                } else {
+                    showToast('搜索服务暂不可用，请稍后重试');
+                }
+            })
+            .catch(error => {
+                console.error('搜索时出错:', error);
+                showToast('搜索服务暂不可用，请稍后重试');
+            });
+    }
+    
+    searchButton.addEventListener('click', handleSearch);
     
     // 回车键也可以搜索
     if (searchInput) {
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                searchButton.click();
+                handleSearch();
             }
         });
+    }
     }
 }
 

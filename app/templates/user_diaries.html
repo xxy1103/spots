@@ -76,13 +76,13 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- 日记区域 -->
+        </div>        <!-- 日记区域 -->
         <div class="diaries-section">
             <div class="section-header">
-                <h2>我的旅行日记</h2>
+                <h2>{% if is_current_user %}我的旅行日记{% else %}{{ user.name }}的旅行日记{% endif %}</h2>
+                {% if is_current_user %}
                 <a href="{{ url_for('diary.add_diary_page') }}" class="write-diary-btn">写日记</a>
+                {% endif %}
             </div>
             
             <div class="diary-list">
@@ -133,13 +133,14 @@
                             {% endif %}
                         </div>
                     </div>
-                    {% endfor %}
-                {% else %}
+                    {% endfor %}                {% else %}
                     <div class="no-diaries">
                         <div class="no-diaries-icon">📝</div>
-                        <h3>暂无旅行日记</h3>
-                        <p>快去记录你的精彩旅程吧！</p>
+                        <h3>{% if is_current_user %}暂无旅行日记{% else %}该用户暂无旅行日记{% endif %}</h3>
+                        <p>{% if is_current_user %}快去记录你的精彩旅程吧！{% else %}期待TA分享精彩的旅程{% endif %}</p>
+                        {% if is_current_user %}
                         <a href="{{ url_for('diary.add_diary_page') }}" class="write-diary-btn primary">立即写日记</a>
+                        {% endif %}
                     </div>
                 {% endif %}
             </div>

@@ -269,13 +269,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
             return;
         }
+          const searchType = searchSelect.value;
         
-        const searchType = searchSelect.value;
+        // 如果搜索类型是日记，直接跳转到日记搜索页面
+        if (searchType === 'diary') {
+            window.location.href = `/diary/search?keyword=${encodeURIComponent(keyword)}`;
+            return;
+        }
+        
+        // 其他搜索类型使用景点搜索API
         const apiUrl = new URL('/api/search-spots', window.location.origin);
         apiUrl.searchParams.append('keyword', keyword);
-        if (searchType === 'diary') {
-            apiUrl.searchParams.append('type', 'diary');
-        }
         
         fetch(apiUrl)
             .then(response => {

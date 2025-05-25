@@ -22,8 +22,7 @@ def get_user_diaries(user_id):
     user = user_manager.getUser(user_id)
     if not user:
         return render_template('error.html', message="用户不存在")
-    
-    # diaries_id = user["reviews"]["diary_ids"]
+      # diaries_id = user["reviews"]["diary_ids"]
     diaries_id = user.reviews.getDiaryIds()
     diaries = []
     for diary_id in diaries_id:
@@ -33,7 +32,10 @@ def get_user_diaries(user_id):
         if diary:
             diaries.append(diary_json)
 
-    return render_template('user_diaries.html', diaries=diaries, user=user)
+    # 判断是否为当前登录用户
+    is_current_user = g.user and g.user["user_id"] == user_id
+
+    return render_template('user_diaries.html', diaries=diaries, user=user, is_current_user=is_current_user)
     #return jsonify(diaries)
 
 @diary.route('/spot/<int:spot_id>', methods=['GET'])

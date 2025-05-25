@@ -73,6 +73,7 @@
                 <div class="control-group">
                     <label for="type">搜索类型:</label>
                     <select id="type" name="type">
+                        <option value="_" {% if request.args.get('type') == '' %}selected{% endif %}>全部搜索</option>
                         <option value="title" {% if request.args.get('type') == 'title' %}selected{% endif %}>标题</option>
                         <option value="content" {% if request.args.get('type') == 'content' %}selected{% endif %}>内容</option>
                         <option value="user" {% if request.args.get('type') == 'user' %}selected{% endif %}>用户</option>

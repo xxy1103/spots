@@ -139,17 +139,49 @@ function handleSearch() {
     
     const keyword = searchInput.value.trim();
     if (!keyword) {
-        showToast('请输入搜索关键词', 'warning');
+        // 空关键词提示
+        searchInput.style.borderColor = 'red';
+        searchInput.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            searchInput.style.borderColor = '#CCCCCC';
+            searchInput.style.animation = '';
+        }, 500);
         return;
     }
     
     const searchType = searchSelect.value;
-    // 根据搜索类型跳转
+    
+    // 如果搜索类型是日记，直接跳转到日记搜索页面
     if (searchType === 'diary') {
         window.location.href = `/diary/search?keyword=${encodeURIComponent(keyword)}`;
-    } else {
-        window.location.href = `/spots/search?keyword=${encodeURIComponent(keyword)}`;
+        return;
     }
+    
+    // 其他搜索类型使用景点搜索API
+    const apiUrl = new URL('/api/search-spots', window.location.origin);
+    apiUrl.searchParams.append('keyword', keyword);
+    
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                if (response.status === 401) {
+                    window.location.href = '/login';
+                }
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success && Array.isArray(data.spots)) {
+                window.location.href = `/spots/search?keyword=${encodeURIComponent(keyword)}`;
+            } else {
+                showToast('搜索服务暂不可用，请稍后重试');
+            }
+        })
+        .catch(error => {
+            console.error('搜索时出错:', error);
+            showToast('搜索服务暂不可用，请稍后重试');
+        });
 }
 
 // 处理登出
