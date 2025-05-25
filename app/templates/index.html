@@ -89,81 +89,224 @@
             </div>
             <span>演出</span>
         </a>
-    </div>
-
-    <div class="tabs-container">
-        <div class="tabs-nav">
-            <a href="#" class="tab-item active" data-target="recommended"><strong>推荐景区</strong></a>
-            <a href="#" class="tab-item" data-target="5star"><strong>5分景区</strong></a>
-            <a href="#" class="tab-item" data-target="4star"><strong>4分景区</strong></a>
-            <a href="#" class="tab-item" data-target="3star"><strong>3分景区</strong></a>
-            <a href="#" class="tab-item" data-target="shows"><strong>旅游演艺</strong></a>
+    </div>    <div class="tabs-container">
+        <div class="tabs-header">
+            <div class="tabs-title">
+                <h2 class="section-heading">
+                    <span class="heading-icon">🏞️</span>
+                    <span class="heading-text">精选景区推荐</span>
+                </h2>
+                <p class="section-subtitle">为您精心挑选的优质旅游目的地</p>
+            </div>
         </div>
         
-        <div id="recommended" class="tab-content active">
-            <div class="spots-grid" id="recommended-grid">
-                <!-- 推荐景区卡片将通过JS动态加载 -->
-                <div class="spot-card">
-                    <div style="height: 150px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">加载中...</div>
+        <div class="tabs-nav-wrapper">
+            <div class="tabs-nav">
+                <a href="#" class="tab-item active" data-target="recommended">
+                    <span class="tab-icon">⭐</span>
+                    <span class="tab-text">推荐景区</span>
+                    <div class="tab-indicator"></div>
+                </a>
+                <a href="#" class="tab-item" data-target="5star">
+                    <span class="tab-icon">🏆</span>
+                    <span class="tab-text">5分景区</span>
+                    <div class="tab-indicator"></div>
+                </a>
+                <a href="#" class="tab-item" data-target="4star">
+                    <span class="tab-icon">💎</span>
+                    <span class="tab-text">4分景区</span>
+                    <div class="tab-indicator"></div>
+                </a>
+                <a href="#" class="tab-item" data-target="3star">
+                    <span class="tab-icon">🌟</span>
+                    <span class="tab-text">3分景区</span>
+                    <div class="tab-indicator"></div>
+                </a>
+                <a href="#" class="tab-item" data-target="shows">
+                    <span class="tab-icon">🎭</span>
+                    <span class="tab-text">旅游演艺</span>
+                    <div class="tab-indicator"></div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="tabs-content-wrapper">
+            <div id="recommended" class="tab-content active">
+                <div class="content-header">
+                    <h3 class="content-title">个性化推荐</h3>
+                    <p class="content-desc">基于您的喜好为您推荐</p>
+                </div>
+                <div class="spots-grid" id="recommended-grid">
+                    <!-- 推荐景区卡片将通过JS动态加载 -->
+                    <div class="spot-card loading-spot">
+                        <div class="spot-card-skeleton">
+                            <div class="skeleton-image"></div>
+                            <div class="skeleton-content">
+                                <div class="skeleton-line skeleton-title"></div>
+                                <div class="skeleton-line skeleton-location"></div>
+                                <div class="skeleton-line skeleton-rating"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spot-card loading-spot">
+                        <div class="spot-card-skeleton">
+                            <div class="skeleton-image"></div>
+                            <div class="skeleton-content">
+                                <div class="skeleton-line skeleton-title"></div>
+                                <div class="skeleton-line skeleton-location"></div>
+                                <div class="skeleton-line skeleton-rating"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spot-card loading-spot">
+                        <div class="spot-card-skeleton">
+                            <div class="skeleton-image"></div>
+                            <div class="skeleton-content">
+                                <div class="skeleton-line skeleton-title"></div>
+                                <div class="skeleton-line skeleton-location"></div>
+                                <div class="skeleton-line skeleton-rating"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-more-container">
+                    <a href="/spots/search?user_preference=true&exclude_type=演出" class="view-more-btn modern">
+                        <span class="btn-text">查看更多推荐</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
                 </div>
             </div>
-            <a href="/spots/search?user_preference=true&exclude_type=演出" class="view-more">查看更多</a>
-        </div>
-        
-        <div id="5star" class="tab-content">
-            <div class="spots-grid" id="5star-grid">
-                <!-- 5分景区卡片将通过JS动态加载 -->
+            
+            <div id="5star" class="tab-content">
+                <div class="content-header">
+                    <h3 class="content-title">顶级体验</h3>
+                    <p class="content-desc">评分最高的精品景区</p>
+                </div>
+                <div class="spots-grid" id="5star-grid">
+                    <!-- 5分景区卡片将通过JS动态加载 -->
+                </div>
+                <div class="view-more-container">
+                    <a href="/spots/search?min_score=5.0&max_score=5.0&exclude_type=演出" class="view-more-btn modern">
+                        <span class="btn-text">查看更多5分景区</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
             </div>
-            <a href="/spots/search?min_score=5.0&max_score=5.0&exclude_type=演出" class="view-more">查看更多</a>
-        </div>
-        
-        <div id="4star" class="tab-content">
-            <div class="spots-grid" id="4star-grid">
-                <!-- 4分景区卡片将通过JS动态加载 -->
+            
+            <div id="4star" class="tab-content">
+                <div class="content-header">
+                    <h3 class="content-title">优质选择</h3>
+                    <p class="content-desc">口碑优秀的热门景区</p>
+                </div>
+                <div class="spots-grid" id="4star-grid">
+                    <!-- 4分景区卡片将通过JS动态加载 -->
+                </div>
+                <div class="view-more-container">
+                    <a href="/spots/search?min_score=4.0&max_score=4.9&exclude_type=演出" class="view-more-btn modern">
+                        <span class="btn-text">查看更多4分景区</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
             </div>
-            <a href="/spots/search?min_score=4.0&max_score=4.9&exclude_type=演出" class="view-more">查看更多</a>
-        </div>
-        
-        <div id="3star" class="tab-content">
-            <div class="spots-grid" id="3star-grid">
-                <!-- 3分景区卡片将通过JS动态加载 -->
+            
+            <div id="3star" class="tab-content">
+                <div class="content-header">
+                    <h3 class="content-title">经济实惠</h3>
+                    <p class="content-desc">性价比出色的好去处</p>
+                </div>
+                <div class="spots-grid" id="3star-grid">
+                    <!-- 3分景区卡片将通过JS动态加载 -->
+                </div>
+                <div class="view-more-container">
+                    <a href="/spots/search?min_score=3.0&max_score=3.9&exclude_type=演出" class="view-more-btn modern">
+                        <span class="btn-text">查看更多3分景区</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
             </div>
-            <a href="/spots/search?min_score=3.0&max_score=3.9&exclude_type=演出" class="view-more">查看更多</a>
-        </div>
-        
-        <div id="shows" class="tab-content">
-            <div class="spots-grid" id="shows-grid">
-                <!-- 旅游演艺卡片将通过JS动态加载 -->
+            
+            <div id="shows" class="tab-content">
+                <div class="content-header">
+                    <h3 class="content-title">精彩演出</h3>
+                    <p class="content-desc">不容错过的文化演艺</p>
+                </div>
+                <div class="spots-grid" id="shows-grid">
+                    <!-- 旅游演艺卡片将通过JS动态加载 -->
+                </div>
+                <div class="view-more-container">
+                    <a href="/spots/search?type=演出" class="view-more-btn modern">
+                        <span class="btn-text">查看更多演出</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
             </div>
-            <a href="/spots/search?type=演出" class="view-more">查看更多</a>
         </div>
-    </div>
-
-    <!-- 推荐日记部分 -->
+    </div><!-- 推荐日记部分 -->
     <div class="diary-recommendation-container">
         <div class="section-title">
-            <h2>📝 推荐日记</h2>
-            <p>发现其他旅行者的精彩分享</p>
+            <div class="title-icon">📝</div>
+            <h2>推荐日记</h2>
+            <p class="subtitle">发现其他旅行者的精彩分享</p>
+            <div class="title-decoration"></div>
         </div>
         
-        <div class="diary-grid" id="diary-grid">
-            <!-- 推荐日记卡片将通过JS动态加载 -->
-            <div class="diary-card">
-                <div style="height: 200px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">加载中...</div>
+        <div class="diary-content-wrapper">
+            <div class="diary-grid" id="diary-grid">
+                <!-- 推荐日记卡片将通过JS动态加载 -->
+                <div class="diary-card loading-card">
+                    <div class="diary-card-skeleton">
+                        <div class="skeleton-image"></div>
+                        <div class="skeleton-content">
+                            <div class="skeleton-line skeleton-title"></div>
+                            <div class="skeleton-line skeleton-meta"></div>
+                            <div class="skeleton-line skeleton-text"></div>
+                            <div class="skeleton-line skeleton-text short"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="diary-card loading-card">
+                    <div class="diary-card-skeleton">
+                        <div class="skeleton-image"></div>
+                        <div class="skeleton-content">
+                            <div class="skeleton-line skeleton-title"></div>
+                            <div class="skeleton-line skeleton-meta"></div>
+                            <div class="skeleton-line skeleton-text"></div>
+                            <div class="skeleton-line skeleton-text short"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="diary-card loading-card">
+                    <div class="diary-card-skeleton">
+                        <div class="skeleton-image"></div>
+                        <div class="skeleton-content">
+                            <div class="skeleton-line skeleton-title"></div>
+                            <div class="skeleton-line skeleton-meta"></div>
+                            <div class="skeleton-line skeleton-text"></div>
+                            <div class="skeleton-line skeleton-text short"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-more-container">
+                <button id="view-more-diaries-btn" class="view-more-btn diary-view-more">
+                    <span class="btn-text">查看更多日记</span>
+                    <span class="btn-icon">→</span>
+                </button>
             </div>
         </div>
-        
-        <button id="view-more-diaries-btn" class="view-more diary-view-more">查看更多日记</button>
     </div>
 
     <div class="blue-container">
-    <div class="nav-item" onclick="window.location.href='/spots/search'">
-        推荐景区
+        <div class="nav-item" onclick="window.location.href='/spots/search'">
+            <span class="nav-icon">🏞️</span>
+            <span class="nav-text">推荐景区</span>
+        </div>
+        <div class="nav-item" onclick="window.location.href='/diary/search'">
+            <span class="nav-icon">📖</span>
+            <span class="nav-text">口碑日记</span>
+        </div>
     </div>
-    <div class="nav-item" onclick="window.location.href='/diary/search'">
-        口碑日记
-    </div>
-</div>    
     <header class="header">
         <div class="header-container">
             <div class="header-left">

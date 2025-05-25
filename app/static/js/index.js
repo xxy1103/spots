@@ -341,8 +341,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 初始加载推荐景区数据
     loadTabContent('recommended');
     
-    let currentDiaryCount = 6; // 当前已加载的日记数量
-    const diariesPerLoad = 6; // 每次加载的日记数量
+    let currentDiaryCount = 8; // 当前已加载的日记数量
+    const diariesPerLoad = 8; // 每次加载的日记数量
 
     // 加载推荐日记
     loadRecommendedDiaries(currentDiaryCount);    // "查看更多日记"按钮事件监听
