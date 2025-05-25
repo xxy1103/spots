@@ -339,11 +339,10 @@
 }
 .view-all-reviews-btn {
     width: 100%;
-    padding: 14px 0;
-    margin: 20px 0 10px;
-    background-color: #f5f7fa;
-    color: #555;
-    border: 1px solid #e0e0e0;
+    padding: 12px 0;
+    background-color: #0052d9;
+    color: white;
+    border: none;
     border-radius: 8px;
     font-size: 15px;
     font-weight: 500;
@@ -354,27 +353,15 @@
     justify-content: center;
 }
 .view-all-reviews-btn:hover {
-    background-color: #f0f2f5;
-    color: #333;
+    background-color: #0046be;
 }
-.view-all-reviews-btn:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    background-color: #f0f0f0;
+.view-all-reviews-btn::after {
+    content: "→";
+    margin-left: 5px;
+    transition: transform 0.2s;
 }
-.view-all-reviews-btn .spinner {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    border-top: 2px solid #555;
-    border-radius: 50%;
-    margin-right: 8px;
-    animation: spin 1s linear infinite;
-}
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.view-all-reviews-btn:hover::after {
+    transform: translateX(3px);
 }
 
 /* 更新评价项样式，匹配图片中的样式 */
@@ -576,11 +563,10 @@
 /* 查看全部按钮 */
 .view-all-reviews-btn {
     width: 100%;
-    padding: 14px 0;
-    margin: 20px 0 10px;
-    background-color: #f5f7fa;
-    color: #555;
-    border: 1px solid #e0e0e0;
+    padding: 12px 0;
+    background-color: #0052d9;
+    color: white;
+    border: none;
     border-radius: 8px;
     font-size: 15px;
     font-weight: 500;
@@ -591,27 +577,15 @@
     justify-content: center;
 }
 .view-all-reviews-btn:hover {
-    background-color: #f0f2f5;
-    color: #333;
+    background-color: #0046be;
 }
-.view-all-reviews-btn:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    background-color: #f0f0f0;
+.view-all-reviews-btn::after {
+    content: "→";
+    margin-left: 5px;
+    transition: transform 0.2s;
 }
-.view-all-reviews-btn .spinner {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    border-top: 2px solid #555;
-    border-radius: 50%;
-    margin-right: 8px;
-    animation: spin 1s linear infinite;
-}
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.view-all-reviews-btn:hover::after {
+    transform: translateX(3px);
 }
 
 /* 加载更多按钮 */
@@ -890,6 +864,36 @@
     background: #fafafa;
     border-radius: 8px;
     border: 2px dashed #e0e0e0;
+}
+
+/* 浮动元素样式 */
+.floating-element {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0.6;
+    animation: float 6s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.floating-element:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.floating-element:nth-child(2) {
+    animation-delay: 2s;
+}
+
+.floating-element:nth-child(3) {
+    animation-delay: 4s;
 }
 
 /* 添加响应式样式以处理不同屏幕宽度下的布局 */

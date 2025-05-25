@@ -36,6 +36,28 @@ def get_user_diaries(user_id):
     return render_template('user_diaries.html', diaries=diaries, user=user)
     #return jsonify(diaries)
 
+@diary.route('/spot/<int:spot_id>', methods=['GET'])
+@login_required
+# 获取景点的日记列表
+def get_spot_diaries(spot_id):
+    """
+    获取景点的日记列表
+    """
+    spot = spot_manager.getSpot(spot_id)
+    if not spot:
+        return render_template('error.html', message="景点不存在")
+    
+    diaries = []
+    diaries_id = spot.getDiaryList()
+    for diary_id in diaries_id:
+        diary = diary_manager.getDiary(diary_id)
+        diary_json = diary.to_dict()
+        diary_json["content"] = diary_manager.getDiaryContent(diary_id)
+        if diary:
+            diaries.append(diary_json)
+
+    return jsonify(diaries)
+
 
 @diary.route('<int:diary_id>', methods=['GET'])
 @login_required

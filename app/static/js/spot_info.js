@@ -330,6 +330,9 @@ function setupImagePreview() {
     }
 }
 
+// 全局变量存储评价数据
+let allReviewsData = null;
+
 // 加载用户评价数据 (初始加载)
 function loadUserReviews() {
     const spotId = getSpotIdFromUrl();
@@ -354,6 +357,9 @@ function loadUserReviews() {
         })
         .then(data => {
             if (data && Array.isArray(data) && data.length > 0) {
+                // 缓存全部评价数据
+                allReviewsData = data;
+                
                 // 限制首页显示的评价数量
                 const previewReviews = data.slice(0, 3);
                 renderReviews(previewReviews, reviewsList);
@@ -370,6 +376,7 @@ function loadUserReviews() {
                     }
                 }
             } else {
+                allReviewsData = [];
                 showEmptyMessage('reviewsList', '暂无评价');
                 
                 // 禁用"加载更多"按钮
@@ -382,6 +389,7 @@ function loadUserReviews() {
         })
         .catch(error => {
             console.error('获取评价数据出错:', error);
+            allReviewsData = null;
             showEmptyMessage('reviewsList', '加载评价失败，请稍后再试');
             
             // 禁用"加载更多"按钮
@@ -558,111 +566,127 @@ function loadMoreReviews() {
         loadMoreBtn.innerHTML = '<span class="spinner"></span> 加载中...';
     }
     
-    // 获取景点ID
-    const spotId = getSpotIdFromUrl();
-    if (!spotId) {
-        showEmptyMessage('reviewsList', '无法获取景点ID');
-        resetLoadMoreButton();
+    // 如果没有缓存的评价数据，先加载
+    if (!allReviewsData) {
+        const spotId = getSpotIdFromUrl();
+        if (!spotId) {
+            showEmptyMessage('reviewsList', '无法获取景点ID');
+            resetLoadMoreButton();
+            return;
+        }
+        
+        // 从API获取评价数据
+        fetch(`/diary/spot/${spotId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`请求失败，状态码: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                allReviewsData = data || [];
+                processMoreReviews();
+            })
+            .catch(error => {
+                console.error('获取评价数据出错:', error);
+                
+                // 恢复按钮状态
+                if (loadMoreBtn) {
+                    loadMoreBtn.innerHTML = '加载失败，点击重试';
+                    loadMoreBtn.disabled = false;
+                }
+            });
+    } else {
+        // 使用缓存的数据
+        processMoreReviews();
+    }
+}
+
+// 处理加载更多评价的逻辑
+function processMoreReviews() {
+    const reviewsList = document.getElementById('reviewsList');
+    const loadMoreBtn = document.querySelector('.view-all-reviews-btn');
+    
+    if (!allReviewsData || !Array.isArray(allReviewsData)) {
+        if (loadMoreBtn) {
+            loadMoreBtn.innerHTML = '没有更多评价了';
+            loadMoreBtn.disabled = true;
+        }
         return;
     }
     
-    // 获取已显示的评价数量，用于分页加载
+    // 获取已显示的评价数量
     const existingReviews = reviewsList.querySelectorAll('.review-item');
     const offset = existingReviews.length;
     
-    // 从API获取更多评价
-    fetch(`/diary/spot/${spotId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`请求失败，状态码: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data && Array.isArray(data)) {
-                // 获取所有评价
-                const allReviews = data;
-                
-                // 如果已经加载了所有的评价
-                if (offset >= allReviews.length) {
-                    if (loadMoreBtn) {
-                        loadMoreBtn.innerHTML = '没有更多评价了';
-                        loadMoreBtn.disabled = true;
-                    }
-                    return;
-                }
-                
-                // 获取下一批评价（最多5条）
-                const nextBatch = allReviews.slice(offset, offset + 5);
-                
-                if (nextBatch.length > 0) {
-                    // 添加新评价到列表
-                    appendReviews(nextBatch, reviewsList);
-                    
-                    // 如果已经加载完所有评价
-                    if (offset + nextBatch.length >= allReviews.length) {
-                        if (loadMoreBtn) {
-                            loadMoreBtn.innerHTML = '没有更多评价了';
-                            loadMoreBtn.disabled = true;
-                        }
-                    } else {
-                        // 还有更多评价可加载
-                        resetLoadMoreButton();
-                    }
-                } else {
-                    // 没有更多评价可加载
-                    if (loadMoreBtn) {
-                        loadMoreBtn.innerHTML = '没有更多评价了';
-                        loadMoreBtn.disabled = true;
-                    }
-                }
-            } else {
-                // 无评价数据
-                if (existingReviews.length === 0) {
-                    showEmptyMessage('reviewsList', '暂无评价');
-                }
-                
-                // 更新按钮状态
-                if (loadMoreBtn) {
-                    loadMoreBtn.innerHTML = '没有更多评价了';
-                    loadMoreBtn.disabled = true;
-                }
-            }
-        })
-        .catch(error => {
-            console.error('获取评价数据出错:', error);
-            
-            // 只有在没有已显示评价时才显示错误消息
-            if (existingReviews.length === 0) {
-                showEmptyMessage('reviewsList', '加载评价失败，请稍后再试');
-            }
-            
-            // 恢复按钮状态
+    // 如果已经加载了所有的评价
+    if (offset >= allReviewsData.length) {
+        if (loadMoreBtn) {
+            loadMoreBtn.innerHTML = '没有更多评价了';
+            loadMoreBtn.disabled = true;
+        }
+        return;
+    }
+    
+    // 获取下一批评价（最多5条）
+    const nextBatch = allReviewsData.slice(offset, offset + 5);
+    
+    if (nextBatch.length > 0) {
+        // 添加新评价到列表
+        appendReviews(nextBatch, reviewsList);
+        
+        // 如果已经加载完所有评价
+        if (offset + nextBatch.length >= allReviewsData.length) {
             if (loadMoreBtn) {
-                loadMoreBtn.innerHTML = '加载失败，点击重试';
-                loadMoreBtn.disabled = false;
+                loadMoreBtn.innerHTML = '没有更多评价了';
+                loadMoreBtn.disabled = true;
             }
-        });
+        } else {
+            // 还有更多评价可加载
+            resetLoadMoreButton();
+        }
+    } else {
+        // 没有更多评价可加载
+        if (loadMoreBtn) {
+            loadMoreBtn.innerHTML = '没有更多评价了';
+            loadMoreBtn.disabled = true;
+        }
+    }
 }
 
 // 向评价列表追加新评价
 function appendReviews(reviews, container) {
     if (!container || !reviews || reviews.length === 0) return;
     
+    // 获取已存在的评价ID，避免重复添加
+    const existingReviewIds = new Set();
+    container.querySelectorAll('.review-item[data-review-id]').forEach(element => {
+        existingReviewIds.add(element.getAttribute('data-review-id'));
+    });
+    
     reviews.forEach((review, index) => {
+        const reviewId = review.id || `temp-${Date.now()}-${index}`;
+        
+        // 检查是否已存在该评价
+        if (existingReviewIds.has(reviewId.toString())) {
+            return; // 跳过已存在的评价
+        }
+        
         const reviewElement = createReviewElement(review);
         
         // 添加评价ID作为数据属性，用于避免重复添加
-        reviewElement.setAttribute('data-review-id', review.id || index);
+        reviewElement.setAttribute('data-review-id', reviewId);
         
         // 添加淡入淡出动画效果
         reviewElement.classList.add('review-fade-in');
         reviewElement.style.animationDelay = `${index * 0.1}s`;
         
         container.appendChild(reviewElement);
+        
+        // 将新的ID添加到集合中
+        existingReviewIds.add(reviewId.toString());
     });
-    
-    // 添加CSS动画类
+      // 添加CSS动画类
     const styleElement = document.createElement('style');
     if (!document.querySelector('#review-animations')) {
         styleElement.id = 'review-animations';
@@ -674,6 +698,20 @@ function appendReviews(reviews, container) {
             .review-fade-in {
                 animation: reviewFadeIn 0.5s ease forwards;
                 opacity: 0;
+            }
+            .spinner {
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                border: 2px solid #f3f3f3;
+                border-top: 2px solid #0052d9;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                margin-right: 5px;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
             }
         `;
         document.head.appendChild(styleElement);

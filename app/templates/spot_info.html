@@ -1,448 +1,234 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
+<head>    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ spot.name }} - 景点详情</title>
-    <link rel="icon" href="../static/logo.png" type="image/png">
-    <link rel="shortcut icon" href="../static/logo.png" type="image/png">
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --text-color: #333;
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-
-        .container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            margin: 190px auto 20px;
-            max-width: 1200px;
-        }
-
-        .spot-header {
-            border-bottom: 2px solid var(--primary-color);
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-        }
-
-        .header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            position: relative;
-            top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .image-container {
-            position: absolute;
-            left: 20%;
-            top: 29px;
-            transform: translateY(-50%);
-            width: 280px;
-            height: 80px;
-            background: url('../static/dogo.png') center center/contain no-repeat;
-            z-index: 999;
-            cursor: pointer;
-        }
-
-        .header span {
-            font-weight: bold;
-            position: absolute;
-            right: 32%;
-            display: flex;
-            align-items: center;
-            height: 100%;
-            top: 22px;
-        }
-
-        .header .search-bar {
-            display: flex;
-            max-width: 400px;
-            height: 48px;
-            gap: 0px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 5px;
-        }
-
-        .header .search-bar select {
-            padding: 12px 16px;
-            border: 1px solid #CCCCCC;
-            border-radius: 4px 0 0 4px;
-            font-size: 14px;
-            min-width: 100px;
-        }
-
-        .header .search-input {
-            flex: 1;
-            position: relative;
-            display: flex;
-            align-items: center;
-            height: 46px;
-            top: 1px;
-        }
-
-        .header .search-input svg {
-            position: absolute;
-            left: 16px;
-            pointer-events: none;
-        }
-
-        .header .search-input input {
-            width: 100%;
-            height: 46px;
-            padding: 0 16px 0 48px;
-            border: 1px solid #CCCCCC;
-            border-left: none;
-            border-right: none;
-            font-size: 14px;
-        }
-
-        .header .search-input input::placeholder {
-            color: #999999;
-        }
-
-        .header .search-button {
-            padding: 12px 16px;
-            background-color: #FF6600;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 0 4px 4px 0;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .header .search-button:hover {
-            background-color: #E55C00;
-        }
-
-        .header .search-button:active {
-            transform: translateY(1px);
-        }
-
-        .header .actions {
-            display: flex;
-            gap: 10px;
-            position: absolute;
-            right: 29%;
-            top: 17px;
-        }
-
-        .header button, .header a.button {
-            padding: 0;
-            cursor: pointer;
-            text-decoration: none;
-            background-color: transparent;
-            border: none;
-            color: #333;
-        }
-
-        .header a.button:hover {
-            color: #0066cc;
-        }
-
-        #logout-button {
-            font-size: 16px;
-            margin-left: 10px;
-        }
-
-        #logout-button:hover {
-            color: #0066cc;
-        }
-
-        @media (max-width: 768px) {
-            .header .search-bar { height: 40px; }
-            .header .search-button span { display: none; }
-            .header .search-button::after { content: "🔍"; }
-        }
-
-        .spot-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .spot-info .image-container {
-            border-radius: 8px;
-            overflow: hidden;
-            max-height: 400px;
-            position: relative;
-            left: auto;
-            top: auto;
-            transform: none;
-            width: 100%;
-            height: auto;
-            background: none;
-        }
-
-        .spot-info .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .metadata {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .badge {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9em;
-        }
-
-        .rating {
-            color: #f39c12;
-            font-weight: bold;
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.8rem 1.5rem;
-            background: var(--secondary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-        }
-
-        .description {
-            text-indent: 2em;
-            line-height: 1.8;
-            color: #555;
-        }
-
-        @media (max-width: 768px) {
-            .spot-info {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* 蓝色导航栏样式 */
-        .blue-container {
-            position: absolute;
-            top: 125px;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background-color: #0052d9;
-            z-index: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 60px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        
-        .nav-item {
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .nav-item:hover {
-            background-color: #003bb3;
-        }
-        
-        /* 添加推荐景区的橙色背景样式 */
-        .nav-item.orange {
-            background-color: #FF6600;
-        }
-        
-        .nav-item.orange:hover {
-            background-color: #E55C00;
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
-        }
-    </style>
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/spot_info.css') }}">
 </head>
 <body>
-    <!-- 页面顶部导航 -->
-    <div class="header">
-        <a href="/" style="text-decoration: none;">
-            <div class="image-container"></div>
-        </a>
-        <span id="username">访客</span>
-        <div class="search-bar">
-            <select aria-label="搜索类型">
-                <option value="spot">景区</option>
-                <option value="diary">日记</option>
-            </select>
-            <div class="search-input">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#666666">
-                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                </svg>
-                <input type="text" placeholder="请输入关键词" aria-label="搜索关键词">
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="/spots" class="logo-link">
+                    <div class="image-container"></div>
+                </a>
             </div>
-            <button class="search-button">搜索</button>
+            
+            <div class="header-center">
+                <div class="search-bar">
+                    <select aria-label="搜索类型">
+                        <option value="spot">景区</option>
+                        <option value="diary">日记</option>
+                    </select>
+                    <div class="search-input">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#666666">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                        <input type="text" placeholder="请输入关键词" aria-label="搜索关键词">
+                    </div>
+                    <button class="search-button">搜索</button>
+                </div>
+            </div>
+              <div class="header-right">
+                <div class="user-info">
+                    <a id="username" href="#" style="text-decoration: none; color: inherit; cursor: pointer;">访客</a>
+                    <button id="logout-button" class="logout-button">登出</button>
+                </div>
+            </div>
         </div>
-        <div class="actions">
-            <button id="logout-button">登出</button>
-        </div>
-    </div>
+    </header>
     
-    <!-- 蓝色导航栏 -->
     <div class="blue-container">
         <div class="nav-item" onclick="window.location.href='/spots/search'">
             推荐景区
         </div>
-        <div class="nav-item" onclick="window.location.href='/spots/spot_info/143'">
+        <div class="nav-item" onclick="window.location.href='/diary/search'">
             口碑日记
         </div>
     </div>
 
-    <div class="container">
-        <div class="spot-header">
-            <h1>{{ spot.name }}</h1>
-            <div class="metadata">
-                <span class="badge">{{ spot.type }}</span>
-                <span class="rating">⭐ {{ spot.score }}</span>
-                <span>👁️ {{ spot.visited_time }}次浏览</span>
-            </div>
-        </div>
-
-        <div class="spot-info">
-            {% if spot.img %}
-            <div class="image-container">
-                <img src="{{ spot.img }}" alt="{{ spot.name }}封面图">
-            </div>
-            {% endif %}
-
-            <div>
-                <h2>景点介绍</h2>
-                <p class="description">{{ spot.introduce.介绍 }}</p>
+    <!-- 主要内容 -->
+    <div class="main-container">
+        <div class="content-wrapper">
+            <!-- 景点头部信息 -->
+            <div class="spot-header">
+                <div class="spot-title-row">
+                    <h1 class="spot-title">{{ spot.name }}</h1>
+                </div>
                 
-                <h2>详细信息</h2>
-                <p class="description">{{ spot.info }}</p>
+                <div class="spot-metadata">
+                    <span class="badge spot-type">{{ spot.type }}</span>
+                    <div class="rating-container">
+                        <div class="stars">
+                            {% set star_rating = (spot.score / 5 * 5) | round %}
+                            {% for i in range(5) %}
+                                {% if i < star_rating %}
+                                    <span class="star filled">★</span>
+                                {% else %}
+                                    <span class="star">☆</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <span class="score">{{ "%.1f"|format(spot.score) }}</span>
+                        <span class="total-reviews">({{ spot.reviews.total }}条评价)</span>
+                    </div>
+                    <span class="visit-count">
+                        <svg viewBox="0 0 24 24" width="16" height="16">
+                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                        </svg>
+                        {{ spot.visited_time }}次浏览
+                    </span>
+                </div>
+            </div>
 
-                <a href="/map/{{ spot.id }}" class="button">
-                    查看地图位置
-                </a>
+            <!-- 景点主要内容 -->
+            <div class="spot-content">
+                <!-- 左侧图片和基本信息 -->
+                <div class="left-section">
+                    {% if spot.img %}
+                    <div class="image-section">
+                        <div class="main-image-container">
+                            <img src="{{ spot.img }}" alt="{{ spot.name }}封面图" class="main-image" loading="lazy">
+                            <div class="image-overlay">
+                                <button class="view-full-btn">查看大图</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- 基本信息 -->
+                    <div class="basic-info-section">
+                        <h3>基本信息</h3>
+                        <div class="info-grid">
+                            {% if spot.info %}
+                                {% for item in spot.info %}
+                                    {% for key, value in item.items() %}
+                                    <div class="info-item">
+                                        <span class="info-label">{{ key }}：</span>
+                                        <span class="info-value">{{ value }}</span>
+                                    </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %}
+                            
+                            {% if spot.location %}
+                            <div class="info-item">
+                                <span class="info-label">位置坐标：</span>
+                                <span class="info-value">{{ spot.location }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- 快捷操作 -->
+                    <div class="quick-actions">
+                        <a href="/map/{{ spot.id }}" class="action-button primary">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            查看地图位置
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 右侧详细介绍 -->
+                <div class="right-section">
+                    <div class="introduction-section">
+                        <h3>景点介绍</h3>
+                        {% if spot.introduce and spot.introduce.get('介绍') %}
+                        <div class="description-content">
+                            <p>{{ spot.introduce['介绍'] }}</p>
+                        </div>
+                        {% else %}
+                        <div class="description-content">
+                            <p class="no-content">暂无详细介绍</p>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- 介绍字段中的其他信息 -->
+                        {% if spot.introduce %}
+                            {% for key, value in spot.introduce.items() %}
+                                {% if key != '介绍' %}
+                                <div class="additional-info">
+                                    <h4>{{ key }}</h4>
+                                    {% if value is string %}
+                                        <p>{{ value }}</p>
+                                    {% elif value is iterable and value is not string %}
+                                        <div class="info-list">
+                                            {% for item in value %}
+                                                {% if item is mapping %}
+                                                    {% for sub_key, sub_value in item.items() %}
+                                                    <div class="info-list-item">
+                                                        <strong>{{ sub_key }}：</strong>{{ sub_value }}
+                                                    </div>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <div class="info-list-item">{{ item }}</div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <p>{{ value }}</p>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <!-- 用户评价预览 -->
+                    <div class="reviews-preview">
+                        <h3>用户评价</h3>
+                        <div class="reviews-summary">
+                            <div class="rating-breakdown">
+                                <div class="overall-rating">
+                                    <span class="big-score">{{ "%.1f"|format(spot.score) }}</span>
+                                    <div class="rating-stars">
+                                        {% set star_rating = (spot.score / 5 * 5) | round %}
+                                        {% for i in range(5) %}
+                                            {% if i < star_rating %}
+                                                <span class="star filled">★</span>
+                                            {% else %}
+                                                <span class="star">☆</span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <p>{{ spot.reviews.total }}条评价</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="reviews-list" id="reviewsList">
+                            <!-- 评价列表将通过JavaScript动态加载 -->
+                            <div class="loading-reviews">正在加载评价...</div>
+                        </div>
+                          <button class="view-all-reviews-btn" onclick="loadMoreReviews()">
+                            加载更多评价
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const usernameSpan = document.getElementById('username');
-            const logoutButton = document.getElementById('logout-button');
-            const headerSearchBar = document.querySelector('.header .search-bar');
-            const headerSearchSelect = headerSearchBar.querySelector('select');
-            const headerSearchInput = headerSearchBar.querySelector('input');
-            const headerSearchButton = headerSearchBar.querySelector('.search-button');
-            
-            // 处理顶部搜索栏
-            function handleHeaderSearch() {
-                const keyword = headerSearchInput.value.trim();
-                if (!keyword) {
-                    // 空关键词提示
-                    headerSearchInput.style.borderColor = 'red';
-                    headerSearchInput.style.animation = 'shake 0.5s';
-                    setTimeout(() => {
-                        headerSearchInput.style.borderColor = '#CCCCCC';
-                        headerSearchInput.style.animation = '';
-                    }, 500);
-                    return;
-                }
-                
-                const searchType = headerSearchSelect.value;
-                const apiUrl = new URL('/api/search-spots', window.location.origin);
-                apiUrl.searchParams.append('keyword', keyword);
-                if (searchType === 'diary') {
-                    apiUrl.searchParams.append('type', 'diary');
-                }
-                
-                window.location.href = `/spots/search?keyword=${encodeURIComponent(keyword)}`;
-            }
-            
-            // 添加顶部搜索栏事件监听
-            headerSearchButton.addEventListener('click', handleHeaderSearch);
-            headerSearchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    handleHeaderSearch();
-                }
-            });
-            
-            // 处理登出
-            logoutButton.addEventListener('click', () => {
-                fetch('/api/logout', { method: 'POST' })
-                    .then(response => {
-                        window.location.href = '/login';
-                    })
-                    .catch(error => {
-                        console.error('登出时出错:', error);
-                        window.location.href = '/login';
-                    });
-            });
-            
-            // 检查会话并获取用户信息
-            fetch('/api/check-session')
-                .then(response => {
-                    if (!response.ok) {
-                        if (response.status === 401) {
-                            window.location.href = '/login';
-                        } else {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return null;
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data && data.success) {
-                        usernameSpan.textContent = data.user.username || '用户';
-                    } else if (data) {
-                        console.error('会话检查失败:', data.message);
-                        window.location.href = '/login';
-                    }
-                })
-                .catch(error => {
-                    console.error('检查会话时出错:', error);
-                    usernameSpan.textContent = '错误';
-                    window.location.href = '/login';
-                });
-        });
-    </script>
+    <!-- 评价模态框 -->
+    <div class="modal" id="reviewsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>{{ spot.name }} - 全部评价</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="allReviewsList">
+                    <!-- 全部评价列表 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/spot_info.js') }}"></script>
 </body>
 </html>
