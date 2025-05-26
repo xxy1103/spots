@@ -40,13 +40,12 @@ class IdGenerator:
 class DiaryManager:
     """日记管理类，实现日记的搜索、排序和推荐功能"""
 
-    def __init__(self,diaries,counts,titleHashTable=None,visitedHeap=None,scoreHeap=None,idGenerator=None,huffman_tree=None,codes=None):
+    def __init__(self,diaries,counts,titleHashTable=None,idGenerator=None,huffman_tree=None,codes=None):
         """初始化日记管理器"""
         # 获取所有日记
         self.diaries = diaries
         self.titleHashTable = titleHashTable
-        self.visitedHeap = visitedHeap
-        self.scoreHeap = scoreHeap
+
         self.idGenerator = idGenerator
         self.counts = counts
         self.huffman_tree = huffman_tree
@@ -71,18 +70,13 @@ class DiaryManager:
         titleHashTable = HashTable(hash_table_size)
         for diary in diaries:
             titleHashTable.insert({"id": diary.id, "name": diary.title})
-        # 创建索引堆
-        scoreHeap = TopKHeap()
-        visitedHeap = TopKHeap()
-        for diary in diaries:
-            scoreHeap.insert(diary.id,  diary.score, diary.visited_time)
-            visitedHeap.insert(diary.id, diary.visited_time, diary.score)
+
 
         # 加载哈夫曼树
         codes = generate_huffman_codes(huffman_tree)
         log.writeLog(f"成功加载全局哈夫曼树，包含 {len(codes)} 个字符编码")
         # 创建对象
-        return cls(diaries,counts, titleHashTable, visitedHeap, scoreHeap, id_generator,huffman_tree, codes)
+        return cls(diaries,counts, titleHashTable, id_generator,huffman_tree, codes)
     def to_dict(self):
         """
         将日记管理器转换为字典
@@ -146,8 +140,6 @@ class DiaryManager:
 
         # 将新名称添加到哈希表
         self.titleHashTable.insert({"id": new_diary.id, "name": title})
-        self.visitedHeap.insert(new_diary.id, new_diary.visited_time,  new_diary.score)
-        self.scoreHeap.insert(new_diary.id, new_diary.score, new_diary.visited_time)
         return new_diary # 返回新创建的对象
 
 
@@ -176,7 +168,6 @@ class DiaryManager:
         self.titleHashTable.delete(diary_id)
         # 从索引堆中删除日记
         self.visitedHeap.delete(diary_id)   
-        self.scoreHeap.delete(diary_id)
 
 
     def visitDiary(self, diary_id:int):
@@ -185,11 +176,6 @@ class DiaryManager:
         diary = self.getDiary(diary_id)
         if diary is not None:
             diary.visited()
-
-        if diary.visited_time > 0:
-            # 更新索引堆中的浏览次数
-            self.visitedHeap.updateValue1(diary_id, diary.visited_time)
-            self.scoreHeap.updateValue2(diary_id, diary.visited_time)
         
         return diary.visited_time
 
@@ -200,40 +186,9 @@ class DiaryManager:
         diary = self.getDiary(diary_id)
         new_score = diary.updateScore(newScore, oldScore)
 
-        if new_score >= 0:
-            # 更新索引堆中的评分
-            self.scoreHeap.updateValue1(diary_id, new_score)
-            self.visitedHeap.updateValue2(diary_id, new_score)
-            return new_score
-        return -1
-    
 
-    def getTopKByVisited(self, k=10):
-        """获取浏览量最高的K条日记"""
-        top_ids = self.visitedHeap.getTopK(k)
-        result = []
-        
-        for item in top_ids:
-            diary_id = item["id"]
-            diary = self.getDiary(diary_id)
-            if diary:
-                result.append(diary)
-        
-        return result
-    
-    def getTopKByScore(self, k=10):
-        """获取评分最高的K条日记"""
-        top_ids = self.scoreHeap.getTopK(k)
-        result = []
-        
-        for item in top_ids:
-            diary_id = item["id"]
-            diary = self.getDiary(diary_id)
-            if diary:
-                result.append(diary)
-        
-        return result
-    
+        return new_score
+ 
     # 日记的全文搜索
     # 通过关键字的出现位置和次数增加权重分数，最后根据分数排序
     def searchByTitle(self, keys):

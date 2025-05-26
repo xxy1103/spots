@@ -266,8 +266,10 @@ class User:
         self.reviews.deleteOne(diary.id)
 
     def diaryMarking(self,diary,score):
-        oldscore = self.review_marking.search(diary.id)
+        oldscore = self.review_marking.search(diary.id).value
         self.review_marking.insert(diary.id,score)
+        if oldscore == None:
+            return 0
         return oldscore #通过返回旧分数来判断是否是第一次评分
     
     def getDiaryScore(self,diary_id):

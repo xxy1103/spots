@@ -267,11 +267,7 @@ class UserManager:
         user = self.getUser(userId)
         diary = diaryManager.getDiary(diary_id)
         oldscore = user.diaryMarking(diary, score)
-        if oldscore.value == None:
-            log.writeLog(f"用户{userId}对日记{diary_id}的评分不存在")
-            return 0
-
-        return oldscore.value
+        return oldscore
 
 
 userManager = UserManager.from_dict(userIo.load_users())
