@@ -46,13 +46,13 @@ def get_spot_diaries(spot_id):
     获取景点的日记列表
     """
 
-    topK = request.args.get('topK', default=10, type=int)  # 获取前K个日记
+    
 
     spot = spot_manager.getSpot(spot_id)
     if not spot:
         return render_template('error.html', message="景点不存在")
 
-    diaries_id = spot_manager.spotDiaryHeapArray[spot_id - 1].getTopK(10)  # 确保堆中的数据是最新的
+    diaries_id = spot_manager.spotDiaryHeapArray[spot_id - 1].getTopK(100)  # 确保堆中的数据是最新的
     diaries = []
     for diary_id in diaries_id:
         diary = diary_manager.getDiary(diary_id["id"])
@@ -60,6 +60,7 @@ def get_spot_diaries(spot_id):
             diary_json = diary.to_dict()
             diary_json["content"] = diary_manager.getDiaryContent(diary_id["id"])
             diary_json["spot_name"] = spot.name
+            diaries.append(diary_json)
     return jsonify(diaries)
 
 
@@ -269,10 +270,7 @@ def add_diary_marking(diary_id):
     oldscore = user_manager.markingReview(user_id, diary_id, score)
 
     # 跟新索引和日记类中的评分
-    new_score = diary_manager.rateDiary(diary_id, score, oldscore)
-    spot_manager.spotDiaryHeapArray[diary_manager.getDiary(diary_id).spot_id - 1].updateValue1(diary_id, new_score)
-    # 更新景点的堆中的评分
-
+    diary_manager.rateDiary(diary_id, score, oldscore)
 
     return redirect(url_for('diary.get_diary', diary_id=diary_id))
 

@@ -44,7 +44,7 @@ signal.signal(signal.SIGTERM, shutdown_handler)
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
 
 # True 为调试模式，可以动态加载前端
 # False 为生产模式，不能动态加载前端
