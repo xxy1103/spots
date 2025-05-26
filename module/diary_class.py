@@ -87,7 +87,7 @@ class DiaryManager:
         """
         将日记管理器转换为字典
         """
-        diaries_json = [diary.to_dict() for diary in self.diaries if diary is not None]
+        diaries_json = [diary.to_dict() if diary is not None else None for diary in self.diaries]
         return {
             "counts": self.counts,
             "currentId": self.idGenerator.currentId,
