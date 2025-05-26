@@ -46,8 +46,6 @@ def get_spot_diaries(spot_id):
     获取景点的日记列表
     """
 
-    
-
     spot = spot_manager.getSpot(spot_id)
     if not spot:
         return render_template('error.html', message="景点不存在")

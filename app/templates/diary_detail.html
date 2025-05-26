@@ -9,6 +9,38 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/diary_detail.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .spot-link {
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .spot-link:hover {
+            color: #007bff !important;
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0,123,255,0.3);
+        }
+        
+        .spot-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            transition: width 0.3s ease;
+        }
+        
+        .spot-link:hover::after {
+            width: 100%;
+        }
+        
+        .spot-link:active {
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
     <!-- 头部导航 -->
@@ -143,13 +175,17 @@
                             <span class="stat-value">{{ diary.scoreToSpot }}</span>
                             <span class="stat-label">景点评分</span>
                         </div>
-                    </div>
-                            <div class="stat-item">
+                    </div>                            <div class="stat-item">
                                 <div class="stat-icon">
                                     <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="stat-info">
-                                    <span class="stat-value">{{ diary.spot_name }}</span>
+                                </div>                                <div class="stat-info">
+                                    <span class="stat-value">
+                                        <a href="{{ url_for('spots.spot', id=diary.spot_id) }}" 
+                                           class="spot-link"
+                                           style="color: inherit; text-decoration: none; position: relative; display: inline-block; transition: all 0.3s ease; cursor: pointer;">
+                                            {{ diary.spot_name }}
+                                        </a>
+                                    </span>
                                     <span class="stat-label">旅游景点</span>
                                 </div>
                             </div>
