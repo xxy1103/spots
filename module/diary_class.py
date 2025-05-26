@@ -113,9 +113,11 @@ class DiaryManager:
         if videos is None:
             videos = []
 
+        current_id = self.idGenerator.getCurrentId()
+
         new_diary_json = {
             "id": self.idGenerator.getId(),
-            "name": user.name,
+            "user_name": user.name,
             "user_id": user.id,
             "spot_id": spot.id,
             "content": content,
@@ -135,7 +137,7 @@ class DiaryManager:
         # 压缩日记内容
         new_diary.compress(self.codes)
         # 添加到日记列表
-        if new_diary.id < self.idGenerator.currentId:
+        if new_diary.id <= current_id:
             self.diaries[new_diary.id] = new_diary
         else:
             self.diaries.append(new_diary)
