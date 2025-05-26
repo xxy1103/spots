@@ -105,6 +105,16 @@ class UserManager:
             users=users,
             counts=count_json
         )
+    
+    def to_dict(self):
+        """
+        将对象转换为字典
+        """
+        users_json = [user.to_dict() for user in self.users]
+        return {
+            "counts": self.counts,
+            "users": users_json
+        }
 
     def getUser(self, userId):
         """

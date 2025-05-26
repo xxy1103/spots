@@ -83,7 +83,17 @@ class DiaryManager:
         log.writeLog(f"成功加载全局哈夫曼树，包含 {len(codes)} 个字符编码")
         # 创建对象
         return cls(diaries,counts, titleHashTable, visitedHeap, scoreHeap, id_generator,huffman_tree, codes)
-
+    def to_dict(self):
+        """
+        将日记管理器转换为字典
+        """
+        diaries_json = [diary.to_dict() for diary in self.diaries if diary is not None]
+        return {
+            "counts": self.counts,
+            "currentId": self.idGenerator.currentId,
+            "holes": self.idGenerator.getHolesList(),
+            "diaries": diaries_json
+        }
     
     def getDiary(self, diary_id:int):
         """获取单个日记"""

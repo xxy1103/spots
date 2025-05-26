@@ -70,6 +70,15 @@ class SpotManager:
             spotDiaryHeapArray_data=sdk_spotDiaryHeapArray
         )
 
+    def to_dict(self):
+        """
+        将对象转换为字典
+        """
+        spots_json = [spot.to_dict() for spot in self.spots]
+        return {
+            "counts": self.counts,
+            "spots": spots_json,
+        }
 
     def getSpot(self, spotId):
         """
