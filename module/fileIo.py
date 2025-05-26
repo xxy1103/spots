@@ -16,7 +16,7 @@ class UserIo:
         """
         从文件加载用户信息
         """
-        usersPath = dataPath + r"/users/users.json"
+        usersPath = os.path.join(dataPath, r"users/users.json")
         with open(usersPath, "r", encoding="utf-8") as f:
             usersData = json.load(f)
         return usersData
@@ -26,7 +26,7 @@ class UserIo:
         """
         保存数据
         """
-        usersPath = dataPath + r"/users/users.json"
+        usersPath = dataPath + r"users/users.json"
         with open(usersPath, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
 

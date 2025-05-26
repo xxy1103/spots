@@ -98,7 +98,7 @@ class Diary:
         """
         return cls(
             diary_id=data.get("id"),
-            user_name=data.get("name", ""),
+            user_name=data.get("user_name", ""),
             user_id=data.get("user_id"),
             spot_id=data.get("spot_id"),
             content=data.get("content"),
@@ -222,7 +222,7 @@ class User:
         reviews_marking_json = []
         lists =  self.review_marking.get_all_keys()
         for i in lists:
-            item = {"id":i,"score":self.review_marking.search(i)}
+            item = {"id":i,"score":self.review_marking.search(i).value}
             reviews_marking_json.append(item)
         return {
             "id": self.id,
