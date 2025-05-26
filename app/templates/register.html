@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 </head>
 <body>
-    <div class="image-container"></div> <!-- 用于显示dogo.png -->
+    <div class="top-left-brand">
+        <img src="{{ url_for('static', filename='dogo.png') }}" alt="Logo" class="logo-img">
+        <span class="brand-text"></span>
+    </div>
     
     <!-- 全局消息容器 -->
     <div id="globalMessageContainer" style="display:none;"></div> 
