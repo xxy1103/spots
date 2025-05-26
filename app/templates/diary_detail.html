@@ -35,10 +35,9 @@
                     <button class="search-button">搜索</button>
                 </div>
             </div>
-            
-            <div class="header-right">
+              <div class="header-right">
                 <div class="user-info">
-                    <a id="username" href="#" style="text-decoration: none; color: inherit; cursor: pointer;">{{ g.user.name if g.user else '访客' }}</a>
+                    <a id="username" href="{{ url_for('diary.get_user_diaries', user_id=g.user.user_id) if g.user else '#' }}" style="text-decoration: none; color: inherit; cursor: pointer;">{{ g.user.name if g.user else '访客' }}</a>
                     <button id="logout-button" class="logout-button">登出</button>
                 </div>
             </div>
@@ -175,7 +174,9 @@
                         <img src="{{ url_for('static', filename='dogo.png') }}" alt="{{ user.name }}">
                     </div>
                     <div class="author-info">
-                        <span class="author-name">{{ user.name }}</span>
+                        <a href="{{ url_for('diary.get_user_diaries', user_id=diary.user_id) }}" class="author-name-link">
+                            <span class="author-name">{{ user.name }}</span>
+                        </a>
                         <span class="post-date"><i class="far fa-calendar-alt"></i> 发布于 {{ diary.time }}</span>
                     </div>
                     

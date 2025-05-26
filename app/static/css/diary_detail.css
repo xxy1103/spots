@@ -461,6 +461,33 @@
     margin-bottom: 0.3rem;
 }
 
+.author-name-link {
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.author-name-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #0052d9;
+    transition: width 0.3s ease;
+}
+
+.author-name-link:hover::after {
+    width: 100%;
+}
+
+.author-name-link:hover .author-name {
+    color: #003ca3;
+    transform: translateX(3px);
+}
+
 .post-date {
     color: #888;
     font-size: 0.9rem;
