@@ -123,11 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function createSpotCard(spot) {
         const card = document.createElement('div');
         card.className = 'spot-card';
-        
-        const id = spot.id || '';
+          const id = spot.id || '';
         const name = spot.name || '未知景点';
         const imgUrl = spot.img || '';
         const score = spot.value1 || 'N/A';
+        const type = spot.type || '未知类型';
         // 提取地址信息 - 假设info是一个数组，里面包含地址字段
         let location = '未知地区';
         if (spot.info && Array.isArray(spot.info)) {
@@ -154,13 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     location = cityMatch[0].substring(0, 2);
                 }
             }
-        }
-        
-        card.innerHTML = `
+        }        card.innerHTML = `
             ${imgUrl ? `<img src="${imgUrl}" alt="${name}">` : '<div style="height: 130px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa;">无图片</div>'}
             <div class="spot-card-info">
                 <h3><a href="/spots/spot_info/${id}" style="text-decoration: none; color: inherit;">${name}</a></h3>
+                <div class="spot-type" data-type="${type}">${type}</div>
                 <span class="spot-location">[${location} ${score}分]</span>
+                
                 <div style="clear: both;"></div>
             </div>
         `;

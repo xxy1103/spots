@@ -1,3 +1,35 @@
+// 全局定义 openImageModal 和 closeImageModal 函数，以便 HTML 中的 onclick 能够访问
+window.openImageModal = function(imgElement) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    
+    if (modal && modalImg) {
+        // 设置模态框中的图片源
+        modalImg.src = imgElement.src;
+        
+        // 显示模态框并添加淡入动画
+        modal.style.display = 'block';
+        
+        // 阻止事件冒泡
+        event.stopPropagation();
+        
+        // 禁止背景滚动
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+window.closeImageModal = function() {
+    const modal = document.getElementById('imageModal');
+    
+    if (modal) {
+        // 淡出并关闭模态框
+        modal.style.display = 'none';
+        
+        // 恢复背景滚动
+        document.body.style.overflow = '';
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     // 获取用户信息
     checkUserSession();
@@ -13,6 +45,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 评分系统设置
     setupRatingSystem();
+    
+    // 为模态框添加键盘事件监听器
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeImageModal();
+        }
+    });
 });
 
 function checkUserSession() {
@@ -125,45 +164,47 @@ function setupSearch() {
 
 // 图片预览功能
 function setupImagePreview() {
-    const images = document.querySelectorAll('.image-gallery img');
+    // 添加图片悬停效果
+    const galleryItems = document.querySelectorAll('.gallery-item');
     
-    images.forEach(img => {
-        img.addEventListener('click', function() {
-            // 创建覆盖层
-            const overlay = document.createElement('div');
-            overlay.className = 'image-overlay';
-            overlay.style.position = 'fixed';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-            overlay.style.display = 'flex';
-            overlay.style.justifyContent = 'center';
-            overlay.style.alignItems = 'center';
-            overlay.style.zIndex = '1000';
-            overlay.style.cursor = 'zoom-out';
-            
-            // 创建大图
-            const fullImg = document.createElement('img');
-            fullImg.src = this.src;
-            fullImg.style.maxWidth = '90%';
-            fullImg.style.maxHeight = '90%';
-            fullImg.style.objectFit = 'contain';
-            fullImg.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.1)';
-            fullImg.style.transition = 'transform 0.3s ease';
-            
-            // 将图片添加到覆盖层
-            overlay.appendChild(fullImg);
-            
-            // 添加关闭功能
-            overlay.addEventListener('click', function() {
-                document.body.removeChild(overlay);
+    galleryItems.forEach(item => {
+        const img = item.querySelector('img');
+        const overlay = item.querySelector('.image-overlay');
+        
+        // 确保点击浮层也能触发图片预览
+        if (overlay) {
+            overlay.addEventListener('click', function(event) {
+                // 阻止事件冒泡
+                event.stopPropagation();
+                // 调用父元素图片的 click 事件
+                img.click();
             });
+        }
+    });
+    
+    // 添加键盘支持 - 当模态框打开时使用箭头键浏览图片
+    document.addEventListener('keydown', function(event) {
+        const modal = document.getElementById('imageModal');
+        if (modal && modal.style.display === 'block') {
+            const images = Array.from(document.querySelectorAll('.gallery-image'));
+            const modalImg = document.getElementById('modalImage');
+            const currentSrc = modalImg.src;
             
-            // 添加到body
-            document.body.appendChild(overlay);
-        });
+            // 找到当前图片的索引
+            const currentIndex = images.findIndex(img => img.src === currentSrc);
+            
+            if (event.key === 'ArrowLeft' && currentIndex > 0) {
+                // 上一张图片
+                modalImg.src = images[currentIndex - 1].src;
+                modalImg.classList.add('slide-left');
+                setTimeout(() => modalImg.classList.remove('slide-left'), 300);
+            } else if (event.key === 'ArrowRight' && currentIndex < images.length - 1) {
+                // 下一张图片
+                modalImg.src = images[currentIndex + 1].src;
+                modalImg.classList.add('slide-right');
+                setTimeout(() => modalImg.classList.remove('slide-right'), 300);
+            }
+        }
     });
 }
 

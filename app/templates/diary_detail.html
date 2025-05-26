@@ -53,9 +53,7 @@
         <div class="nav-item" onclick="window.location.href='/diary/search'">
             口碑日记
         </div>
-    </div>
-
-    <!-- 主要内容区域 -->
+    </div>    <!-- 主要内容区域 -->
     <div class="main-content">
         <div class="diary-detail-container">
             <div class="diary-article">
@@ -75,35 +73,103 @@
                         <span class="views-count"><i class="fas fa-eye"></i> {{ diary.visited_time }} 次浏览</span>
                     </div>
                 </div>
-                  <div class="diary-content">
-                    {{ diary.content or "暂无内容" }}
-                </div>
                 
-                {% if diary.img_list and diary.img_list|length > 0 %}
-                <div class="image-gallery">
-                    <h4><i class="fas fa-images"></i> 旅行图片集</h4>
-                    <div class="gallery-grid">
-                        {% for img in diary.img_list %}
-                        <img src="{{ url_for('external_static', filename=img) }}" alt="旅行图片" class="gallery-image">
-                        {% endfor %}
+                <div class="diary-content-wrapper">
+                    <div class="diary-content">
+                        {{ diary.content or "暂无内容" }}
                     </div>
-                </div>
-                {% endif %}                      
-                
-                {% if diary.video_path %}
-                <div class="video-section">
-                    <h4><i class="fas fa-film"></i> 旅行视频</h4>
-                    {% for video in diary.video_path %}
-                    <div class="video-container">
-                        <video controls>
-                            <source src="{{ url_for('external_static', filename=video) }}" type="video/mp4">
-                            您的浏览器不支持视频播放
-                        </video>
+                    
+                    {% if diary.img_list and diary.img_list|length > 0 %}
+                    <div class="image-gallery">
+                        <h4><i class="fas fa-images"></i> 旅行图片集</h4>
+                        <div class="gallery-grid">
+                            {% for img in diary.img_list %}
+                            <div class="gallery-item">
+                                <img src="{{ url_for('external_static', filename=img) }}" alt="旅行图片" class="gallery-image" onclick="openImageModal(this)">
+                                <div class="image-overlay">
+                                    <i class="fas fa-search-plus"></i>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                    {% endfor %}
+                    {% endif %}
+                      {% if diary.video_path %}
+                    <div class="video-section">
+                        <h4><i class="fas fa-film"></i> 旅行视频</h4>
+                        <div class="video-grid">
+                            {% for video in diary.video_path %}
+                            <div class="video-container">
+                                <video controls>
+                                    <source src="{{ url_for('external_static', filename=video) }}" type="video/mp4">
+                                    您的浏览器不支持视频播放
+                                </video>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
                 
+                <div class="diary-sidebar">
+                    <div class="diary-stats-card">
+                        <div class="stats-header">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>日记统计</span>
+                        </div>
+                        <div class="stats-content">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value">{{ diary.visited_time }}</span>
+                                    <span class="stat-label">次浏览</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value">{{ diary.score_count }}</span>
+                                    <span class="stat-label">次评分</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value">{{ diary.spot_name }}</span>
+                                    <span class="stat-label">旅游景点</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 添加评分表单 -->
+                    {% if g.user and g.user.user_id != diary.user_id %}
+                    <div class="rating-section-card">
+                        <div class="rating-header">
+                            <i class="fas fa-star"></i>
+                            <span>给这篇日记评分</span>
+                        </div>
+                        <form action="{{ url_for('diary.add_diary_marking', diary_id=diary.id) }}" method="POST" class="rating-form">
+                            <div class="form-group">
+                                <label for="score">评分 (0-5分):</label>
+                                <div class="rating-input-group">
+                                    <input type="number" step="0.1" min="0" max="5" class="form-control" id="score" name="score" required>
+                                    <button type="submit" class="btn-primary">提交评分</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="diary-footer">
                 <div class="diary-author">
                     <div class="author-avatar">
                         <img src="{{ url_for('static', filename='dogo.png') }}" alt="{{ user.name }}">
@@ -124,38 +190,18 @@
                     </div>
                     {% endif %}
                 </div>
-                
-                <div class="diary-stats">
-                    <div class="stat">
-                        <i class="fas fa-eye"></i>
-                        <span>{{ diary.visited_time }} 次浏览</span>
-                    </div>
-                    <div class="stat">
-                        <i class="fas fa-star"></i>
-                        <span>{{ diary.score_count }} 次评分</span>
-                    </div>
-                    <div class="stat">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>{{ diary.spot_name }}</span>
-                    </div>
-                </div>
-                
-                <!-- 添加评分表单 -->
-                {% if g.user and g.user.user_id != diary.user_id %}
-                <div class="rating-section">
-                    <h5><i class="fas fa-star"></i> 给这篇日记评分</h5>
-                    <form action="{{ url_for('diary.add_diary_marking', diary_id=diary.id) }}" method="POST" class="rating-form">
-                        <div class="form-group">
-                            <label for="score">评分 (0-5分):</label>
-                            <div class="d-flex">
-                                <input type="number" step="0.1" min="0" max="5" class="form-control" id="score" name="score" required>
-                                <button type="submit" class="btn-primary">提交评分</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                {% endif %}
-                
+            </div>
+        </div>
+    </div>    <!-- 图片预览模态框 -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-button" onclick="closeImageModal()">&times;</span>
+            <div class="prev-button nav-button" onclick="navigateImage(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <img id="modalImage" src="" alt="预览图片">
+            <div class="next-button nav-button" onclick="navigateImage(1)">
+                <i class="fas fa-chevron-right"></i>
             </div>
         </div>
     </div>

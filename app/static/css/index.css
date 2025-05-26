@@ -1834,3 +1834,92 @@ h2 {
         transform: translateY(0) scale(1);
     }
 }
+
+/* 景区类型标签样式 */
+.spot-type {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #e7f3ff 0%, #f0f8ff 100%);
+    color: #0052d9;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 82, 217, 0.15);
+    margin-bottom: 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 82, 217, 0.08);
+    letter-spacing: 0.3px;
+}
+
+.spot-type:hover {
+    background: linear-gradient(135deg, #d6efff 0%, #e7f3ff 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 82, 217, 0.15);
+}
+
+/* 类型标签的图标支持 */
+.spot-type::before {
+    content: "🏷️";
+    margin-right: 4px;
+    font-size: 10px;
+    opacity: 0.8;
+}
+
+/* 不同类型的色彩主题 */
+.spot-type[data-type*="展馆"] {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe8cc 100%);
+    color: #e65100;
+    border-color: rgba(230, 81, 0, 0.15);
+}
+
+.spot-type[data-type*="展馆"]:hover {
+    background: linear-gradient(135deg, #ffe8cc 0%, #ffcc99 100%);
+}
+
+.spot-type[data-type*="遛娃"] {
+    background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+    color: #7b1fa2;
+    border-color: rgba(123, 31, 162, 0.15);
+}
+
+.spot-type[data-type*="遛娃"]:hover {
+    background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+}
+
+.spot-type[data-type*="自然"] {
+    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+    color: #2e7d32;
+    border-color: rgba(46, 125, 50, 0.15);
+}
+
+.spot-type[data-type*="自然"]:hover {
+    background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+}
+
+.spot-type[data-type*="文化"] {
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+    color: #c2185b;
+    border-color: rgba(194, 24, 91, 0.15);
+}
+
+.spot-type[data-type*="文化"]:hover {
+    background: linear-gradient(135deg, #f8bbd9 0%, #f48fb1 100%);
+}
+
+/* 卡片内的类型标签布局调整 */
+.spot-card-info .spot-type {
+    animation: slideInLeft 0.5s ease-out forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
