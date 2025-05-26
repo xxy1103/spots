@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // 评分系统设置
     setupRatingSystem();
     
+    // 加载用户之前的评分
+    loadUserRating();
+    
     // 为模态框添加键盘事件监听器
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
@@ -208,6 +211,37 @@ function setupImagePreview() {
     });
 }
 
+// 在模态框中导航图片
+window.navigateImage = function(direction) {
+    const modalImg = document.getElementById('modalImage');
+    if (!modalImg) return;
+    
+    const currentSrc = modalImg.src;
+    const images = Array.from(document.querySelectorAll('.gallery-image'));
+    
+    // 找到当前图片的索引
+    const currentIndex = images.findIndex(img => img.src === currentSrc);
+    if (currentIndex === -1) return;
+    
+    // 计算下一张图片的索引
+    let nextIndex = currentIndex + direction;
+    
+    // 循环浏览图片
+    if (nextIndex < 0) nextIndex = images.length - 1;
+    if (nextIndex >= images.length) nextIndex = 0;
+    
+    // 更新图片
+    if (images[nextIndex]) {
+        modalImg.src = images[nextIndex].src;
+        
+        // 添加动画类
+        modalImg.classList.add(direction > 0 ? 'slide-right' : 'slide-left');
+        setTimeout(() => {
+            modalImg.classList.remove('slide-right', 'slide-left');
+        }, 300);
+    }
+};
+
 // 返回顶部按钮
 function setupBackToTop() {
     // 创建返回顶部按钮
@@ -288,19 +322,12 @@ function setupRatingSystem() {
         updateStars(scoreInput.value);
     });
     
-    // 更新星星显示的函数
-    function updateStars(value) {
-        document.querySelectorAll('.star').forEach(s => {
-            const starValue = s.getAttribute('data-value');
-            if (starValue <= value) {
-                s.classList.add('filled');
-                s.classList.remove('empty');
-            } else {
-                s.classList.add('empty');
-                s.classList.remove('filled');
-            }
-        });
-    }
+    // 使用全局 updateStars 函数，之前已在全局范围定义
+
+    // 添加数字输入框变化监听，同步更新星星
+    scoreInput.addEventListener('input', function() {
+        updateStars(this.value);
+    });
     
     // 表单提交前验证
     ratingForm.addEventListener('submit', function(e) {
@@ -310,6 +337,55 @@ function setupRatingSystem() {
             e.preventDefault();
             alert('请输入0-5之间的评分');
             return false;
+        }
+    });
+}
+
+// 加载用户之前对日记的评分
+function loadUserRating() {
+    // 检查是否有评分表单（如果是作者自己的日记则没有评分表单）
+    const ratingForm = document.querySelector('.rating-form');
+    if (!ratingForm) return;
+    
+    // 从URL中获取日记ID
+    const pathParts = window.location.pathname.split('/');
+    const diaryId = pathParts[pathParts.length - 1];
+    
+    // 发起请求获取用户之前的评分
+    fetch(`/diary/${diaryId}/user_marking`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // 更新评分输入框
+            const scoreInput = document.getElementById('score');
+            if (scoreInput) {
+                // 即使评分为 0 也要显示
+                scoreInput.value = data.score !== undefined ? data.score : 0;
+                
+                // 更新星级显示
+                updateStars(scoreInput.value);
+            }
+        })
+        .catch(error => {
+            console.error('获取用户评分时出错:', error);
+        });
+}
+
+// 全局函数：更新星星显示
+function updateStars(value) {
+    const stars = document.querySelectorAll('.star-rating .star');
+    stars.forEach(star => {
+        const starValue = star.getAttribute('data-value');
+        if (starValue <= value) {
+            star.classList.add('filled');
+            star.classList.remove('empty');
+        } else {
+            star.classList.add('empty');
+            star.classList.remove('filled');
         }
     });
 }

@@ -270,6 +270,14 @@ class User:
         self.review_marking.insert(diary.id,score)
         return oldscore #通过返回旧分数来判断是否是第一次评分
     
+    def getDiaryScore(self,diary_id):
+        """
+        获取用户对某篇日记的评分
+        """
+        if self.review_marking.search(diary_id) is not None:
+            return self.review_marking.search(diary_id).value
+        return 0
+
     def getDiaryList(self):
         """
         获取用户的日记列表

@@ -225,6 +225,16 @@ def add_diary():
     # 重定向到日记详情页
     return redirect(url_for('diary.get_diary', diary_id=diary.id))
 
+@diary.route("/<int:diary_id>/user_marking", methods=["GET"])
+@login_required
+def get_diary_marking(diary_id):
+    """
+    获取日记的评分信息
+    """
+    user = user_manager.getUser(g.user["user_id"])
+    return jsonify({
+        "score": user.getDiaryScore(diary_id) 
+    })
 
 @diary.route("/add", methods=["GET"])
 @login_required
