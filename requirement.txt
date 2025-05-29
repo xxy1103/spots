@@ -1,2 +1,6 @@
 Flask
 osmnx
+python-dotenv
+volcengine-python-sdk
+requests
+Pillow
