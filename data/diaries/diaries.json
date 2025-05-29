@@ -1,6 +1,6 @@
 {
-    "counts": 3466,
-    "currentId": 3465,
+    "counts": 3467,
+    "currentId": 3466,
     "holes": [],
     "diaries": [
         {
@@ -83469,6 +83469,27 @@
             "video_path": [],
             "compressed": true,
             "scoreToSpot": 1.0
+        },
+        {
+            "id": 3466,
+            "user_name": "ulna",
+            "user_id": 3466,
+            "spot_id": 1,
+            "content": "data/scenic_spots/spot_1/diary_content/compressed_content_3466.bin",
+            "title": "Are Extroverts More Popular in Society?ssdadsad",
+            "time": "2025-05-29",
+            "score": 0,
+            "score_count": 0,
+            "visited_time": 2,
+            "img_list": [
+                "data/scenic_spots/spot_1/images/1748512347045_wallhaven-o5zrj7.jpg"
+            ],
+            "video_path": [
+                "data/scenic_spots/spot_1/videos/1748512347053_WIN_20241117_11_37_38_Pro.mp4",
+                "data/scenic_spots/spot_1/videos/generated_video_1748512387.mp4"
+            ],
+            "compressed": true,
+            "scoreToSpot": 5.0
         }
     ]
 }
