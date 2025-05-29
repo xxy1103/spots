@@ -112,11 +112,10 @@
                     
                     {% if diary.img_list and diary.img_list|length > 0 %}
                     <div class="image-gallery">
-                        <h4><i class="fas fa-images"></i> 旅行图片集</h4>
-                        <div class="gallery-grid">
+                        <h4><i class="fas fa-images"></i> 旅行图片集</h4>                        <div class="gallery-grid">
                             {% for img in diary.img_list %}
-                            <div class="gallery-item">
-                                <img src="{{ url_for('external_static', filename=img) }}" alt="旅行图片" class="gallery-image" onclick="openImageModal(this)">
+                            <div class="gallery-item" onclick="openImageModal(this.querySelector('.gallery-image'), event)">
+                                <img src="{{ url_for('external_static', filename=img) }}" alt="旅行图片" class="gallery-image">
                                 <div class="image-overlay">
                                     <i class="fas fa-search-plus"></i>
                                 </div>
@@ -249,9 +248,26 @@
             <div class="next-button nav-button" onclick="navigateImage(1)">
                 <i class="fas fa-chevron-right"></i>
             </div>
-        </div>
-    </div>
-
-    <script src="{{ url_for('static', filename='js/diary_detail.js') }}"></script>
+            
+            <!-- AIGC 视频生成按钮 -->
+            {% if g.user and g.user.user_id == diary.user_id %}
+            <div class="aigc-button-container">
+                <button id="aigcButton" class="aigc-button" onclick="generateVideo()">
+                    <i class="fas fa-video"></i>
+                    <span>生成视频</span>
+                </button>
+                
+                <!-- 加载动画 -->
+                <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>AI正在生成视频，请稍候...</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>    </div>    <script>
+        // 全局变量，传递日记ID到JavaScript
+        window.DIARY_ID = {{ diary.id }};
+    </script>
+    <script src="{{ url_for('static', filename='js/test_modal.js') }}"></script>
 </body>
 </html>

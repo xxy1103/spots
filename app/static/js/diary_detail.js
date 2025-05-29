@@ -1,20 +1,41 @@
+// 图片导航功能
+let currentImageIndex = 0;
+let imageElements = [];
+
 // 全局定义 openImageModal 和 closeImageModal 函数，以便 HTML 中的 onclick 能够访问
-window.openImageModal = function(imgElement) {
+window.openImageModal = function(imgElement, event) {
+    console.log('openImageModal called with:', imgElement, event); // 调试日志
+    
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     
+    console.log('Modal elements found:', modal, modalImg); // 调试日志
+    
     if (modal && modalImg) {
+        // 获取所有图片元素
+        imageElements = Array.from(document.querySelectorAll('.gallery-image'));
+        currentImageIndex = imageElements.indexOf(imgElement);
+        
+        console.log('Image elements:', imageElements.length, 'Current index:', currentImageIndex); // 调试日志
+        
         // 设置模态框中的图片源
         modalImg.src = imgElement.src;
+        modalImg.dataset.imagePath = imgElement.src; // 保存图片路径用于AIGC
         
         // 显示模态框并添加淡入动画
         modal.style.display = 'block';
         
         // 阻止事件冒泡
-        event.stopPropagation();
+        if (event) {
+            event.stopPropagation();
+        }
         
         // 禁止背景滚动
         document.body.style.overflow = 'hidden';
+        
+        // 更新导航按钮状态
+        updateNavigationButtons();    } else {
+        console.error('Modal or modal image not found!'); // 错误日志
     }
 };
 
@@ -27,8 +48,196 @@ window.closeImageModal = function() {
         
         // 恢复背景滚动
         document.body.style.overflow = '';
+        
+        // 隐藏加载动画
+        hideLoadingSpinner();
     }
 };
+
+// 图片导航功能
+window.navigateImage = function(direction) {
+    if (imageElements.length === 0) return;
+    
+    const modalImg = document.getElementById('modalImage');
+    const prevIndex = currentImageIndex;
+    
+    currentImageIndex += direction;
+    
+    // 循环导航
+    if (currentImageIndex >= imageElements.length) {
+        currentImageIndex = 0;
+    } else if (currentImageIndex < 0) {
+        currentImageIndex = imageElements.length - 1;
+    }
+    
+    // 添加切换动画
+    const animationClass = direction > 0 ? 'slide-right' : 'slide-left';
+    modalImg.classList.remove('slide-right', 'slide-left');
+    
+    // 更新图片
+    modalImg.src = imageElements[currentImageIndex].src;
+    modalImg.dataset.imagePath = imageElements[currentImageIndex].src;
+    modalImg.classList.add(animationClass);
+    
+    // 移除动画类
+    setTimeout(() => {
+        modalImg.classList.remove(animationClass);
+    }, 300);
+    
+    // 更新导航按钮状态
+    updateNavigationButtons();
+};
+
+// 更新导航按钮状态
+function updateNavigationButtons() {
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    
+    if (imageElements.length <= 1) {
+        if (prevButton) prevButton.style.display = 'none';
+        if (nextButton) nextButton.style.display = 'none';
+    } else {
+        if (prevButton) prevButton.style.display = 'flex';
+        if (nextButton) nextButton.style.display = 'flex';
+    }
+}
+
+// AIGC 视频生成功能
+window.generateVideo = function() {
+    const modalImg = document.getElementById('modalImage');
+    const imagePath = modalImg.dataset.imagePath;
+    
+    if (!imagePath) {
+        showToast('未能获取图片路径', 'error');
+        return;
+    }
+    
+    if (!window.DIARY_ID) {
+        showToast('未能获取日记ID', 'error');
+        return;
+    }
+    
+    // 显示加载动画
+    showLoadingSpinner();
+    
+    // 禁用按钮
+    const aigcButton = document.getElementById('aigcButton');
+    if (aigcButton) {
+        aigcButton.disabled = true;
+    }
+    
+    // 发送请求到后端
+    fetch(`/diary/AIGC/${window.DIARY_ID}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            image_path: imagePath
+        })
+    })
+    .then(response => {
+        if (response.redirected) {
+            // 如果后端返回重定向，直接跳转
+            window.location.href = response.url;
+            return;
+        }
+        return response.json();
+    })
+    .then(data => {
+        hideLoadingSpinner();
+        
+        if (data && data.success === false) {
+            showToast(data.message || 'AI视频生成失败', 'error');
+        } else {
+            showToast('AI视频生成成功！页面即将刷新...', 'success');
+            // 延迟刷新页面以显示成功消息
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        }
+    })
+    .catch(error => {
+        console.error('AI视频生成错误:', error);
+        hideLoadingSpinner();
+        showToast('AI视频生成过程中出现错误', 'error');
+    })
+    .finally(() => {
+        // 重新启用按钮
+        if (aigcButton) {
+            aigcButton.disabled = false;
+        }
+    });
+};
+
+// 显示加载动画
+function showLoadingSpinner() {
+    const spinner = document.getElementById('loadingSpinner');
+    const button = document.getElementById('aigcButton');
+    
+    if (spinner && button) {
+        button.style.display = 'none';
+        spinner.style.display = 'flex';
+    }
+}
+
+// 隐藏加载动画
+function hideLoadingSpinner() {
+    const spinner = document.getElementById('loadingSpinner');
+    const button = document.getElementById('aigcButton');
+    
+    if (spinner && button) {
+        spinner.style.display = 'none';
+        button.style.display = 'flex';
+    }
+}
+
+// 显示提示消息
+function showToast(message, type = 'success') {
+    // 移除现有的提示
+    const existingToast = document.querySelector('.toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+    
+    // 创建新的提示
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    
+    document.body.appendChild(toast);
+    
+    // 显示提示
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    
+    // 3秒后自动隐藏
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// 键盘事件支持
+document.addEventListener('keydown', function(event) {
+    const modal = document.getElementById('imageModal');
+    if (modal && modal.style.display === 'block') {
+        switch(event.key) {
+            case 'Escape':
+                closeImageModal();
+                break;
+            case 'ArrowLeft':
+                navigateImage(-1);
+                break;
+            case 'ArrowRight':
+                navigateImage(1);                break;
+        }    }
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     // 获取用户信息
@@ -36,9 +245,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 设置搜索功能
     setupSearch();
-    
-    // 图片预览功能
-    setupImagePreview();
     
     // 返回顶部按钮
     setupBackToTop();
@@ -164,83 +370,6 @@ function setupSearch() {
         }
     });
 }
-
-// 图片预览功能
-function setupImagePreview() {
-    // 添加图片悬停效果
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    galleryItems.forEach(item => {
-        const img = item.querySelector('img');
-        const overlay = item.querySelector('.image-overlay');
-        
-        // 确保点击浮层也能触发图片预览
-        if (overlay) {
-            overlay.addEventListener('click', function(event) {
-                // 阻止事件冒泡
-                event.stopPropagation();
-                // 调用父元素图片的 click 事件
-                img.click();
-            });
-        }
-    });
-    
-    // 添加键盘支持 - 当模态框打开时使用箭头键浏览图片
-    document.addEventListener('keydown', function(event) {
-        const modal = document.getElementById('imageModal');
-        if (modal && modal.style.display === 'block') {
-            const images = Array.from(document.querySelectorAll('.gallery-image'));
-            const modalImg = document.getElementById('modalImage');
-            const currentSrc = modalImg.src;
-            
-            // 找到当前图片的索引
-            const currentIndex = images.findIndex(img => img.src === currentSrc);
-            
-            if (event.key === 'ArrowLeft' && currentIndex > 0) {
-                // 上一张图片
-                modalImg.src = images[currentIndex - 1].src;
-                modalImg.classList.add('slide-left');
-                setTimeout(() => modalImg.classList.remove('slide-left'), 300);
-            } else if (event.key === 'ArrowRight' && currentIndex < images.length - 1) {
-                // 下一张图片
-                modalImg.src = images[currentIndex + 1].src;
-                modalImg.classList.add('slide-right');
-                setTimeout(() => modalImg.classList.remove('slide-right'), 300);
-            }
-        }
-    });
-}
-
-// 在模态框中导航图片
-window.navigateImage = function(direction) {
-    const modalImg = document.getElementById('modalImage');
-    if (!modalImg) return;
-    
-    const currentSrc = modalImg.src;
-    const images = Array.from(document.querySelectorAll('.gallery-image'));
-    
-    // 找到当前图片的索引
-    const currentIndex = images.findIndex(img => img.src === currentSrc);
-    if (currentIndex === -1) return;
-    
-    // 计算下一张图片的索引
-    let nextIndex = currentIndex + direction;
-    
-    // 循环浏览图片
-    if (nextIndex < 0) nextIndex = images.length - 1;
-    if (nextIndex >= images.length) nextIndex = 0;
-    
-    // 更新图片
-    if (images[nextIndex]) {
-        modalImg.src = images[nextIndex].src;
-        
-        // 添加动画类
-        modalImg.classList.add(direction > 0 ? 'slide-right' : 'slide-left');
-        setTimeout(() => {
-            modalImg.classList.remove('slide-right', 'slide-left');
-        }, 300);
-    }
-};
 
 // 返回顶部按钮
 function setupBackToTop() {

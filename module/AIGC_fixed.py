@@ -133,7 +133,6 @@ class AIGC:
             )
             
             # 提取生成的提示词
-            
             generated_prompt = response.choices[0].message.content.strip()
             print(f"生成的动画提示词: {generated_prompt}")
             return generated_prompt            
@@ -186,7 +185,8 @@ class AIGC:
             return {
                 "task_id": create_result.id,
                 "status": "created",
-                "prompt": prompt,                "image_path": image_path
+                "prompt": prompt,
+                "image_path": image_path
             }
             
         except Exception as e:
@@ -213,6 +213,7 @@ class AIGC:
         except Exception as e:
             print(f"获取任务状态失败: {e}")
             raise
+
     def wait_for_completion(self, task_id: str, max_wait_time: int = 300) -> Dict[str, Any]:
         """
         等待视频生成任务完成
@@ -236,7 +237,8 @@ class AIGC:
                 
             except Exception as e:
                 print(f"检查任务状态时出错: {e}")
-                time.sleep(5)        
+                time.sleep(5)
+        
         raise TimeoutError(f"任务在{max_wait_time}秒内未完成")
     
     def generate_video_complete_workflow(self, image_path: str, custom_prompt: Optional[str] = None, 
@@ -302,7 +304,7 @@ class AIGC:
                         local_video_path = self._download_video(video_url, save_path)
                         print(f"视频已保存到: {local_video_path}")
                     except Exception as e:
-                        print(f"视频下载失败: {e}")                
+                        print(f"视频下载失败: {e}")
                 else:
                     print("视频生成成功，但未提供下载链接")
                 

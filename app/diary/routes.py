@@ -9,6 +9,7 @@ from module.diary_class import diaryManager as diary_manager
 from module.Spot_class import spotManager as spot_manager
 import module.printLog as log
 from module.data_structure.quicksort import quicksort
+from module.AIGC import AIGC 
 
 
 
@@ -406,3 +407,132 @@ def search_diary():
                          user_id=user_id,
                          pagination=pagination_info,
                          total_count=total_count)
+
+
+@diary.route("/AIGC/<int:diary_id>", methods=["POST"])
+@login_required
+def aigc_video(diary_id):
+    """
+    为指定日记的图片生成AI视频
+    """
+    print("开始生成AI视频")
+    # 获取请求数据
+    data = request.get_json()
+    print(f"接收到的请求数据: {data}")
+    
+    diary = diary_manager.getDiary(diary_id)
+
+    if not diary:
+        return jsonify({"success": False, "message": "日记不存在"}), 404
+
+    # 检查权限 - 只有日记作者可以生成视频
+    if diary.user_id != g.user["user_id"]:
+        return jsonify({"success": False, "message": "无权限操作此日记"}), 403
+
+    video_dir_path = f"data/scenic_spots/spot_{diary.spot_id}/videos/"
+
+    if not data:
+        return jsonify({"success": False, "message": "无效的请求数据"}), 400    # 从请求数据中提取信息
+    image_path = data.get("image_path")
+
+    if not image_path:
+        return jsonify({"success": False, "message": "缺少图片路径"}), 400
+
+    # 处理图片路径 - 如果是完整URL，提取相对路径
+    if image_path.startswith('http'):
+        # 从URL中提取文件路径
+        from urllib.parse import urlparse
+        parsed = urlparse(image_path)
+        
+        # 移除端口号后的路径部分，获取相对路径
+        # 例如: http://127.0.0.1:5000/data/diaries/xxx.jpg
+        # 提取为: data/diaries/xxx.jpg
+        path = parsed.path
+        
+        # 处理静态文件路径
+        if '/static/external/' in path:
+            # 提取 /static/external/ 后面的路径
+            image_path = path.split('/static/external/')[-1]
+        elif '/static/' in path:
+            # 处理其他静态文件路径
+            static_part = path.split('/static/')[-1]
+            # 如果是 uploads/ 开头，可能需要添加完整路径
+            if static_part.startswith('uploads/'):
+                image_path = f"app/static/{static_part}"
+            else:
+                image_path = static_part
+        else:
+            # 如果路径格式不匹配，尝试直接使用路径部分
+            image_path = path.lstrip('/')
+            
+        print(f"处理后的图片路径: {image_path}")
+      # 确保路径格式正确（使用正斜杠）
+    image_path = image_path.replace('\\', '/')
+
+    # 验证图片文件是否存在
+    import os
+    print(f"检查图片文件路径: {image_path}")
+    print(f"当前工作目录: {os.getcwd()}")
+    print(f"文件是否存在: {os.path.exists(image_path)}")
+    
+    if not os.path.exists(image_path):
+        # 尝试其他可能的路径
+        alternative_paths = [
+            os.path.join("app", "static", "external", image_path),
+            os.path.join("data", image_path),
+            image_path.replace('/', os.sep)  # 处理路径分隔符
+        ]
+        
+        found_path = None
+        for alt_path in alternative_paths:
+            print(f"尝试路径: {alt_path}")
+            if os.path.exists(alt_path):
+                found_path = alt_path
+                image_path = alt_path
+                print(f"找到有效路径: {found_path}")
+                break
+        
+        if not found_path:
+            print(f"所有路径都无效，返回错误")
+            return jsonify({"success": False, "message": f"图片文件不存在: {image_path}"}), 404
+
+    try:
+        # 创建AIGC实例
+        aigc = AIGC()
+
+        # 生成视频
+        result = aigc.generate_video_complete_workflow(image_path, save_path=video_dir_path)
+        
+        if result["success"]:
+            
+            
+            
+            # 返回成功响应，前端会重定向
+            # 只保留相对路径
+            abs_path = result["local_video_path"]
+            # 查找 "data\" 的起始位置
+            idx = abs_path.lower().find("data\\")
+            if idx != -1:
+                rel_path = abs_path[idx:]
+                rel_path = rel_path.replace("\\", "/")  # 替换为正斜杠
+            else:
+                rel_path = abs_path  # 如果找不到，保留原路径
+
+            diary.video_path.append(rel_path)  # 添加到日记的视频路径列表中
+            return jsonify({
+                "success": True, 
+                "message": "AI视频生成成功",
+                "video_path": rel_path
+            })
+        else:
+            return jsonify({
+                "success": False, 
+                "message": result.get("error", "AI视频生成失败")
+            }), 500
+            
+    except Exception as e:
+        log.writeLog(f"AIGC视频生成异常: {str(e)}")
+        return jsonify({
+            "success": False, 
+            "message": f"视频生成过程中出现错误: {str(e)}"
+        }), 500
