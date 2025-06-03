@@ -227,3 +227,82 @@ def create_spot_iterator(spot_type, spot_manager):
     创建景点迭代器的工厂函数
     """
     return SpotIterator(spot_type, spot_manager)
+
+
+class DiaryIterator:
+    """
+    日记迭代器 - 为特定景点类型的所有景点的日记提供按评分排序的迭代器
+    """
+    def __init__(self, spot_type, spot_manager):
+        self.spot_type = spot_type
+        self.spot_manager = spot_manager
+        self.spots_of_type = spot_manager.getTopKByType(spot_type, k=-1)  # 获取该类型的所有景点
+        self.current_spot_index = 0
+        self.current_diary_list = []
+        self.current_diary_index = 0
+        self._advance_to_next_valid_spot()
+    
+    def _advance_to_next_valid_spot(self):
+        """推进到下一个有日记的景点"""
+        while self.current_spot_index < len(self.spots_of_type):
+            spot = self.spots_of_type[self.current_spot_index]
+            spot_id = spot["id"]
+            
+            # 获取该景点的日记堆
+            diary_heap = self.spot_manager.spotDiaryHeapArray[spot_id - 1]
+            
+            # 获取该景点的所有日记 - 使用一个足够大的数字而不是-1
+            if diary_heap.size() > 0:
+                self.current_diary_list = diary_heap.getTopK(diary_heap.size())  # 获取所有日记
+            else:
+                self.current_diary_list = []
+            
+            self.current_diary_index = 0
+            
+            # 检查这个景点是否有日记
+            if self.current_diary_list and len(self.current_diary_list) > 0:
+                return  # 找到有效的景点和日记
+            else:
+                # 这个景点没有日记，继续下一个
+                self.current_spot_index += 1
+                continue
+        
+        # 如果到达这里，说明没有更多景点或日记了
+        self.current_diary_list = []
+        self.current_diary_index = 0
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        # 检查当前景点是否还有日记
+        if (self.current_diary_index >= len(self.current_diary_list) or 
+            not self.current_diary_list):
+            
+            # 当前景点的日记已耗尽，移动到下一个景点
+            self.current_spot_index += 1
+            self._advance_to_next_valid_spot()
+            
+            # 如果没有更多日记，抛出 StopIteration
+            if (self.current_diary_index >= len(self.current_diary_list) or 
+                not self.current_diary_list):
+                raise StopIteration
+        
+        # 返回当前日记
+        current_diary = self.current_diary_list[self.current_diary_index]
+        self.current_diary_index += 1
+        
+        # 转换为标准格式
+        return {
+            'id': current_diary['id'],
+            'score': current_diary['value1'],  # 评分存储在 value1 中
+            'visited_time': current_diary['value2'],  # 访问次数存储在 value2 中
+            'type': self.spot_type
+        }
+
+
+def create_diary_iterator(spot_type, spot_manager):
+    """
+    创建日记迭代器的工厂函数
+    """
+    return DiaryIterator(spot_type, spot_manager)

@@ -188,62 +188,49 @@ class UserManager:
             return None
         
         user_likes = user.likes_type
-        
-        # 使用优化的堆算法进行推荐
+          # 使用优化的堆算法进行推荐
         return self._getRecommendSpotsOptimized(user_likes, topK)
     
     def _getRecommendSpotsOptimized(self, user_likes, topK=10):
         """
-        使用堆优化的推荐算法
-        时间复杂度: O((M + topK) × log M)，其中M是用户喜好类型数
+        使用indexHeap进行归并排序的优化推荐算法
+        时间复杂度: O(N log N)，其中N是所有相关景点总数
         """
-        from module.data_structure.heap import RecommendationHeap, create_spot_iterator
+        from module.data_structure.indexHeap import TopKHeap
+        from module.data_structure.heap import create_spot_iterator
         
-        # 使用最小堆来维护全局最高评分景点
-        iterators_heap = RecommendationHeap()
+        # 使用indexHeap进行归并排序
+        merge_heap = TopKHeap()
         seen_spots = set()  # 去重
         
-        # 为每个类型创建迭代器并初始化堆
+        # 收集所有相关景点并插入到归并堆中
         for spot_type in user_likes:
             spots_iter = create_spot_iterator(spot_type, spotManager)
-            try:
-                first_spot = next(spots_iter)
-                # 堆中存储 (-score, spot_id, iterator, spot_data)
-                # 使用负分数实现最大堆效果
-                iterators_heap.push((-first_spot['score'], first_spot['id'], spots_iter, first_spot))
-            except StopIteration:
-                # 该类型没有景点，跳过
-                continue
-        
-        result = []
-        
-        # 从堆中依次取出最高分的景点
-        while not iterators_heap.is_empty() and len(result) < topK:
-            try:
-                neg_score, spot_id, spots_iter, spot_data = iterators_heap.pop()
-                
-                # 避免重复推荐
+            for spot in spots_iter:
+                spot_id = spot['id']
                 if spot_id not in seen_spots:
-                    result.append(spot_data)
+                    # 插入到归并堆：value1=score, value2=visited_time
+                    merge_heap.insert(spot_id, spot['score'], spot['visited_time'])
                     seen_spots.add(spot_id)
-                
-                # 从同一个迭代器获取下一个景点
-                try:
-                    next_spot = next(spots_iter)
-                    iterators_heap.push((-next_spot['score'], next_spot['id'], spots_iter, next_spot))
-                except StopIteration:
-                    # 该迭代器已耗尽，继续处理其他迭代器
-                    continue
-                    
-            except IndexError:
-                # 堆为空，结束循环
-                break
         
-        if not result:
+        # 从归并堆中获取前topK个最高评分的景点
+        result_data = merge_heap.getTopK(topK)
+        
+        if not result_data:
             log.writeLog(f"未能根据用户喜好找到任何景点")
             return []
         
-        log.writeLog(f"使用堆优化算法成功获取{len(result)}个推荐景点")
+        # 转换为完整的景点数据
+        result = []
+        for item in result_data:
+            spot_data = {
+                'id': item['id'],
+                'score': item['value1'],
+                'visited_time': item['value2']
+            }
+            result.append(spot_data)
+        
+        log.writeLog(f"使用indexHeap归并排序成功获取{len(result)}个推荐景点")
         return result
 
     def getRecommendSpotsTraditional(self, userId, topK=10):
@@ -274,13 +261,64 @@ class UserManager:
 
         if not merged_list:
              log.writeLog(f"未能根据用户{userId}的喜好找到任何景点")
-             return []
-
-        # 返回排序并去重后的前 topK 个景点
+             return []        # 返回排序并去重后的前 topK 个景点
         return merged_list[:topK]
 
     def getRecommendDiaries(self, userId, topK=10):
         """
+        获取用户推荐的日记 - 使用堆优化的推荐算法
+        """
+        user = self.getUser(userId)
+        if user is None:
+            log.writeLog(f"用户{userId}不存在")
+            return None
+        
+        user_likes = user.likes_type
+          # 使用优化的堆算法进行推荐
+        return self._getRecommendDiariesOptimized(user_likes, topK)
+    
+    def _getRecommendDiariesOptimized(self, user_likes, topK=10):
+        """
+        使用indexHeap进行归并排序的优化日记推荐算法
+        时间复杂度: O(N log N)，其中N是所有相关日记总数
+        """
+        from module.data_structure.indexHeap import TopKHeap
+        from module.data_structure.heap import create_diary_iterator
+        
+        # 使用indexHeap进行归并排序
+        merge_heap = TopKHeap()
+        seen_diaries = set()  # 去重
+        
+        # 收集所有相关日记并插入到归并堆中
+        for spot_type in user_likes:
+            diaries_iter = create_diary_iterator(spot_type, spotManager)
+            for diary in diaries_iter:
+                diary_id = diary['id']
+                if diary_id not in seen_diaries:
+                    # 插入到归并堆：value1=score, value2=visited_time
+                    merge_heap.insert(diary_id, diary['score'], diary['visited_time'])
+                    seen_diaries.add(diary_id)
+        
+        # 从归并堆中获取前topK个最高评分的日记
+        result_data = merge_heap.getTopK(topK)
+        
+        if not result_data:
+            log.writeLog(f"未能根据用户喜好找到任何日记")
+            return []
+        
+        # 转换为完整的日记对象
+        result = []
+        for item in result_data:
+            diary_obj = diaryManager.getDiary(item['id'])
+            if diary_obj:
+                result.append(diary_obj)
+        
+        log.writeLog(f"使用indexHeap归并排序成功获取{len(result)}个推荐日记")
+        return result
+
+    def getRecommendDiariesTraditional(self, userId, topK=10):
+        """
+        传统的日记推荐算法（保留用于对比）
         获取用户推荐的日记
         """
         user = self.getUser(userId)
