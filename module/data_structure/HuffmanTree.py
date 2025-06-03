@@ -1,6 +1,4 @@
 from module.data_structure.heap import MinHeap # 最小堆的特性完全符合构建哈夫曼树的过程，使用自定义的最小堆实现，不依赖heapq库
-from collections import Counter # 用于统计字符频率
-import struct
 
 class Node:
     def __init__(self, char, freq):
