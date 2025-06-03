@@ -155,8 +155,6 @@ class SpotManager:
         all_sorted_spots = heap_instance.getTopK(length)
         writeLog(f"使用堆获取 '{spotType}' 类型的{length}个景点并排序完成")
 
-
-
         return all_sorted_spots  
 
 
