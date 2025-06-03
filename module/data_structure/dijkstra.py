@@ -690,10 +690,11 @@ class DijkstraRouter:
             # 使用多目标Dijkstra算法
             distances = self._dijkstra_multi_target(start_node, target_nodes, optimize_for)
             
-            # 将结果写入目标点列表
+            # 将结果写入目标点列表，结果保留一位小数
             for i, point in enumerate(target_points):
                 if target_nodes[i] is not None:
-                    point["value1"] = distances.get(target_nodes[i], float('inf'))
+                    value = distances.get(target_nodes[i], float('inf'))
+                    point["value1"] = round(value, 1) if value != float('inf') else float('inf')
                 else:
                     point["value1"] = float('inf')
             
