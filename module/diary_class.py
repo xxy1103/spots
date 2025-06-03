@@ -5,6 +5,7 @@ from module.data_structure.stack import Stack
 from module.data_structure.set import MySet
 from module.printLog import writeLog
 from module.data_structure.HuffmanTree import generate_huffman_codes
+from module.data_structure.KMP import kmp_search
 from module.Model.Model import Diary, User, Spot
 import module.printLog as log
 import datetime #日期使用
@@ -312,7 +313,7 @@ class DiaryManager:
                     #     print(f"搜索词的编码: {search_encoded}")
 
                     # 在位级别搜索编码后的搜索词
-                    if search_encoded in bit_string:
+                    if kmp_search(bit_string, search_encoded):
                         candidates.append(diary_id)
                         
                 except Exception as e:
