@@ -344,7 +344,7 @@ class DiaryManager:
                 decompressed = diary.getContent(self.huffman_tree)
                 if decompressed:
                     # 在解压后的内容中搜索
-                    if search_term in decompressed:
+                    if kmp_search(decompressed, search_term):
                         results.append(diary)
                         if len(results) >= max_results:
                             break
