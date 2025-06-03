@@ -1,6 +1,5 @@
 # 本类用于获取data中的数组，所用输入可以调用此类，统一方法
 import module.printLog as log
-import datetime
 import pickle
 import json
 import os

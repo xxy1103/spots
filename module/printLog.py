@@ -1,10 +1,5 @@
 # 用此类安全的打印调试信息
 
-import os
-import json
-import datetime
-
-
 
 def writeLog(logInfo,debug=True):
     """

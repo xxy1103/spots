@@ -3,7 +3,6 @@ import time
 import base64
 from typing import Optional, Dict, Any
 from dotenv import load_dotenv
-import requests
 from PIL import Image
 from volcenginesdkarkruntime import Ark
 

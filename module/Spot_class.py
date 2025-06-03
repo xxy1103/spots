@@ -3,8 +3,7 @@ from module.fileIo import spotIo, configIo
 from module.data_structure.indexHeap import TopKHeap
 from module.printLog import writeLog
 from module.data_structure.quicksort import quicksort
-from module.data_structure.merge import merge_sort
-from module.Model.Model import Diary, User, Reviews, Spot
+from module.Model.Model import  Spot
 from module.data_structure.kwaymerge import k_way_merge_descending
 from module.diary_class import diaryManager
 # 导入自定义 Set 类
@@ -252,6 +251,13 @@ class SpotManager:
 
         return sorted_spots # 返回字典
 
+    def getTopKIterator(self, spot_type):
+        """
+        为指定类型创建景点迭代器
+        用于支持优化的推荐算法
+        """
+        from module.data_structure.heap import create_spot_iterator
+        return create_spot_iterator(spot_type, self)
 
 
 spotManager = SpotManager.from_dict(spotIo.load_spots())

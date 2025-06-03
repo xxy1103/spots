@@ -1,18 +1,14 @@
 from module.fileIo import diaryIo
 # userManager导入了DiaryManager，则diary_class中不能再导入user,否则报错
 from module.data_structure.hashtable import HashTable
-from module.data_structure.indexHeap import TopKHeap
-
-from module.data_structure.merge import merge_sort
 from module.data_structure.stack import Stack
 from module.data_structure.set import MySet
 from module.printLog import writeLog
 from module.data_structure.HuffmanTree import generate_huffman_codes
-from module.Model.Model import Diary, User, Reviews, Spot
+from module.Model.Model import Diary, User, Spot
 import module.printLog as log
 import datetime #日期使用
-import re #正则表达式使用
-import os
+
 
             
 class IdGenerator:      

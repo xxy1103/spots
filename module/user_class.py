@@ -3,9 +3,7 @@ from module.data_structure.btree import BTree
 from module.fileIo import userIo
 from module.diary_class import diaryManager
 from module.Spot_class import spotManager
-from module.data_structure.merge import merge_sort
-from module.Model.Model import Diary, User, Reviews, Spot
-from module.data_structure.rb_tree import RedBlackTree as rb
+from module.Model.Model import User
 import module.data_structure.kwaymerge as kwaymerge
 
 import module.printLog as log
@@ -171,8 +169,7 @@ class UserManager:
             
         # 获取完整用户信息
         full_user_info = self.getUser(user["id"]) # b树中返回的对象是字典{"id":,"name":}
-        
-        # 验证密码
+          # 验证密码
         if not verifyPassword(userPassword, full_user_info.password):
             log.writeLog(f"用户{userName}密码错误")
             return None
@@ -183,6 +180,75 @@ class UserManager:
 
     def getRecommendSpots(self, userId, topK=10):
         """
+        获取用户推荐的景点 - 使用堆优化的推荐算法
+        """
+        user = self.getUser(userId)
+        if user is None:
+            log.writeLog(f"用户{userId}不存在")
+            return None
+        
+        user_likes = user.likes_type
+        
+        # 使用优化的堆算法进行推荐
+        return self._getRecommendSpotsOptimized(user_likes, topK)
+    
+    def _getRecommendSpotsOptimized(self, user_likes, topK=10):
+        """
+        使用堆优化的推荐算法
+        时间复杂度: O((M + topK) × log M)，其中M是用户喜好类型数
+        """
+        from module.data_structure.heap import RecommendationHeap, create_spot_iterator
+        
+        # 使用最小堆来维护全局最高评分景点
+        iterators_heap = RecommendationHeap()
+        seen_spots = set()  # 去重
+        
+        # 为每个类型创建迭代器并初始化堆
+        for spot_type in user_likes:
+            spots_iter = create_spot_iterator(spot_type, spotManager)
+            try:
+                first_spot = next(spots_iter)
+                # 堆中存储 (-score, spot_id, iterator, spot_data)
+                # 使用负分数实现最大堆效果
+                iterators_heap.push((-first_spot['score'], first_spot['id'], spots_iter, first_spot))
+            except StopIteration:
+                # 该类型没有景点，跳过
+                continue
+        
+        result = []
+        
+        # 从堆中依次取出最高分的景点
+        while not iterators_heap.is_empty() and len(result) < topK:
+            try:
+                neg_score, spot_id, spots_iter, spot_data = iterators_heap.pop()
+                
+                # 避免重复推荐
+                if spot_id not in seen_spots:
+                    result.append(spot_data)
+                    seen_spots.add(spot_id)
+                
+                # 从同一个迭代器获取下一个景点
+                try:
+                    next_spot = next(spots_iter)
+                    iterators_heap.push((-next_spot['score'], next_spot['id'], spots_iter, next_spot))
+                except StopIteration:
+                    # 该迭代器已耗尽，继续处理其他迭代器
+                    continue
+                    
+            except IndexError:
+                # 堆为空，结束循环
+                break
+        
+        if not result:
+            log.writeLog(f"未能根据用户喜好找到任何景点")
+            return []
+        
+        log.writeLog(f"使用堆优化算法成功获取{len(result)}个推荐景点")
+        return result
+
+    def getRecommendSpotsTraditional(self, userId, topK=10):
+        """
+        传统的推荐算法（保留用于对比）
         获取用户推荐的景点
         """
         user = self.getUser(userId)

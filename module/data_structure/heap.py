@@ -111,3 +111,119 @@ if __name__ == '__main__':
     while not h2.is_empty():
             sorted_data.append(h2.pop())
     print("Sorted data using heap:", sorted_data) # Expected: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+class RecommendationHeap:
+    """
+    专门用于推荐系统的堆实现
+    支持迭代器模式，用于优化多路归并推荐算法
+    """
+    def __init__(self):
+        self._heap = []  # 存储 (-score, spot_id, iterator, spot_data)
+    
+    def _parent(self, i):
+        return (i - 1) // 2
+    
+    def _left_child(self, i):
+        return 2 * i + 1
+    
+    def _right_child(self, i):
+        return 2 * i + 2
+    
+    def _swap(self, i, j):
+        self._heap[i], self._heap[j] = self._heap[j], self._heap[i]
+    
+    def _sift_up(self, i):
+        """将索引 i 处的元素向上调整以维护堆属性"""
+        parent_index = self._parent(i)
+        while i > 0 and self._heap[i] < self._heap[parent_index]:
+            self._swap(i, parent_index)
+            i = parent_index
+            parent_index = self._parent(i)
+    
+    def _sift_down(self, i):
+        """将索引 i 处的元素向下调整以维护堆属性"""
+        max_index = i
+        left = self._left_child(i)
+        if left < len(self._heap) and self._heap[left] < self._heap[max_index]:
+            max_index = left
+        
+        right = self._right_child(i)
+        if right < len(self._heap) and self._heap[right] < self._heap[max_index]:
+            max_index = right
+        
+        if i != max_index:
+            self._swap(i, max_index)
+            self._sift_down(max_index)
+    
+    def push(self, item):
+        """向堆中添加一个元素 (neg_score, spot_id, iterator, spot_data)"""
+        self._heap.append(item)
+        self._sift_up(len(self._heap) - 1)
+    
+    def pop(self):
+        """移除并返回堆中的最小元素（即最高分的景点）"""
+        if not self._heap:
+            raise IndexError("pop from an empty heap")
+        if len(self._heap) == 1:
+            return self._heap.pop()
+        
+        min_item = self._heap[0]
+        self._heap[0] = self._heap.pop()
+        self._sift_down(0)
+        return min_item
+    
+    def is_empty(self):
+        return len(self._heap) == 0
+    
+    def __len__(self):
+        return len(self._heap)
+
+
+class SpotIterator:
+    """
+    景点迭代器，用于按分数降序迭代特定类型的景点
+    """
+    def __init__(self, spot_type, spot_manager):
+        self.spot_type = spot_type
+        self.spot_manager = spot_manager
+        self.current_index = 0
+        self.spots_data = None
+        self._initialize()
+    
+    def _initialize(self):
+        """初始化迭代器，获取该类型的所有景点数据"""
+        if self.spot_type not in self.spot_manager.spotTypeDict:
+            self.spots_data = []
+            return
+        
+        # 获取该类型所有景点的排序数据
+        heap_instance = self.spot_manager.spotTypeDict[self.spot_type].get("heap")
+        if heap_instance and heap_instance.size() > 0:
+            # 获取所有景点数据（已按分数排序）
+            self.spots_data = heap_instance.getTopK(heap_instance.size())
+        else:
+            self.spots_data = []
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if self.current_index >= len(self.spots_data):
+            raise StopIteration
+        
+        spot_data = self.spots_data[self.current_index]
+        self.current_index += 1
+        
+        # 返回景点数据，包含id和score等信息
+        return {
+            'id': spot_data['id'],
+            'score': spot_data['value1'],
+            'visited_time': spot_data['value2']
+        }
+
+
+def create_spot_iterator(spot_type, spot_manager):
+    """
+    创建景点迭代器的工厂函数
+    """
+    return SpotIterator(spot_type, spot_manager)
