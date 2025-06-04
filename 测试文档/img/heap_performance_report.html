@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>堆复制性能分析报告</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        
+        .summary {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .performance-table th,
+        .performance-table td {
+            border: 1px solid #bdc3c7;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .performance-table th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .performance-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .chart-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .recommendations {
+            background-color: #d5f5d5;
+            padding: 20px;
+            border-left: 5px solid #27ae60;
+            margin: 20px 0;
+        }
+        
+        .recommendations h3 {
+            color: #27ae60;
+            margin-top: 0;
+        }
+        
+        .recommendations ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .recommendations li {
+            margin: 8px 0;
+        }
+        
+        .method-ranking {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .ranking-card {
+            background-color: #fff;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+        
+        .ranking-card.winner {
+            border-color: #f39c12;
+            background-color: #fdf2e9;
+        }
+        
+        .ranking-card h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+        
+        .ranking-card .time {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 堆复制性能分析报告</h1>
+        
+        <div class="summary">
+            <h2>📊 执行概要</h2>
+            <p>本报告详细分析了五种不同堆复制方法在不同堆大小下的性能表现，测试规模从100到10,000个元素，每种方法执行1000次复制操作来获得准确的性能数据。</p>
+        </div>
+
+        <h2>📈 性能分析图表</h2>
+        
+        <div class="chart-container">
+            <h3>堆复制方法综合性能对比</h3>
+            <img src="heap_copy_performance_analysis.png" alt="堆复制性能分析图表">
+        </div>
+        
+        <div class="chart-container">
+            <h3>TopK方法性能分析</h3>
+            <img src="topk_performance_analysis.png" alt="TopK性能分析图表">
+        </div>
+
+        <h2>🏆 性能排名</h2>
+        
+        <div class="method-ranking">
+            <div class="ranking-card winner">
+                <h4>🥇 第一名</h4>
+                <p><strong>切片[:]</strong></p>
+                <div class="time">平均: 0.004816s</div>
+                <p>在大多数情况下表现最佳</p>
+            </div>
+            
+            <div class="ranking-card">
+                <h4>🥈 第二名</h4>
+                <p><strong>copy()</strong></p>
+                <div class="time">平均: 0.005205s</div>
+                <p>性能稳定，接近最优</p>
+            </div>
+            
+            <div class="ranking-card">
+                <h4>🥉 第三名</h4>
+                <p><strong>_fast_heap_copy()</strong></p>
+                <div class="time">平均: 0.005273s</div>
+                <p>自定义优化方法</p>
+            </div>
+        </div>
+
+        <h2>📋 详细性能数据</h2>
+        
+        <table class="performance-table">
+            <thead>
+                <tr>
+                    <th>堆大小</th>
+                    <th>最优方法</th>
+                    <th>执行时间 (秒)</th>
+                    <th>推荐场景</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>100</td>
+                    <td>copy()</td>
+                    <td>0.000000s</td>
+                    <td>小型数据集，所有方法都很快</td>
+                </tr>
+                <tr>
+                    <td>1,000</td>
+                    <td>切片[:]</td>
+                    <td>0.000997s</td>
+                    <td>中等数据集的理想选择</td>
+                </tr>
+                <tr>
+                    <td>5,000</td>
+                    <td>copy()</td>
+                    <td>0.006019s</td>
+                    <td>大型数据集，稳定性好</td>
+                </tr>
+                <tr>
+                    <td>10,000</td>
+                    <td>切片[:]</td>
+                    <td>0.012098s</td>
+                    <td>超大数据集的最佳选择</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>🔍 复杂度分析</h2>
+        
+        <div class="summary">
+            <p><strong>时间复杂度:</strong> 所有测试的复制方法都表现出接近 O(n) 的时间复杂度，这符合列表复制操作的理论预期。</p>
+            
+            <ul>
+                <li><strong>copy()方法:</strong> Python内置的优化复制，性能稳定</li>
+                <li><strong>切片[:]:</strong> 语法简洁，性能最佳</li>
+                <li><strong>_fast_heap_copy():</strong> 自定义方法，性能良好</li>
+                <li><strong>list()构造器:</strong> 通用方法，性能中等</li>
+                <li><strong>浅复制字典:</strong> 由于额外的字典操作，性能最差</li>
+            </ul>
+        </div>
+
+        <div class="recommendations">
+            <h3>💡 优化建议</h3>
+            <ul>
+                <li><strong>小堆 (&lt;1000元素):</strong> 使用切片[:]是最快的复制方法</li>
+                <li><strong>大堆且k值很小:</strong> 考虑使用heapq.nlargest代替完整复制</li>
+                <li><strong>避免深度复制:</strong> 除非绝对必要，否则使用浅复制</li>
+                <li><strong>k值接近堆大小:</strong> 直接排序可能更高效</li>
+                <li><strong>生产环境:</strong> 切片[:]方法提供了最佳的性能和可读性平衡</li>
+            </ul>
+        </div>
+
+        <h2>📊 关键发现</h2>
+        
+        <div class="summary">
+            <ol>
+                <li><strong>切片操作胜出:</strong> 切片[:]在大多数测试场景中表现最佳，平均性能领先约8%</li>
+                <li><strong>字典复制性能差:</strong> 浅复制字典方法比最佳方法慢约50倍，应避免使用</li>
+                <li><strong>性能稳定性:</strong> copy()方法虽然不是最快，但在所有测试中都表现稳定</li>
+                <li><strong>线性扩展:</strong> 所有方法都表现出良好的线性时间复杂度特性</li>
+                <li><strong>TopK优化空间:</strong> 对于小k值的TopK操作，有进一步优化的潜力</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: #7f8c8d;">
+            <p>报告生成时间: 2025年6月4日</p>
+            <p>测试环境: Python 3.x | 数据结构课设项目</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -4,3 +4,5 @@ python-dotenv
 volcengine-python-sdk
 requests
 Pillow
+matplotlib
+numpy

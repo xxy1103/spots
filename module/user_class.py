@@ -302,15 +302,15 @@ class UserManager:
         """
         获取用户推荐的日记 - 使用堆优化的推荐算法
         """
-        # user = self.getUser(userId)
-        # if user is None:
-        #     log.writeLog(f"用户{userId}不存在")
-        #     return None
+        user = self.getUser(userId)
+        if user is None:
+            log.writeLog(f"用户{userId}不存在")
+            return None
         
-        # user_likes = user.likes_type
-        #   # 使用优化的堆算法进行推荐
-        # return self._getRecommendDiariesOptimized(user_likes, topK)
-        return self.getRecommendDiariesTraditional(userId, topK)
+        user_likes = user.likes_type
+          # 使用优化的堆算法进行推荐
+        return self._getRecommendDiariesOptimized(user_likes, topK)
+        #return self.getRecommendDiariesTraditional(userId, topK)
 
     def _getRecommendDiariesOptimized(self, user_likes, topK=10):
         """

@@ -14,7 +14,7 @@ import numpy as np
 # 添加模块路径
 sys.path.append(os.path.join(os.path.dirname(__file__), 'module'))
 
-from data_structure.indexHeap import TopKHeap
+from module.data_structure.indexHeap import TopKHeap
 
 def generate_test_data(size):
     """生成测试数据"""

@@ -311,8 +311,8 @@ class UserSearchPerformanceTest:
         ax4.grid(True, alpha=0.3)
         
         plt.tight_layout()
-        plt.savefig('user_search_performance_comparison.png', dpi=300, bbox_inches='tight')
-        print(f"\n性能对比图表已保存为: user_search_performance_comparison.png")
+        plt.savefig('用户名trie树与B树对比.png', dpi=300, bbox_inches='tight')
+        print(f"\n性能对比图表已保存为: 用户名trie树与B树对比.png")
         plt.show()
 
 
