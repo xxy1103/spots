@@ -8,10 +8,59 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import matplotlib
+from matplotlib import font_manager
 
-# 设置中文字体
-plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans']
-plt.rcParams['axes.unicode_minus'] = False
+# 配置matplotlib字体和负号显示
+def configure_matplotlib_fonts():
+    """配置matplotlib字体，解决中文和负号显示问题"""
+    # 强制重置matplotlib配置
+    matplotlib.rcdefaults()
+    
+    # 设置字体族
+    plt.rcParams['font.family'] = ['sans-serif']
+    
+    # 查找可用的中文字体
+    available_fonts = [f.name for f in font_manager.fontManager.ttflist]
+    chinese_fonts = []
+    
+    # 按优先级检查中文字体
+    preferred_fonts = ['Microsoft YaHei', 'SimHei', 'SimSun', 'KaiTi', 'FangSong', 'Arial Unicode MS']
+    for font in preferred_fonts:
+        if font in available_fonts:
+            chinese_fonts.append(font)
+    
+    # 如果没有找到中文字体，使用系统默认
+    if not chinese_fonts:
+        chinese_fonts = ['DejaVu Sans', 'Arial', 'Liberation Sans']
+    
+    plt.rcParams['font.sans-serif'] = chinese_fonts
+    
+    # 强制解决负号显示问题 - 这是关键设置
+    plt.rcParams['axes.unicode_minus'] = False
+    
+    # 额外的字体配置以确保兼容性
+    plt.rcParams['mathtext.fontset'] = 'stix'
+    plt.rcParams['mathtext.default'] = 'regular'
+    
+    # 设置其他字体参数
+    plt.rcParams['font.size'] = 10
+    plt.rcParams['axes.titlesize'] = 12
+    plt.rcParams['axes.labelsize'] = 10
+    plt.rcParams['xtick.labelsize'] = 9
+    plt.rcParams['ytick.labelsize'] = 9
+    plt.rcParams['legend.fontsize'] = 9
+    
+    # 设置图形参数
+    plt.rcParams['figure.dpi'] = 100
+    plt.rcParams['savefig.dpi'] = 300
+    plt.rcParams['figure.figsize'] = [10, 8]
+    
+    print(f"已配置字体: {chinese_fonts[0] if chinese_fonts else 'default'}")
+    print("负号显示问题已修复")
+
+# 初始化字体配置
+configure_matplotlib_fonts()
 
 def create_performance_visualization():
     """创建性能分析可视化图表"""
