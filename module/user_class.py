@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 from module.data_structure.btree import BTree
 from module.data_structure.trie import UsernameTrie
+from module.data_structure.set import MySet
 from module.fileIo import userIo
 from module.diary_class import diaryManager
 from module.Spot_class import spotManager
 from module.Model.Model import User
 import module.data_structure.kwaymerge as kwaymerge
-
+from module.data_structure.indexHeap import TopKHeap
+from module.data_structure.heap import create_diary_iterator
 import module.printLog as log
 import base64
 import hashlib
@@ -232,20 +234,18 @@ class UserManager:
         """
         from module.data_structure.indexHeap import TopKHeap
         from module.data_structure.heap import create_spot_iterator
-        
-        # 使用indexHeap进行归并排序
+          # 使用indexHeap进行归并排序
         merge_heap = TopKHeap()
-        seen_spots = set()  # 去重
+        
         
         # 收集所有相关景点并插入到归并堆中
         for spot_type in user_likes:
             spots_iter = create_spot_iterator(spot_type, spotManager)
             for spot in spots_iter:
                 spot_id = spot['id']
-                if spot_id not in seen_spots:
-                    # 插入到归并堆：value1=score, value2=visited_time
-                    merge_heap.insert(spot_id, spot['score'], spot['visited_time'])
-                    seen_spots.add(spot_id)
+                # 插入到归并堆：value1=score, value2=visited_time
+                merge_heap.insert(spot_id, spot['score'], spot['visited_time'])
+
         
         # 从归并堆中获取前topK个最高评分的景点
         result_data = merge_heap.getTopK(topK)
@@ -316,22 +316,17 @@ class UserManager:
         使用indexHeap进行归并排序的优化日记推荐算法
         时间复杂度: O(N log N)，其中N是所有相关日记总数
         """
-        from module.data_structure.indexHeap import TopKHeap
-        from module.data_structure.heap import create_diary_iterator
         
-        # 使用indexHeap进行归并排序
+          # 使用indexHeap进行归并排序
         merge_heap = TopKHeap()
-        seen_diaries = set()  # 去重
         
         # 收集所有相关日记并插入到归并堆中
         for spot_type in user_likes:
             diaries_iter = create_diary_iterator(spot_type, spotManager)
             for diary in diaries_iter:
                 diary_id = diary['id']
-                if diary_id not in seen_diaries:
-                    # 插入到归并堆：value1=score, value2=visited_time
-                    merge_heap.insert(diary_id, diary['score'], diary['visited_time'])
-                    seen_diaries.add(diary_id)
+                # 插入到归并堆：value1=score, value2=visited_time
+                merge_heap.insert(diary_id, diary['score'], diary['visited_time'])
         
         # 从归并堆中获取前topK个最高评分的日记
         result_data = merge_heap.getTopK(topK)
