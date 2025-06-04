@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from module.data_structure.btree import BTree
+from module.data_structure.trie import UsernameTrie
 from module.fileIo import userIo
 from module.diary_class import diaryManager
 from module.Spot_class import spotManager
@@ -82,11 +83,22 @@ class UserManager:
     def __init__(self, users=None, counts=0):
 
         self.users = users if users is not None else []
-        self.counts = counts if counts > 0 else len(users)
+        self.counts = counts if counts > 0 else len(self.users)
+        
+        # 初始化B树（保留原有功能）
         self.btree = BTree(t=3)
+        
+        # 初始化Trie树（新增功能）
+        self.username_trie = UsernameTrie()
+        
+        # 将现有用户数据加载到两种数据结构中
         for user in self.users:
+            # B树插入
             self.btree.insert({"id":user.id, "name":user.name})
-        log.writeLog("用户数据加载完成")
+            # Trie树插入
+            self.username_trie.insert_user(user.id, user.name)
+            
+        log.writeLog("用户数据加载完成（B树 + Trie树）")
 
     @classmethod
     def from_dict(cls,data:dict):
@@ -121,9 +133,9 @@ class UserManager:
         return self.users[userId-1]
 
     def addUser(self, username, password, liketype):
+        # 检查用户是否已存在（使用B树）
         existing_user_node = self.btree.search(username) 
         if existing_user_node is not None:
-            # --- 修改这里：日志记录也使用 username ---
             log.writeLog(f"用户 {username} 已存在") 
             return False
         
@@ -147,8 +159,9 @@ class UserManager:
         self.users.append(user)
         self.counts = self.counts + 1
 
-        # 使用返回的 ID 更新 B 树
+        # 使用返回的 ID 更新 B 树和 Trie 树
         self.btree.insert({"id": user.id, "name": user.name})
+        self.username_trie.insert_user(user.id, user.name)  # 同时插入Trie树
         log.writeLog(f"添加用户 {username} (ID: {user.id}) 成功")
         return True # 返回 True 表示成功
     
@@ -160,6 +173,27 @@ class UserManager:
         log.writeLog(f"找到用户{user['name']}")
         return user
     
+    def searchUserWithTrie(self, name):
+        """
+        使用Trie树查找用户（新增方法）
+        """
+        user_data = self.username_trie.search_by_username(name)
+        if user_data is None:
+            log.writeLog(f"用户{name}不存在（Trie树查找）")
+            return None
+        log.writeLog(f"找到用户{user_data['name']}（Trie树查找）")
+        return user_data
+    
+    def searchUserByPrefix(self, prefix):
+        """
+        使用Trie树根据前缀查找用户（新增功能）
+        """
+        users = self.username_trie.find_users_by_prefix(prefix)
+        if not users:
+            log.writeLog(f"未找到前缀为{prefix}的用户")
+            return []
+        log.writeLog(f"找到{len(users)}个前缀为{prefix}的用户")
+        return users
     
     def loginUser(self, userName, userPassword):
         user = self.searchUser(userName)
