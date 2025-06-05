@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个性化旅游系统日记搜索功能分析报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        .section h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        .overview-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .overview-card {
+            background: linear-gradient(135deg, #f6f9fc 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .overview-card h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .overview-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .performance-card {
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .performance-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+        }
+
+        .performance-card h4 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .performance-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .performance-desc {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .complexity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .complexity-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .complexity-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+
+        .complexity-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .complexity-code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }        .mermaid-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid #e1e5e9;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .mermaid-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px 15px 0 0;
+        }        .mermaid {
+            width: 100%;
+            min-height: 200px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        /* 为Mermaid图表添加hover效果 */
+        .mermaid-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        /* 为不同类型的流程图添加特色边框 */
+        .mermaid-container:nth-child(2) {
+            border-left: 5px solid #667eea;
+        }
+
+        .mermaid-container:nth-child(4) {
+            border-left: 5px solid #48bb78;
+        }
+
+        .mermaid-container:nth-child(6) {
+            border-left: 5px solid #38b2ac;
+        }
+
+        .mermaid-container:nth-child(8) {
+            border-left: 5px solid #ed8936;
+        }
+
+        .mermaid-container:nth-child(10) {
+            border-left: 5px solid #9f7aea;
+        }
+
+        .algorithm-details {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #28a745;
+        }
+
+        .algorithm-steps {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .algorithm-steps ol {
+            padding-left: 20px;
+        }
+
+        .algorithm-steps li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 1px solid #c3e6cb;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .summary-box h3 {
+            color: #155724;
+            margin-bottom: 15px;
+        }
+
+        .summary-box ul {
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .variable-note {
+            background: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .variable-note strong {
+            color: #0056b3;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .toc h3 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+                border-radius: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .overview-cards,
+            .performance-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .complexity-table {
+                font-size: 0.9em;
+            }
+            
+            .complexity-table th,
+            .complexity-table td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>个性化旅游系统日记搜索功能分析报告</h1>
+            <p>多维度搜索机制与性能分析</p>
+        </div>
+
+        <div class="toc">
+            <h3>📋 目录</h3>
+            <ul>
+                <li><a href="#overview">1. 功能概述</a></li>
+                <li><a href="#search-types">2. 搜索类型与数据结构分析</a></li>
+                <li><a href="#data-structures">3. 核心数据结构详解</a></li>
+                <li><a href="#performance">4. 搜索性能分析</a></li>
+                <li><a href="#flowcharts">5. 搜索流程图</a></li>
+                <li><a href="#optimization">6. 性能优化策略</a></li>
+                <li><a href="#summary">7. 总结</a></li>
+            </ul>
+        </div>
+
+        <div id="overview" class="section">
+            <h2>1. 功能概述</h2>
+            <p>个性化旅游系统的日记搜索功能支持多种搜索方式，包括标题搜索、内容搜索、用户搜索、景点搜索和综合搜索。系统采用了多种数据结构和算法来优化不同场景下的搜索性能。</p>
+            
+            <div class="overview-cards">
+                <div class="overview-card">
+                    <h4>🔍 标题搜索</h4>
+                    <p>基于哈希表的字符级索引，支持快速的标题关键词匹配，使用集合交集运算提高搜索精度。</p>
+                </div>
+                <div class="overview-card">
+                    <h4>📄 内容搜索</h4>
+                    <p>结合哈夫曼编码与KMP算法，支持压缩内容的直接搜索，避免解压开销，提升搜索效率。</p>
+                </div>
+                <div class="overview-card">
+                    <h4>👤 用户搜索</h4>
+                    <p>采用B树与Trie树双重索引，支持精确匹配和前缀搜索，快速定位用户及其相关日记。</p>
+                </div>
+                <div class="overview-card">
+                    <h4>🏛️ 景点搜索</h4>
+                    <p>通过景点名称的字符级哈希映射，快速查找与特定地点相关的所有旅游日记。</p>
+                </div>
+                <div class="overview-card">
+                    <h4>🌐 综合搜索</h4>
+                    <p>并行执行多种搜索算法，合并去重结果，提供全方位的搜索体验。</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="search-types" class="section">
+            <h2>2. 搜索类型与数据结构分析</h2>
+
+            <h3>2.1 标题搜索 (searchByTitle)</h3>
+            <div class="algorithm-details">
+                <h4>🔧 数据结构</h4>
+                <p><strong>哈希表 + 自定义集合类(MySet)</strong></p>
+                
+                <h4>⚡ 核心算法</h4>
+                <p>字符级别的哈希映射与集合交集运算</p>
+                
+                <div class="algorithm-steps">
+                    <h4>实现机制：</h4>
+                    <ol>
+                        <li>系统为每个日记标题中的字符建立哈希映射</li>
+                        <li>搜索时获取关键词首字符对应的日记集合</li>
+                        <li>逐个字符计算集合交集，找到包含所有字符的日记</li>
+                        <li>使用自定义MySet类进行高效的交集运算</li>
+                    </ol>
+                </div>
+                
+                <div class="performance-grid">
+                    <div class="performance-card">
+                        <h4>预处理复杂度</h4>
+                        <div class="performance-value">O(T)</div>
+                        <div class="performance-desc">T为所有标题字符总数</div>
+                    </div>
+                    <div class="performance-card">
+                        <h4>查询复杂度</h4>
+                        <div class="performance-value">O(k×m + r×s)</div>
+                        <div class="performance-desc">k为关键词长度，m为平均每字符匹配日记数</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>2.2 内容搜索 (searchByContent)</h3>
+            <div class="algorithm-details">
+                <h4>🔧 数据结构</h4>
+                <p><strong>哈夫曼树 + 编码表 + KMP算法</strong></p>
+                
+                <h4>⚡ 核心算法</h4>
+                <p>压缩内容的位级搜索 + KMP字符串匹配</p>
+                
+                <div class="algorithm-steps">
+                    <h4>实现机制：</h4>
+                    <h5>📦 压缩内容搜索：</h5>
+                    <ol>
+                        <li>使用全局哈夫曼树编码搜索词</li>
+                        <li>在压缩文件的位流中进行KMP搜索</li>
+                        <li>读取压缩文件并处理填充位</li>
+                        <li>在位级别匹配编码后的搜索词</li>
+                    </ol>
+                    
+                    <h5>📄 未压缩内容搜索：</h5>
+                    <ol>
+                        <li>直接在原文本中进行字符串匹配</li>
+                        <li>同时搜索标题和内容字段</li>
+                    </ol>
+                    
+                    <h5>✅ 结果验证：</h5>
+                    <ol>
+                        <li>对压缩内容的匹配结果进行解压验证</li>
+                        <li>确保搜索结果的准确性</li>
+                    </ol>
+                </div>
+                
+                <div class="performance-grid">
+                    <div class="performance-card">
+                        <h4>编码搜索词</h4>
+                        <div class="performance-value">O(p×log c)</div>
+                        <div class="performance-desc">p为搜索词长度，c为字符集大小</div>
+                    </div>
+                    <div class="performance-card">
+                        <h4>位流搜索</h4>
+                        <div class="performance-value">O(n + p)</div>
+                        <div class="performance-desc">n为压缩数据长度，p为编码后搜索词长度</div>
+                    </div>
+                    <div class="performance-card">
+                        <h4>解压验证</h4>
+                        <div class="performance-value">O(n×log c)</div>
+                        <div class="performance-desc">n为压缩数据长度</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>2.3 用户搜索 (searchUser)</h3>
+            <div class="algorithm-details">
+                <h4>🔧 数据结构</h4>
+                <p><strong>B树 + Trie树</strong></p>
+                
+                <h4>⚡ 核心算法</h4>
+                <p>B树精确查找 + Trie树前缀匹配</p>
+                
+                <div class="algorithm-steps">
+                    <h4>实现机制：</h4>
+                    <ol>
+                        <li><strong>精确查找</strong>: 使用B树进行用户名的精确匹配</li>
+                        <li><strong>前缀搜索</strong>: 使用Trie树支持前缀匹配功能</li>
+                        <li><strong>获取用户日记</strong>: 通过用户ID获取其所有日记列表</li>
+                    </ol>
+                </div>
+                
+                <div class="performance-grid">
+                    <div class="performance-card">
+                        <h4>B树查找</h4>
+                        <div class="performance-value">O(log n)</div>
+                        <div class="performance-desc">n为用户总数</div>
+                    </div>
+                    <div class="performance-card">
+                        <h4>Trie树查找</h4>
+                        <div class="performance-value">O(k)</div>
+                        <div class="performance-desc">k为查询字符串长度</div>
+                    </div>
+                    <div class="performance-card">
+                        <h4>获取日记列表</h4>
+                        <div class="performance-value">O(d)</div>
+                        <div class="performance-desc">d为用户日记数量</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>2.4 景点搜索 (getSpotByName)</h3>
+            <div class="algorithm-details">
+                <h4>🔧 数据结构</h4>
+                <p><strong>哈希表 + 自定义集合类(MySet)</strong></p>
+                
+                <h4>⚡ 核心算法</h4>
+                <p>字符级别的哈希映射与集合交集运算</p>
+                
+                <div class="algorithm-steps">
+                    <h4>实现机制：</h4>
+                    <ol>
+                        <li>为每个景点名称中的字符建立哈希映射</li>
+                        <li>搜索时计算包含所有关键词字符的景点集合</li>
+                        <li>通过景点ID获取关联的所有日记</li>
+                    </ol>
+                </div>
+                
+                <div class="performance-grid">
+                    <div class="performance-card">
+                        <h4>景点查找</h4>
+                        <div class="performance-value">O(k×m + r×s)</div>
+                        <div class="performance-desc">k为关键词长度，m为平均每字符匹配景点数</div>
+                    </div>
+                    <div class="performance-card">
+                        <h4>获取日记</h4>
+                        <div class="performance-value">O(r×d)</div>
+                        <div class="performance-desc">r为匹配景点数，d为平均每景点日记数</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>2.5 综合搜索 (综合模式)</h3>
+            <div class="algorithm-details">
+                <h4>🔧 数据结构</h4>
+                <p><strong>组合使用上述所有数据结构</strong></p>
+                
+                <h4>⚡ 核心算法</h4>
+                <p>多种搜索算法的并行执行与结果合并</p>
+                
+                <div class="algorithm-steps">
+                    <h4>实现机制：</h4>
+                    <ol>
+                        <li>同时执行标题、内容、用户、景点四种搜索</li>
+                        <li>合并所有搜索结果并去重</li>
+                        <li>按指定排序方式排序结果</li>
+                    </ol>
+                </div>
+                
+                <div class="performance-grid">
+                    <div class="performance-card">
+                        <h4>综合搜索复杂度</h4>
+                        <div class="performance-value">O(T_all)</div>
+                        <div class="performance-desc">各搜索方式时间复杂度之和</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="data-structures" class="section">
+            <h2>3. 核心数据结构详解</h2>
+
+            <h3>3.1 自定义集合类 (MySet)</h3>
+            <div class="algorithm-details">
+                <h4>🎯 设计目的</h4>
+                <p>支持可哈希和不可哈希元素的集合操作</p>
+                
+                <div class="algorithm-steps">
+                    <h4>核心特性：</h4>
+                    <ul>
+                        <li><strong>哈希表存储可哈希元素</strong> - O(1)平均访问时间</li>
+                        <li><strong>列表存储不可哈希元素</strong> - O(n)访问时间</li>
+                        <li><strong>高效的交集运算</strong> - intersection_update方法</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>3.2 KMP算法</h3>
+            <div class="algorithm-details">
+                <h4>🎯 设计目的</h4>
+                <p>高效的字符串匹配，避免回溯</p>
+                
+                <div class="algorithm-steps">
+                    <h4>核心特性：</h4>
+                    <ul>
+                        <li><strong>预处理阶段构建next数组</strong> - O(m)时间复杂度</li>
+                        <li><strong>匹配阶段利用next数组避免重复比较</strong> - O(n)时间复杂度</li>
+                        <li><strong>适用于压缩内容的位级搜索</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>3.3 哈夫曼编码系统</h3>
+            <div class="algorithm-details">
+                <h4>🎯 设计目的</h4>
+                <p>内容压缩存储与压缩状态下的直接搜索</p>
+                
+                <div class="algorithm-steps">
+                    <h4>核心特性：</h4>
+                    <ul>
+                        <li><strong>全局哈夫曼树统一编码规则</strong></li>
+                        <li><strong>位级别的搜索匹配</strong></li>
+                        <li><strong>LRU缓存机制提升访问性能</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="performance" class="section">
+            <h2>4. 搜索性能分析</h2>
+
+            <h3>4.1 各搜索方式时间复杂度对比</h3>
+            <table class="complexity-table">
+                <thead>
+                    <tr>
+                        <th>搜索类型</th>
+                        <th>数据结构</th>
+                        <th>查询复杂度</th>
+                        <th>适用场景</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>标题搜索</strong></td>
+                        <td>哈希表+MySet</td>
+                        <td><span class="complexity-code">O(k×m + r×s)</span></td>
+                        <td>快速标题匹配</td>
+                    </tr>
+                    <tr>
+                        <td><strong>内容搜索</strong></td>
+                        <td>哈夫曼树+KMP</td>
+                        <td><span class="complexity-code">O(n + p×log c)</span></td>
+                        <td>全文内容检索</td>
+                    </tr>
+                    <tr>
+                        <td><strong>用户搜索</strong></td>
+                        <td>B树+Trie树</td>
+                        <td><span class="complexity-code">O(log n + d)</span></td>
+                        <td>用户名精确查找</td>
+                    </tr>
+                    <tr>
+                        <td><strong>景点搜索</strong></td>
+                        <td>哈希表+MySet</td>
+                        <td><span class="complexity-code">O(k×m + r×d)</span></td>
+                        <td>地点关联搜索</td>
+                    </tr>
+                    <tr>
+                        <td><strong>综合搜索</strong></td>
+                        <td>组合结构</td>
+                        <td><span class="complexity-code">O(T_all)</span></td>
+                        <td>全方位搜索</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="variable-note">
+                <strong>复杂度变量说明：</strong><br>
+                • k = 关键词长度 • m = 平均每字符匹配数量 • r = 结果数量 • s = 集合操作复杂度<br>
+                • n = 数据长度 • p = 搜索词长度 • c = 字符集大小 • d = 日记数量 • T_all = 所有搜索复杂度之和
+            </div>
+
+            <h3>4.2 空间复杂度分析</h3>
+            <table class="complexity-table">
+                <thead>
+                    <tr>
+                        <th>数据结构</th>
+                        <th>空间复杂度</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>标题哈希表</strong></td>
+                        <td><span class="complexity-code">O(T)</span></td>
+                        <td>T为所有标题字符数</td>
+                    </tr>
+                    <tr>
+                        <td><strong>哈夫曼树</strong></td>
+                        <td><span class="complexity-code">O(c)</span></td>
+                        <td>c为字符集大小</td>
+                    </tr>
+                    <tr>
+                        <td><strong>编码表</strong></td>
+                        <td><span class="complexity-code">O(c)</span></td>
+                        <td>字符到编码的映射</td>
+                    </tr>
+                    <tr>
+                        <td><strong>用户B树</strong></td>
+                        <td><span class="complexity-code">O(n)</span></td>
+                        <td>n为用户数量</td>
+                    </tr>
+                    <tr>
+                        <td><strong>用户Trie树</strong></td>
+                        <td><span class="complexity-code">O(Σ用户名长度)</span></td>
+                        <td>前缀树存储</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MySet</strong></td>
+                        <td><span class="complexity-code">O(元素数量)</span></td>
+                        <td>动态集合存储</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="flowcharts" class="section">
+            <h2>5. 搜索流程图</h2>            <h3>5.1 📝 标题搜索流程</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    graph LR
+                        A[输入关键词] --> B[哈希表查找首字符]
+                        B --> C[逐字符计算交集]
+                        C --> D[获取匹配日记]
+                        D --> E[返回结果]
+                        
+                        classDef startEnd fill:#667eea,stroke:#4c63d2,stroke-width:3px,color:#fff,font-weight:bold;
+                        classDef process fill:#48bb78,stroke:#38a169,stroke-width:2px,color:#fff;
+                        classDef data fill:#ed8936,stroke:#dd6b20,stroke-width:2px,color:#fff;
+                        
+                        class A,E startEnd;
+                        class B,D data;
+                        class C process;
+                </div>
+            </div>            <h3>5.2 📄 内容搜索流程</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    graph LR
+                        A[输入搜索词] --> B[加载哈夫曼树]
+                        B --> C[编码搜索词]
+                        C --> D[遍历日记文件]
+                        D --> E{压缩?}
+                        E -->|是| F[位流KMP搜索]
+                        E -->|否| G[文本直接搜索]
+                        F --> H[解压验证]
+                        G --> H
+                        H --> I[返回结果]
+                        
+                        classDef startEnd fill:#667eea,stroke:#4c63d2,stroke-width:3px,color:#fff,font-weight:bold;
+                        classDef process fill:#48bb78,stroke:#38a169,stroke-width:2px,color:#fff;
+                        classDef decision fill:#9f7aea,stroke:#805ad5,stroke-width:2px,color:#fff;
+                        classDef compress fill:#f56565,stroke:#e53e3e,stroke-width:2px,color:#fff;
+                        classDef data fill:#ed8936,stroke:#dd6b20,stroke-width:2px,color:#fff;
+                        
+                        class A,I startEnd;
+                        class B,C,D,H process;
+                        class E decision;
+                        class F,G compress;
+                </div>
+            </div>            <h3>5.3 👤 用户搜索流程</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    graph LR
+                        A[输入用户名] --> B[B树精确查找]
+                        B --> C[获取用户信息]
+                        C --> D[获取日记列表]
+                        D --> E[返回用户日记]
+                        
+                        classDef startEnd fill:#667eea,stroke:#4c63d2,stroke-width:3px,color:#fff,font-weight:bold;
+                        classDef btree fill:#38b2ac,stroke:#319795,stroke-width:2px,color:#fff;
+                        classDef process fill:#48bb78,stroke:#38a169,stroke-width:2px,color:#fff;
+                        
+                        class A,E startEnd;
+                        class B btree;
+                        class C,D process;
+                </div>
+            </div>            <h3>5.4 🏛️ 景点搜索流程</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    graph LR
+                        A[输入景点名] --> B[哈希表字符匹配]
+                        B --> C[计算景点交集]
+                        C --> D[获取景点日记]
+                        D --> E[返回结果]
+                        
+                        classDef startEnd fill:#667eea,stroke:#4c63d2,stroke-width:3px,color:#fff,font-weight:bold;
+                        classDef hash fill:#ed8936,stroke:#dd6b20,stroke-width:2px,color:#fff;
+                        classDef process fill:#48bb78,stroke:#38a169,stroke-width:2px,color:#fff;
+                        
+                        class A,E startEnd;
+                        class B hash;
+                        class C,D process;
+                </div>
+            </div>            <h3>5.5 🌐 综合搜索流程</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    graph LR
+                        A[输入关键词] --> B[并行执行四种搜索]
+                        B --> C[标题搜索]
+                        B --> D[内容搜索]
+                        B --> E[用户搜索]
+                        B --> F[景点搜索]
+                        C --> G[合并结果]
+                        D --> G
+                        E --> G
+                        F --> G
+                        G --> H[去重排序]
+                        H --> I[返回综合结果]
+                        
+                        classDef startEnd fill:#667eea,stroke:#4c63d2,stroke-width:3px,color:#fff,font-weight:bold;
+                        classDef parallel fill:#9f7aea,stroke:#805ad5,stroke-width:2px,color:#fff;
+                        classDef search fill:#48bb78,stroke:#38a169,stroke-width:2px,color:#fff;
+                        classDef merge fill:#ed8936,stroke:#dd6b20,stroke-width:2px,color:#fff;
+                        
+                        class A,I startEnd;
+                        class B parallel;
+                        class C,D,E,F search;
+                        class G,H merge;
+                </div>
+            </div>
+        </div>
+
+        <div id="optimization" class="section">
+            <h2>6. 性能优化策略</h2>
+
+            <div class="overview-cards">
+                <div class="overview-card">
+                    <h4>🔍 索引优化</h4>
+                    <ul>
+                        <li><strong>字符级哈希索引</strong>: 为标题和景点名称建立字符级别的倒排索引</li>
+                        <li><strong>B树索引</strong>: 用户名使用B树进行快速精确查找</li>
+                        <li><strong>Trie树索引</strong>: 支持用户名前缀匹配和模糊搜索</li>
+                    </ul>
+                </div>
+                
+                <div class="overview-card">
+                    <h4>📦 压缩搜索优化</h4>
+                    <ul>
+                        <li><strong>全局哈夫曼树</strong>: 统一的编码规则，支持压缩状态下的直接搜索</li>
+                        <li><strong>位级别搜索</strong>: 避免解压开销，直接在压缩数据中匹配</li>
+                        <li><strong>LRU缓存</strong>: 缓存频繁访问的解压内容</li>
+                    </ul>
+                </div>
+                
+                <div class="overview-card">
+                    <h4>⚡ 搜索策略优化</h4>
+                    <ul>
+                        <li><strong>早期终止</strong>: 集合交集为空时提前结束搜索</li>
+                        <li><strong>候选预筛选</strong>: 限制候选结果数量，避免过度搜索</li>
+                        <li><strong>分页支持</strong>: 支持结果分页，提升大结果集的响应速度</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="summary" class="section">
+            <h2>7. 总结</h2>
+            
+            <div class="summary-box">
+                <h3>🎯 核心成果</h3>
+                <p>个性化旅游系统的日记搜索功能通过多种数据结构和算法的组合，实现了高效的多维度搜索能力：</p>
+                
+                <ul>
+                    <li><strong>标题搜索</strong>使用哈希表+集合交集，平均时间复杂度O(k×m)</li>
+                    <li><strong>内容搜索</strong>结合哈夫曼编码+KMP算法，支持压缩内容直接搜索</li>
+                    <li><strong>用户搜索</strong>采用B树+Trie树双重索引，支持精确和前缀匹配</li>
+                    <li><strong>景点搜索</strong>使用字符级哈希映射，快速定位相关日记</li>
+                    <li><strong>综合搜索</strong>并行执行多种搜索并合并结果</li>
+                </ul>
+            </div>
+
+            <div class="highlight">
+                <h4>🚀 技术优势</h4>
+                <p>整个搜索系统在保证功能完整性的同时，通过合理的数据结构选择和算法优化，实现了良好的搜索性能和用户体验。特别是压缩内容的直接搜索功能，避免了解压开销，大大提升了搜索效率。</p>
+            </div>
+
+            <div class="performance-grid">
+                <div class="performance-card">
+                    <h4>搜索方式</h4>
+                    <div class="performance-value">5种</div>
+                    <div class="performance-desc">标题、内容、用户、景点、综合</div>
+                </div>
+                <div class="performance-card">
+                    <h4>核心数据结构</h4>
+                    <div class="performance-value">6种</div>
+                    <div class="performance-desc">哈希表、B树、Trie树、哈夫曼树、MySet、KMP</div>
+                </div>
+                <div class="performance-card">
+                    <h4>最优查询复杂度</h4>
+                    <div class="performance-value">O(log n)</div>
+                    <div class="performance-desc">B树用户查找</div>
+                </div>
+                <div class="performance-card">
+                    <h4>压缩搜索支持</h4>
+                    <div class="performance-value">✅</div>
+                    <div class="performance-desc">位级别直接搜索</div>
+                </div>
+            </div>
+        </div>
+    </div>    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#4c63d2',
+                lineColor: '#4a5568',
+                secondaryColor: '#764ba2',
+                tertiaryColor: '#f8fafc',
+                background: '#ffffff',
+                mainBkg: '#667eea',
+                secondBkg: '#764ba2',
+                tertiaryBkg: '#e2e8f0'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis',
+                nodeSpacing: 60,
+                rankSpacing: 80,
+                padding: 20
+            }
+        });
+    </script>
+</body>
+</html>

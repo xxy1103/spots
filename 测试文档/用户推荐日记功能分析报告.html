@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户推荐日记功能分析报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid #FF6B6B;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h3 {
+            color: #34495e;
+            margin: 20px 0 15px 0;
+            font-size: 1.4em;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+
+        .flowchart-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        .data-structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .ds-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ds-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .ds-card h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ds-card .icon {
+            font-size: 1.5em;
+        }
+
+        .complexity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .complexity-table th {
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .complexity-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .complexity-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .complexity-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: white;
+        }
+
+        .complexity-constant { background: #27ae60; }
+        .complexity-log { background: #f39c12; }
+        .complexity-linear { background: #e74c3c; }
+        .complexity-nlogn { background: #8e44ad; }
+        .complexity-quadratic { background: #c0392b; }
+
+        .algorithm-steps {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .step-number {
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }        .code-block {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            border: 1px solid #4a5568;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4299e1, #38b2ac, #68d391);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .code-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .code-block code {
+            display: block;
+            white-space: pre;
+            color: inherit;
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            font-size: inherit;
+            line-height: inherit;
+        }        /* 代码语法高亮 */
+        .code-block .keyword {
+            color: #ff7a93;
+            font-weight: 600;
+        }
+
+        .code-block .string {
+            color: #a8e6cf;
+        }
+
+        .code-block .comment {
+            color: #8892b0;
+            font-style: italic;
+        }
+
+        .code-block .function {
+            color: #82aaff;
+        }
+
+        .code-block .variable {
+            color: #ffcb6b;
+        }
+
+        /* 代码块复制按钮 */
+        .code-container {
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e2e8f0;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .code-container:hover .copy-btn {
+            opacity: 1;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* 代码块滚动条美化 */
+        .code-block::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .code-block::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .code-block::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        .code-block::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .highlight {
+            background: rgba(255, 235, 59, 0.3);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .performance-summary {
+            background: linear-gradient(135deg, #FF9500 0%, #FF5722 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .perf-metric {
+            display: inline-block;
+            margin: 10px 20px;
+            text-align: center;
+        }
+
+        .perf-value {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .perf-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .variable-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .variable-table th {
+            background: #34495e;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .variable-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .variable-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .data-structure-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .code-block {
+                padding: 15px;
+                font-size: 0.85em;
+                margin: 15px 0;
+            }
+
+            .code-block code {
+                white-space: pre-wrap;
+                word-break: break-word;
+            }
+
+            .complexity-table,
+            .variable-table {
+                font-size: 0.9em;
+            }
+
+            .complexity-table th,
+            .complexity-table td,
+            .variable-table th,
+            .variable-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📖 用户推荐日记功能分析报告</h1>
+            <p>getRecommendDiariesTraditional 方法深度分析</p>
+        </div>
+
+        <div class="content">
+            <!-- 方法概述 -->
+            <div class="section">
+                <h2>🎯 方法概述</h2>
+                <p><strong>getRecommendDiariesTraditional</strong> 是个性化旅游系统中的核心推荐算法，用于根据用户的兴趣偏好为其推荐相关的旅行日记。该方法采用传统的多路归并排序策略，通过分析用户喜好的景点类型，收集相关日记并按评分进行排序推荐。</p>
+                
+                <div class="performance-summary">
+                    <div class="perf-metric">
+                        <span class="perf-value">O(N log N)</span>
+                        <span class="perf-label">时间复杂度</span>
+                    </div>
+                    <div class="perf-metric">
+                        <span class="perf-value">O(N)</span>
+                        <span class="perf-label">空间复杂度</span>
+                    </div>
+                    <div class="perf-metric">
+                        <span class="perf-value">K-way</span>
+                        <span class="perf-label">归并策略</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 算法流程图 -->
+            <div class="section">
+                <h2>🔄 算法流程图</h2>
+                <div class="flowchart-container">
+                    <div class="mermaid">
+                        flowchart TD
+                            A[🔍 获取用户信息] --> B{用户是否存在?}
+                            B -->|否| C[❌ 返回 None]
+                            B -->|是| D[📋 获取用户兴趣标签]
+                            D --> E[🔄 遍历兴趣类型]
+                            E --> F[🏞️ 获取该类型所有景点]
+                            F --> G[📖 提取每个景点的Top日记]
+                            G --> H[📚 收集所有日记列表]
+                            H --> I[🔀 K-way归并排序]
+                            I --> J[🎯 返回TopK推荐结果]
+                            
+                            style A fill:#FF6B6B,stroke:#fff,color:#fff
+                            style B fill:#4ECDC4,stroke:#fff,color:#fff
+                            style C fill:#E74C3C,stroke:#fff,color:#fff
+                            style D fill:#3498DB,stroke:#fff,color:#fff
+                            style E fill:#9B59B6,stroke:#fff,color:#fff
+                            style F fill:#F39C12,stroke:#fff,color:#fff
+                            style G fill:#2ECC71,stroke:#fff,color:#fff
+                            style H fill:#1ABC9C,stroke:#fff,color:#fff
+                            style I fill:#E67E22,stroke:#fff,color:#fff
+                            style J fill:#27AE60,stroke:#fff,color:#fff
+                    </div>
+                </div>
+            </div>
+
+            <!-- 数据结构分析 -->
+            <div class="section">
+                <h2>🏗️ 数据结构分析</h2>
+                <div class="data-structure-grid">
+                    <div class="ds-card">
+                        <h4><span class="icon">👤</span>User对象</h4>
+                        <p><strong>用途：</strong>存储用户基本信息和兴趣偏好</p>
+                        <p><strong>关键属性：</strong>likes_type (兴趣标签列表)</p>
+                        <p><strong>时间复杂度：</strong>O(1) 访问用户信息</p>
+                    </div>
+                    
+                    <div class="ds-card">
+                        <h4><span class="icon">🏔️</span>SpotManager</h4>
+                        <p><strong>用途：</strong>管理景点数据和分类索引</p>
+                        <p><strong>关键方法：</strong>getTopKByType() 获取分类景点</p>
+                        <p><strong>时间复杂度：</strong>O(k) 获取k个景点</p>
+                    </div>
+                    
+                    <div class="ds-card">
+                        <h4><span class="icon">📚</span>TopKHeap数组</h4>
+                        <p><strong>用途：</strong>为每个景点维护其日记的最大堆</p>
+                        <p><strong>关键操作：</strong>getTopK() 获取前k个日记</p>
+                        <p><strong>时间复杂度：</strong>O(k log n) 堆操作</p>
+                    </div>
+                    
+                    <div class="ds-card">
+                        <h4><span class="icon">🔀</span>K-way归并</h4>
+                        <p><strong>用途：</strong>合并多个已排序的日记列表</p>
+                        <p><strong>数据结构：</strong>MinHeap + 多路指针</p>
+                        <p><strong>时间复杂度：</strong>O(N log k) 归并k个列表</p>
+                    </div>
+                    
+                    <div class="ds-card">
+                        <h4><span class="icon">📖</span>Diary对象</h4>
+                        <p><strong>用途：</strong>存储日记的详细信息</p>
+                        <p><strong>排序键：</strong>score(评分), visited_time(访问量)</p>
+                        <p><strong>时间复杂度：</strong>O(1) 属性访问</p>
+                    </div>
+                    
+                    <div class="ds-card">
+                        <h4><span class="icon">📝</span>推荐列表</h4>
+                        <p><strong>用途：</strong>存储最终的推荐结果</p>
+                        <p><strong>结构：</strong>List[Diary] 有序列表</p>
+                        <p><strong>时间复杂度：</strong>O(k) 构建结果列表</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 算法步骤详解 -->
+            <div class="section">
+                <h2>📋 算法步骤详解</h2>
+                <div class="algorithm-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">用户验证与数据获取</div>
+                            <p>通过 userId 获取用户对象，验证用户存在性，提取用户的兴趣标签列表 likes_type</p>                            <div class="code-block"><code><span class="variable">user</span> = <span class="keyword">self</span>.<span class="function">getUser</span>(<span class="variable">userId</span>)
+<span class="variable">user_likes</span> = <span class="variable">user</span>.<span class="variable">likes_type</span></code></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">兴趣类型遍历</div>
+                            <p>遍历用户的每个兴趣类型，为每种类型收集相关的景点和日记数据</p>                            <div class="code-block"><code><span class="keyword">for</span> <span class="variable">spot_type</span> <span class="keyword">in</span> <span class="variable">user_likes</span>:
+    <span class="variable">spots_of_type</span> = <span class="variable">spotManager</span>.<span class="function">getTopKByType</span>(<span class="variable">spot_type</span>, <span class="variable">k</span>=<span class="string">-1</span>)</code></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">景点日记提取</div>
+                            <p>对于每个景点，从其专属的TopKHeap中提取前topK个高评分日记</p>                            <div class="code-block"><code><span class="keyword">for</span> <span class="variable">spot</span> <span class="keyword">in</span> <span class="variable">spots_of_type</span>:
+    <span class="variable">spot_id</span> = <span class="variable">spot</span>[<span class="string">"id"</span>]
+    <span class="variable">diarys</span> = <span class="variable">spotManager</span>.<span class="variable">spotDiaryHeapArray</span>[<span class="variable">spot_id</span><span class="string">-1</span>].<span class="function">getTopK</span>(<span class="variable">topK</span>)</code></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <div class="step-title">日记列表收集</div>
+                            <p>将所有获取到的日记列表添加到推荐列表集合中，形成多个已排序的子列表</p>                            <div class="code-block"><code><span class="keyword">if</span> <span class="variable">diarys</span>:
+    <span class="variable">recommended_diaries</span>.<span class="function">append</span>(<span class="variable">diarys</span>)</code></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <div class="step-title">K-way归并排序</div>
+                            <p>使用k路归并算法将多个已排序的日记列表合并为一个全局有序的推荐列表</p>
+                            <div class="code-block"><code><span class="variable">recommended_diaries</span> = <span class="variable">kwaymerge</span>.<span class="function">k_way_merge_descending</span>(<span class="variable">recommended_diaries</span>)</code></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <div class="step-title">结果构建与返回</div>
+                            <p>从归并结果中选取前topK个日记ID，获取完整的日记对象并返回</p>                            <div class="code-block"><code><span class="variable">diarys</span> = []
+<span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="variable">topK</span>):
+    <span class="variable">diarys</span>.<span class="function">append</span>(<span class="variable">diaryManager</span>.<span class="function">getDiary</span>(<span class="variable">recommended_diaries</span>[<span class="variable">i</span>][<span class="string">"id"</span>]))</code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 时间复杂度分析 -->
+            <div class="section">
+                <h2>⏱️ 时间复杂度分析</h2>
+                <table class="complexity-table">
+                    <thead>
+                        <tr>
+                            <th>操作步骤</th>
+                            <th>时间复杂度</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>用户验证</td>
+                            <td><span class="complexity-badge complexity-constant">O(1)</span></td>
+                            <td>哈希表查找用户信息</td>
+                        </tr>
+                        <tr>
+                            <td>获取兴趣类型景点</td>
+                            <td><span class="complexity-badge complexity-linear">O(S)</span></td>
+                            <td>S为该类型景点总数</td>
+                        </tr>
+                        <tr>
+                            <td>景点日记提取</td>
+                            <td><span class="complexity-badge complexity-nlogn">O(k log n)</span></td>
+                            <td>从堆中获取前k个元素</td>
+                        </tr>
+                        <tr>
+                            <td>K-way归并排序</td>
+                            <td><span class="complexity-badge complexity-nlogn">O(N log L)</span></td>
+                            <td>N为总日记数，L为列表数量</td>
+                        </tr>
+                        <tr>
+                            <td>结果对象构建</td>
+                            <td><span class="complexity-badge complexity-linear">O(k)</span></td>
+                            <td>构建k个日记对象</td>
+                        </tr>
+                        <tr>
+                            <td><strong>总体复杂度</strong></td>
+                            <td><span class="complexity-badge complexity-nlogn">O(N log N)</span></td>
+                            <td>dominated by 归并排序</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>复杂度变量说明</h3>
+                <table class="variable-table">
+                    <thead>
+                        <tr>
+                            <th>变量</th>
+                            <th>含义</th>
+                            <th>典型范围</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>N</code></td>
+                            <td>所有相关日记的总数量</td>
+                            <td>100 ~ 10,000</td>
+                        </tr>
+                        <tr>
+                            <td><code>k</code></td>
+                            <td>用户请求的推荐日记数量(topK)</td>
+                            <td>5 ~ 50</td>
+                        </tr>
+                        <tr>
+                            <td><code>L</code></td>
+                            <td>需要归并的日记列表数量</td>
+                            <td>10 ~ 100</td>
+                        </tr>
+                        <tr>
+                            <td><code>S</code></td>
+                            <td>单个兴趣类型的景点数量</td>
+                            <td>20 ~ 200</td>
+                        </tr>
+                        <tr>
+                            <td><code>T</code></td>
+                            <td>用户兴趣类型的数量</td>
+                            <td>1 ~ 10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- K-way归并算法细节 -->
+            <div class="section">
+                <h2>🔀 K-way归并算法细节</h2>
+                <p>K-way归并排序是该推荐算法的核心组件，使用最小堆来高效合并多个已排序的日记列表。</p>
+                
+                <h3>算法原理</h3>
+                <div class="algorithm-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">初始化最小堆</div>
+                            <p>创建MinHeap，将每个列表的第一个元素加入堆中，堆元素格式为：(-value1, -value2, list_index, item_index, item_dict)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">归并过程</div>
+                            <p>重复执行：从堆顶弹出最大元素，加入结果列表，如果该元素所在列表还有下一个元素，则将下一个元素加入堆</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">排序策略</div>
+                            <p>使用负值技巧：-value1作为主排序键，-value2作为次排序键，实现降序排列</p>
+                        </div>
+                    </div>
+                </div>                <div class="code-block"><code><span class="keyword">def</span> <span class="function">k_way_merge_descending</span>(<span class="variable">list_of_lists</span>):
+    <span class="variable">min_heap</span> = <span class="function">MinHeap</span>()
+    <span class="variable">result</span> = []
+    
+    <span class="comment"># 初始化堆</span>
+    <span class="keyword">for</span> <span class="variable">i</span>, <span class="variable">sub_list</span> <span class="keyword">in</span> <span class="function">enumerate</span>(<span class="variable">list_of_lists</span>):
+        <span class="keyword">if</span> <span class="variable">sub_list</span>:
+            <span class="variable">item</span> = <span class="variable">sub_list</span>[<span class="string">0</span>]
+            <span class="variable">heap_item</span> = (<span class="string">-</span><span class="variable">item</span>[<span class="string">'value1'</span>], <span class="string">-</span><span class="variable">item</span>[<span class="string">'value2'</span>], <span class="variable">i</span>, <span class="string">0</span>, <span class="variable">item</span>)
+            <span class="variable">min_heap</span>.<span class="function">push</span>(<span class="variable">heap_item</span>)
+    
+    <span class="comment"># 归并过程</span>
+    <span class="keyword">while</span> <span class="keyword">not</span> <span class="variable">min_heap</span>.<span class="function">is_empty</span>():
+        <span class="variable">neg_v1</span>, <span class="variable">neg_v2</span>, <span class="variable">list_idx</span>, <span class="variable">item_idx</span>, <span class="variable">current_item</span> = <span class="variable">min_heap</span>.<span class="function">pop</span>()
+        <span class="variable">result</span>.<span class="function">append</span>(<span class="variable">current_item</span>)
+        
+        <span class="comment"># 添加下一个元素</span>
+        <span class="variable">next_item_idx</span> = <span class="variable">item_idx</span> + <span class="string">1</span>
+        <span class="keyword">if</span> <span class="variable">next_item_idx</span> < <span class="function">len</span>(<span class="variable">list_of_lists</span>[<span class="variable">list_idx</span>]):
+            <span class="variable">next_item</span> = <span class="variable">list_of_lists</span>[<span class="variable">list_idx</span>][<span class="variable">next_item_idx</span>]
+            <span class="variable">new_heap_item</span> = (<span class="string">-</span><span class="variable">next_item</span>[<span class="string">'value1'</span>], <span class="string">-</span><span class="variable">next_item</span>[<span class="string">'value2'</span>], 
+                           <span class="variable">list_idx</span>, <span class="variable">next_item_idx</span>, <span class="variable">next_item</span>)
+            <span class="variable">min_heap</span>.<span class="function">push</span>(<span class="variable">new_heap_item</span>)</code></div>
+            </div>
+
+            <!-- 性能优化建议 -->
+            <div class="section">
+                <h2>🚀 性能优化建议</h2>
+                <div class="data-structure-grid">
+                    <div class="ds-card">
+                        <h4><span class="icon">🎯</span>早期过滤优化</h4>
+                        <p>在景点级别就限制提取的日记数量，避免过多无效数据参与归并排序，减少整体计算量。</p>
+                    </div>
+                    
+                    <div class="ds-card">
+                        <h4><span class="icon">🔄</span>分页推荐</h4>
+                        <p>实现分页推荐机制，不一次性加载所有推荐结果，提高响应速度和用户体验。</p>
+                    </div>
+                    
+                    <div class="ds-card">
+                        <h4><span class="icon">💾</span>缓存策略</h4>
+                        <p>对用户推荐结果进行缓存，设置合理的过期时间，减少重复计算开销。</p>
+                    </div>
+                    
+                    <div class="ds-card">
+                        <h4><span class="icon">🔗</span>并行处理</h4>
+                        <p>对不同兴趣类型的数据收集过程进行并行化处理，充分利用多核CPU资源。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 算法优缺点 -->
+            <div class="section">
+                <h2>⚖️ 算法优缺点分析</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div style="background: linear-gradient(135deg, #27AE60 0%, #2ECC71 100%); color: white; padding: 20px; border-radius: 10px;">
+                        <h3 style="color: white; border: none; margin: 0 0 15px 0;">✅ 优点</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin: 8px 0;">• 结果准确性高，充分考虑用户兴趣</li>
+                            <li style="margin: 8px 0;">• 排序稳定，保证推荐质量一致性</li>
+                            <li style="margin: 8px 0;">• 算法逻辑清晰，易于理解和维护</li>
+                            <li style="margin: 8px 0;">• 支持多维度排序（评分+访问量）</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); color: white; padding: 20px; border-radius: 10px;">
+                        <h3 style="color: white; border: none; margin: 0 0 15px 0;">❌ 缺点</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin: 8px 0;">• 时间复杂度较高，大数据量时性能受限</li>
+                            <li style="margin: 8px 0;">• 内存占用较大，需存储所有候选日记</li>
+                            <li style="margin: 8px 0;">• 实时性不足，无法快速响应数据变化</li>
+                            <li style="margin: 8px 0;">• 缺乏个性化权重调整机制</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 总结 -->
+            <div class="section">
+                <h2>📊 总结</h2>
+                <p><strong>getRecommendDiariesTraditional</strong> 方法实现了一个基于用户兴趣的传统推荐算法，通过多路归并排序确保了推荐结果的准确性和有序性。该算法在中小规模数据集上表现良好，为用户提供了高质量的个性化推荐服务。</p>
+                
+                <div class="performance-summary">
+                    <h3 style="color: white; margin-bottom: 20px;">核心性能指标</h3>
+                    <div class="perf-metric">
+                        <span class="perf-value">稳定</span>
+                        <span class="perf-label">排序算法</span>
+                    </div>
+                    <div class="perf-metric">
+                        <span class="perf-value">多维</span>
+                        <span class="perf-label">排序标准</span>
+                    </div>
+                    <div class="perf-metric">
+                        <span class="perf-value">个性化</span>
+                        <span class="perf-label">推荐策略</span>
+                    </div>
+                </div>
+                
+                <p>未来可以考虑引入机器学习算法、实时计算框架和分布式处理技术，进一步提升推荐系统的性能和用户体验。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化 Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#FF6B6B',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#FF5252',
+                lineColor: '#666666',
+                secondaryColor: '#4ECDC4',
+                tertiaryColor: '#FFE082',
+                background: '#ffffff',
+                mainBkg: '#ffffff',
+                secondBkg: '#f8f9fa'
+            },
+            flowchart: {
+                nodeSpacing: 50,
+                rankSpacing: 60,
+                curve: 'basis'
+            }
+        });        // 添加平滑滚动效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            for (const link of links) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+
+            // 为代码块添加复制功能
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach((block, index) => {
+                // 创建容器
+                const container = document.createElement('div');
+                container.className = 'code-container';
+                block.parentNode.insertBefore(container, block);
+                container.appendChild(block);
+
+                // 创建复制按钮
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'copy-btn';
+                copyBtn.textContent = '复制';
+                copyBtn.addEventListener('click', () => {
+                    const codeText = block.textContent || block.innerText;
+                    navigator.clipboard.writeText(codeText).then(() => {
+                        copyBtn.textContent = '已复制!';
+                        setTimeout(() => {
+                            copyBtn.textContent = '复制';
+                        }, 2000);
+                    }).catch(() => {
+                        // 备用复制方法
+                        const textArea = document.createElement('textarea');
+                        textArea.value = codeText;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        copyBtn.textContent = '已复制!';
+                        setTimeout(() => {
+                            copyBtn.textContent = '复制';
+                        }, 2000);
+                    });
+                });
+                container.appendChild(copyBtn);
+            });
+        });
+    </script>
+</body>
+</html>

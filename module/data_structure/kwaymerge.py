@@ -10,7 +10,7 @@ from module.data_structure.heap import MinHeap
 # 如果是从项目根目录运行，可能需要调整为:
 # from module.data_structure.heap import MinHeap
 
-def k_way_merge_descending(list_of_lists):
+def k_way_merge_descending(list_of_lists, limit=None):
     """
     Performs a k-way merge on a list of lists, where each inner list
     contains dictionaries of the format {"id": ..., "value1": ..., "value2": ...}.
@@ -23,9 +23,11 @@ def k_way_merge_descending(list_of_lists):
     Args:
         list_of_lists: A list of k sorted lists. Each inner list contains
                        dictionaries.
+        limit: Optional integer. If specified, stops merging after collecting
+               'limit' number of elements. This is useful for getting top-k results.
 
     Returns:
-        A single list containing all dictionaries from list_of_lists,
+        A single list containing the merged elements (up to 'limit' if specified),
         sorted in descending order as specified.
     """
     if not list_of_lists:
@@ -49,10 +51,12 @@ def k_way_merge_descending(list_of_lists):
                 0,  # item_index_in_list for tie-breaking
                 item # The actual dictionary
             )
-            min_heap.push(heap_item)
-
-    # Merge process
+            min_heap.push(heap_item)    # Merge process with optional limit
     while not min_heap.is_empty():
+        # Check if we've reached the limit
+        if limit is not None and len(result) >= limit:
+            break
+            
         neg_v1, neg_v2, list_idx, item_idx, current_item = min_heap.pop()
         result.append(current_item)
 
@@ -71,6 +75,19 @@ def k_way_merge_descending(list_of_lists):
             min_heap.push(new_heap_item)
 
     return result
+
+def get_top_k_elements(list_of_lists, k):
+    """
+    获取前k个最大的元素的便捷函数
+    
+    Args:
+        list_of_lists: 已排序的列表集合
+        k: 需要的前k个元素数量
+        
+    Returns:
+        包含前k个元素的列表
+    """
+    return k_way_merge_descending(list_of_lists, limit=k)
 
 if __name__ == '__main__':
     # Example Usage (requires MinHeap to be accessible)
@@ -96,16 +113,31 @@ if __name__ == '__main__':
 
 
     all_lists = [list1, list2, list3, list_empty, list_single]
-    
-
-    # Need to ensure MinHeap is correctly imported for this test to run.
+        # Need to ensure MinHeap is correctly imported for this test to run.
     # If module.data_structure.heap.MinHeap is not found, this will fail.
     # For testing, you might need to adjust PYTHONPATH or use a placeholder.
     # For the purpose of this response, assume MinHeap is available via the import.
     
+    # 测试完整归并
+    print("完整归并结果:")
     merged_list = k_way_merge_descending(all_lists)
-    print("Merged and sorted list:")
     for item in merged_list:
+        print(item)
+    
+    print("\n" + "="*50 + "\n")
+    
+    # 测试限制前3个元素
+    print("仅获取前3个元素:")
+    top_3 = k_way_merge_descending(all_lists, limit=3)
+    for item in top_3:
+        print(item)
+    
+    print("\n" + "="*50 + "\n")
+    
+    # 使用便捷函数获取前5个元素
+    print("使用便捷函数获取前5个元素:")
+    top_5 = get_top_k_elements(all_lists, 5)
+    for item in top_5:
         print(item)
 
     # Expected output order (example):
@@ -116,4 +148,5 @@ if __name__ == '__main__':
     # {"id": "C2", "value1": 90, "value2": 12}
     # {"id": "A2", "value1": 90, "value2": 10}
     # {"id": "B2", "value1": 85, "value2": 20}
-    # {"id": "
+    # {"id": "C3", "value1": 70, "value2": 5}
+    # {"id": "A3", "value1": 80, "value2": 1}

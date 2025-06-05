@@ -291,7 +291,7 @@ class UserManager:
                 # 将新获取的有序列表与当前已合并的列表进行归并排序
                 sorted_recommended_spots.append(spots_of_type)
         
-        merged_list = kwaymerge.k_way_merge_descending(sorted_recommended_spots)
+        merged_list = kwaymerge.k_way_merge_descending(sorted_recommended_spots,topK)
 
         if not merged_list:
              log.writeLog(f"未能根据用户{userId}的喜好找到任何景点")
@@ -302,15 +302,15 @@ class UserManager:
         """
         获取用户推荐的日记 - 使用堆优化的推荐算法
         """
-        user = self.getUser(userId)
-        if user is None:
-            log.writeLog(f"用户{userId}不存在")
-            return None
+        # user = self.getUser(userId)
+        # if user is None:
+        #     log.writeLog(f"用户{userId}不存在")
+        #     return None
         
-        user_likes = user.likes_type
-          # 使用优化的堆算法进行推荐
-        return self._getRecommendDiariesOptimized(user_likes, topK)
-        #return self.getRecommendDiariesTraditional(userId, topK)
+        # user_likes = user.likes_type
+        #   # 使用优化的堆算法进行推荐
+        # return self._getRecommendDiariesOptimized(user_likes, topK)
+        return self.getRecommendDiariesTraditional(userId, topK)
 
     def _getRecommendDiariesOptimized(self, user_likes, topK=10):
         """
@@ -374,8 +374,8 @@ class UserManager:
                         # 将新获取的有序列表与当前已合并的列表进行归并排序
                         recommended_diaries.append(diarys)
         # 使用 k-way merge 对推荐的日记进行排序
-        recommended_diaries = kwaymerge.k_way_merge_descending(recommended_diaries)
-        
+        recommended_diaries = kwaymerge.k_way_merge_descending(recommended_diaries, topK)
+
         if not recommended_diaries:
             log.writeLog(f"未能根据用户{userId}的喜好找到任何日记")
             return []
