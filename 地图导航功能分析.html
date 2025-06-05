@@ -408,14 +408,196 @@
             style E fill:#f3e5f5
             style G fill:#e8f5e8
         </flowchart>
-        </div>
-
-        <ol>
+        </div>        <ol>
             <li>预计算所有节点对之间的最短路径和距离</li>
             <li>使用最近邻算法构建初始TSP解</li>
             <li>应用2-opt算法进行局部优化</li>
             <li>合并分段路径，生成完整导航路线</li>
         </ol>
+
+        <h4>5.4.1 最近邻算法(Nearest Neighbor Algorithm)</h4>
+        <p><strong>算法原理：</strong>最近邻算法是一种贪心算法，用于构建TSP问题的初始解。</p>
+        
+        <div class="mermaid">
+        flowchart TD
+            A[🚀 选择起始节点] --> B[📍 当前节点 = 起始节点]
+            B --> C[📋 初始化未访问集合]
+            C --> D[🔄 开始主循环]
+            D --> E{📭 未访问集合空?}
+            E -->|✅ 是| F[🏁 返回路径]
+            E -->|❌ 否| G[🔍 找最近未访问节点]
+            G --> H[➕ 添加到路径]
+            H --> I[❌ 从未访问集合移除]
+            I --> J[🔄 更新当前节点]
+            J --> D
+            
+            style A fill:#e8f5e8
+            style E fill:#fff3e0
+            style G fill:#f3e5f5
+            style F fill:#ffebee
+        </flowchart>
+        </div>
+
+        <p><strong>算法步骤：</strong></p>
+        <ol>
+            <li>从起始节点开始</li>
+            <li>在未访问的节点中选择距离当前节点最近的节点</li>
+            <li>将该节点添加到路径中，并标记为已访问</li>
+            <li>重复步骤2-3，直到所有节点都被访问</li>
+        </ol>
+
+        <p><strong>时间复杂度：</strong>O(n²)，其中n为节点数量</p>
+        <p><strong>空间复杂度：</strong>O(n)，用于存储未访问节点集合</p>
+        <p><strong>优缺点：</strong></p>
+        <ul>
+            <li>✅ 算法简单，易于理解和实现</li>
+            <li>✅ 时间复杂度较低，适合实时应用</li>
+            <li>❌ 贪心策略可能导致局部最优解</li>
+            <li>❌ 解的质量依赖于起始节点的选择</li>
+        </ul>
+
+        <h4>5.4.2 2-opt算法(2-opt Algorithm)</h4>
+        <p><strong>算法原理：</strong>2-opt是一种局部搜索算法，通过交换路径中的边来优化TSP解。</p>
+
+        <div class="mermaid">
+        flowchart TD
+            A[🎯 输入初始路径] --> B[🔄 设置改进标志=true]
+            B --> C[🔁 while 有改进]
+            C --> D[🔄 遍历所有边对i,j]
+            D --> E[📐 计算当前边成本]
+            E --> F[🔄 计算交换后成本]
+            F --> G{💰 成本降低?}
+            G -->|✅ 是| H[🔄 执行2-opt交换]
+            G -->|❌ 否| I[➡️ 继续下一对]
+            H --> J[✅ 设置改进标志=true]
+            J --> I
+            I --> K{🔚 遍历完成?}
+            K -->|❌ 否| D
+            K -->|✅ 是| L{🔄 有改进?}
+            L -->|✅ 是| C
+            L -->|❌ 否| M[🏁 返回优化路径]
+            
+            style A fill:#e8f5e8
+            style G fill:#fff3e0
+            style H fill:#f3e5f5
+            style M fill:#ffebee
+        </flowchart>
+        </div>
+
+        <p><strong>2-opt交换原理：</strong></p>
+        <div class="mermaid">
+        flowchart LR
+            subgraph "交换前"
+                A1[节点A] -->|边1| B1[节点B]
+                B1 --> C1[...]
+                C1 --> D1[节点C]
+                D1 -->|边2| E1[节点D]
+            end
+            
+            subgraph "交换后"
+                A2[节点A] -->|新边1| D2[节点D]
+                D2 --> C2[...]
+                C2 --> B2[节点B]
+                B2 -->|新边2| E2[节点...]
+            end
+            
+            style A1 fill:#e3f2fd
+            style D1 fill:#e3f2fd
+            style A2 fill:#fff3e0
+            style D2 fill:#fff3e0
+        </flowchart>
+        </div>
+
+        <p><strong>算法特点：</strong></p>
+        <ul>
+            <li><strong>时间复杂度：</strong>O(n²)每次迭代，总体复杂度取决于迭代次数</li>
+            <li><strong>空间复杂度：</strong>O(1)，原地交换</li>
+            <li><strong>收敛性：</strong>能够保证收敛到局部最优解</li>
+            <li><strong>实用性：</strong>在实际应用中能显著改善解的质量</li>
+        </ul>
+
+        <h4>5.4.3 系统中的实现细节</h4>
+        <pre><code>def _nearest_neighbor_tsp(self, start_node, waypoints, distances):
+    """最近邻算法实现"""
+    unvisited = set(waypoints)  # 未访问节点集合
+    tour = [start_node]         # 路径从起点开始
+    current = start_node        # 当前节点
+    
+    while unvisited:
+        # 找到距离当前节点最近的未访问节点
+        nearest = min(unvisited, 
+                     key=lambda node: distances.get((current, node), float('inf')))
+        tour.append(nearest)    # 添加到路径
+        unvisited.remove(nearest)  # 标记为已访问
+        current = nearest       # 更新当前节点
+    
+    return tour
+
+def _two_opt_optimize(self, tour, distances):
+    """2-opt算法优化"""
+    improved = True
+    while improved:
+        improved = False
+        for i in range(1, len(tour) - 2):
+            for j in range(i + 1, len(tour)):
+                # 计算当前边的成本
+                current_cost = (distances.get((tour[i-1], tour[i]), float('inf')) +
+                               distances.get((tour[j], tour[j+1]), float('inf')))
+                
+                # 计算交换后的成本
+                new_cost = (distances.get((tour[i-1], tour[j]), float('inf')) +
+                           distances.get((tour[i], tour[j+1]), float('inf')))
+                
+                if new_cost < current_cost:
+                    # 执行2-opt交换：反转子序列
+                    tour[i:j+1] = reversed(tour[i:j+1])
+                    improved = True
+    
+    return tour</code></pre>
+
+        <h4>5.4.4 算法性能分析</h4>
+        <table class="complexity-table">
+            <tr>
+                <th>算法阶段</th>
+                <th>时间复杂度</th>
+                <th>说明</th>
+                <th>实际表现</th>
+            </tr>
+            <tr>
+                <td>预计算距离矩阵</td>
+                <td>O(n² × (V+E)log V)</td>
+                <td>计算所有点对间最短路径</td>
+                <td>一次性计算，可缓存结果</td>
+            </tr>
+            <tr>
+                <td>最近邻算法</td>
+                <td>O(n²)</td>
+                <td>构建初始TSP解</td>
+                <td>快速生成可行解</td>
+            </tr>
+            <tr>
+                <td>2-opt优化</td>
+                <td>O(n²k)</td>
+                <td>k为迭代次数</td>
+                <td>通常3-5次迭代收敛</td>
+            </tr>
+            <tr>
+                <td>路径合并</td>
+                <td>O(n)</td>
+                <td>构建最终路径</td>
+                <td>线性时间完成</td>
+            </tr>
+        </table>
+
+        <div class="note">
+            <strong>算法选择原因：</strong>
+            <ul>
+                <li><strong>实时性要求：</strong>导航系统需要快速响应，O(n²)复杂度适合小规模多点路径规划</li>
+                <li><strong>解质量平衡：</strong>最近邻+2-opt组合在计算速度和解质量间达到良好平衡</li>
+                <li><strong>实现简单：</strong>算法逻辑清晰，便于调试和维护</li>
+                <li><strong>适应性强：</strong>适用于不同规模的途径点集合</li>
+            </ul>
+        </div>
 
         <div class="note">
             <strong>多点路径优化：</strong>系统对于经过多个途径点的路径规划采用了启发式算法，虽然不保证全局最优解，但在实际应用中能够在合理时间内生成接近最优的解，满足实时导航需求。
