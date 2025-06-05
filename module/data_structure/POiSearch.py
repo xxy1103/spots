@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv() # 加载 .env 文件中的环境变量
 try:
     from module.data_structure.coordTransform_utils import gcj02_to_wgs84, wgs84_to_gcj02
-    from module.data_structure.dijkstra import DijkstraRouter
+    from module.data_structure.dijkstra import dijkstraRouter
 except:
     from coordTransform_utils import gcj02_to_wgs84, wgs84_to_gcj02
     from dijkstra import DijkstraRouter
@@ -29,7 +29,7 @@ class POISearch:
         self.host = "https://api.map.baidu.com"
         self.uri = "/place/v2/search"
         self.ak = ak
-        self.dijkstra_router = None  # 延迟初始化Dijkstra路由器
+        self.dijkstra_router = dijkstraRouter
         
     def _get_dijkstra_router(self):
         """

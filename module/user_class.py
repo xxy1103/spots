@@ -8,7 +8,7 @@ from module.Spot_class import spotManager
 from module.Model.Model import User
 import module.data_structure.kwaymerge as kwaymerge
 from module.data_structure.indexHeap import TopKHeap
-from module.data_structure.heap import create_diary_iterator
+from module.data_structure.heap import create_spot_iterator
 import module.printLog as log
 import base64
 import hashlib
@@ -226,6 +226,7 @@ class UserManager:
         user_likes = user.likes_type
           # 使用优化的堆算法进行推荐
         return self._getRecommendSpotsOptimized(user_likes, topK)
+        # return self.getRecommendSpotsTraditional(userId, topK)
     
     def _getRecommendSpotsOptimized(self, user_likes, topK=10):
         """
@@ -286,12 +287,12 @@ class UserManager:
         # --- 迭代用户喜欢的类型，逐步合并排序 ---
         for spot_type in user_likes:
             # 使用 k=topK 获取该类型所有排序后的景点
-            spots_of_type = spotManager.getTopKByType(spot_type, k=topK)    #只获取前 topK 个
+            spots_of_type = spotManager.getTopKByType(spot_type)    #只获取前 topK 个
             if spots_of_type: # 确保列表非空
                 # 将新获取的有序列表与当前已合并的列表进行归并排序
                 sorted_recommended_spots.append(spots_of_type)
         
-        merged_list = kwaymerge.k_way_merge_descending(sorted_recommended_spots,topK)
+        merged_list = kwaymerge.k_way_merge_descending(sorted_recommended_spots, topK)
 
         if not merged_list:
              log.writeLog(f"未能根据用户{userId}的喜好找到任何景点")
@@ -323,7 +324,7 @@ class UserManager:
         
         # 收集所有相关日记并插入到归并堆中
         for spot_type in user_likes:
-            diaries_iter = create_diary_iterator(spot_type, spotManager)
+            diaries_iter = create_spot_iterator(spot_type, spotManager)
             for diary in diaries_iter:
                 diary_id = diary['id']
                 # 插入到归并堆：value1=score, value2=visited_time

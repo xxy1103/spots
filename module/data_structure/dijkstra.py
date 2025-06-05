@@ -5,10 +5,6 @@ from module.data_structure.set import MySet
 from typing import List, Tuple, Any, Union, Dict
 import osmnx as ox
 import webbrowser
-try:
-    import folium
-except ImportError:
-    folium = None
 
 
 class DijkstraRouter:
@@ -765,85 +761,7 @@ class DijkstraRouter:
         
         return r * c
 
-    def plot_route_interactive(self, path: List[Any], original_coordinates: List[Tuple[float, float]] = None, save_path=None):
-        """使用Folium创建交互式地图"""
-        try:
-            if folium is None:
-                print("请安装必要的库: pip install folium")
-                return None
-                
-            route_coords = self.get_route_coordinates(path)
-            
-            if not route_coords:
-                print("无法获取路径坐标")
-                return None
-            
-            # 提取所有坐标点
-            all_coords = []
-            for segment in route_coords:
-                all_coords.extend(segment['nodes'])
-            
-            if len(all_coords) < 2:
-                print("路径点数量不足")
-                return None
-            
-            # 计算中心点和缩放级别
-            lats = [lat for lat, _ in all_coords]
-            lngs = [lng for _, lng in all_coords]
-            center_lat = sum(lats) / len(lats)
-            center_lng = sum(lngs) / len(lngs)
-            
-            lat_range = max(lats) - min(lats)
-            lng_range = max(lngs) - min(lngs)
-            zoom_start = 14
-            
-            if max(lat_range, lng_range) > 0.1:
-                zoom_start = 10
-            elif max(lat_range, lng_range) < 0.01:
-                zoom_start = 16
-            
-            # 创建地图
-            m = folium.Map(
-                location=[center_lat, center_lng], 
-                zoom_start=zoom_start,
-                tiles='OpenStreetMap'
-            )
-            
-            # 添加路径线
-            folium.PolyLine(
-                locations=all_coords,
-                color='blue',
-                weight=5,
-                opacity=0.7,
-                tooltip='路线'
-            ).add_to(m)
-            
-            # 添加起点和终点标记
-            if all_coords:
-                start_lat, start_lng = all_coords[0]
-                end_lat, end_lng = all_coords[-1]
-                
-                folium.Marker([start_lat, start_lng], popup='<b>起点</b>', 
-                             icon=folium.Icon(color='green')).add_to(m)
-                folium.Marker([end_lat, end_lng], popup='<b>终点</b>', 
-                             icon=folium.Icon(color='red')).add_to(m)
-            
-            # 保存地图
-            if not save_path:
-                save_path = 'route_map.html'
-            
-            m.save(save_path)
-            print(f"交互式地图已保存至: {save_path}")
-            
-            try:
-                webbrowser.open('file://' + os.path.abspath(save_path))
-            except Exception as e:
-                print(f"自动打开地图失败: {e}")
-                
-            return save_path
-        except Exception as e:
-            print(f"创建交互式地图失败: {e}")
-            return None
+dijkstraRouter = DijkstraRouter()
 
 
 # 使用示例

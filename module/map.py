@@ -1,4 +1,4 @@
-from module.data_structure.dijkstra import DijkstraRouter
+from module.data_structure.dijkstra import dijkstraRouter
 from module.data_structure.POiSearch import POISearch
 from module.data_structure.quicksort import quicksort
 
@@ -6,7 +6,7 @@ from module.data_structure.quicksort import quicksort
 
 class Map:
     def __init__(self):
-        self.router = DijkstraRouter()
+        self.router = dijkstraRouter
         self.poi_search = POISearch()
 
     def plan_route(self, coordinates, method="distance", use_vehicle=False):
