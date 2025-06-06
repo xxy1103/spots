@@ -326,7 +326,7 @@ class DiaryManager:
                 
                 # 在标题和内容中搜索，逻辑上或许与searchByTitle重复了，这里为了验证搜索功能先保留
                 title = diary.title
-                if search_term in content or search_term in title:
+                if kmp_search(content, search_term) or kmp_search(title, search_term):
                     candidates.append(diary_id)
                     
             # 如果候选列表足够大，提前结束搜索

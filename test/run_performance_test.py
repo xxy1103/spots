@@ -29,7 +29,7 @@ def main():
     if args.mode == 'quick':
         print("运行快速测试...")
         try:
-            from spot_recommed_compare_quickly import quick_performance_test
+            from test.spot_recommed_compare_quickly import quick_performance_test
             quick_performance_test()
         except Exception as e:
             print(f"快速测试失败: {e}")
