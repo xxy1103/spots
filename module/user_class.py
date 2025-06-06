@@ -300,9 +300,9 @@ class UserManager:
         return merged_list[:topK]
 
     def getRecommendDiaries(self, userId, topK=10):
-        """
-        获取用户推荐的日记 - 使用堆优化的推荐算法
-        """
+        # """
+        # 获取用户推荐的日记 - 使用堆优化的推荐算法
+        # """
         # user = self.getUser(userId)
         # if user is None:
         #     log.writeLog(f"用户{userId}不存在")
@@ -324,7 +324,7 @@ class UserManager:
         
         # 收集所有相关日记并插入到归并堆中
         for spot_type in user_likes:
-            diaries_iter = create_spot_iterator(spot_type, spotManager)
+            diaries_iter = create_spot_iterator(spot_type, spotManager,topK=topK)
             for diary in diaries_iter:
                 diary_id = diary['id']
                 # 插入到归并堆：value1=score, value2=visited_time

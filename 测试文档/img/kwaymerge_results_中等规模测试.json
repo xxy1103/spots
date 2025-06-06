@@ -1,0 +1,37 @@
+{
+  "k_values": [
+    1,
+    10,
+    25,
+    50,
+    100,
+    200
+  ],
+  "complete_merge_times": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "iterator_times": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "heap_optimized_times": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0010051727294921875,
+    0.0009944438934326172
+  ],
+  "num_lists": 10,
+  "avg_list_size": 500,
+  "correctness_verified": true
+}

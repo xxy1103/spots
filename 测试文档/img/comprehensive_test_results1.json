@@ -1,0 +1,990 @@
+{
+  "test_config": {
+    "basic_test_sizes": [
+      5,
+      10,
+      20,
+      50,
+      100,
+      200,
+      500
+    ],
+    "stress_test_sizes": [
+      1000,
+      2000,
+      5000,
+      10000
+    ],
+    "concurrent_thread_counts": [
+      1,
+      5,
+      10,
+      20,
+      50
+    ],
+    "memory_test_iterations": 1000,
+    "stability_test_duration": 300,
+    "repeat_count": 5
+  },
+  "test_results": {
+    "basic_performance": {
+      "traditional": {
+        "5": {
+          "execution_time": 0.1760800019837916,
+          "execution_time_std": 0.030252955545447206,
+          "execution_time_min": 0.14250000822357833,
+          "execution_time_max": 0.22109999554231763,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "10": {
+          "execution_time": 0.17009999719448388,
+          "execution_time_std": 0.0329838791531253,
+          "execution_time_min": 0.1354999840259552,
+          "execution_time_max": 0.22869999520480633,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "20": {
+          "execution_time": 0.21718000643886626,
+          "execution_time_std": 0.04035662438600036,
+          "execution_time_min": 0.16960001084953547,
+          "execution_time_max": 0.2731999848037958,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "50": {
+          "execution_time": 0.22609999869018793,
+          "execution_time_std": 0.03793968049584061,
+          "execution_time_min": 0.17710000975057483,
+          "execution_time_max": 0.2778999914880842,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "100": {
+          "execution_time": 0.4161000018939376,
+          "execution_time_std": 0.15660595419448378,
+          "execution_time_min": 0.2342000079806894,
+          "execution_time_max": 0.6428000051528215,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "200": {
+          "execution_time": 0.3906599886249751,
+          "execution_time_std": 0.2359160512623791,
+          "execution_time_min": 0.19279998377896845,
+          "execution_time_max": 0.7947999984025955,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "500": {
+          "execution_time": 0.2913000003900379,
+          "execution_time_std": 0.12487892798441379,
+          "execution_time_min": 0.15529998927377164,
+          "execution_time_max": 0.4569999873638153,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        }
+      },
+      "optimized": {
+        "5": {
+          "execution_time": 0.3924399963580072,
+          "execution_time_std": 0.2535986212597314,
+          "execution_time_min": 0.25060001644305885,
+          "execution_time_max": 0.8990000060293823,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "10": {
+          "execution_time": 0.3168199968058616,
+          "execution_time_std": 0.07946789089979696,
+          "execution_time_min": 0.24999998277053237,
+          "execution_time_max": 0.461799994809553,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "20": {
+          "execution_time": 0.2709800028242171,
+          "execution_time_std": 0.04572803264565769,
+          "execution_time_min": 0.22010001703165472,
+          "execution_time_max": 0.3549999964889139,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "50": {
+          "execution_time": 0.23577999672852457,
+          "execution_time_std": 0.029121022638859066,
+          "execution_time_min": 0.2106000029016286,
+          "execution_time_max": 0.291600008495152,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "100": {
+          "execution_time": 0.27199999894946814,
+          "execution_time_std": 0.042707320378286145,
+          "execution_time_min": 0.205100019229576,
+          "execution_time_max": 0.3254000039305538,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "200": {
+          "execution_time": 0.281919987173751,
+          "execution_time_std": 0.08126343165888746,
+          "execution_time_min": 0.19589997828006744,
+          "execution_time_max": 0.391699984902516,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "500": {
+          "execution_time": 0.2642999985255301,
+          "execution_time_std": 0.05121471404992025,
+          "execution_time_min": 0.17110002227127552,
+          "execution_time_max": 0.32469999860040843,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        }
+      }
+    },
+    "stress_test": {
+      "traditional": {
+        "1000": {
+          "execution_time": 0.32912499882513657,
+          "execution_time_std": 0.16969002975104333,
+          "execution_time_min": 0.15490001533180475,
+          "execution_time_max": 0.8275000145658851,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "2000": {
+          "execution_time": 0.36826000578003004,
+          "execution_time_std": 0.1810918627542379,
+          "execution_time_min": 0.14700001338496804,
+          "execution_time_max": 0.7246999884955585,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "5000": {
+          "execution_time": 0.3138400017633103,
+          "execution_time_std": 0.14324045762660112,
+          "execution_time_min": 0.17359998309984803,
+          "execution_time_max": 0.5984999879729003,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "10000": {
+          "execution_time": 0.3444249974563718,
+          "execution_time_std": 0.18625656567659818,
+          "execution_time_min": 0.14910000027157366,
+          "execution_time_max": 0.7290999928954989,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        }
+      },
+      "optimized": {
+        "1000": {
+          "execution_time": 0.275129999499768,
+          "execution_time_std": 0.06736779711063394,
+          "execution_time_min": 0.18969998927786946,
+          "execution_time_max": 0.42130000656470656,
+          "memory_usage": 0.0001953125,
+          "memory_usage_std": 0.0008513474499102876,
+          "memory_usage_min": 0.0,
+          "memory_usage_max": 0.00390625,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "2000": {
+          "execution_time": 0.26901000237558037,
+          "execution_time_std": 0.044646967134490866,
+          "execution_time_min": 0.2108000044245273,
+          "execution_time_max": 0.3921999887097627,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "5000": {
+          "execution_time": 0.25947500398615375,
+          "execution_time_std": 0.03795037206746794,
+          "execution_time_min": 0.18980001914314926,
+          "execution_time_max": 0.34389999927952886,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "10000": {
+          "execution_time": 0.27887999603990465,
+          "execution_time_std": 0.06408885202297934,
+          "execution_time_min": 0.18339999951422215,
+          "execution_time_max": 0.4793000116478652,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        }
+      }
+    },
+    "concurrent_test": {
+      "traditional": {
+        "1": {
+          "total_time": 0.08627320002415217,
+          "throughput": 23.1821701228203,
+          "metrics": {
+            "execution_time": 0.30870000773575157,
+            "execution_time_std": 0.11350000568199903,
+            "execution_time_min": 0.19520000205375254,
+            "execution_time_max": 0.4222000134177506,
+            "memory_usage": 0.001953125,
+            "memory_usage_std": 0.001953125,
+            "memory_usage_min": 0.0,
+            "memory_usage_max": 0.00390625,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "5": {
+          "total_time": 0.40295220000552945,
+          "throughput": 24.816839317077253,
+          "metrics": {
+            "execution_time": 89.97649000084493,
+            "execution_time_std": 81.73951774351747,
+            "execution_time_min": 0.33019998227246106,
+            "execution_time_max": 244.54290000721812,
+            "memory_usage": 0.048046875,
+            "memory_usage_std": 0.06536523177799207,
+            "memory_usage_min": 0.0,
+            "memory_usage_max": 0.18359375,
+            "cpu_usage": 81.17999999999999,
+            "cpu_usage_std": 40.69837343187071,
+            "cpu_usage_min": 0.0,
+            "cpu_usage_max": 110.2,
+            "success_rate": 1.0
+          }
+        },
+        "10": {
+          "total_time": 0.809259400004521,
+          "throughput": 24.713954511851536,
+          "metrics": {
+            "execution_time": 73.63473999721464,
+            "execution_time_std": 49.727958188786,
+            "execution_time_min": 0.5206999776419252,
+            "execution_time_max": 159.07699998933822,
+            "memory_usage": 0.047265625,
+            "memory_usage_std": 0.042753366438175074,
+            "memory_usage_min": 0.0,
+            "memory_usage_max": 0.1328125,
+            "cpu_usage": 75.78,
+            "cpu_usage_std": 41.366019871387195,
+            "cpu_usage_min": 0.0,
+            "cpu_usage_max": 148.8,
+            "success_rate": 1.0
+          }
+        },
+        "20": {
+          "total_time": 1.588910799997393,
+          "throughput": 25.174478013533314,
+          "metrics": {
+            "execution_time": 95.29796999995597,
+            "execution_time_std": 63.68456335208903,
+            "execution_time_min": 0.39870000910013914,
+            "execution_time_max": 265.2402000094298,
+            "memory_usage": 0.06015625,
+            "memory_usage_std": 0.05215099771337074,
+            "memory_usage_min": 0.0,
+            "memory_usage_max": 0.23046875,
+            "cpu_usage": 103.6825,
+            "cpu_usage_std": 35.035638195271964,
+            "cpu_usage_min": 0.0,
+            "cpu_usage_max": 166.2,
+            "success_rate": 1.0
+          }
+        },
+        "50": {
+          "total_time": 3.96606909998809,
+          "throughput": 25.21388243091889,
+          "metrics": {
+            "execution_time": 141.33029299991904,
+            "execution_time_std": 111.22384789711441,
+            "execution_time_min": 0.4603999841492623,
+            "execution_time_max": 593.2307000039145,
+            "memory_usage": 0.0743359375,
+            "memory_usage_std": 0.07462973176149684,
+            "memory_usage_min": 0.0,
+            "memory_usage_max": 0.39453125,
+            "cpu_usage": 92.60700000000003,
+            "cpu_usage_std": 32.039442114368974,
+            "cpu_usage_min": 0.0,
+            "cpu_usage_max": 151.2,
+            "success_rate": 1.0
+          }
+        }
+      },
+      "optimized": {
+        "1": {
+          "total_time": 0.08443740001530387,
+          "throughput": 23.686186448629513,
+          "metrics": {
+            "execution_time": 0.2520999842090532,
+            "execution_time_std": 0.07779999577905983,
+            "execution_time_min": 0.1742999884299934,
+            "execution_time_max": 0.32989997998811305,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "5": {
+          "total_time": 0.38402620001579635,
+          "throughput": 26.039889985601672,
+          "metrics": {
+            "execution_time": 40.69597999914549,
+            "execution_time_std": 32.134312591707264,
+            "execution_time_min": 0.3485000052023679,
+            "execution_time_max": 101.74010001355782,
+            "memory_usage": 0.01640625,
+            "memory_usage_std": 0.016828640022295324,
+            "memory_usage_min": 0.0,
+            "memory_usage_max": 0.046875,
+            "cpu_usage": 74.83,
+            "cpu_usage_std": 51.27724739102129,
+            "cpu_usage_min": 0.0,
+            "cpu_usage_max": 151.2,
+            "success_rate": 1.0
+          }
+        },
+        "10": {
+          "total_time": 0.8713024999888148,
+          "throughput": 22.954140496850115,
+          "metrics": {
+            "execution_time": 84.75764500471996,
+            "execution_time_std": 68.2295334333647,
+            "execution_time_min": 0.3073000116273761,
+            "execution_time_max": 218.90219999477267,
+            "memory_usage": 0.0271484375,
+            "memory_usage_std": 0.024965644118076925,
+            "memory_usage_min": 0.0,
+            "memory_usage_max": 0.08203125,
+            "cpu_usage": 78.225,
+            "cpu_usage_std": 48.24510208300942,
+            "cpu_usage_min": 0.0,
+            "cpu_usage_max": 151.2,
+            "success_rate": 1.0
+          }
+        },
+        "20": {
+          "total_time": 1.6034605000168085,
+          "throughput": 24.946046378804276,
+          "metrics": {
+            "execution_time": 81.4069575004396,
+            "execution_time_std": 63.81339224473823,
+            "execution_time_min": 0.31259999377653,
+            "execution_time_max": 225.73199999169447,
+            "memory_usage": 0.022265625,
+            "memory_usage_std": 0.011020887484113973,
+            "memory_usage_min": 0.0,
+            "memory_usage_max": 0.05078125,
+            "cpu_usage": 85.10249999999999,
+            "cpu_usage_std": 52.08352660630806,
+            "cpu_usage_min": 0.0,
+            "cpu_usage_max": 244.1,
+            "success_rate": 1.0
+          }
+        },
+        "50": {
+          "total_time": 3.8935943000251427,
+          "throughput": 25.683209983986842,
+          "metrics": {
+            "execution_time": 90.78707600012422,
+            "execution_time_std": 66.79791335900218,
+            "execution_time_min": 0.30849999166093767,
+            "execution_time_max": 247.6304000010714,
+            "memory_usage": 0.0288671875,
+            "memory_usage_std": 0.019183585398211377,
+            "memory_usage_min": 0.0,
+            "memory_usage_max": 0.0859375,
+            "cpu_usage": 84.214,
+            "cpu_usage_std": 42.89762235835455,
+            "cpu_usage_min": 0.0,
+            "cpu_usage_max": 201.6,
+            "success_rate": 1.0
+          }
+        }
+      }
+    },
+    "memory_test": {
+      "traditional": {
+        "average_metrics": {
+          "execution_time": 0.28259909991174936,
+          "execution_time_std": 0.10921195380187232,
+          "execution_time_min": 0.11550000635907054,
+          "execution_time_max": 0.9120999893639237,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "peak_memory": 0,
+        "total_iterations": 1000
+      },
+      "optimized": {
+        "average_metrics": {
+          "execution_time": 0.27207910080323927,
+          "execution_time_std": 0.05868033061871236,
+          "execution_time_min": 0.14879999798722565,
+          "execution_time_max": 0.5898000090382993,
+          "memory_usage": 0.0,
+          "memory_usage_std": 0.0,
+          "memory_usage_min": 0,
+          "memory_usage_max": 0,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        },
+        "peak_memory": 0,
+        "total_iterations": 1000
+      }
+    },
+    "stability_test": {
+      "traditional": {
+        "total_requests": 5334,
+        "error_count": 0,
+        "error_rate": 0.0,
+        "coefficient_of_variation": 0.38662127131972834,
+        "average_metrics": {
+          "execution_time": 0.2818808587706069,
+          "execution_time_std": 0.10898113597858884,
+          "execution_time_min": 0.11059999815188348,
+          "execution_time_max": 1.0818000009749085,
+          "memory_usage": 2.929321334833146e-06,
+          "memory_usage_std": 0.00010693026017320479,
+          "memory_usage_min": 0.0,
+          "memory_usage_max": 0.00390625,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        }
+      },
+      "optimized": {
+        "total_requests": 6416,
+        "error_count": 0,
+        "error_rate": 0.0,
+        "coefficient_of_variation": 0.16455172723303216,
+        "average_metrics": {
+          "execution_time": 0.27180766843692916,
+          "execution_time_std": 0.04472642131648001,
+          "execution_time_min": 0.15269999857991934,
+          "execution_time_max": 0.7393000123556703,
+          "memory_usage": 6.088294887780548e-07,
+          "memory_usage_std": 4.876340346194952e-05,
+          "memory_usage_min": 0.0,
+          "memory_usage_max": 0.00390625,
+          "cpu_usage": 0.0,
+          "cpu_usage_std": 0.0,
+          "cpu_usage_min": 0,
+          "cpu_usage_max": 0,
+          "success_rate": 1.0
+        }
+      }
+    },
+    "scalability_test": {
+      "traditional": {
+        "1": {
+          "total_time": 0.03288089999114163,
+          "average_time_per_user": 0.03288089999114163,
+          "throughput": 30.412792845372472,
+          "metrics": {
+            "execution_time": 0.4290000069886446,
+            "execution_time_std": 0.0,
+            "execution_time_min": 0.4290000069886446,
+            "execution_time_max": 0.4290000069886446,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "5": {
+          "total_time": 0.15484380000270903,
+          "average_time_per_user": 0.030968760000541808,
+          "throughput": 32.29060511245864,
+          "metrics": {
+            "execution_time": 0.30768000870011747,
+            "execution_time_std": 0.07964905763687002,
+            "execution_time_min": 0.2127000188920647,
+            "execution_time_max": 0.4147999861743301,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "10": {
+          "total_time": 0.2930085999832954,
+          "average_time_per_user": 0.029300859998329543,
+          "throughput": 34.128691105210244,
+          "metrics": {
+            "execution_time": 0.3076699998928234,
+            "execution_time_std": 0.09533350605407737,
+            "execution_time_min": 0.15159999020397663,
+            "execution_time_max": 0.4589000018313527,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "25": {
+          "total_time": 0.7806676999898627,
+          "average_time_per_user": 0.03122670799959451,
+          "throughput": 32.023868798881566,
+          "metrics": {
+            "execution_time": 0.3016760025639087,
+            "execution_time_std": 0.0649583792242434,
+            "execution_time_min": 0.21399999968707561,
+            "execution_time_max": 0.4312999953981489,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "50": {
+          "total_time": 1.487160299991956,
+          "average_time_per_user": 0.02974320599983912,
+          "throughput": 33.62112342581391,
+          "metrics": {
+            "execution_time": 0.28831600153353065,
+            "execution_time_std": 0.0637824531943498,
+            "execution_time_min": 0.1908999984152615,
+            "execution_time_max": 0.40759998955763876,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "100": {
+          "total_time": 3.124997299979441,
+          "average_time_per_user": 0.031249972999794408,
+          "throughput": 32.000027648234415,
+          "metrics": {
+            "execution_time": 0.28879000135930255,
+            "execution_time_std": 0.07001611037747234,
+            "execution_time_min": 0.15460001304745674,
+            "execution_time_max": 0.48660000902600586,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        }
+      },
+      "optimized": {
+        "1": {
+          "total_time": 0.029900699999416247,
+          "average_time_per_user": 0.029900699999416247,
+          "throughput": 33.44403308349045,
+          "metrics": {
+            "execution_time": 1.2955000274814665,
+            "execution_time_std": 0.0,
+            "execution_time_min": 1.2955000274814665,
+            "execution_time_max": 1.2955000274814665,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "5": {
+          "total_time": 0.14695389999542385,
+          "average_time_per_user": 0.029390779999084772,
+          "throughput": 34.02427564124328,
+          "metrics": {
+            "execution_time": 0.2646199951414019,
+            "execution_time_std": 0.03532949632696645,
+            "execution_time_min": 0.21160001051612198,
+            "execution_time_max": 0.311699986923486,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "10": {
+          "total_time": 0.31160820001969114,
+          "average_time_per_user": 0.031160820001969115,
+          "throughput": 32.09158167008468,
+          "metrics": {
+            "execution_time": 0.27990999806206673,
+            "execution_time_std": 0.020379571089707903,
+            "execution_time_min": 0.24959997972473502,
+            "execution_time_max": 0.3208999987691641,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "25": {
+          "total_time": 0.7418559000070672,
+          "average_time_per_user": 0.02967423600028269,
+          "throughput": 33.69926693278552,
+          "metrics": {
+            "execution_time": 0.27156799915246665,
+            "execution_time_std": 0.030578614001602812,
+            "execution_time_min": 0.18400000408291817,
+            "execution_time_max": 0.3436999977566302,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "50": {
+          "total_time": 1.4838905000069644,
+          "average_time_per_user": 0.02967781000013929,
+          "throughput": 33.69520864225853,
+          "metrics": {
+            "execution_time": 0.28414199769031256,
+            "execution_time_std": 0.05211250205359204,
+            "execution_time_min": 0.20769998081959784,
+            "execution_time_max": 0.47900000936351717,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        },
+        "100": {
+          "total_time": 3.2486635000095703,
+          "average_time_per_user": 0.0324866350000957,
+          "throughput": 30.781889229126197,
+          "metrics": {
+            "execution_time": 0.2728379995096475,
+            "execution_time_std": 0.038312576475938366,
+            "execution_time_min": 0.17600000137463212,
+            "execution_time_max": 0.42440000106580555,
+            "memory_usage": 0.0,
+            "memory_usage_std": 0.0,
+            "memory_usage_min": 0,
+            "memory_usage_max": 0,
+            "cpu_usage": 0.0,
+            "cpu_usage_std": 0.0,
+            "cpu_usage_min": 0,
+            "cpu_usage_max": 0,
+            "success_rate": 1.0
+          }
+        }
+      }
+    },
+    "edge_case_test": {
+      "traditional": {
+        "topK=1": {
+          "execution_time": 0.12059998698532581,
+          "memory_usage": 0,
+          "cpu_usage": 0,
+          "success": true,
+          "error_msg": null,
+          "result_count": 1
+        },
+        "topK=0": {
+          "execution_time": 0.287600007141009,
+          "memory_usage": 0,
+          "cpu_usage": 0,
+          "success": true,
+          "error_msg": null,
+          "result_count": 0
+        },
+        "topK=超大值": {
+          "execution_time": 0.5027999868616462,
+          "memory_usage": 0,
+          "cpu_usage": 0,
+          "success": true,
+          "error_msg": null,
+          "result_count": 128
+        },
+        "无效用户ID": {
+          "execution_time": 1.0303999879397452,
+          "memory_usage": 0,
+          "cpu_usage": 0,
+          "success": true,
+          "error_msg": null,
+          "result_count": 10
+        },
+        "不存在用户ID": {
+          "execution_time": 0.47420000191777945,
+          "memory_usage": 0,
+          "cpu_usage": 0,
+          "success": false,
+          "error_msg": "list index out of range",
+          "result_count": 0
+        }
+      },
+      "optimized": {
+        "topK=1": {
+          "execution_time": 0.29540000832639635,
+          "memory_usage": 0,
+          "cpu_usage": 0,
+          "success": true,
+          "error_msg": null,
+          "result_count": 1
+        },
+        "topK=0": {
+          "execution_time": 0.3302000113762915,
+          "memory_usage": 0,
+          "cpu_usage": 0,
+          "success": true,
+          "error_msg": null,
+          "result_count": 0
+        },
+        "topK=超大值": {
+          "execution_time": 0.2423000114504248,
+          "memory_usage": 0,
+          "cpu_usage": 0,
+          "success": true,
+          "error_msg": null,
+          "result_count": 10
+        },
+        "无效用户ID": {
+          "execution_time": 0.4557000065688044,
+          "memory_usage": 0,
+          "cpu_usage": 0,
+          "success": true,
+          "error_msg": null,
+          "result_count": 10
+        },
+        "不存在用户ID": {
+          "execution_time": 0.10409997776150703,
+          "memory_usage": 0,
+          "cpu_usage": 0,
+          "success": false,
+          "error_msg": "list index out of range",
+          "result_count": 0
+        }
+      }
+    }
+  },
+  "test_summary": {
+    "total_tests_run": 70,
+    "test_duration": "2025-06-06T09:52:52.881166",
+    "test_users_count": 1000
+  }
+}
