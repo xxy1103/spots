@@ -118,13 +118,14 @@ class SpotIterator:
     """
     景点迭代器，用于按分数降序迭代特定类型的景点
     """
-    def __init__(self, spot_type, spot_manager):
+    def __init__(self, spot_type, spot_manager, topK=10):
         self.spot_type = spot_type
         self.spot_manager = spot_manager
         self.current_index = 0
         self.spots_data = None
+        self.topK = topK
         self._initialize()
-    
+
     def _initialize(self):
         """初始化迭代器，获取该类型的所有景点数据"""
         if self.spot_type not in self.spot_manager.spotTypeDict:
@@ -135,7 +136,7 @@ class SpotIterator:
         heap_instance = self.spot_manager.spotTypeDict[self.spot_type].get("heap")
         if heap_instance and heap_instance.size() > 0:
             # 获取所有景点数据（已按分数排序）
-            self.spots_data = heap_instance.getTopK(heap_instance.size())
+            self.spots_data = heap_instance.getTopK(self.topK)
         else:
             self.spots_data = []
     
@@ -157,11 +158,11 @@ class SpotIterator:
         }
 
 
-def create_spot_iterator(spot_type, spot_manager):
+def create_spot_iterator(spot_type, spot_manager, topK=10):
     """
     创建景点迭代器的工厂函数
     """
-    return SpotIterator(spot_type, spot_manager)
+    return SpotIterator(spot_type, spot_manager, topK=topK)
 
 
 class DiaryIterator:

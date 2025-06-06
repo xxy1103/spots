@@ -287,12 +287,12 @@ class UserManager:
         # --- 迭代用户喜欢的类型，逐步合并排序 ---
         for spot_type in user_likes:
             # 使用 k=topK 获取该类型所有排序后的景点
-            spots_of_type = spotManager.getTopKByType(spot_type)    #只获取前 topK 个
+            spots_of_type = spotManager.getTopKByType(spot_type, topK)    #只获取前 topK 个
             if spots_of_type: # 确保列表非空
                 # 将新获取的有序列表与当前已合并的列表进行归并排序
                 sorted_recommended_spots.append(spots_of_type)
         
-        merged_list = kwaymerge.k_way_merge_descending(sorted_recommended_spots, topK)
+        merged_list = kwaymerge.k_way_merge_descending(sorted_recommended_spots, topK)  # 获取前topK个景点后立即停止
 
         if not merged_list:
              log.writeLog(f"未能根据用户{userId}的喜好找到任何景点")
