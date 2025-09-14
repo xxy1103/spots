@@ -1,0 +1,6 @@
+2025-09-14 04:09:38,799 - RecommendationEvaluator - INFO - 评估器初始化完成: 3468个用户, 352个景点, 3467个日记
+2025-09-14 04:09:38,799 - RecommendationEvaluator - INFO - 开始全面评估流程
+2025-09-14 04:09:38,799 - RecommendationEvaluator - INFO - 开始生成真实标签数据，方法: user_preference
+2025-09-14 04:09:39,469 - RecommendationEvaluator - INFO - 真实标签生成完成，有效用户数: 0
+2025-09-14 04:09:39,469 - RecommendationEvaluator - INFO - 真实标签数据已保存到: ground_truth_user_preference_20250914_040939.json
+2025-09-14 04:09:39,469 - RecommendationEvaluator - ERROR - 无法生成有效的真实标签数据
